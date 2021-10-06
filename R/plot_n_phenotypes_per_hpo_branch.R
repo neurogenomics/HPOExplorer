@@ -35,14 +35,14 @@
 #'                                  phenotype_to_genes = phenotype_to_genes)
 #' }
 #' @export
-plot_n_phenotypes_per_branch_hpo <- function(highlighted_branches =
+plot_n_phenotypes_per_branch_hpo <- function(phenotype_to_genes,
+                                             hpo,
+                                             highlighted_branches =
                                              c("Abnormality of the nervous system",
                                                "Abnormality of the cardiovascular system",
                                                "Abnormality of the immune system"),
                                              background_branches = hpo$children["HP:0000118"][[1]],
-                                             wes_anderson_palette = "Moonrise3",
-                                             phenotype_to_genes = phenotype_to_genes,
-                                             hpo=hpo) {
+                                             wes_anderson_palette = "Moonrise3") {
   color_pal = wesanderson::wes_palette(wes_anderson_palette, 2)
   highlighted_branches_ids = hpo$id[match(highlighted_branches,hpo$name)]
   phenos_per_branch = data.frame()

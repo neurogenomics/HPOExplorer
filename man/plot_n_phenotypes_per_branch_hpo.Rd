@@ -5,24 +5,24 @@
 \title{Plot n phenotypes per brach - Highlight selected}
 \usage{
 plot_n_phenotypes_per_branch_hpo(
+  phenotype_to_genes,
+  hpo,
   highlighted_branches = c("Abnormality of the nervous system",
     "Abnormality of the cardiovascular system", "Abnormality of the immune system"),
   background_branches = hpo$children["HP:0000118"][[1]],
-  wes_anderson_palette = "Moonrise3",
-  phenotype_to_genes = phenotype_to_genes,
-  hpo = hpo
+  wes_anderson_palette = "Moonrise3"
 )
 }
 \arguments{
+\item{phenotype_to_genes}{The phenotype_to_genes file from HPO giving phenotype gene lists <data.frame>}
+
+\item{hpo}{The HPO data object from ontologyIndex package.}
+
 \item{highlighted_branches}{Names of branches you want to highlight <vector<string>>}
 
 \item{background_branches}{HPO Ids of all branches to be shown (including highlighted) <vector<string>>}
 
 \item{wes_anderson_palette}{Name of desired color palette, see options above <string>}
-
-\item{phenotype_to_genes}{The phenotype_to_genes file from HPO giving phenotype gene lists <data.frame>}
-
-\item{hpo}{The HPO data object from ontologyIndex package.}
 }
 \description{
 This plots the number of phenotypes per HPO branch and colours selected
