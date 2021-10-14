@@ -13,4 +13,6 @@ RoxygenNote: 7.1.1
 Imports:
     ggplot2,
     wesanderson,
-    ontologyIndex
+    ontologyIndex,
+    httr,
+    jsonlite
