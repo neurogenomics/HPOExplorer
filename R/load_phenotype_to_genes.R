@@ -8,6 +8,7 @@
 #' @examples \dontrun{
 #' phenotype_to_genes <- load_phenotype2genes("data/phenotype_to_genes.txt")
 #' }
+#' @returns a dataframe of the phenotype_to_genes.txt file from HPO
 #' @export
 load_phenotype_to_genes <- function(pheno_to_genes_txt_file = "data/phenotype_to_genes.txt") {
   phenotype_to_genes = utils::read.delim(pheno_to_genes_txt_file,

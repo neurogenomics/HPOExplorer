@@ -12,6 +12,9 @@ load_phenotype_to_genes(
 \item{pheno_to_genes_txt_file}{path to the phenotype to genes text file from the
 HPO. It contains phenotypes annotated with associated genes}
 }
+\value{
+a dataframe of the phenotype_to_genes.txt file from HPO
+}
 \description{
 This is a function for loading the phenotype to genes text file from HPO.
 It adds the collumn names and returns as a dataframe
