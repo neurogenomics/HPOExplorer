@@ -15,4 +15,5 @@ Imports:
     wesanderson,
     ontologyIndex,
     httr,
-    jsonlite
+    jsonlite,
+    utils
