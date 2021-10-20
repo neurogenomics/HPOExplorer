@@ -11,6 +11,6 @@ download_phenotype_to_genes <- function(path = "data/phenotype_to_genes.txt") {
     utils::download.file("https://ndownloader.figshare.com/files/27722238",
                   path)
   } else {
-      print(paste0('file "',path,'" already exists'))
+      cat(paste0('file "',path,'" already exists'))
   }
 }
