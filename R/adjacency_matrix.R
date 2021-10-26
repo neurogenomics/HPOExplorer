@@ -7,9 +7,11 @@
 #'
 #' @param pheno_ids a character vector of HPO Ids
 #' @param hpo ontology object (available in ontologyIndex package)
+#' @param as_dataframe can return matrix or df <bool>
 #' @examples
 #' \dontrun{
-#' adjacency_matrix(c("HP:000001","HP:000002"),hpo)
+#' pheno_ids <- c("HP:000001","HP:000002")
+#' adjacency_matrix(pheno_ids,hpo,as_dataframe=FALSE)
 #' }
 #' @returns adjacency matrix
 #' @export

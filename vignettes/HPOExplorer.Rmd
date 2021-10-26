@@ -65,9 +65,9 @@ HPOExplorer has some useful functions for obtaining the ontology level of terms.
 
 ```{r phenos_dataframe, message = FALSE, warning = FALSE}
 phenos = data.frame()
-for (p in unique(inf_phenos$Phenotype)) {
+for (p in unique(Neuro_delay_descendants$Phenotype)) {
   id <- get_hpo_termID(p, phenotype_to_genes)
-  ontLvl_geneCount_ratio <- (ont_level + 1)/length(get_gene_list(p,phenotype_to_genes))
+  ontLvl_geneCount_ratio <- (get_ont_level(hpo,p) + 1)/length(get_gene_list(p,phenotype_to_genes))
   description <- get_term_definition(id, line_length = 10)
   phenos <- rbind(phenos,
                   data.frame("Phenotype"=p,
@@ -117,7 +117,7 @@ phenoNet <- make_network_object(phenos,phenoAdj, hpo, colour_column = "ontLvl_ge
 # Plot it
 Then we can make the plot with `ggnetwork_plot`. Again you need to give the column name for the variable you want mapped to colour in the `colour_column` argument. We also need to provide a nice label for this column in `colour_label`. This will be used for the figure legend. 
 
-```{r plot, warning = FALSE, message = FALSE, fig.width = 1000, fig.height  = 1000}
+```{r plot, warning = FALSE, message = FALSE}
 plt <-ggnetwork_plot(phenoNet, colour_column = "ontLvl_geneCount_ratio", colour_label = "OntLvl/nGenes")
 print(plt)
 ```
@@ -126,7 +126,7 @@ print(plt)
 # Interactive hoverbox
 In cases where we are making a shiny app or html documenet we may want to include the interactive hoverbox. This allows the user to hover their mouse over a phenotype to get extra information about it. For this we use the plotly library. 
 
-```{r interactive, warning=FALSE , message=FALSE, fig.width=1000, fig.height=1000}
+```{r interactive, warning=FALSE , message=FALSE}
 if (!require("plotly")) {
   install.packages("plotly")
   library("plotly")

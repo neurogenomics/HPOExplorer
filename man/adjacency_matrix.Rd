@@ -4,12 +4,14 @@
 \alias{adjacency_matrix}
 \title{Adjacency matrix}
 \usage{
-adjacency_matrix(pheno_ids, hpo)
+adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
 }
 \arguments{
 \item{pheno_ids}{a character vector of HPO Ids}
 
 \item{hpo}{ontology object (available in ontologyIndex package)}
+
+\item{as_dataframe}{can return matrix or df <bool>}
 }
 \value{
 adjacency matrix
@@ -23,6 +25,7 @@ efficent than the matrix in a shiny app ?
 }
 \examples{
 \dontrun{
-adjacency_matrix(c("HP:000001","HP:000002"),hpo)
+pheno_ids <- c("HP:000001","HP:000002")
+adjacency_matrix(pheno_ids,hpo,as_dataframe=FALSE)
 }
 }

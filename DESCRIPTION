@@ -16,8 +16,12 @@ Imports:
     ontologyIndex,
     httr,
     jsonlite,
-    utils
+    utils,
+    network,
+    ggnetwork
 Suggests: 
     rmarkdown,
-    knitr
+    knitr,
+    plotly,
+    devtools
 VignetteBuilder: knitr

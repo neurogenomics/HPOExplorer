@@ -4,18 +4,16 @@
 \alias{make_network_object}
 \title{Make network object}
 \usage{
-make_network_object(
-  phenos,
-  hpo,
-  phenos_param_columns = c("Phenotype", "hover_box")
-)
+make_network_object(phenos, adjacency, hpo, colour_column = "fold_change")
 }
 \arguments{
 \item{phenos}{dataframe of phenotypes and values/ parameters.}
 
+\item{adjacency}{adjacency matrix (see ?adjacency_matrix) <matrix>}
+
 \item{hpo}{The HPO ontology data object}
 
-\item{phenos_param_columns}{chr vector of parameter column names from phenos dataframe}
+\item{colour_column}{The column from phenos that you wish to map to node colour}
 }
 \value{
 A ggnetowrk graph/ network object of a subset of the RD EWCE results.
@@ -30,5 +28,5 @@ It expects there to be a column of HPO IDs in the phenos dataframe called
 HPO_Id.
 }
 \examples{
-\dontrun{make_network_object(phenos,adjacency,hpo)}
+\dontrun{make_network_object(phenos,adjacency,hpo, colour_column = "fold_change")}
 }

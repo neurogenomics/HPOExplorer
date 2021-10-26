@@ -2,30 +2,26 @@
 % Please edit documentation in R/ggnetwork_plot.R
 \name{ggnetwork_plot}
 \alias{ggnetwork_plot}
-\title{Plot RD EWCE results subset as interactive network plot}
+\title{Generate network plot}
 \usage{
 ggnetwork_plot(
   phenoNet,
-  label_var = "Phenotype",
-  hover = NULL,
-  colour_var = NULL,
-  colour_label = FALSE,
-  size_var = NULL
+  colour_column = "fold_change",
+  colour_label = "Fold change"
 )
 }
 \arguments{
 \item{phenoNet}{The network object created using create_network_object}
 
-\item{disease_descriptions}{The data frame of all disease descriptions, This is
-where new lines are added using the hpo_term_definition_list function.}
+\item{colour_column}{column name of the variable to be mapped to colour <string>}
+
+\item{colour_label}{A label for the colour figure legend <string>}
 }
 \value{
-A interactive plot of the network of phenotypes in the selected subset of results.
+A network plot (compatible with interactive plotly rendering).
 }
 \description{
-This coerces the network object into a plot with ggnetwork (which assigns
-x, y coordinates to each node in the network). The hover box with results and
-disease description for each node is also added here in the
-\code{pheno_ggnetwork$hover} column. Once the x and y coordiantes have been
-added, it can be plot using ggplot2.
+This creates a network plot which is compatible with plotly to make interactive
+plots. It makes it possible to hover box that includes your results related to
+each phenotype and/or a description of the phenotypes.
 }
