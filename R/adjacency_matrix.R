@@ -2,11 +2,8 @@
 #'
 #' Create adjacency matrix of HPO child-parent relationships
 #'
-#' This is needed for plots created using ggnetwork as it can coerce an
-#' adjacency matrix into a directed graph object, and assigns
-#' each datapoint an x,y coordinate. Maybe shouldn't use a for loop for this.
-#' It also may be possible to use a hash table for ggnetwork, which may be more
-#' efficent for the web app
+#' It may be possible to use a hash table for ggnetwork, which may be more
+#' efficent than the matrix in a shiny app ?
 #'
 #' @param pheno_ids a character vector of HPO Ids
 #' @param hpo ontology object (available in ontologyIndex package)
@@ -16,7 +13,9 @@
 #' }
 #' @returns adjacency matrix
 #' @export
-adjacency_matrix <- function(pheno_ids, hpo) {
+adjacency_matrix <- function(pheno_ids,
+                             hpo, as_dataframe = FALSE) {
+  message("adjacency_matrix")
   HPO_id = unique(pheno_ids)
   size = length(HPO_id)
   adjacency = data.frame(matrix(nrow = size, ncol = size))
@@ -27,5 +26,10 @@ adjacency_matrix <- function(pheno_ids, hpo) {
     children = hpo$children[id][[1]]
     adjacency[id, children] = 1
   }
-  return(adjacency[HPO_id,HPO_id])
+  if (as_dataframe) {
+    return(adjacency[HPO_id,HPO_id])
+  } else {
+    return(as.matrix(adjacency[HPO_id,HPO_id]))
+  }
+
 }

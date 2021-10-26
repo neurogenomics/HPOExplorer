@@ -18,11 +18,8 @@ adjacency matrix
 Create adjacency matrix of HPO child-parent relationships
 }
 \details{
-This is needed for plots created using ggnetwork as it can coerce an
-adjacency matrix into a directed graph object, and assigns
-each datapoint an x,y coordinate. Maybe shouldn't use a for loop for this.
-It also may be possible to use a hash table for ggnetwork, which may be more
-efficent for the web app
+It may be possible to use a hash table for ggnetwork, which may be more
+efficent than the matrix in a shiny app ?
 }
 \examples{
 \dontrun{
