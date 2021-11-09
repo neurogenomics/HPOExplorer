@@ -1,2 +1,5 @@
 url: ~
 
+template:
+  params:
+    bootswatch: cerulean
