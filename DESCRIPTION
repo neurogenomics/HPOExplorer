@@ -1,9 +1,9 @@
 Package: HPOExplorer
-Title: What the Package Does (One Line, Title Case)
+Title: Analysis and Visualisation of the Human Phenotype Ontology
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person("Robert", "Gordon-Smith", , "bwg20@ic.ac.uk", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-6698-7387"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
