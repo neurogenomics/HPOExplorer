@@ -11,6 +11,10 @@
 #' @returns a dataframe of the phenotype_to_genes.txt file from HPO
 #' @export
 load_phenotype_to_genes <- function(pheno_to_genes_txt_file = "data/phenotype_to_genes.txt") {
+  if (!file.exists(pheno_to_genes_txt_file)) {
+    download.file("https://ndownloader.figshare.com/files/27722238",
+                  pheno_to_genes_txt_file)}
+
   phenotype_to_genes = utils::read.delim(pheno_to_genes_txt_file,
                                   skip = 1,
                                   header=FALSE)
