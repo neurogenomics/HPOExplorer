@@ -13,13 +13,13 @@
 #' @returns A named vector of relative ontology level, where names are HPO Ids and
 #' value is relative ontology level.
 #' @export
-get_relative_ont_level_multiple <- function (phenoAdj,hpo,reverse=TRUE) {
-  heirarchy = c()
-  for (p in rownames(phenoAdj)) {
-    heirarchy[p] = get_relative_ont_level(p,phenoAdj,hpo)
-  }
-  if (reverse) {
-    heirarchy = max(heirarchy) - heirarchy
-  }
-  return (heirarchy)
+get_relative_ont_level_multiple <- function(phenoAdj, hpo, reverse = TRUE) {
+    heirarchy <- c()
+    for (p in rownames(phenoAdj)) {
+        heirarchy[p] <- get_relative_ont_level(p, phenoAdj, hpo)
+    }
+    if (reverse) {
+        heirarchy <- max(heirarchy) - heirarchy
+    }
+    return(heirarchy)
 }

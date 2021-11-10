@@ -8,7 +8,7 @@ get_gene_list(phenotype, phenotype_to_genes)
 }
 \arguments{
 \item{phenotype}{A phenotype (name) from the HPO
-(e.g. "Phenotypic abnormality") <string>}
+(e.g. "Phenotypic abnormality") \<string\>.}
 
 \item{phenotype_to_genes}{The phenotype_to_genes.txt file from HPO that
 contains gene annotations for HPO phenotypes.}
@@ -17,6 +17,17 @@ contains gene annotations for HPO phenotypes.}
 a character vector of genes associated with the selected phenotype.
 }
 \description{
-This function returns a vector of genes associated with a particular phenotype.
-It uses the \code{phenotype_to_genes.txt} file from the hpo.
+This function returns a vector of genes associated with a
+particular phenotype.
+It uses the \code{phenotype_to_genes.txt} file from the HPO.
+}
+\examples{
+\dontrun{
+# Creating a list of gene lists indexed by phenotype name
+GeneLists <- list()
+for (p in Phenotypes) {
+    GeneLists[[p]] <- get_gene_list(p, phenotype_to_genes)
+}
+}
+
 }

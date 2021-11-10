@@ -7,21 +7,22 @@
 get_hpo_termID_direct(hpo, phenotype = "Phenotypic abnormality")
 }
 \arguments{
-\item{hpo}{The HPO object from ontologyIndex package <list>}
+\item{hpo}{The HPO object from ontologyIndex package \<list\>}
 
-\item{phenotype}{The phenotype of interest <string>}
+\item{phenotype}{The phenotype of interest \<string\>}
 }
 \value{
-The HPO ID of phenotype <string>
+The HPO ID of phenotype \<string\>
 }
 \description{
 This is similar to the \code{get_hpo_germID} function except it does not take
-the ID from the phenotype_to_genes dataframe. It directly gets it from the HPO
+the ID from the phenotype_to_genes dataframe.
+It directly retrieves it from the HPO
 ontology object (found in the ontologyIndex package \code{data(hpo)}). This
 allows you to get the ID of terms that do not have gene annotations.
 }
 \details{
-Why not always use this? I have found that occasionally it doesnt work. Also,
-it requires you to load the full hpo object to get an ID, which is wasteful
-if you are only using the gene annotations.
+Why not always use this? I have found that occasionally it doesn't work.
+Also, it requires you to load the full HPO object to get an ID,
+which is wasteful if you are only using the gene annotations.
 }

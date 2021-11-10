@@ -13,15 +13,17 @@ ggnetwork_plot(
 \arguments{
 \item{phenoNet}{The network object created using create_network_object}
 
-\item{colour_column}{column name of the variable to be mapped to colour <string>}
+\item{colour_column}{column name of the variable to be mapped
+to colour \<string\>}
 
-\item{colour_label}{A label for the colour figure legend <string>}
+\item{colour_label}{A label for the colour figure legend \<string\>}
 }
 \value{
 A network plot (compatible with interactive plotly rendering).
 }
 \description{
-This creates a network plot which is compatible with plotly to make interactive
-plots. It makes it possible to hover box that includes your results related to
+This creates a network plot which is compatible with plotly
+to make interactive plots.
+It makes it possible to hover box that includes your results related to
 each phenotype and/or a description of the phenotypes.
 }

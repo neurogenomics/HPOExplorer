@@ -7,7 +7,7 @@
 get_relative_ont_level(phenotype, phenoAdj, hpo)
 }
 \arguments{
-\item{phenotype}{HPO term Id <string>}
+\item{phenotype}{HPO term Id \<string\>}
 
 \item{phenoAdj}{A adjacency matrix (produced by the adjacency_matrix function)}
 
@@ -18,12 +18,16 @@ A integer representing the relative ontology level of a term within
 a connected component of a subset of the HPO.
 }
 \description{
-When plotting subsets of the HPO data as a network plot, there is often more than
-one connected component to be plotted (i.e. sections of the graph are not connected
-by any edges). To map the ontology level to the size of nodes (such that high up terms
-are bigger than low level terms). This was made to find the relative ontology level
-with respect to other terms in its connected component so that each connected section
-of the plot would have the same size for its root node. It would also be possible
-to just use absolute ontology level, so that "Phenotypic abnormality" would always
-be the largest datapoint etc.
+When plotting subsets of the HPO data as a
+network plot, there is often more than
+one connected component to be plotted
+(i.e. sections of the graph are not connected
+by any edges). To map the ontology level to the size of nodes
+(such that high up terms
+are bigger than low level terms). This was made to find the relative ontology
+level with respect to other terms in its connected component so that
+each connected section
+of the plot would have the same size for its root node.
+It would also be possible to just use absolute ontology level,
+so that "Phenotypic abnormality" would always be the largest datapoint etc.
 }

@@ -7,22 +7,22 @@
 get_term_definition(ontologyId, line_length = FALSE)
 }
 \arguments{
-\item{ontologyId}{A HPO term Id (e.g. "HP:0000002") <string>}
+\item{ontologyId}{A HPO term Id (e.g. "HP:0000002") \<string\>}
 
-\item{line_length}{The number of desired words per line <int>}
+\item{line_length}{The number of desired words per line \<int\>}
 }
 \value{
-A disease definition <string>
+A disease definition \<string\>
 }
 \description{
 This function accesses the HPO API to get a description/ definition of an
-HPO term. If a \code{line_length} > 0 is passed to the funtion, it will add
+HPO term. If a \code{line_length} \> 0 is passed to the function, it will add
 newlines every nth word. This can be useful when displaying the description
 in plots with limited space.
 }
 \examples{
 \dontrun{
-ontologyId = "HP:0000002"
+ontologyId <- "HP:0000002"
 get_term_definition(ontologyId)
 }
 }

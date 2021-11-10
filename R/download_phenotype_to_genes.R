@@ -6,11 +6,14 @@
 #'
 #' @param path The desired path/filename.txt to save the phenotype_to_genes.txt file.
 #' @export
+#' @importFrom utils download.file
 download_phenotype_to_genes <- function(path = "data/phenotype_to_genes.txt") {
-  if (!file.exists(path)) {
-    utils::download.file("https://ndownloader.figshare.com/files/27722238",
-                  path)
-  } else {
-      cat(paste0('file "',path,'" already exists'))
-  }
+    if (!file.exists(path)) {
+        utils::download.file(
+            "https://ndownloader.figshare.com/files/27722238",
+            path
+        )
+    } else {
+        cat(paste0('file "', path, '" already exists'))
+    }
 }

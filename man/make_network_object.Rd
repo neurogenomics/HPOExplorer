@@ -9,24 +9,27 @@ make_network_object(phenos, adjacency, hpo, colour_column = "fold_change")
 \arguments{
 \item{phenos}{dataframe of phenotypes and values/ parameters.}
 
-\item{adjacency}{adjacency matrix (see ?adjacency_matrix) <matrix>}
+\item{adjacency}{adjacency matrix (see \code{\?adjacency_matrix}) \<matrix\>}
 
 \item{hpo}{The HPO ontology data object}
 
-\item{colour_column}{The column from phenos that you wish to map to node colour}
+\item{colour_column}{The column from phenos that you wish
+to map to node colour}
 }
 \value{
 A ggnetowrk graph/ network object of a subset of the RD EWCE results.
 }
 \description{
 This uses the network package to coerce the adjacency matrix into a
-network object. It also adds the fold change, label, and relative ontology level
-parameters to each node in the network.
+network object. It also adds the fold change, label,
+and relative ontology level parameters to each node in the network.
 }
 \details{
 It expects there to be a column of HPO IDs in the phenos dataframe called
 HPO_Id.
 }
 \examples{
-\dontrun{make_network_object(phenos,adjacency,hpo, colour_column = "fold_change")}
+\dontrun{
+make_network_object(phenos, adjacency, hpo, colour_column = "fold_change")
+}
 }

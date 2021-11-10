@@ -12,11 +12,13 @@
 #' @return The disease description with new lines added.
 #'
 #' @examples
-#' \dontrun{hpo_get_term_definition("HP:123456", disease_descriptions)}
+#' \dontrun{
+#' hpo_get_term_definition("HP:123456", disease_descriptions)
+#' }
 #'
 #' @export
 hpo_get_term_definition <- function(ontologyId, disease_descriptions) {
-  definition = disease_descriptions[ontologyId,"description"]
-  definition = newlines_to_definition(definition)
-  return (definition)
+    definition <- disease_descriptions[ontologyId, "description"]
+    definition <- newlines_to_definition(definition)
+    return(definition)
 }

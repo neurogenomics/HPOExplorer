@@ -25,6 +25,10 @@ Adds new lines to the description so that hover boxes dont get too wide.
 Adds new lines to the description so that hover boxes dont get too wide.
 }
 \examples{
-\dontrun{newlines_to_definition(disease_description, 10)}
-\dontrun{newlines_to_definition(disease_description, 10)}
+\dontrun{
+newlines_to_definition(disease_description, 10)
+}
+\dontrun{
+newlines_to_definition(disease_description, 10)
+}
 }

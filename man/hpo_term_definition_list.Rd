@@ -7,14 +7,22 @@
 hpo_term_definition_list(ontologyId_list, disease_descriptions)
 }
 \arguments{
-\item{ontologyId_list}{A character vector of HPO Ids}
+\item{ontologyId_list}{A character vector of HPO Ids.}
 
-\item{disease_descriptions}{A data frame of disease descriptions for all HPO Id}
+\item{disease_descriptions}{A data frame of disease descriptions
+for all HPO Id.}
+}
+\value{
+A named vector of disease descriptions,
+with HPO Id as names and descriptions as values.
 }
 \description{
-Need to redo this without a for loop (use \code{lapply} or something). This just
-applys the \code{hpo_get_term_definition} function to a character vector of terms.
+Need to redo this without a for loop (use \code{lapply} or something).
+This just applies the \link[HPOExplorer]{hpo_get_term_definition} function
+to a character vector of terms.
 }
 \examples{
-\dontrun{hpo_term_definition_list(HPO_terms_char_vector, Disease_description_df)}
+\dontrun{
+hpo_term_definition_list(HPO_terms_char_vector, Disease_description_df)
+}
 }

@@ -5,29 +5,22 @@
 \title{Get HPO Id from phenotype name.}
 \usage{
 get_hpo_termID(phenotype, phenotype_to_genes)
-
-get_hpo_termID(phenotype, phenotype_to_genes)
 }
 \arguments{
-\item{phenotype}{Phenotype name from the HPO <string>}
+\item{phenotype}{Phenotype name from the HPO \<string\>}
 
-\item{phenotype_to_genes}{The hpo terms with gene list annotations data frame from hpo website}
+\item{phenotype_to_genes}{The HPO terms with gene list annotations
+data frame from HPO website}
 }
 \value{
-The HPO Id <string>
-
-The HPO Id <string>
+The HPO Id \<string\>
 }
 \description{
-I have done this more efficiently elsewhere using the hpo data object.
-May be worth replacing, or just add the HPO Id to all datapoints in the results permanently.
-Alternative method: \code{hpo$id[match(term_name, hpo$name)]}
-This function is called by the add_hpo_termid_col function, which is called by the get_cell_ontology
-function when selecting a subset of the data and then adding a HPO id column.
-
-I have done this more efficiently elsewhere using the hpo data object.
-May be worth replacing, or just add the HPO Id to all datapoints in the results permanently.
-Alternative method: \code{hpo$id[match(term_name, hpo$name)]}
-This function is called by the add_hpo_termid_col function, which is called by the get_cell_ontology
+I have done this more efficiently elsewhere using the HPO data object.
+May be worth replacing, or just add the HPO Id to all datapoints
+in the results permanently.
+Alternative method: \code{hpo$id\[match(term_name, hpo$name)\]}
+This function is called by the \emph{add_hpo_termid_col}
+function, which is called by the get_cell_ontology
 function when selecting a subset of the data and then adding a HPO id column.
 }

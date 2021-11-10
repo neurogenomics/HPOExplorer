@@ -11,9 +11,9 @@
 #' @returns A dataframe of HPO phenotype descriptions
 #' @export
 get_disease_description_dataframe <- function(HPO_ids) {
-  descriptions = c()
-  for (id in HPO_ids) {
-    descriptions = append(descriptions, get_term_definition(id))
-  }
-  return(data.frame("HPO_Id"=HPO_ids, "description" = descriptions))
+    descriptions <- c()
+    for (id in HPO_ids) {
+        descriptions <- append(descriptions, get_term_definition(id))
+    }
+    return(data.frame("HPO_Id" = HPO_ids, "description" = descriptions))
 }

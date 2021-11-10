@@ -1,0 +1,49 @@
+---
+title: "HPOExplorer" 
+author: "<h4>Authors: <i>Robert Gordon-Smith, Brian M. Schilder, Nathan G .Skene</i></h4>" 
+date: "<h4>Most recent update: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
+output:
+  github_document 
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+`r badger::badge_github_version(color="black")`
+`r badger::badge_github_actions()`
+`r badger::badge_codecov()`
+`r badger::badge_last_commit()`
+`r badger::badge_license()`
+
+## Intro
+
+This package contains useful functions for working with the [Human Phenotype Ontology (HPO)](https://hpo.jax.org/app/). It allows you to create interactive phenotype network plots, as well as many other useful functions.
+
+## Installation
+
+Within R: 
+
+```{r, eval=FALSE}
+if(!"remotes" %in% rownames(install.packages())){install.packages("remotes")}
+
+remotes::install_github("neurogenomics/HPOExplorer")
+```
+
+## Documentation 
+
+Visit the package site for a tutorial and docs for functions.  
+[`HPOExplorer` site](https://neurogenomics.github.io/HPOExplorer/)
+
+# Session Info 
+
+<details> 
+
+```{r Session Info}
+utils::sessionInfo()
+```
+
+</details>  
+<hr>

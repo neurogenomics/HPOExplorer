@@ -1,74 +1,88 @@
 ---
 title: "HPOExplorer"
-output: rmarkdown::html_vignette
+author: "<h4>Authors: <i>Robert Gordon-Smith, Brian M. Schilder, Nathan G .Skene</i></h4>" 
+date: "<h4>Most recent update: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
+output:
+  BiocStyle::html_document:
 vignette: >
   %\VignetteIndexEntry{HPOExplorer}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+# Installation 
+
+Within R: 
+
+```{r install, eval = FALSE}
+if (!require("remotes")) install.packages("remotes")
+if (!require("HPOExplorer")) remotes::install_github("ovrhuman/HPOExplorer")
 ```
 
-```{r setup}
+```{r setup, include=TRUE}
 library(HPOExplorer)
 ```
 
 # Introduction 
-The HPOExplorer package provides useful functions for working with the [Human Phenotype Ontology](https://hpo.jax.org/app/). The main HPO ontology object comes with the [ontologyIndex](https://CRAN.R-project.org/package=ontologyIndex) R package. This tutorial will focus on creating an interactive network plot of a subset of the HPO, where disease descriptions and results from your analysis appear in a hover box when a specific phenotype is selected from the graph. 
 
-# Installation 
-You can install HPOExplorer with the following code.
-```{r install, message=FALSE, warning=FALSE}
-if (!require("devtools")) {
-  install.packages("devtools")
-}
-if (!require("HPOExplorer")) {
-  devtools::install_github("ovrhuman/HPOExplorer")
-}
-```
+The `HPOExplorer` package provides useful functions for working with 
+the [Human Phenotype Ontology (HPO)](https://hpo.jax.org/app/). 
+The main HPO ontology object comes with the [`ontologyIndex`](https://CRAN.R-project.org/package=ontologyIndex) R package.
+
+This tutorial will focus on creating an interactive network plot of 
+a subset of the HPO, where disease descriptions and results from your
+analysis appear in a hover box when a specific phenotype is
+selected from the graph. 
 
 # Dependencies and data 
-To run the following examples we need the HPO data its self, and the phenotype_to_genes.txt file (gene annotations) from the HPO.
+
+To run the following examples we need the HPO data its self, 
+and the phenotype_to_genes.txt file (gene annotations) from the HPO.
 
 ```{r dependencies, message=FALSE, warning=FALSE}
-if (!require("ontologyIndex")) {
-  install.packages('ontologyIndex')
-  library('ontologyIndex')
-}
+library(ontologyIndex)
 data(hpo)
-phenotype_to_genes <- load_phenotype_to_genes("phenotype_to_genes.txt")
+
+phenotype_to_genes <- load_phenotype_to_genes()
 ```
 
 # Choose subset of HPO phenotypes to plot
-The figure we are going to create is a bit arbitrary, but it should outline the main features of the package. First we are going to get a subset of HPO terms to plot. We will select phenotypes that have gene annotations (in `phenotype_to_genes.txt`), and are descendants of "Neurodevelopmental delay". 
+
+The figure we are going to create is a bit arbitrary, 
+but it should outline the main features of the package. 
+First we are going to get a subset of HPO terms to plot. 
+We will select phenotypes that have gene annotations 
+(in `phenotype_to_genes.txt`), and are descendants of
+"Neurodevelopmental delay". 
+
 ```{r subset1, message=FALSE, warning = FALSE}
 # Get HPO ID of "Neurodevelopmental delay
-Neuro_delay_ID <- get_hpo_termID_direct(hpo,"Neurodevelopmental delay")
+Neuro_delay_ID <- get_hpo_termID_direct(hpo = hpo,
+                                        phenotype = "Neurodevelopmental delay")
 
 # Get descendants that have gene annotations
 Neuro_delay_descendants <- phenotype_to_genes[phenotype_to_genes$ID %in% get_descendants(hpo,Neuro_delay_ID),]
 ```
 
 # Create dataframe of phenotypes and parameters
+
 To create the network object we need a dataframe of the selected phenotypes with columns for associated parameters. We will be able to map these parameters onto the colour of the nodes in the figure. We can also use them to subset the selected phenotypes further. 
 
 Typically, these parameters would be results from an analysis you have done. For example, you may have p values associated with each phenotype and you might want to only show phenotypes where p<0.05, or use them to colour the nodes, or have the p values displayed in the hover box. 
 
 For this example we will have to make up a parameter for demonstration purposes. We are going to divide ontology level of the phenotypes by the number of associated genes. We will also include the ontology level its self and the disease description.
 
-HPOExplorer has some useful functions for obtaining the ontology level of terms. Ontology level describes the number of generations of descendants vertically below a term (note that this is not the same as the raw number of descendants which is also capturing the horizontal spread of branching off terms). For example "Phenotypic abnormality" is high up in the HPO and all other disease phenotypes are descendants of it. It is at ontology level 13. A term with no descendants is at ontology level 0. 
+`HPOExplorer` has some useful functions for obtaining the ontology level of terms. Ontology level describes the number of generations of descendants vertically below a term (note that this is not the same as the raw number of descendants which is also capturing the horizontal spread of branching off terms). For example "Phenotypic abnormality" is high up in the HPO and all other disease phenotypes are descendants of it. It is at ontology level 13. A term with no descendants is at ontology level 0. 
 
 ```{r phenos_dataframe, message = FALSE, warning = FALSE}
 phenos = data.frame()
 for (p in unique(Neuro_delay_descendants$Phenotype)) {
-  id <- get_hpo_termID(p, phenotype_to_genes)
-  ontLvl_geneCount_ratio <- (get_ont_level(hpo,p) + 1)/length(get_gene_list(p,phenotype_to_genes))
-  description <- get_term_definition(id, line_length = 10)
+  id <- get_hpo_termID(phenotype = p, 
+                       phenotype_to_genes = phenotype_to_genes)
+  ontLvl_geneCount_ratio <- (get_ont_level(hpo = hpo,
+                                           term_ids = p) + 1)/length(get_gene_list(p,phenotype_to_genes))
+  description <- get_term_definition(ontologyId = id, 
+                                     line_length = 10)
   phenos <- rbind(phenos,
                   data.frame("Phenotype"=p,
                              "HPO_Id"=id,
@@ -101,7 +115,8 @@ cat(phenos$hover[1])
 ```
 
 # Network object
-In order to generate the plot we need to coerse the phenos dataframe in to a network object. We use the [network](https://CRAN.R-project.org/package=network) package to do this. It is a way to represent the information about each individual phenotype, as well as the types of relationships between them, all in one data structure. 
+
+In order to generate the plot we need to coerse the phenos dataframe in to a network object. We use the [`network`](https://CRAN.R-project.org/package=network) package to do this. It is a way to represent the information about each individual phenotype, as well as the types of relationships between them, all in one data structure. 
 
 To set this up we use `adjacency_matrix` first to create a adjacency matrix of all phenotypes to be plotted. The rows and columns are the phenotypes. If phenotype[i] is a child of phenotype[j] the value in the matrix at matrix[i,j] will be 1. If the two phenotypes are not adjacent to eachother the value will be 0.
 
@@ -118,18 +133,32 @@ phenoNet <- make_network_object(phenos,phenoAdj, hpo, colour_column = "ontLvl_ge
 Then we can make the plot with `ggnetwork_plot`. Again you need to give the column name for the variable you want mapped to colour in the `colour_column` argument. We also need to provide a nice label for this column in `colour_label`. This will be used for the figure legend. 
 
 ```{r plot, warning = FALSE, message = FALSE, fig.width = 9, fig.height = 7}
-plt <-ggnetwork_plot(phenoNet, colour_column = "ontLvl_geneCount_ratio", colour_label = "OntLvl/nGenes")
+plt <- ggnetwork_plot(phenoNet = phenoNet, 
+                      colour_column = "ontLvl_geneCount_ratio", 
+                      colour_label = "OntLvl/nGenes")
 print(plt)
 ```
 
 
 # Interactive hoverbox
-In cases where we are making a shiny app or html documenet we may want to include the interactive hoverbox. This allows the user to hover their mouse over a phenotype to get extra information about it. For this we use the plotly library. 
 
-```{r interactive, warning=FALSE , message=FALSE, fig.width = 9, fig.height = 7}
-if (!require("plotly")) {
-  install.packages("plotly")
-  library("plotly")
-}
-ggplotly(plt, tooltip  = "hover")
+In cases where we are making a shiny app or html document we may want to include the interactive hoverbox. This allows the user to hover their mouse over a phenotype to get extra information about it. For this we use the `plotly` library. 
+
+```{r interactive, warning=FALSE , message=FALSE, eval = FALSE, fig.width = 9, fig.height = 7}
+if (!require("plotly"))  install.packages("plotly")
+
+plotly::ggplotly(plt, tooltip  = "hover")
 ```
+
+
+# Session Info 
+
+<details> 
+
+```{r Session Info}
+utils::sessionInfo()
+```
+
+</details>  
+<hr>
+

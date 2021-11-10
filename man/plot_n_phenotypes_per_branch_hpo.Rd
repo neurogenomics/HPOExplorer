@@ -14,15 +14,19 @@ plot_n_phenotypes_per_branch_hpo(
 )
 }
 \arguments{
-\item{phenotype_to_genes}{The phenotype_to_genes file from HPO giving phenotype gene lists <data.frame>}
+\item{phenotype_to_genes}{The phenotype_to_genes file from
+HPO giving phenotype gene lists \<data.frame\>}
 
 \item{hpo}{The HPO data object from ontologyIndex package.}
 
-\item{highlighted_branches}{Names of branches you want to highlight <vector<string>>}
+\item{highlighted_branches}{Names of branches you want
+to highlight \<vector\<string\>\>}
 
-\item{background_branches}{HPO Ids of all branches to be shown (including highlighted) <vector<string>>}
+\item{background_branches}{HPO Ids of all branches to be shown
+(including highlighted) \<vector\<string\>\>}
 
-\item{wes_anderson_palette}{Name of desired color palette, see options above <string>}
+\item{wes_anderson_palette}{Name of desired color palette,
+see options above \<string\>}
 }
 \description{
 This plots the number of phenotypes per HPO branch and colours selected
@@ -43,14 +47,19 @@ branches.
 }
 \examples{
 \dontrun{
+## Selecting child terms of
+## "Abnormality of the nervous system" as background branches"
 background_branches <- hpo$children[
-  hpo$id[match("Abnormality of the nervous system", hpo$name)]][[1]]
-# Highlighting "Abnormality of ganglion" branch in the plot
+    hpo$id[match("Abnormality of the nervous system", hpo$name)]
+][[1]]
+## Highlighting "Abnormality of ganglion" branch in the plot
 highlighted_branches <- c("Abnormality of nervous system physiology")
-# create the plot
-plot_n_phenotypes_per_branch_hpo(highlighted_branches=highlighted_branches,
-                                 background_branches=background_branches,
-                                 wes_anderson_palette = "Moonrise3",
-                                 phenotype_to_genes = phenotype_to_genes)
+## create the plot
+plot_n_phenotypes_per_branch_hpo(
+    highlighted_branches = highlighted_branches,
+    background_branches = background_branches,
+    wes_anderson_palette = "Moonrise3",
+    phenotype_to_genes = phenotype_to_genes
+)
 }
 }

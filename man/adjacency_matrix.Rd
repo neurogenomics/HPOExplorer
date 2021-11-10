@@ -11,7 +11,7 @@ adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
 
 \item{hpo}{ontology object (available in ontologyIndex package)}
 
-\item{as_dataframe}{can return matrix or df <bool>}
+\item{as_dataframe}{can return matrix or df \<bool\>}
 }
 \value{
 adjacency matrix
@@ -20,12 +20,12 @@ adjacency matrix
 Create adjacency matrix of HPO child-parent relationships
 }
 \details{
-It may be possible to use a hash table for ggnetwork, which may be more
-efficent than the matrix in a shiny app ?
+It may be possible to use a hash table for \link[ggnetwork]{ggnetwork},
+which may be more efficient than the matrix in a shiny app ?
 }
 \examples{
 \dontrun{
-pheno_ids <- c("HP:000001","HP:000002")
-adjacency_matrix(pheno_ids,hpo,as_dataframe=FALSE)
+pheno_ids <- c("HP:000001", "HP:000002")
+adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
 }
 }

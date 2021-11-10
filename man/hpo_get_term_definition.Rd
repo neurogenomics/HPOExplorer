@@ -22,6 +22,8 @@ hover box in the web app does not get too wide. This is done by calling the
 \code{newlines_to_definition} function.
 }
 \examples{
-\dontrun{hpo_get_term_definition("HP:123456", disease_descriptions)}
+\dontrun{
+hpo_get_term_definition("HP:123456", disease_descriptions)
+}
 
 }
