@@ -13,14 +13,18 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 `r badger::badge_github_version(color="black")`
-`r badger::badge_github_actions()`
+`r badger::badge_github_actions(action = "R-CMD-check-bioc")`
+`r badger::badge_github_actions(action = "DockerHub")`
 `r badger::badge_codecov()`
 `r badger::badge_last_commit()`
 `r badger::badge_license()`
 
 ## Intro
 
-This package contains useful functions for working with the [Human Phenotype Ontology (HPO)](https://hpo.jax.org/app/). It allows you to create interactive phenotype network plots, as well as many other useful functions.
+`HPOExplorer` contains useful functions for working with the
+[Human Phenotype Ontology (HPO)](https://hpo.jax.org/app/). 
+It allows you to create interactive phenotype network plots,
+as well as many other useful functions.
 
 ## Installation
 
@@ -32,10 +36,20 @@ if(!"remotes" %in% rownames(install.packages())){install.packages("remotes")}
 remotes::install_github("neurogenomics/HPOExplorer")
 ```
 
-## Documentation 
+## [Documentation website](https://neurogenomics.github.io/HPOExplorer/)
 
-Visit the package site for a tutorial and docs for functions.  
-[`HPOExplorer` site](https://neurogenomics.github.io/HPOExplorer/)
+### [Getting started](https://neurogenomics.github.io/HPOExplorer/articles/HPOExplorer.html)
+
+A quick tutorial on how to get started with `HPOExplorer`.
+
+### [Docker](https://neurogenomics.github.io/HPOExplorer/articles/HPOExplorer.html) 
+
+`HPOExplorer` is also available via [DockerHub](https://hub.docker.com/repository/docker/neurogenomicslab/hpoexplorer). 
+Click
+[here](https://neurogenomics.github.io/HPOExplorer/articles/HPOExplorer.html)
+for instructions on how to create a Docker or Singularity
+container with `HPOExplorer` and Rstudio pre-installed. 
+
 
 # Session Info 
 
