@@ -28,6 +28,9 @@ to highlight \<vector\<string\>\>}
 \item{wes_anderson_palette}{Name of desired color palette,
 see options above \<string\>}
 }
+\value{
+ggplot object
+}
 \description{
 This plots the number of phenotypes per HPO branch and colours selected
 branches to highlight them. This is not using any EWCE results, it is simply

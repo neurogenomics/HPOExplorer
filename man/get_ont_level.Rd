@@ -13,6 +13,9 @@ available in ontologyIndex package \<list\>}
 \item{term_ids}{A HPO Id (e.g. "HP:0000001") or a
 vector of multiple Ids \<string\> or \<vector_string\>}
 }
+\value{
+Ontology level of HPO Id
+}
 \description{
 In this function, ontology level refers to the number of generations of
 sub-phenotypes a term has below it in the HPO DAG. For example, the root of

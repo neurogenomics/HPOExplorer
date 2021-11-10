@@ -2,12 +2,16 @@
 % Please edit documentation in R/download_phenotype_to_genes.R
 \name{download_phenotype_to_genes}
 \alias{download_phenotype_to_genes}
-\title{Download phenotype_to_genes.txt}
+\title{Download HPO data}
 \usage{
 download_phenotype_to_genes(path = "data/phenotype_to_genes.txt")
 }
 \arguments{
-\item{path}{The desired path/filename.txt to save the phenotype_to_genes.txt file.}
+\item{path}{The desired path/filename.txt to save the
+phenotype_to_genes.txt file.}
+}
+\value{
+HPO data
 }
 \description{
 This downloads the gene list annotations for phenotypes in the HPO. The file

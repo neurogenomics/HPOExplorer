@@ -1,6 +1,6 @@
 Package: HPOExplorer
 Title: Analysis and Visualisation of the Human Phenotype Ontology
-Version: 0.99.0
+Version: 0.99.1
 Authors@R:
     c(person(given = "Robert",
            family = "Gordon-Smith",
@@ -18,7 +18,7 @@ Authors@R:
            email = "nathan.skene@gmail.com",
            comment = c(ORCID = "0000-0002-6807-3180"))) 
 Description: This package contains useful functions for working with the Human Phenotype Ontology (HPO). It allows you to create interactive phenotype network plots, as well as many other useful functions.
-License: GPL (>=3) 
+License: GPL-3
 URL: https://github.com/neurogenomics/HPOExplorer
 BugReports: https://github.com/neurogenomics/HPOExplorer/issues
 Encoding: UTF-8
@@ -41,3 +41,6 @@ Suggests:
     BiocStyle,
     badger
 VignetteBuilder: knitr
+biocViews:
+    Genetics, Preprocessing, GeneTarget, SystemsBiology,
+    GraphAndNetwork, Annotation, Network

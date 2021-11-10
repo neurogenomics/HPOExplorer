@@ -1,10 +1,14 @@
-#' Download phenotype_to_genes.txt
+#' Download HPO data
 #'
 #' This downloads the gene list annotations for phenotypes in the HPO. The file
 #' is called phenotype_to_genes.txt and includes over 9000 phenotypes annotated
 #' with associated genes.
 #'
-#' @param path The desired path/filename.txt to save the phenotype_to_genes.txt file.
+#' @param path The desired path/filename.txt to save the
+#'  phenotype_to_genes.txt file.
+#'
+#' @returns HPO data
+#'
 #' @export
 #' @importFrom utils download.file
 download_phenotype_to_genes <- function(path = "data/phenotype_to_genes.txt") {

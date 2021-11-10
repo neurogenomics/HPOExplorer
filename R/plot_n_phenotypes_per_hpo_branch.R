@@ -24,7 +24,9 @@
 #' @param phenotype_to_genes The phenotype_to_genes file from
 #' HPO giving phenotype gene lists \<data.frame\>
 #' @param hpo The HPO data object from ontologyIndex package.
-#' @import ggplot2
+#'
+#' @returns ggplot object
+#'
 #' @examples
 #' \dontrun{
 #' ## Selecting child terms of
@@ -43,16 +45,20 @@
 #' )
 #' }
 #' @export
-plot_n_phenotypes_per_branch_hpo <- function(phenotype_to_genes,
-                                             hpo,
-                                             highlighted_branches =
-                                                 c(
-                                                     "Abnormality of the nervous system",
-                                                     "Abnormality of the cardiovascular system",
-                                                     "Abnormality of the immune system"
-                                                 ),
-                                             background_branches = hpo$children["HP:0000118"][[1]],
-                                             wes_anderson_palette = "Moonrise3") {
+#' @import ggplot2
+#' @importFrom wesanderson wes_palette
+plot_n_phenotypes_per_branch_hpo <- function(
+    phenotype_to_genes,
+    hpo,
+     highlighted_branches =
+         c(
+             "Abnormality of the nervous system",
+             "Abnormality of the cardiovascular system",
+             "Abnormality of the immune system"
+         ),
+     background_branches = hpo$children["HP:0000118"][[1]],
+     wes_anderson_palette = "Moonrise3") {
+
     color_pal <- wesanderson::wes_palette(wes_anderson_palette, 2)
     highlighted_branches_ids <- hpo$id[match(highlighted_branches, hpo$name)]
     phenos_per_branch <- data.frame()
@@ -63,18 +69,29 @@ plot_n_phenotypes_per_branch_hpo <- function(phenotype_to_genes,
         } else {
             target_branch <- "Other"
         }
-        phenos_per_branch <- rbind(phenos_per_branch, data.frame("branch" = hpo$name[b], "n_phenos" = n, "target" = target_branch))
+        phenos_per_branch <- rbind(phenos_per_branch,
+                                   data.frame("branch" = hpo$name[b],
+                                              "n_phenos" = n,
+                                              "target" = target_branch))
     }
-    phenos_per_branch$branch <- stats::reorder(phenos_per_branch$branch, phenos_per_branch$n_phenos)
-    phenos_per_branch_plt <- ggplot(phenos_per_branch, aes(x = n_phenos, y = branch, color = target, fill = target)) +
+    phenos_per_branch$branch <- stats::reorder(phenos_per_branch$branch,
+                                               phenos_per_branch$n_phenos)
+    phenos_per_branch_plt <- ggplot(phenos_per_branch,
+                                    aes(x = n_phenos, y = branch,
+                                        color = target, fill = target)) +
         geom_segment(mapping = aes(xend = 0, yend = branch), size = 3) +
         xlab("Descendants (n)") +
         ylab(element_blank()) +
         scale_color_manual(values = color_pal) +
         theme(
-            axis.line.x = element_blank(), panel.background = element_blank(), panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank(), axis.line.y = element_line(color = "black"),
-            axis.ticks.x = element_blank(), axis.text.x = element_blank(), legend.position = "none"
+            axis.line.x = element_blank(),
+            panel.background = element_blank(),
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            axis.line.y = element_line(color = "black"),
+            axis.ticks.x = element_blank(),
+            axis.text.x = element_blank(),
+            legend.position = "none"
         )
     return(phenos_per_branch_plt)
 }

@@ -16,6 +16,8 @@
 #' @param term_ids A HPO Id (e.g. "HP:0000001") or a
 #' vector of multiple Ids \<string\> or \<vector_string\>
 #'
+#' @returns Ontology level of HPO Id
+#'
 #' @examples
 #' \dontrun{
 #' term_ids <- "HP:0000001"
