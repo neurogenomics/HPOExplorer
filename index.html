@@ -103,9 +103,8 @@ Most recent update: <i>Nov-10-2021</i>
 </h2>
 <p>Within R:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="st">"remotes"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span><span class="op">}</span>
-
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"neurogenomics/HPOExplorer"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/neurogenomics/HPOExplorer" class="external-link">"HPOExplorer"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ovrhuman/HPOExplorer"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="documentation-website">
@@ -119,9 +118,9 @@ Most recent update: <i>Nov-10-2021</i>
 </div>
 <div class="section level3">
 <h3 id="docker">
-<a href="https://neurogenomics.github.io/HPOExplorer/articles/HPOExplorer.html" class="external-link">Docker</a><a class="anchor" aria-label="anchor" href="#docker"></a>
+<a href="https://neurogenomics.github.io/HPOExplorer/articles/docker.html" class="external-link">Docker</a><a class="anchor" aria-label="anchor" href="#docker"></a>
 </h3>
-<p><code>HPOExplorer</code> is also available via <a href="https://hub.docker.com/repository/docker/neurogenomicslab/hpoexplorer" class="external-link">DockerHub</a>. Click <a href="https://neurogenomics.github.io/HPOExplorer/articles/HPOExplorer.html" class="external-link">here</a> for instructions on how to create a Docker or Singularity container with <code>HPOExplorer</code> and Rstudio pre-installed.</p>
+<p><code>HPOExplorer</code> is also available via <a href="https://hub.docker.com/repository/docker/neurogenomicslab/hpoexplorer" class="external-link">DockerHub</a>. Click <a href="https://neurogenomics.github.io/HPOExplorer/articles/docker.html" class="external-link">here</a> for instructions on how to create a Docker or Singularity container with <code>HPOExplorer</code> and Rstudio pre-installed.</p>
 </div>
 </div>
 </div>
