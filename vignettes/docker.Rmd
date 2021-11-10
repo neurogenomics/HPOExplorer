@@ -13,14 +13,13 @@ vignette: >
 
 ```{r setup, include=FALSE}
 #### Package name ####
-pkg <- tolower("HPOExplorer") #desc::desc_get("Package")
+pkg_og <- read.dcf(here::here("DESCRIPTION"), fields = "Package")[1]
+pkg <- tolower(pkg_og)
 #### Username of DockerHub account ####
 docker_user <- tolower("neurogenomicslab")
 ```
 
-# Docker
-
-`r pkg` is now available via 
+``r pkg_og`` is now available via 
 [DockerHub](https://hub.docker.com/repository/docker/`r docker_user`/`r pkg`) 
 as a containerised environment with Rstudio and 
 all necessary dependencies pre-installed.

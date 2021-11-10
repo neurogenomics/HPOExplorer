@@ -39,7 +39,8 @@ Suggests:
     plotly,
     devtools,
     BiocStyle,
-    badger
+    badger,
+    here
 VignetteBuilder: knitr
 biocViews:
     Genetics, Preprocessing, GeneTarget, SystemsBiology,
