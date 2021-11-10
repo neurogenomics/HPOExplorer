@@ -16,7 +16,7 @@ Within R:
 
 ```{r install, eval = FALSE}
 if (!require("remotes")) install.packages("remotes")
-if (!require("HPOExplorer")) remotes::install_github("ovrhuman/HPOExplorer")
+if (!require("HPOExplorer")) remotes::install_github("neurogenomics/HPOExplorer")
 ```
 
 ```{r setup, include=TRUE}
