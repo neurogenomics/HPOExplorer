@@ -29,9 +29,8 @@ functions.
 Within R:
 
 ``` r
-if(!"remotes" %in% rownames(install.packages())){install.packages("remotes")}
-
-remotes::install_github("neurogenomics/HPOExplorer")
+if (!require("remotes")) install.packages("remotes")
+if (!require("HPOExplorer")) remotes::install_github("ovrhuman/HPOExplorer")
 ```
 
 ## [Documentation website](https://neurogenomics.github.io/HPOExplorer/)
@@ -40,12 +39,12 @@ remotes::install_github("neurogenomics/HPOExplorer")
 
 A quick tutorial on how to get started with `HPOExplorer`.
 
-### [Docker](https://neurogenomics.github.io/HPOExplorer/articles/HPOExplorer.html)
+### [Docker](https://neurogenomics.github.io/HPOExplorer/articles/docker.html)
 
 `HPOExplorer` is also available via
 [DockerHub](https://hub.docker.com/repository/docker/neurogenomicslab/hpoexplorer).
 Click
-[here](https://neurogenomics.github.io/HPOExplorer/articles/HPOExplorer.html)
+[here](https://neurogenomics.github.io/HPOExplorer/articles/docker.html)
 for instructions on how to create a Docker or Singularity container with
 `HPOExplorer` and Rstudio pre-installed.
 
