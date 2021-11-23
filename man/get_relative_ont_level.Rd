@@ -36,6 +36,6 @@ library(ontologyIndex)
 data(hpo)
 pheno_ids <- c("HP:000001", "HP:000002")
 phenoAdj <- adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
-rel_ont_lvls <- get_relative_ont_level_multiple("HP:000002", phenoAdj, hpo)
+rel_ont_lvls <- get_relative_ont_level("HP:000002", phenoAdj, hpo)
 
 }
