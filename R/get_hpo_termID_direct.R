@@ -13,6 +13,12 @@
 #' @param phenotype The phenotype of interest \<string\>
 #' @param hpo The HPO object from ontologyIndex package \<list\>
 #' @returns The HPO ID of phenotype \<string\>
+#'
+#' @examples
+#' library(ontologyIndex)
+#' data(hpo)
+#' pheno_abnormality_id <- get_hpo_termID_direct(hpo,"Phenotypic abnormality")
+#'
 #' @export
 get_hpo_termID_direct <- function(hpo,
                                   phenotype = "Phenotypic abnormality") {

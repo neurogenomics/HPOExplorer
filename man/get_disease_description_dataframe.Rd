@@ -21,3 +21,10 @@ the phenotype.
 This can take a while to run on a large number of IDs so it is reccomended
 that you do it once and save the dataframe.
 }
+\examples{
+
+genedata <- load_phenotype_to_genes()
+HPO_ids <- unique(genedata$ID[1:10])
+description_df <- get_disease_description_dataframe(HPO_ids)
+
+}

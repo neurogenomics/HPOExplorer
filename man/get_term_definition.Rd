@@ -21,8 +21,8 @@ newlines every nth word. This can be useful when displaying the description
 in plots with limited space.
 }
 \examples{
-\dontrun{
+
 ontologyId <- "HP:0000002"
 get_term_definition(ontologyId)
-}
+
 }

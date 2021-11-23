@@ -20,7 +20,7 @@ This is a function for loading the phenotype to genes text file from HPO.
 It adds the collumn names and returns as a dataframe
 }
 \examples{
-\dontrun{
-phenotype_to_genes <- load_phenotype2genes("data/phenotype_to_genes.txt")
-}
+
+genedata <- load_phenotype_to_genes()
+
 }

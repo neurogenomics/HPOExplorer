@@ -17,6 +17,13 @@
 #' @param phenoAdj A adjacency matrix (produced by the adjacency_matrix function)
 #' @param hpo The HPO ontology data object
 #'
+#' @examples
+#' library(ontologyIndex)
+#' data(hpo)
+#' pheno_ids <- c("HP:000001", "HP:000002")
+#' phenoAdj <- adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
+#' rel_ont_lvls <- get_relative_ont_level_multiple("HP:000002", phenoAdj, hpo)
+#'
 #' @returns A integer representing the relative ontology level of a term within
 #' a connected component of a subset of the HPO.
 #' @export

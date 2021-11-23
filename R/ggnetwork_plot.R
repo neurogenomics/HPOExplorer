@@ -10,6 +10,20 @@
 #'  to colour \<string\>
 #' @param colour_label A label for the colour figure legend \<string\>
 #'
+#' @examples
+#' library(ontologyIndex)
+#' data(hpo)
+#' phenotype_to_genes <- load_phenotype_to_genes()
+#' Neuro_delay_ID <- get_hpo_termID_direct(hpo = hpo,
+#'                                         phenotype = "Neurodevelopmental delay")
+#' Neuro_delay_descendants <- phenotype_to_genes[
+#'     phenotype_to_genes$ID %in% get_descendants(hpo,Neuro_delay_ID),]
+#' phenoAdj <- adjacency_matrix(unique(phenos$HPO_Id), hpo)
+#' phenoNet <- make_network_object(phenos,phenoAdj, hpo, colour_column = "ontLvl_geneCount_ratio")
+#' plt <- ggnetwork_plot(phenoNet = phenoNet,
+#'                       colour_column = "ontLvl_geneCount_ratio",
+#'                       colour_label = "OntLvl/nGenes")
+#'
 #' @returns A network plot (compatible with interactive plotly rendering).
 #' @import ggplot2
 #' @export

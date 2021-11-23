@@ -30,8 +30,9 @@ but you can supply a vector of multiple terms and it will return the level of
 the highest level term in that vector.
 }
 \examples{
-\dontrun{
+library(ontologyIndex)
+data(hpo)
 term_ids <- "HP:0000001"
 get_ont_level(hpo, term_ids)
-}
+
 }

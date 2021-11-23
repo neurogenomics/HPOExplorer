@@ -18,3 +18,7 @@ This downloads the gene list annotations for phenotypes in the HPO. The file
 is called phenotype_to_genes.txt and includes over 9000 phenotypes annotated
 with associated genes.
 }
+\examples{
+download_phenotype_to_genes(path = "phenotype_to_genes.txt")
+
+}

@@ -22,7 +22,9 @@ This just applies the \link[HPOExplorer]{hpo_get_term_definition} function
 to a character vector of terms.
 }
 \examples{
-\dontrun{
-hpo_term_definition_list(HPO_terms_char_vector, Disease_description_df)
-}
+genedata <- load_phenotype_to_genes()
+HPO_ids <- unique(genedata$ID[1:10])
+
+disease_descriptions <- get_disease_description_dataframe(HPO_ids)
+hpo_term_definition_list(HPO_ids[1:3], disease_descriptions)
 }

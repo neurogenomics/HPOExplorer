@@ -9,10 +9,11 @@
 #' @param hpo ontology object (available in ontologyIndex package)
 #' @param as_dataframe can return matrix or df \<bool\>
 #' @examples
-#' \dontrun{
+#' library(ontologyIndex)
+#' data(hpo)
 #' pheno_ids <- c("HP:000001", "HP:000002")
-#' adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
-#' }
+#' phenoAdj <- adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
+#'
 #' @returns adjacency matrix
 #' @export
 adjacency_matrix <- function(pheno_ids,

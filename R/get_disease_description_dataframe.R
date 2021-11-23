@@ -9,6 +9,13 @@
 #'
 #' @param HPO_ids A character vector of HPO Ids
 #' @returns A dataframe of HPO phenotype descriptions
+#'
+#' @examples
+#'
+#' genedata <- load_phenotype_to_genes()
+#' HPO_ids <- unique(genedata$ID[1:10])
+#' description_df <- get_disease_description_dataframe(HPO_ids)
+#'
 #' @export
 get_disease_description_dataframe <- function(HPO_ids) {
     descriptions <- c()

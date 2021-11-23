@@ -31,3 +31,11 @@ of the plot would have the same size for its root node.
 It would also be possible to just use absolute ontology level,
 so that "Phenotypic abnormality" would always be the largest datapoint etc.
 }
+\examples{
+library(ontologyIndex)
+data(hpo)
+pheno_ids <- c("HP:000001", "HP:000002")
+phenoAdj <- adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
+rel_ont_lvls <- get_relative_ont_level_multiple("HP:000002", phenoAdj, hpo)
+
+}

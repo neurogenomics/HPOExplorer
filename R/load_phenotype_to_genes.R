@@ -6,9 +6,9 @@
 #' @param pheno_to_genes_txt_file path to the phenotype to genes text
 #' file from the HPO. It contains phenotypes annotated with associated genes
 #' @examples
-#' \dontrun{
-#' phenotype_to_genes <- load_phenotype2genes("data/phenotype_to_genes.txt")
-#' }
+#'
+#' genedata <- load_phenotype_to_genes()
+#'
 #' @returns a dataframe of the phenotype_to_genes.txt file from HPO
 #' @export
 #' @importFrom utils read.delim download.file

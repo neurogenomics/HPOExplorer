@@ -24,8 +24,9 @@ It may be possible to use a hash table for \link[ggnetwork]{ggnetwork},
 which may be more efficient than the matrix in a shiny app ?
 }
 \examples{
-\dontrun{
+library(ontologyIndex)
+data(hpo)
 pheno_ids <- c("HP:000001", "HP:000002")
-adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
-}
+phenoAdj <- adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
+
 }
