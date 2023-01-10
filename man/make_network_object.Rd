@@ -4,7 +4,13 @@
 \alias{make_network_object}
 \title{Make network object}
 \usage{
-make_network_object(phenos, adjacency, hpo, colour_column = "fold_change")
+make_network_object(
+  phenos,
+  adjacency,
+  hpo,
+  colour_column = "fold_change",
+  verbose = TRUE
+)
 }
 \arguments{
 \item{phenos}{dataframe of phenotypes and values/ parameters.}
@@ -14,10 +20,12 @@ make_network_object(phenos, adjacency, hpo, colour_column = "fold_change")
 \item{hpo}{The HPO ontology data object}
 
 \item{colour_column}{The column from phenos that you wish
-to map to node colour}
+to map to node colour.}
+
+\item{verbose}{Print messages.}
 }
 \value{
-A ggnetowrk graph/ network object of a subset of the RD EWCE results.
+A ggnetwork graph/ network object of a subset of the RD EWCE results.
 }
 \description{
 This uses the network package to coerce the adjacency matrix into a
@@ -29,33 +37,16 @@ It expects there to be a column of HPO IDs in the phenos dataframe called
 HPO_Id.
 }
 \examples{
-\dontrun{
-make_network_object(phenos, adjacency, hpo, colour_column = "fold_change")
-}
 library(ontologyIndex)
 data(hpo)
-phenotype_to_genes <- load_phenotype_to_genes()
-Neuro_delay_ID <- get_hpo_termID_direct(hpo = hpo,
-                                        phenotype = "Neurodevelopmental delay")
-Neuro_delay_descendants <- phenotype_to_genes[
-    phenotype_to_genes$ID \%in\% get_descendants(hpo,Neuro_delay_ID),]
-
-phenos = data.frame()
-for (p in unique(Neuro_delay_descendants$Phenotype)) {
-    id <- get_hpo_termID(phenotype = p,
-                         phenotype_to_genes = phenotype_to_genes)
-    ontLvl_geneCount_ratio <- (get_ont_level(hpo = hpo,
-                                             term_ids = p) + 1)/length(get_gene_list(p,phenotype_to_genes))
-    description <- get_term_definition(ontologyId = id,
-                                       line_length = 10)
-    phenos <- rbind(phenos,
-                    data.frame("Phenotype"=p,
-                               "HPO_Id"=id,
-                               "ontLvl_geneCount_ratio"=ontLvl_geneCount_ratio,
-                               "description"=description))
-}
-
-phenoAdj <- adjacency_matrix(unique(phenos$HPO_Id), hpo)
-phenoNet <- make_network_object(phenos,phenoAdj, hpo, colour_column = "ontLvl_geneCount_ratio")
-
+phenos = make_phenos_dataframe(hpo = hpo,
+                               ancestor = "Neurodevelopmental delay",
+                               add_description = FALSE)
+phenos <- make_hoverboxes(phenos_dataframe = phenos)
+adjacency <- adjacency_matrix(pheno_ids = unique(phenos$HPO_Id),
+                              hpo = hpo)
+phenoNet <- make_network_object(phenos = phenos,
+                                adjacency = adjacency,
+                                hpo = hpo,
+                                colour_column = "ontLvl_geneCount_ratio")
 }

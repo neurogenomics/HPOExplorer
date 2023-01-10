@@ -37,12 +37,11 @@ selected from the graph.
 # Dependencies and data 
 
 To run the following examples we need the HPO data its self, 
-and the phenotype_to_genes.txt file (gene annotations) from the HPO.
+and the *phenotype_to_genes.txt* file (gene annotations) from the HPO.
 
 ```{r dependencies, message=FALSE, warning=FALSE}
 library(ontologyIndex)
 data(hpo)
-
 phenotype_to_genes <- load_phenotype_to_genes()
 ```
 
@@ -75,20 +74,20 @@ For this example we will have to make up a parameter for demonstration purposes.
 `HPOExplorer` has some useful functions for obtaining the ontology level of terms. Ontology level describes the number of generations of descendants vertically below a term (note that this is not the same as the raw number of descendants which is also capturing the horizontal spread of branching off terms). For example "Phenotypic abnormality" is high up in the HPO and all other disease phenotypes are descendants of it. It is at ontology level 13. A term with no descendants is at ontology level 0. 
 
 ```{r phenos_dataframe, message = FALSE, warning = FALSE}
-phenos = data.frame()
-for (p in unique(Neuro_delay_descendants$Phenotype)) {
+phenos <- lapply(unique(Neuro_delay_descendants$Phenotype), function(p) {
+  message("Processing: ",p)
   id <- get_hpo_termID(phenotype = p, 
                        phenotype_to_genes = phenotype_to_genes)
   ontLvl_geneCount_ratio <- (get_ont_level(hpo = hpo,
-                                           term_ids = p) + 1)/length(get_gene_list(p,phenotype_to_genes))
+                                           term_ids = p) + 1)/
+    length(get_gene_list(p,phenotype_to_genes))
   description <- get_term_definition(ontologyId = id, 
                                      line_length = 10)
-  phenos <- rbind(phenos,
-                  data.frame("Phenotype"=p,
-                             "HPO_Id"=id,
-                             "ontLvl_geneCount_ratio"=ontLvl_geneCount_ratio,
-                             "description"=description))
-}
+  data.frame("Phenotype"=p, 
+             "HPO_Id"=id,
+             "ontLvl_geneCount_ratio"=ontLvl_geneCount_ratio,
+             "description"=description)
+}) |> data.table::rbindlist()
 ```
 
 We used the `get_hpo_termID` function to get the HPO Id of each term, and `length(get_gene_list(p,phenotype_to_genes))` to get the number of genes. 
@@ -97,21 +96,15 @@ We used the `get_hpo_termID` function to get the HPO Id of each term, and `lengt
 The hoverbox is useful for making interactive plots in shiny apps. It allows the user to hover their mouse over a phenotype and see a description of it and any results relating to it from your analysis. This function generates the hoverbox based on selected columns from the dataframe above. We then add these to a new column in the `phenos` dataframe called `hover_box`. 
 
 ```{r hover, message= FALSE, warning = FALSE}
-hoverBox = c()
-for (p in unique(phenos$Phenotype)) {
-  hoverBox <- append(hoverBox, 
-                     make_hoverbox(p,
-                                   phenos,
-                                   columns = c("HPO_Id",
-                                               "ontLvl_geneCount_ratio",
-                                               "description"),
-                                   labels = c("ID",
-                                              "Ont.Lvl/n.genes",
-                                              "Description")))
-}
-phenos$hover<- hoverBox
+phenos <- make_hoverboxes(phenos_dataframe = phenos, 
+                          columns = c("HPO_Id",
+                                      "ontLvl_geneCount_ratio",
+                                      "description"),
+                          labels = c("ID",
+                                     "Ont.Lvl/n.genes",
+                                     "Description")) 
 print("Here is an example hover box from this:")
-cat(phenos$hover[1])
+cat(phenos$hover[[1]])
 ```
 
 # Network object
@@ -125,8 +118,12 @@ Once we have this adjacecny matrix that represents the relationships between phe
 The `colour_column` argument is where you choose the column name from the `phenos` dataframe which you want to be mapped to the colour of the nodes. In this case we created the family arbitrary variable of ontology level to number of associated genes ratio and its column name is `ontLvl_geneCount_ratio`. 
 
 ```{r nw, warning = FALSE , message = FALSE} 
-phenoAdj <- adjacency_matrix(unique(phenos$HPO_Id), hpo)
-phenoNet <- make_network_object(phenos,phenoAdj, hpo, colour_column = "ontLvl_geneCount_ratio")
+adjacency <- adjacency_matrix(pheno_ids = unique(phenos$HPO_Id), 
+                              hpo = hpo)
+phenoNet <- make_network_object(phenos = phenos, 
+                                adjacency = adjacency, 
+                                hpo = hpo, 
+                                colour_column = "ontLvl_geneCount_ratio")
 ```
 
 # Plot it

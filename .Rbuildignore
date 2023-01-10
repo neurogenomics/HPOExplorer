@@ -12,3 +12,4 @@
 Dockerfile
 ^LICENSE\.md$
 ^LICENSE$
+phenotype_to_genes.txt$

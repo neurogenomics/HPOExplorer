@@ -1,18 +1,16 @@
 #' Get term definition
 #'
-#' This function accesses the HPO API to get a description/ definition of an
+#' This function accesses the HPO API to get a description/definition of an
 #' HPO term. If a \code{line_length} \> 0 is passed to the function, it will add
 #' newlines every nth word. This can be useful when displaying the description
 #' in plots with limited space.
 #' @param ontologyId A HPO term Id (e.g. "HP:0000002") \<string\>
 #' @param line_length The number of desired words per line \<int\>
 #' @returns A disease definition \<string\>
-#' @examples
-#'
-#' ontologyId <- "HP:0000002"
-#' get_term_definition(ontologyId)
 #'
 #' @export
+#' @examples
+#' get_term_definition(ontologyId="HP:0000002")
 get_term_definition <- function(ontologyId,
                                 line_length = FALSE) {
     hpo_termdetails <- tryCatch(expr = {

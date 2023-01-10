@@ -15,14 +15,11 @@ get_term_definition(ontologyId, line_length = FALSE)
 A disease definition \<string\>
 }
 \description{
-This function accesses the HPO API to get a description/ definition of an
+This function accesses the HPO API to get a description/definition of an
 HPO term. If a \code{line_length} \> 0 is passed to the function, it will add
 newlines every nth word. This can be useful when displaying the description
 in plots with limited space.
 }
 \examples{
-
-ontologyId <- "HP:0000002"
-get_term_definition(ontologyId)
-
+get_term_definition(ontologyId="HP:0000002")
 }

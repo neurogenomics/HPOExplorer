@@ -8,53 +8,57 @@
 #' @param phenoNet The network object created using create_network_object
 #' @param colour_column column name of the variable to be mapped
 #'  to colour \<string\>
-#' @param colour_label A label for the colour figure legend \<string\>
+#' @param colour_label A label for the colour figure legend \<string\>.
+#' @param interactive Make the plot interactive with \link[plotly]{ggplotly}.
+#' @param verbose Print messages.
+#' @inheritParams plotly::ggplotly
+#' @returns A network plot (compatible with interactive plotly rendering).
+#' @importFrom ggnetwork geom_edges
+#' @export
 #'
 #' @examples
 #' library(ontologyIndex)
 #' data(hpo)
-#' phenotype_to_genes <- load_phenotype_to_genes()
-#' Neuro_delay_ID <- get_hpo_termID_direct(hpo = hpo,
-#'                                         phenotype = "Neurodevelopmental delay")
-#' Neuro_delay_descendants <- phenotype_to_genes[
-#'     phenotype_to_genes$ID %in% get_descendants(hpo,Neuro_delay_ID),]
-#'
-#' phenos = data.frame()
-#' for (p in unique(Neuro_delay_descendants$Phenotype)) {
-#'     id <- get_hpo_termID(phenotype = p,
-#'                          phenotype_to_genes = phenotype_to_genes)
-#'     ontLvl_geneCount_ratio <- (get_ont_level(hpo = hpo,
-#'                                              term_ids = p) + 1)/length(get_gene_list(p,phenotype_to_genes))
-#'     description <- get_term_definition(ontologyId = id,
-#'                                        line_length = 10)
-#'     phenos <- rbind(phenos,
-#'                     data.frame("Phenotype"=p,
-#'                                "HPO_Id"=id,
-#'                                "ontLvl_geneCount_ratio"=ontLvl_geneCount_ratio,
-#'                                "description"=description))
-#' }
-#'
-#' phenoAdj <- adjacency_matrix(unique(phenos$HPO_Id), hpo)
-#' phenoNet <- make_network_object(phenos,phenoAdj, hpo, colour_column = "ontLvl_geneCount_ratio")
+#' phenos = make_phenos_dataframe(hpo = hpo,
+#'                                ancestor = "Neurodevelopmental delay",
+#'                                add_description = FALSE)
+#' phenos <- make_hoverboxes(phenos_dataframe = phenos)
+#' adjacency <- adjacency_matrix(unique(phenos$HPO_Id), hpo)
+#' phenoNet <- make_network_object(phenos = phenos,
+#'                                 adjacency = adjacency,
+#'                                 hpo = hpo,
+#'                                 colour_column = "ontLvl_geneCount_ratio")
 #' plt <- ggnetwork_plot(phenoNet = phenoNet,
 #'                       colour_column = "ontLvl_geneCount_ratio",
 #'                       colour_label = "OntLvl/nGenes")
-#'
-#' @returns A network plot (compatible with interactive plotly rendering).
-#' @import ggplot2
-#' @export
 ggnetwork_plot <- function(phenoNet,
                            colour_column = "fold_change",
-                           colour_label = "Fold change") {
-    message("ggnetwork_plot")
-    network_plot <- ggplot(phenoNet, aes(x = x, y = y, xend = xend, yend = yend, text = hover)) +
-        ggnetwork::geom_edges(color = "darkgray") +
-        geom_point(aes_string(colour = colour_column, size = "hierarchy")) + # , text= hover)) +
-        geom_text(aes(label = label), color = "black") +
-        scale_colour_gradient2(low = "white", mid = "yellow", high = "red") +
-        scale_size(trans = "exp") +
-        guides(size = "none") +
-        labs(colour = colour_label) +
-        theme_void() #  use tooltip = "hover" with ggplotly for hover box
+                           colour_label = "Fold change",
+                           interactive = FALSE,
+                           tooltip = "hover",
+                           verbose = TRUE) {
+  requireNamespace("ggplot2")
+  messager("Creating ggnetwork plot.",v=verbose)
+  network_plot <- ggplot(phenoNet,
+                         aes(x = x,
+                             y = y,
+                             xend = xend,
+                             yend = yend,
+                             text = hover)) +
+      ggnetwork::geom_edges(color = "darkgray") +
+      geom_point(aes_string(colour = colour_column,
+                            size = "hierarchy")) + # , text= hover)) +
+      geom_text(aes(label = label), color = "black") +
+      scale_colour_gradient2(low = "white", mid = "yellow", high = "red") +
+      scale_size(trans = "exp") +
+      guides(size = "none") +
+      labs(colour = colour_label) +
+      theme_void() #  use tooltip = "hover" with ggplotly for hover box
+
+  if(isTRUE(interactive)){
+    requireNamespace("plotly")
+    return(plotly::ggplotly(network_plot, tooltip = tooltip))
+  } else {
     return(network_plot)
+  }
 }

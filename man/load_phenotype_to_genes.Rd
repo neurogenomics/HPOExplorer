@@ -5,7 +5,8 @@
 \title{Load phenotype_to_genes.txt}
 \usage{
 load_phenotype_to_genes(
-  pheno_to_genes_txt_file = file.path(tempdir(), "data/phenotype_to_genes.txt")
+  pheno_to_genes_txt_file = file.path(tools::R_user_dir("HPOExplorer", which = "cache"),
+    "data", "phenotype_to_genes.txt")
 )
 }
 \arguments{
@@ -20,7 +21,5 @@ This is a function for loading the phenotype to genes text file from HPO.
 It adds the collumn names and returns as a dataframe
 }
 \examples{
-
-genedata <- load_phenotype_to_genes()
-
+phenotype_to_genes <- load_phenotype_to_genes()
 }
