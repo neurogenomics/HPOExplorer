@@ -26,3 +26,9 @@ Why not always use this? I have found that occasionally it doesn't work.
 Also, it requires you to load the full HPO object to get an ID,
 which is wasteful if you are only using the gene annotations.
 }
+\examples{
+library(ontologyIndex)
+data(hpo)
+pheno_abnormality_id <- get_hpo_termID_direct(hpo,"Phenotypic abnormality")
+
+}

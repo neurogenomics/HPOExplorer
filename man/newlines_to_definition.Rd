@@ -25,9 +25,11 @@ Adds new lines to the description so that hover boxes dont get too wide.
 Adds new lines to the description so that hover boxes dont get too wide.
 }
 \examples{
-\dontrun{
-newlines_to_definition(disease_description, 10)
-}
+description <- "A dialeptic seizure is a type of seizure characterised
+predominantly by reduced responsiveness or awareness and with subsequent at
+least partial amnesia of the event."
+newlines_to_definition(description, 10)
+
 \dontrun{
 newlines_to_definition(disease_description, 10)
 }

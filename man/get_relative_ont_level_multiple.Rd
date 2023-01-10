@@ -25,3 +25,11 @@ subset of the HPO. The subest chosen when creating the phenoAdj from the main
 adjacency matrix of all phenotypes. So, the phenotypes can be found in the
 row and column names of phenoAdj.
 }
+\examples{
+library(ontologyIndex)
+data(hpo)
+pheno_ids <- c("HP:000001", "HP:000002")
+phenoAdj <- adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
+rel_ont_lvls <- get_relative_ont_level_multiple(phenoAdj, hpo, reverse = TRUE)
+
+}

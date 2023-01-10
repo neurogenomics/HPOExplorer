@@ -8,6 +8,8 @@
 #'  phenotype_to_genes.txt file.
 #'
 #' @returns HPO data
+#' @examples
+#' download_phenotype_to_genes(path = "phenotype_to_genes.txt")
 #'
 #' @export
 #' @importFrom utils download.file

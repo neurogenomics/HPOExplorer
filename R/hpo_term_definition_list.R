@@ -10,9 +10,11 @@
 #' @returns A named vector of disease descriptions,
 #' with HPO Id as names and descriptions as values.
 #' @examples
-#' \dontrun{
-#' hpo_term_definition_list(HPO_terms_char_vector, Disease_description_df)
-#' }
+#' genedata <- load_phenotype_to_genes()
+#' HPO_ids <- unique(genedata$ID[1:10])
+#'
+#' disease_descriptions <- get_disease_description_dataframe(HPO_ids)
+#' hpo_term_definition_list(HPO_ids[1:3], disease_descriptions)
 #' @export
 hpo_term_definition_list <- function(ontologyId_list,
                                      disease_descriptions) {

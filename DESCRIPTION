@@ -5,7 +5,7 @@ Authors@R:
     c(person(given = "Robert",
            family = "Gordon-Smith",
            role = c("aut","cre"),
-           email = "bwg20@ic.ac.uk",
+           email = "b.gordon-smith20@imperial.ac.uk",
            comment = c(ORCID = "0000-0001-6698-7387")),
      person(given = "Brian",
            family = "Schilder",
@@ -17,7 +17,7 @@ Authors@R:
            role = c("aut"),
            email = "nathan.skene@gmail.com",
            comment = c(ORCID = "0000-0002-6807-3180"))) 
-Description: HPOExplorer contains useful functions for working with the Human Phenotype Ontology (HPO). It allows you to create interactive phenotype network plots, as well as many other useful functions.
+Description: HPOExplorer contains useful functions for working with the Human Phenotype Ontology (HPO). It allows you to create interactive phenotype network plots, which can be useful for making web applications. It also has functions for finding ontology level (n generations of terms below the selected term), and getting term definitions from HPO API.
 License: GPL-3
 URL: https://github.com/neurogenomics/HPOExplorer
 BugReports: https://github.com/neurogenomics/HPOExplorer/issues

@@ -24,3 +24,9 @@ This function is called by the \emph{add_hpo_termid_col}
 function, which is called by the get_cell_ontology
 function when selecting a subset of the data and then adding a HPO id column.
 }
+\examples{
+genedata <- load_phenotype_to_genes()
+phenotype <- "Phenotypic abnormality"
+pheno_abnorm_id <- get_hpo_termID(phenotype, genedata)
+
+}

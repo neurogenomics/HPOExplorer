@@ -11,6 +11,11 @@
 #' @param phenotype_to_genes The HPO terms with gene list annotations
 #'  data frame from HPO website
 #'
+#' @examples
+#' genedata <- load_phenotype_to_genes()
+#' phenotype <- "Phenotypic abnormality"
+#' pheno_abnorm_id <- get_hpo_termID(phenotype, genedata)
+#'
 #' @returns The HPO Id \<string\>
 #'
 #' @export

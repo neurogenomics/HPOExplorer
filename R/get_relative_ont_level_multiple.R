@@ -12,6 +12,14 @@
 #' the parent terms are larger than the child terms.
 #' @returns A named vector of relative ontology level, where names are HPO Ids and
 #' value is relative ontology level.
+#'
+#' @examples
+#' library(ontologyIndex)
+#' data(hpo)
+#' pheno_ids <- c("HP:000001", "HP:000002")
+#' phenoAdj <- adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
+#' rel_ont_lvls <- get_relative_ont_level_multiple(phenoAdj, hpo, reverse = TRUE)
+#'
 #' @export
 get_relative_ont_level_multiple <- function(phenoAdj, hpo, reverse = TRUE) {
     heirarchy <- c()

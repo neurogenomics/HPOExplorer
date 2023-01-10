@@ -8,10 +8,10 @@
 #' @param line_length The number of desired words per line \<int\>
 #' @returns A disease definition \<string\>
 #' @examples
-#' \dontrun{
+#'
 #' ontologyId <- "HP:0000002"
 #' get_term_definition(ontologyId)
-#' }
+#'
 #' @export
 get_term_definition <- function(ontologyId,
                                 line_length = FALSE) {

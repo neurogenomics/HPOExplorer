@@ -10,12 +10,13 @@
 #' contains gene annotations for HPO phenotypes.
 #' @returns a character vector of genes associated with the selected phenotype.
 #' @examples
-#' \dontrun{
+#'
+#' phenotype_to_genes <- load_phenotype_to_genes()
 #' # Creating a list of gene lists indexed by phenotype name
 #' GeneLists <- list()
+#' Phenotypes <- unique(phenotype_to_genes$Phenotype[1:5])
 #' for (p in Phenotypes) {
 #'     GeneLists[[p]] <- get_gene_list(p, phenotype_to_genes)
-#' }
 #' }
 #'
 #' @export

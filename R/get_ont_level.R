@@ -19,10 +19,11 @@
 #' @returns Ontology level of HPO Id
 #'
 #' @examples
-#' \dontrun{
+#' library(ontologyIndex)
+#' data(hpo)
 #' term_ids <- "HP:0000001"
 #' get_ont_level(hpo, term_ids)
-#' }
+#'
 #' @export
 get_ont_level <- function(hpo,
                           term_ids) {

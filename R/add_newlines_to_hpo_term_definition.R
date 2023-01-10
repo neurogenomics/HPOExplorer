@@ -8,9 +8,11 @@
 #' @returns The disease description with newline symbols added every nth word.
 #'
 #' @examples
-#' \dontrun{
-#' newlines_to_definition(disease_description, 10)
-#' }
+#' description <- "A dialeptic seizure is a type of seizure characterised
+#' predominantly by reduced responsiveness or awareness and with subsequent at
+#' least partial amnesia of the event."
+#' newlines_to_definition(description, 10)
+#'
 #' @export
 newlines_to_definition <- function(definition, line_length = 10) {
     definition <- strsplit(definition, split = " ")[[1]]
@@ -23,3 +25,4 @@ newlines_to_definition <- function(definition, line_length = 10) {
     definition <- paste(definition, collapse = " ")
     return(definition)
 }
+

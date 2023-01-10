@@ -27,3 +27,34 @@ to make interactive plots.
 It makes it possible to hover box that includes your results related to
 each phenotype and/or a description of the phenotypes.
 }
+\examples{
+library(ontologyIndex)
+data(hpo)
+phenotype_to_genes <- load_phenotype_to_genes()
+Neuro_delay_ID <- get_hpo_termID_direct(hpo = hpo,
+                                        phenotype = "Neurodevelopmental delay")
+Neuro_delay_descendants <- phenotype_to_genes[
+    phenotype_to_genes$ID \%in\% get_descendants(hpo,Neuro_delay_ID),]
+
+phenos = data.frame()
+for (p in unique(Neuro_delay_descendants$Phenotype)) {
+    id <- get_hpo_termID(phenotype = p,
+                         phenotype_to_genes = phenotype_to_genes)
+    ontLvl_geneCount_ratio <- (get_ont_level(hpo = hpo,
+                                             term_ids = p) + 1)/length(get_gene_list(p,phenotype_to_genes))
+    description <- get_term_definition(ontologyId = id,
+                                       line_length = 10)
+    phenos <- rbind(phenos,
+                    data.frame("Phenotype"=p,
+                               "HPO_Id"=id,
+                               "ontLvl_geneCount_ratio"=ontLvl_geneCount_ratio,
+                               "description"=description))
+}
+
+phenoAdj <- adjacency_matrix(unique(phenos$HPO_Id), hpo)
+phenoNet <- make_network_object(phenos,phenoAdj, hpo, colour_column = "ontLvl_geneCount_ratio")
+plt <- ggnetwork_plot(phenoNet = phenoNet,
+                      colour_column = "ontLvl_geneCount_ratio",
+                      colour_label = "OntLvl/nGenes")
+
+}
