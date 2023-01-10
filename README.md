@@ -31,6 +31,8 @@ Within R:
 ``` r
 if (!require("remotes")) install.packages("remotes")
 if (!require("HPOExplorer")) remotes::install_github("neurogenomics/HPOExplorer")
+
+library(HPOExplorer)
 ```
 
 ## [Documentation website](https://neurogenomics.github.io/HPOExplorer/)
