@@ -34,15 +34,11 @@ a subset of the HPO, where disease descriptions and results from your
 analysis appear in a hover box when a specific phenotype is
 selected from the graph. 
 
-# Dependencies and data 
-
-To run the following examples we need the HPO data its self, 
-and the *phenotype_to_genes.txt* file (gene annotations) from the HPO.
+# Load ontology data 
 
 ```{r dependencies, message=FALSE, warning=FALSE}
 library(ontologyIndex)
-data(hpo)
-phenotype_to_genes <- load_phenotype_to_genes()
+data(hpo) 
 ```
 
 # Choose subset of HPO phenotypes to plot
@@ -50,18 +46,13 @@ phenotype_to_genes <- load_phenotype_to_genes()
 The figure we are going to create is a bit arbitrary, 
 but it should outline the main features of the package. 
 First we are going to get a subset of HPO terms to plot. 
-We will select phenotypes that have gene annotations 
-(in `phenotype_to_genes.txt`), and are descendants of
-"Neurodevelopmental delay". 
+We will select phenotypes that are descendants of
+"Neurodevelopmental delay".  
 
-```{r subset1, message=FALSE, warning = FALSE}
-# Get HPO ID of "Neurodevelopmental delay
-Neuro_delay_ID <- get_hpo_termID_direct(hpo = hpo,
-                                        phenotype = "Neurodevelopmental delay")
-
-# Get descendants that have gene annotations
-Neuro_delay_descendants <- phenotype_to_genes[phenotype_to_genes$ID %in% get_descendants(hpo,Neuro_delay_ID),]
+```{r}
+ancestor <- "Neurodevelopmental delay"
 ```
+
 
 # Create dataframe of phenotypes and parameters
 
@@ -73,24 +64,11 @@ For this example we will have to make up a parameter for demonstration purposes.
 
 `HPOExplorer` has some useful functions for obtaining the ontology level of terms. Ontology level describes the number of generations of descendants vertically below a term (note that this is not the same as the raw number of descendants which is also capturing the horizontal spread of branching off terms). For example "Phenotypic abnormality" is high up in the HPO and all other disease phenotypes are descendants of it. It is at ontology level 13. A term with no descendants is at ontology level 0. 
 
-```{r phenos_dataframe, message = FALSE, warning = FALSE}
-phenos <- lapply(unique(Neuro_delay_descendants$Phenotype), function(p) {
-  message("Processing: ",p)
-  id <- get_hpo_termID(phenotype = p, 
-                       phenotype_to_genes = phenotype_to_genes)
-  ontLvl_geneCount_ratio <- (get_ont_level(hpo = hpo,
-                                           term_ids = p) + 1)/
-    length(get_gene_list(p,phenotype_to_genes))
-  description <- get_term_definition(ontologyId = id, 
-                                     line_length = 10)
-  data.frame("Phenotype"=p, 
-             "HPO_Id"=id,
-             "ontLvl_geneCount_ratio"=ontLvl_geneCount_ratio,
-             "description"=description)
-}) |> data.table::rbindlist()
+```{r phenos_dataframe, message = FALSE, warning = FALSE} 
+phenos <- make_phenos_dataframe(hpo = hpo, 
+                                ancestor = ancestor, 
+                                add_description = FALSE)
 ```
-
-We used the `get_hpo_termID` function to get the HPO Id of each term, and `length(get_gene_list(p,phenotype_to_genes))` to get the number of genes. 
 
 # Make hoverbox
 The hoverbox is useful for making interactive plots in shiny apps. It allows the user to hover their mouse over a phenotype and see a description of it and any results relating to it from your analysis. This function generates the hoverbox based on selected columns from the dataframe above. We then add these to a new column in the `phenos` dataframe called `hover_box`. 
