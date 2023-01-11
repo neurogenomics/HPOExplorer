@@ -32,8 +32,6 @@ Imports:
     ggplot2,
     wesanderson,
     ontologyIndex,
-    httr,
-    jsonlite,
     utils,
     network,
     ggnetwork,
@@ -46,8 +44,13 @@ Suggests:
     devtools,
     BiocStyle,
     badger,
-    here
+    here,
+    httr,
+    jsonlite
 VignetteBuilder: knitr
 biocViews:
     Genetics, Preprocessing, GeneTarget, SystemsBiology,
     GraphAndNetwork, Annotation, Network
+Depends: 
+    R (>= 2.10)
+LazyData: true

@@ -11,21 +11,21 @@
 #'
 #' @param ontologyId The HPO Id of the term (string)
 #' @param disease_descriptions A data frame of disease descriptions corresponding to each HPO Id
-#'
 #' @return The disease description with new lines added.
 #'
+#' @export
 #' @examples
 #' genedata <- load_phenotype_to_genes()
-#' HPO_ids <- unique(genedata$ID[1:10])
-#' term <- HPO_ids[1]
-#'
-#' disease_descriptions <- get_disease_description_dataframe(HPO_ids)
-#' hpo_get_term_definition(term, disease_descriptions)
-#'
-#'
-#' @export
-hpo_get_term_definition <- function(ontologyId, disease_descriptions) {
-    definition <- disease_descriptions[ontologyId, "description"]
-    definition <- newlines_to_definition(definition)
-    return(definition)
+#' ontologyId <- unique(genedata$ID)[seq_len(10)]
+#' disease_descriptions <- get_disease_description_dataframe(
+#'   HPO_ids = ontologyId)
+#' defs <- hpo_get_term_definition(ontologyId = ontologyId,
+#'                                 disease_descriptions = disease_descriptions)
+hpo_get_term_definition <- function(ontologyId,
+                                    disease_descriptions) {
+
+  HPO_id <- NULL;
+  definition <- disease_descriptions[HPO_id %in% ontologyId,]$description
+  definition <- newlines_to_definition(definition = definition)
+  return(definition)
 }

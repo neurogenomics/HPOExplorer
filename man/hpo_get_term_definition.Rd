@@ -27,11 +27,9 @@ because its more efficient for use in web apps etc.
 }
 \examples{
 genedata <- load_phenotype_to_genes()
-HPO_ids <- unique(genedata$ID[1:10])
-term <- HPO_ids[1]
-
-disease_descriptions <- get_disease_description_dataframe(HPO_ids)
-hpo_get_term_definition(term, disease_descriptions)
-
-
+ontologyId <- unique(genedata$ID)[seq_len(10)]
+disease_descriptions <- get_disease_description_dataframe(
+  HPO_ids = ontologyId)
+defs <- hpo_get_term_definition(ontologyId = ontologyId,
+                                disease_descriptions = disease_descriptions)
 }

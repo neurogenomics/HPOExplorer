@@ -22,7 +22,6 @@ particular phenotype.
 It uses the \code{phenotype_to_genes.txt} file from the HPO.
 }
 \examples{
-
 phenotype_to_genes <- load_phenotype_to_genes()
 # Creating a list of gene lists indexed by phenotype name
 GeneLists <- list()
@@ -30,5 +29,4 @@ Phenotypes <- unique(phenotype_to_genes$Phenotype[1:5])
 for (p in Phenotypes) {
     GeneLists[[p]] <- get_gene_list(p, phenotype_to_genes)
 }
-
 }

@@ -10,10 +10,14 @@
   - `make_phenos_dataframe`
 * Add `verbose` arg throughout.
 * Cache file from `load_phenotype_to_genes`
+* Add *hpo_meta* data to speed everything up.
+  - Add helper func to preprocess data: `as_ascii`
 
 ## Bug fixes
 
 * Make examples runnable.
 * Fix Imports
 * Update and streamline Get started vignette.
-* Remove unused function: `download_phenotype_to_genes`
+* Remove unused functions:
+  - `download_phenotype_to_genes`
+  - `hpo_term_definition_list`

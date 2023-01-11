@@ -6,32 +6,23 @@
 #' in plots with limited space.
 #' @param ontologyId A HPO term Id (e.g. "HP:0000002") \<string\>
 #' @param line_length The number of desired words per line \<int\>
-#' @returns A disease definition \<string\>
+#' @param use_api Get definitions from the HPO API,
+#' as opposed to a static local dataset.
+#' @returns A named vector of HPO term descriptions.
 #'
 #' @export
+#' @importFrom stats setNames
 #' @examples
-#' get_term_definition(ontologyId="HP:0000002")
+#' definitions <- get_term_definition(ontologyId=c("HP:0000002","HP:0000003"))
 get_term_definition <- function(ontologyId,
-                                line_length = FALSE) {
-    hpo_termdetails <- tryCatch(expr = {
-        httr::GET(paste0("hpo.jax.org/api/hpo/term/",
-                         ontologyId))
-
-    },
-    error = function(e){
-        httr::set_config(httr::config(ssl_verifypeer = FALSE))
-        httr::GET(paste0("hpo.jax.org/api/hpo/term/",
-                         ontologyId))
-    })
-    hpo_termdetails_char <- rawToChar(hpo_termdetails$content)
-    hpo_termdetails_data <- jsonlite::fromJSON(hpo_termdetails_char)
-    if (line_length > 0) {
-        definition <- newlines_to_definition(
-            hpo_termdetails_data$details$definition,
-            line_length
-        )
-    } else {
-        definition <- hpo_termdetails_data$details$definition
-    }
-    return(definition)
+                                line_length = FALSE,
+                                use_api = FALSE) {
+  if(isTRUE(use_api)){
+    definitions <- get_term_definition_api(ontologyId = ontologyId,
+                                           line_length = line_length)
+  } else {
+    definitions <- get_term_definition_data(ontologyId = ontologyId,
+                                            line_length = line_length)
+  }
+  return(definitions)
 }
