@@ -25,9 +25,6 @@
     <loc>/reference/adjacency_matrix.html</loc>
   </url>
   <url>
-    <loc>/reference/download_phenotype_to_genes.html</loc>
-  </url>
-  <url>
     <loc>/reference/get_disease_description_dataframe.html</loc>
   </url>
   <url>
@@ -52,13 +49,16 @@
     <loc>/reference/get_term_definition.html</loc>
   </url>
   <url>
+    <loc>/reference/get_term_definition_api.html</loc>
+  </url>
+  <url>
     <loc>/reference/ggnetwork_plot.html</loc>
   </url>
   <url>
     <loc>/reference/hpo_get_term_definition.html</loc>
   </url>
   <url>
-    <loc>/reference/hpo_term_definition_list.html</loc>
+    <loc>/reference/hpo_meta.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
@@ -70,7 +70,13 @@
     <loc>/reference/make_hoverbox.html</loc>
   </url>
   <url>
+    <loc>/reference/make_hoverboxes.html</loc>
+  </url>
+  <url>
     <loc>/reference/make_network_object.html</loc>
+  </url>
+  <url>
+    <loc>/reference/make_phenos_dataframe.html</loc>
   </url>
   <url>
     <loc>/reference/newlines_to_definition.html</loc>
