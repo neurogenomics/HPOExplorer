@@ -5,9 +5,9 @@
 \title{Make phenotypes dataframe}
 \usage{
 make_phenos_dataframe(
+  ancestor,
   hpo = get_hpo(),
   phenotype_to_genes = load_phenotype_to_genes(),
-  ancestor = NULL,
   add_description = TRUE,
   add_hoverboxes = TRUE,
   columns = list(Phenotype = "Phenotype", ID = "HPO_ID", ontLvl_genes =
@@ -18,14 +18,14 @@ make_phenos_dataframe(
 )
 }
 \arguments{
+\item{ancestor}{The ancestor to get all descendants of. If \code{NULL},
+returns the entirely ontology.}
+
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 
 \item{phenotype_to_genes}{Output of
 \link[HPOExplorer]{load_phenotype_to_genes} mapping phenotypes
 to gene annotations.}
-
-\item{ancestor}{The ancestor to get all descendants of. If \code{NULL},
-returns the entirely ontology.}
 
 \item{add_description}{Whether to get the phenotype descriptions as
 well (slower).}

@@ -10,10 +10,16 @@
   - `get_disease_description_dataframe`
 * Add `hpo_tiers` data from Momoko's thesis.
 * Make `make_phenos_dataframe` far more efficient.
+* `adjacency_matrix`:
+  - Simply turn into a shallow wrapper for nearly identical function: 
+    `ontologyIndex::get_term_descendancy_matrix`
 
 ## Bug fixes
 
 * Remove *globals.R*. 
+* Avoid redundancy with:
+  - `get_relative_ont_level` ~= `find_parent` ~= `get_ont_level` --> `get_ont_lvl`
+  - `get_relative_ont_level_multiple` ~= `get_hierarchy` --> `get_ont_lvls`
 
 # HPOExplorer 0.99.2
 

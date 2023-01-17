@@ -7,18 +7,16 @@ test_that("ggnetwork_plot works", {
 
   #### make_network_object ####
   phenoNet <- make_network_object(phenos = phenos,
-                                  colour_column = "ontLvl_geneCount_ratio")
+                                  colour_var = "ontLvl_geneCount_ratio")
   testthat::expect_true(methods::is(phenoNet,"data.frame"))
   testthat::expect_equal(nrow(phenoNet),33)
 
   #### ggnetwork_plot ####
   plt <- ggnetwork_plot(phenoNet = phenoNet,
-                        colour_column = "ontLvl_geneCount_ratio",
-                        colour_label = "ontLvl_genes")
+                        colour_var = "ontLvl_geneCount_ratio")
   testthat::expect_true(methods::is(plt,"plotly"))
   plt <- ggnetwork_plot(phenoNet = phenoNet,
-                        colour_column = "ontLvl_geneCount_ratio",
-                        colour_label = "ontLvl_genes",
+                        colour_var = "ontLvl_geneCount_ratio",
                         interactive = FALSE)
   testthat::expect_true(methods::is(plt,"gg"))
 

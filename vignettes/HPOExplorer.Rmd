@@ -86,25 +86,24 @@ To set this up we use `adjacency_matrix` first to create a adjacency matrix of a
 
 Once we have this adjacecny matrix that represents the relationships between phenotypes, we use `make_network_object` to coerce it into a format suitable for plotting. Essentially this converts the matrix into a dataframe and gives (x,y) coodinates for each data point so that they can be plotted using ggplot. 
 
-The `colour_column` argument is where you choose the column name from the `phenos` dataframe which you want to be mapped to the colour of the nodes. In this case we created the family arbitrary variable of ontology level to number of associated genes ratio and its column name is `ontLvl_geneCount_ratio`. 
+The `colour_var` argument is where you choose the column name from the `phenos` dataframe which you want to be mapped to the colour of the nodes. In this case we created the family arbitrary variable of ontology level to number of associated genes ratio and its column name is `ontLvl_geneCount_ratio`. 
 
 ```{r nw, warning = FALSE , message = FALSE} 
-adjacency <- adjacency_matrix(pheno_ids = unique(phenos$HPO_ID), 
+adjacency <- adjacency_matrix(terms = unique(phenos$HPO_ID), 
                               hpo = hpo)
 phenoNet <- make_network_object(phenos = phenos, 
                                 adjacency = adjacency, 
                                 hpo = hpo, 
-                                colour_column = "ontLvl_geneCount_ratio")
+                                colour_var = "ontLvl_geneCount_ratio")
 ```
 
 # Plot it
-Then we can make the plot with `ggnetwork_plot`. Again you need to give the column name for the variable you want mapped to colour in the `colour_column` argument. We also need to provide a nice label for this column in `colour_label`. This will be used for the figure legend. 
+Then we can make the plot with `ggnetwork_plot`. Again you need to give the column name for the variable you want mapped to colour in the `colour_var` argument. We also need to provide a nice label for this column in `colour_label`. This will be used for the figure legend. 
 
 ```{r plot, warning = FALSE, message = FALSE, fig.width = 9, fig.height = 7}
 plt <- ggnetwork_plot(phenoNet = phenoNet, 
-                      colour_column = "ontLvl_geneCount_ratio", 
-                      colour_label = "OntLvl genes")
-print(plt)
+                      colour_var = "ontLvl_geneCount_ratio")
+methods::show(plt)
 ```
 
 

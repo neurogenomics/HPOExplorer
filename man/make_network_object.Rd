@@ -7,8 +7,8 @@
 make_network_object(
   phenos,
   hpo = get_hpo(),
-  adjacency = adjacency_matrix(pheno_ids = unique(phenos$HPO_ID), hpo = hpo),
-  colour_column = "fold_change",
+  adjacency = adjacency_matrix(terms = unique(phenos$HPO_ID), hpo = hpo),
+  colour_var = "fold_change",
   verbose = TRUE
 )
 }
@@ -17,9 +17,10 @@ make_network_object(
 
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 
-\item{adjacency}{adjacency matrix (see \code{\?adjacency_matrix}) \<matrix\>}
+\item{adjacency}{AN adjacency matrix generated
+by \link[HPOExplorer]{adjacency_matrix}.}
 
-\item{colour_column}{The column from phenos that you wish
+\item{colour_var}{The column from phenos that you wish
 to map to node colour.}
 
 \item{verbose}{Print messages.}
@@ -39,5 +40,5 @@ HPO_ID.
 \examples{
 phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
 phenoNet <- make_network_object(phenos = phenos,
-                                colour_column = "ontLvl_geneCount_ratio")
+                                colour_var = "ontLvl_geneCount_ratio")
 }

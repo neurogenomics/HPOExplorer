@@ -7,7 +7,7 @@ create_node_data <- function(phenoNet,
   if(!phenos_column %in% names(phenos)){
     messager(paste0("phenos_column=",shQuote(phenos_column)),
              "not found in phenos.",v=verbose)
-    return(NULL)
+    return(phenoNet)
   }
   data.table::setkeyv(phenos,"HPO_ID")
   phenoNet[[new_column]] <- phenos[phenoNet$vertex.names, ][[phenos_column]]

@@ -6,8 +6,9 @@
 \usage{
 ggnetwork_plot(
   phenoNet,
-  colour_column = "fold_change",
-  colour_label = gsub("_", "", colour_column),
+  colour_var = "fold_change",
+  colour_label = gsub("_", " ", colour_var),
+  size_var = "ontLvl",
   interactive = TRUE,
   tooltip = "hover",
   verbose = TRUE,
@@ -17,10 +18,11 @@ ggnetwork_plot(
 \arguments{
 \item{phenoNet}{The network object created using create_network_object}
 
-\item{colour_column}{column name of the variable to be mapped
-to colour \<string\>}
+\item{colour_var}{Column  to be mapped to node colour.}
 
 \item{colour_label}{A label for the colour figure legend \<string\>.}
+
+\item{size_var}{Column name to be mapped  to node size.}
 
 \item{interactive}{Make the plot interactive with \link[plotly]{ggplotly}.}
 
@@ -62,8 +64,8 @@ each phenotype and/or a description of the phenotypes.
 \examples{
 phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
 phenoNet <- make_network_object(phenos = phenos,
-                                colour_column = "ontLvl_geneCount_ratio")
+                                colour_var = "ontLvl_geneCount_ratio")
 plt <- ggnetwork_plot(phenoNet = phenoNet,
-                      colour_column = "ontLvl_geneCount_ratio",
+                      colour_var = "ontLvl_geneCount_ratio",
                       colour_label = "ontLvl_genes")
 }

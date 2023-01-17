@@ -6,9 +6,9 @@
 #' each phenotype and/or a description of the phenotypes.
 #'
 #' @param phenoNet The network object created using create_network_object
-#' @param colour_column column name of the variable to be mapped
-#'  to colour \<string\>
+#' @param colour_var Column  to be mapped to node colour.
 #' @param colour_label A label for the colour figure legend \<string\>.
+#' @param size_var Column name to be mapped  to node size.
 #' @param interactive Make the plot interactive with \link[plotly]{ggplotly}.
 #' @param verbose Print messages.
 #' @inheritParams plotly::ggplotly
@@ -22,13 +22,14 @@
 #' @examples
 #' phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
 #' phenoNet <- make_network_object(phenos = phenos,
-#'                                 colour_column = "ontLvl_geneCount_ratio")
+#'                                 colour_var = "ontLvl_geneCount_ratio")
 #' plt <- ggnetwork_plot(phenoNet = phenoNet,
-#'                       colour_column = "ontLvl_geneCount_ratio",
+#'                       colour_var = "ontLvl_geneCount_ratio",
 #'                       colour_label = "ontLvl_genes")
 ggnetwork_plot <- function(phenoNet,
-                           colour_column = "fold_change",
-                           colour_label = gsub("_","",colour_column),
+                           colour_var = "fold_change",
+                           colour_label = gsub("_"," ",colour_var),
+                           size_var = "ontLvl",
                            interactive = TRUE,
                            tooltip = "hover",
                            verbose = TRUE,
@@ -44,8 +45,8 @@ ggnetwork_plot <- function(phenoNet,
                              yend = yend,
                              text = hover)) +
       ggnetwork::geom_edges(color = "darkgray") +
-      geom_point(aes_string(colour = colour_column,
-                            size = "hierarchy")) + # , text= hover)) +
+      geom_point(aes_string(colour = colour_var,
+                            size = size_var)) + # , text= hover)) +
       geom_text(aes(label = label), color = "black") +
       scale_colour_gradient2(low = "white", mid = "yellow", high = "red") +
       scale_size(trans = "exp") +

@@ -17,20 +17,25 @@
 #' @returns ggplot object
 #'
 #' @export
+#' @import ggplot2
 #' @importFrom ontologyIndex get_descendants
 #' @examples
 #' ## Selecting child terms of
-#' ## "Abnormality of the nervous system" as background branches"
+#' ## "Abnormality of the nervous system" as background branches
 #' plt <-  per_branch_plot(
 #'     highlighted_branches = "Abnormality of nervous system physiology",
 #'     ancestor = "Abnormality of the nervous system")
 per_branch_plot <- function(highlighted_branches,
-                            ancestor = "Abnormality of the nervous system",
+                            ancestor,
                             hpo = get_hpo(),
                             background_branches = hpo$children[
                               hpo$id[match(ancestor, hpo$name)]
                             ][[1]],
                             phenotype_to_genes = load_phenotype_to_genes()) {
+
+  # templateR:::source_all()
+  # templateR:::args2vars(per_branch_plot)
+
   requireNamespace("ggplot2")
   n_phenos <- branch <- target <- NULL;
 
@@ -53,8 +58,8 @@ per_branch_plot <- function(highlighted_branches,
                                      levels = unique(phenos_per_branch$branch),
                                      ordered = TRUE)
   plt <- ggplot(phenos_per_branch,
-                aes_string(x = n_phenos, y = branch,
-                    color = target, fill = target)) +
+                aes_string(x = "n_phenos", y = "branch",
+                    color = "target", fill = "target")) +
     geom_col(width = .5) +
     labs(x="Descendants (n)",
          y="Phenotype",

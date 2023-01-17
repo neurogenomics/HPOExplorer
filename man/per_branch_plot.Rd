@@ -6,7 +6,7 @@
 \usage{
 per_branch_plot(
   highlighted_branches,
-  ancestor = "Abnormality of the nervous system",
+  ancestor,
   hpo = get_hpo(),
   background_branches = hpo$children[hpo$id[match(ancestor, hpo$name)]][[1]],
   phenotype_to_genes = load_phenotype_to_genes()
@@ -45,7 +45,7 @@ branches.
 }
 \examples{
 ## Selecting child terms of
-## "Abnormality of the nervous system" as background branches"
+## "Abnormality of the nervous system" as background branches
 plt <-  per_branch_plot(
     highlighted_branches = "Abnormality of nervous system physiology",
     ancestor = "Abnormality of the nervous system")

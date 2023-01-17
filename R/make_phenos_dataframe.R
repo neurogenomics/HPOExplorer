@@ -23,10 +23,10 @@
 #' @importFrom data.table setnames := .N
 #' @examples
 #' phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
-make_phenos_dataframe <- function(hpo = get_hpo(),
+make_phenos_dataframe <- function(ancestor,
+                                  hpo = get_hpo(),
                                   phenotype_to_genes =
                                     load_phenotype_to_genes(),
-                                  ancestor = NULL,
                                   add_description = TRUE,
                                   add_hoverboxes = TRUE,
                                   columns = list(
@@ -40,6 +40,7 @@ make_phenos_dataframe <- function(hpo = get_hpo(),
                                   ){
   # templateR:::source_all()
   # templateR:::args2vars(make_phenos_dataframe)
+  # ancestor = "Neurodevelopmental delay"
 
   description <- ontLvl <- geneCount <- ontLvl_geneCount_ratio <-
     ID <- HPO_ID <- NULL;
@@ -47,12 +48,9 @@ make_phenos_dataframe <- function(hpo = get_hpo(),
   if(!is.null(ancestor)){
     IDx <- get_hpo_id_direct(hpo = hpo,
                              phenotype = ancestor)
-    IDx_all <- unique(
-      c(IDx,
-        ontologyIndex::get_descendants(ontology = hpo,
-                                       roots = IDx)
-      )
-    )
+    IDx_all <- ontologyIndex::get_descendants(ontology = hpo,
+                                              roots = IDx,
+                                              exclude_roots = FALSE)
     descendants <- phenotype_to_genes[ID %in% IDx_all,]
   } else {
     descendants <- phenotype_to_genes
@@ -63,10 +61,11 @@ make_phenos_dataframe <- function(hpo = get_hpo(),
   messager("Computing gene counts.",v=verbose)
   phenos <- descendants[,.(geneCount=.N), by=c("ID","Phenotype")]
   data.table::setnames(phenos, "ID","HPO_ID")
-  messager("Computing ontology level.",v=verbose)
-  phenos[,ontLvl:=sapply(HPO_ID,get_ont_level)+1]
+  # messager("Computing ontology level.",v=verbose)
+  phenos[,ontLvl:=get_ont_lvls(terms = HPO_ID, hpo = hpo, verbose = verbose)]
   messager("Computing ontology level / gene count ratio",v=verbose)
   phenos[,ontLvl_geneCount_ratio:=(ontLvl/geneCount)]
+  messager("Gathering term descriptions.",v=verbose)
   phenos[,description:=sapply(HPO_ID,get_term_definition)]
   #### Add hoverboxes ####
   if(isTRUE(add_hoverboxes)){

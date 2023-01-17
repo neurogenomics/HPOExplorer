@@ -1,6 +1,6 @@
 #' Add HPO term ID column to dataframe
 #'
-#' This adds the HPO term id column to the subest of ewce results data
+#' This adds the HPO term id column to the subset of ewce results data
 #' to be plotted
 #' in the cell select app. It also checks if it is a valid HPO term id to
 #' prevent error and adds

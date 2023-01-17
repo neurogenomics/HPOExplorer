@@ -7,8 +7,9 @@
 #' It expects there to be a column of HPO IDs in the phenos dataframe called
 #' HPO_ID.
 #' @param phenos dataframe of phenotypes and values / parameters.
-#' @param adjacency adjacency matrix (see \code{\?adjacency_matrix}) \<matrix\>
-#' @param colour_column The column from phenos that you wish
+#' @param adjacency AN adjacency matrix generated
+#' by \link[HPOExplorer]{adjacency_matrix}.
+#' @param colour_var The column from phenos that you wish
 #' to map to node colour.
 #' @inheritParams make_phenos_dataframe
 #' @returns A ggnetwork graph/ network object of a subset of the RD EWCE results.
@@ -20,22 +21,25 @@
 #' @examples
 #' phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
 #' phenoNet <- make_network_object(phenos = phenos,
-#'                                 colour_column = "ontLvl_geneCount_ratio")
+#'                                 colour_var = "ontLvl_geneCount_ratio")
 make_network_object <- function(phenos,
                                 hpo = get_hpo(),
                                 adjacency =
                                   adjacency_matrix(
-                                    pheno_ids = unique(phenos$HPO_ID),
+                                    terms = unique(phenos$HPO_ID),
                                     hpo = hpo),
-                                colour_column = "fold_change",
+                                colour_var = "fold_change",
                                 verbose = TRUE) {
 
     messager("Making phenotype network object.",v=verbose)
     adjacency <- adjacency[phenos$HPO_ID, phenos$HPO_ID]
-    hierarchy <- get_relative_ont_level_multiple(adjacency = adjacency,
-                                                 hpo = hpo,
-                                                 reverse = TRUE) + 1
-    phenos$hierarchy <- hierarchy[phenos$HPO_ID]
+    if(!"ontLvl" %in% names(phenos)){
+      hierarchy <- get_ont_lvls(terms = rownames(adjacency),
+                                adjacency = adjacency,
+                                hpo = hpo,
+                                reverse = TRUE)
+      phenos$ontLvl <- hierarchy[phenos$HPO_ID]
+    }
     #### Create phenoNet obj ####
     phenoNet <- ggnetwork::ggnetwork(x = adjacency,
                                      arrow.gap = 0)
@@ -46,7 +50,7 @@ make_network_object <- function(phenos,
                                  verbose = verbose)
     phenoNet <- create_node_data(phenoNet = phenoNet,
                                  phenos = phenos,
-                                 phenos_column = "hierarchy",
+                                 phenos_column = "ontLvl",
                                  verbose = verbose)
     phenoNet <- create_node_data(phenoNet = phenoNet,
                                  phenos = phenos,
@@ -55,7 +59,7 @@ make_network_object <- function(phenos,
                                  verbose = verbose)
     phenoNet <- create_node_data(phenoNet = phenoNet,
                                  phenos = phenos,
-                                 phenos_column = colour_column,
+                                 phenos_column = colour_var,
                                  verbose = verbose)
     return(phenoNet)
 }
