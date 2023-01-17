@@ -21,10 +21,10 @@ test_that("get_ont_lvls works", {
   testthat::expect_equal(max(lvls2),3)
 
   #### Visual confirmation of correct hierarchy ####
-  ontologyPlot::onto_plot(ontology = hpo,
-                          label = terms1,
-                          terms = terms1)
-  ontologyPlot::onto_plot(ontology = hpo,
-                          label = terms2,
-                          terms = terms2)
+  # ontologyPlot::onto_plot(ontology = hpo,
+  #                         label = terms1,
+  #                         terms = terms1)
+  # ontologyPlot::onto_plot(ontology = hpo,
+  #                         label = terms2,
+  #                         terms = terms2)
 })
