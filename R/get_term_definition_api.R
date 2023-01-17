@@ -5,6 +5,7 @@
 #' newlines every nth word. This can be useful when displaying the description
 #' in plots with limited space.
 #' @inheritParams get_term_definition
+#' @returns Character vector of definitions.
 #' @keywords internal
 get_term_definition_api <- function(ontologyId,
                                     line_length = FALSE){

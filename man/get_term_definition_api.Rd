@@ -11,6 +11,9 @@ get_term_definition_api(ontologyId, line_length = FALSE)
 
 \item{line_length}{The number of desired words per line \<int\>}
 }
+\value{
+Character vector of definitions.
+}
 \description{
 This function accesses the HPO API to get a description/definition of an
 HPO term. If a \code{line_length} \> 0 is passed to the function, it will add
