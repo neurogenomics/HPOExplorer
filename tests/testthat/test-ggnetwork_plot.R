@@ -1,0 +1,25 @@
+test_that("ggnetwork_plot works", {
+
+  #### make_phenos_dataframe ####
+  phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
+  testthat::expect_true(methods::is(phenos,"data.table"))
+  testthat::expect_equal(nrow(phenos),17)
+
+  #### make_network_object ####
+  phenoNet <- make_network_object(phenos = phenos,
+                                  colour_column = "ontLvl_geneCount_ratio")
+  testthat::expect_true(methods::is(phenoNet,"data.frame"))
+  testthat::expect_equal(nrow(phenoNet),33)
+
+  #### ggnetwork_plot ####
+  plt <- ggnetwork_plot(phenoNet = phenoNet,
+                        colour_column = "ontLvl_geneCount_ratio",
+                        colour_label = "ontLvl_genes")
+  testthat::expect_true(methods::is(plt,"plotly"))
+  plt <- ggnetwork_plot(phenoNet = phenoNet,
+                        colour_column = "ontLvl_geneCount_ratio",
+                        colour_label = "ontLvl_genes",
+                        interactive = FALSE)
+  testthat::expect_true(methods::is(plt,"gg"))
+
+})
