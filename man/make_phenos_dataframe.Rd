@@ -5,16 +5,20 @@
 \title{Make phenotypes dataframe}
 \usage{
 make_phenos_dataframe(
-  hpo,
+  hpo = get_hpo(),
   phenotype_to_genes = load_phenotype_to_genes(),
   ancestor = NULL,
   add_description = TRUE,
-  line_length = 10,
+  add_hoverboxes = TRUE,
+  columns = list(Phenotype = "Phenotype", ID = "HPO_ID", ontLvl_genes =
+    "ontLvl_geneCount_ratio", Description = "description"),
+  line_length = FALSE,
+  interactive = TRUE,
   verbose = TRUE
 )
 }
 \arguments{
-\item{hpo}{Human Phenotype Ontology object.}
+\item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 
 \item{phenotype_to_genes}{Output of
 \link[HPOExplorer]{load_phenotype_to_genes} mapping phenotypes
@@ -26,7 +30,15 @@ returns the entirely ontology.}
 \item{add_description}{Whether to get the phenotype descriptions as
 well (slower).}
 
+\item{add_hoverboxes}{Add hoverdata with
+\link[HPOExplorer]{make_hoverboxes}.}
+
+\item{columns}{A named vector of columns in \code{phenos}
+to add to the hoverdata via \link[HPOExplorer]{make_hoverboxes}.}
+
 \item{line_length}{The number of desired words per line \<int\>}
+
+\item{interactive}{Make the plot interactive with \link[plotly]{ggplotly}.}
 
 \item{verbose}{Print messages.}
 }
@@ -37,9 +49,5 @@ The HPO in dataframe format.
 Make a dataframe from a subset of the Human Phenotype Ontology.
 }
 \examples{
-library(ontologyIndex)
-data(hpo)
-pheno <- make_phenos_dataframe(hpo = hpo,
-                               ancestor = "Neurodevelopmental delay",
-                               add_description = FALSE)
+phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
 }

@@ -2,6 +2,23 @@
 
 ## New features
 
+* Automatically load hpo with new func: `get_hpo()`
+* Remove `wesanderson` from deps.
+* Add remaining functions from [*rare_disease_celltyping_apps*](https://github.com/neurogenomics/rare_disease_celltyping_apps). 
+* Remove unused functions:
+  - `make_hoverbox`
+  - `get_disease_description_dataframe`
+* Add `hpo_tiers` data from Momoko's thesis.
+* Make `make_phenos_dataframe` far more efficient.
+
+## Bug fixes
+
+* Remove *globals.R*. 
+
+# HPOExplorer 0.99.2
+
+## New features
+
 * Added a `NEWS.md` file to track changes to the package.
 * Implemented `rworkflows`
 * `ggnetwork_plot`: make interactive with `plotly`

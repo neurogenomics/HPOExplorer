@@ -4,17 +4,18 @@
 \alias{get_ont_level}
 \title{Get HPO term ontology level}
 \usage{
-get_ont_level(hpo, term_ids)
+get_ont_level(term_ids, hpo = get_hpo(), verbose = FALSE)
 }
 \arguments{
-\item{hpo}{The Human phenotype ontology data object,
-available in ontologyIndex package \<list\>}
-
 \item{term_ids}{A HPO Id (e.g. "HP:0000001") or a
-vector of multiple Ids \<string\> or \<vector_string\>}
+vector of multiple Ids \<string\> or \<vector_string\>.}
+
+\item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
+
+\item{verbose}{Print messages.}
 }
 \value{
-Ontology level of HPO Id
+Ontology level of HPO ID.
 }
 \description{
 In this function, ontology level refers to the number of generations of
@@ -30,9 +31,5 @@ but you can supply a vector of multiple terms and it will return the level of
 the highest level term in that vector.
 }
 \examples{
-library(ontologyIndex)
-data(hpo)
-term_ids <- "HP:0000001"
-get_ont_level(hpo, term_ids)
-
+lvl <- get_ont_level(term_ids = "HP:0000001")
 }

@@ -6,10 +6,8 @@
 #'
 #' @param phenotype A phenotype (name) from the HPO
 #' (e.g. "Phenotypic abnormality") \<string\>.
-#' @param phenotype_to_genes The phenotype_to_genes.txt file from HPO that
-#' contains gene annotations for HPO phenotypes.
 #' @returns a character vector of genes associated with the selected phenotype.
-#'
+#' @inheritParams make_phenos_dataframe
 #' @export
 #' @examples
 #' phenotype_to_genes <- load_phenotype_to_genes()

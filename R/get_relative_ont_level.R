@@ -14,28 +14,30 @@
 #' so that "Phenotypic abnormality" would always be the largest datapoint etc.
 #'
 #' @param phenotype HPO term Id \<string\>
-#' @param phenoAdj A adjacency matrix (produced by the adjacency_matrix function)
+#' @param adjacency A adjacency matrix (produced by the adjacency_matrix function)
 #' @param hpo The HPO ontology data object
-#'
-#' @examples
-#' library(ontologyIndex)
-#' data(hpo)
-#' pheno_ids <- c("HP:000001", "HP:000002")
-#' phenoAdj <- adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
-#' rel_ont_lvls <- get_relative_ont_level("HP:000002", phenoAdj, hpo)
-#'
 #' @returns A integer representing the relative ontology level of a term within
 #' a connected component of a subset of the HPO.
+#'
 #' @export
+#' @examples
+#' pheno_ids <- c("HP:000001", "HP:000002")
+#' adjacency <- adjacency_matrix(pheno_ids)
+#' rel_ont_lvls <- get_relative_ont_level(phenotype="HP:000002",
+#'                                        adjacency = adjacency)
+get_relative_ont_level <- function(phenotype,
+                                   adjacency,
+                                   hpo = get_hpo()) {
 
-get_relative_ont_level <- function(phenotype, phenoAdj, hpo) {
     pos_parents <- hpo$parents[phenotype]
-    phenotypes <- rownames(phenoAdj)
+    phenotypes <- rownames(adjacency)
     paths <- list()
     for (p in phenotypes) {
-        if (phenoAdj[p, phenotype] == 1) {
+        if (adjacency[p, phenotype] == 1) {
             if (p %in% pos_parents) {
-                paths[p] <- 1 + get_relative_ont_level(p, phenoAdj, hpo) # <- recursion
+                paths[p] <- 1 + get_relative_ont_level(phenotype = p,
+                                                       adjacency =  adjacency,
+                                                       hpo = hpo) # <- recursion
             }
         }
     }

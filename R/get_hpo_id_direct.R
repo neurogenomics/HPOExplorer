@@ -11,16 +11,13 @@
 #'  which is wasteful if you are only using the gene annotations.
 #'
 #' @param phenotype The phenotype of interest \<string\>
-#' @param hpo The HPO object from ontologyIndex package \<list\>
+#' @inheritParams make_phenos_dataframe
 #' @returns The HPO ID of phenotype \<string\>
 #'
-#' @examples
-#' library(ontologyIndex)
-#' data(hpo)
-#' pheno_abnormality_id <- get_hpo_termID_direct(hpo,"Phenotypic abnormality")
-#'
 #' @export
-get_hpo_termID_direct <- function(hpo,
-                                  phenotype = "Phenotypic abnormality") {
+#' @examples
+#' pheno_abnormality_id <- get_hpo_id_direct("Phenotypic abnormality")
+get_hpo_id_direct <- function(phenotype = "Phenotypic abnormality",
+                                  hpo = get_hpo()) {
     return(hpo$id[which(phenotype == hpo$name)])
 }

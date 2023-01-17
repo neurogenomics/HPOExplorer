@@ -5,17 +5,32 @@
 \title{Make hoverboxes}
 \usage{
 make_hoverboxes(
-  phenos_dataframe,
-  columns = c("HPO_Id", "ontLvl_geneCount_ratio", "description"),
-  labels = c("ID", "Ont.Lvl/n.genes", "Description")
+  phenos,
+  columns = list(Phenotype = "Phenotype", ID = "HPO_ID", ontLvl_genes =
+    "ontLvl_geneCount_ratio", Description = "description"),
+  interactive = TRUE,
+  width = 60,
+  digits = 3,
+  verbose = TRUE
 )
 }
 \arguments{
-\item{phenos_dataframe}{The dataframe of phenotypes and parameters to be included}
+\item{phenos}{dataframe of phenotypes and values / parameters.}
 
-\item{columns}{chr vector of column names from the phenos_dataframe}
+\item{columns}{A named vector of columns in \code{phenos}
+to add to the hoverdata via \link[HPOExplorer]{make_hoverboxes}.}
 
-\item{labels}{chr vector of labels for the selected columns}
+\item{interactive}{Make the plot interactive with \link[plotly]{ggplotly}.}
+
+\item{width}{Positive integer giving target line width (in number of
+characters). A width less than or equal to 1 will put each word on its
+own line.}
+
+\item{digits}{integer indicating the number of decimal places
+    (\code{round}) or significant digits (\code{signif}) to be used.
+    For \code{round}, negative values are allowed (see \sQuote{Details}).}
+
+\item{verbose}{Print messages.}
 }
 \value{
 A nicely formatted string with newlines etc,
@@ -34,10 +49,7 @@ name of each phenotype. It must then include columns
 for all of the parameters you wish to include in the hoverbox.
 }
 \examples{
-library(ontologyIndex)
-data(hpo)
-phenos = make_phenos_dataframe(hpo = hpo,
-                               ancestor = "Neurodevelopmental delay",
-                               add_description = FALSE)
-phenos <- make_hoverboxes(phenos_dataframe = phenos)
+phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay",
+                                add_hoverboxes = FALSE)
+phenos <- make_hoverboxes(phenos = phenos)
 }

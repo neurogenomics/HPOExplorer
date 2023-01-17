@@ -6,18 +6,18 @@
 \usage{
 make_network_object(
   phenos,
-  adjacency,
-  hpo,
+  hpo = get_hpo(),
+  adjacency = adjacency_matrix(pheno_ids = unique(phenos$HPO_ID), hpo = hpo),
   colour_column = "fold_change",
   verbose = TRUE
 )
 }
 \arguments{
-\item{phenos}{dataframe of phenotypes and values/ parameters.}
+\item{phenos}{dataframe of phenotypes and values / parameters.}
+
+\item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 
 \item{adjacency}{adjacency matrix (see \code{\?adjacency_matrix}) \<matrix\>}
-
-\item{hpo}{The HPO ontology data object}
 
 \item{colour_column}{The column from phenos that you wish
 to map to node colour.}
@@ -34,19 +34,10 @@ and relative ontology level parameters to each node in the network.
 }
 \details{
 It expects there to be a column of HPO IDs in the phenos dataframe called
-HPO_Id.
+HPO_ID.
 }
 \examples{
-library(ontologyIndex)
-data(hpo)
-phenos = make_phenos_dataframe(hpo = hpo,
-                               ancestor = "Neurodevelopmental delay",
-                               add_description = FALSE)
-phenos <- make_hoverboxes(phenos_dataframe = phenos)
-adjacency <- adjacency_matrix(pheno_ids = unique(phenos$HPO_Id),
-                              hpo = hpo)
+phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
 phenoNet <- make_network_object(phenos = phenos,
-                                adjacency = adjacency,
-                                hpo = hpo,
                                 colour_column = "ontLvl_geneCount_ratio")
 }

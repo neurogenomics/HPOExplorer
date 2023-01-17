@@ -1,23 +1,16 @@
 #' Adjacency matrix
 #'
-#' Create adjacency matrix of HPO child-parent relationships
-#'
-#' It may be possible to use a hash table for \link[ggnetwork]{ggnetwork},
-#'  which may be more efficient than the matrix in a shiny app ?
-#'
-#' @param pheno_ids a character vector of HPO Ids
-#' @param hpo ontology object (available in ontologyIndex package)
-#' @param as_dataframe can return matrix or df \<bool\>
-#' @examples
-#' library(ontologyIndex)
-#' data(hpo)
-#' pheno_ids <- c("HP:000001", "HP:000002")
-#' phenoAdj <- adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
-#'
+#' Create adjacency matrix of HPO child-parent relationships.
+#' @param pheno_ids Character vector of HPO IDs.
+#' @param as_dataframe Can return matrix or dataframe \<bool\>
+#' @inheritParams make_phenos_dataframe
 #' @returns adjacency matrix
+#'
 #' @export
+#' @examples
+#' adjacency <- adjacency_matrix(pheno_ids = c("HP:000001", "HP:000002"))
 adjacency_matrix <- function(pheno_ids,
-                             hpo,
+                             hpo = get_hpo(),
                              as_dataframe = FALSE) {
     message("adjacency_matrix")
     HPO_id <- unique(pheno_ids)
@@ -30,7 +23,7 @@ adjacency_matrix <- function(pheno_ids,
         children <- hpo$children[id][[1]]
         adjacency[id, children] <- 1
     }
-    if (as_dataframe) {
+    if (isTRUE(as_dataframe)) {
         return(adjacency[HPO_id, HPO_id])
     } else {
         return(as.matrix(adjacency[HPO_id, HPO_id]))

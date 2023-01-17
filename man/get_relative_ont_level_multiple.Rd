@@ -4,32 +4,33 @@
 \alias{get_relative_ont_level_multiple}
 \title{Get relative ontology level for multiple HPO terms}
 \usage{
-get_relative_ont_level_multiple(phenoAdj, hpo, reverse = TRUE)
+get_relative_ont_level_multiple(adjacency, hpo = get_hpo(), reverse = TRUE)
 }
 \arguments{
-\item{phenoAdj}{A adjacency matrix of phenotypes where 1 represents i is parent of j
-and 0 represents that i is not a parent of j. It is a subset of the main phenotype adjacency matrix}
+\item{adjacency}{A adjacency matrix of phenotypes where 1 represents
+i is parent of j
+and 0 represents that i is not a parent of j. It is a subset of
+the main phenotype adjacency matrix}
 
-\item{hpo}{The HPO ontology data object}
+\item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 
-\item{reverse}{A boolean, if TRUE it will reverse the ontology level numbers so that
+\item{reverse}{A boolean, if TRUE it will reverse the ontology
+level numbers so that
 the parent terms are larger than the child terms.}
 }
 \value{
-A named vector of relative ontology level, where names are HPO Ids and
+A named vector of relative ontology level,
+where names are HPO Ids and
 value is relative ontology level.
 }
 \description{
 This calls the \code{get_relative_ont_level} function on all phenotypes in a
-subset of the HPO. The subest chosen when creating the phenoAdj from the main
+subset of the HPO. The subest chosen when creating the adjacency from the main
 adjacency matrix of all phenotypes. So, the phenotypes can be found in the
-row and column names of phenoAdj.
+row and column names of adjacency.
 }
 \examples{
-library(ontologyIndex)
-data(hpo)
 pheno_ids <- c("HP:000001", "HP:000002")
-phenoAdj <- adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
-rel_ont_lvls <- get_relative_ont_level_multiple(phenoAdj, hpo, reverse = TRUE)
-
+adjacency <- adjacency_matrix(pheno_ids)
+rel_ont_lvls <- get_relative_ont_level_multiple(adjacency)
 }

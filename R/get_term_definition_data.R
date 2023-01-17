@@ -1,6 +1,7 @@
 get_term_definition_data <- function(ontologyId,
                                      line_length){
-  # data(hpo_meta)
+
+  utils::data(hpo_meta, package = "HPOExplorer")
   hpo_id <- NULL;
 
   ontologyId <- gsub(":","_",ontologyId)

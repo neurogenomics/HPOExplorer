@@ -12,32 +12,30 @@
 #' @param interactive Make the plot interactive with \link[plotly]{ggplotly}.
 #' @param verbose Print messages.
 #' @inheritParams plotly::ggplotly
+#' @inheritDotParams plotly::ggplotly
 #' @returns A network plot (compatible with interactive plotly rendering).
-#' @importFrom ggnetwork geom_edges
-#' @export
 #'
+#' @export
+#' @import ggplot2
+#' @importFrom ggnetwork geom_edges
+#' @importFrom plotly ggplotly layout
 #' @examples
-#' library(ontologyIndex)
-#' data(hpo)
-#' phenos = make_phenos_dataframe(hpo = hpo,
-#'                                ancestor = "Neurodevelopmental delay",
-#'                                add_description = FALSE)
-#' phenos <- make_hoverboxes(phenos_dataframe = phenos)
-#' adjacency <- adjacency_matrix(unique(phenos$HPO_Id), hpo)
+#' phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
 #' phenoNet <- make_network_object(phenos = phenos,
-#'                                 adjacency = adjacency,
-#'                                 hpo = hpo,
 #'                                 colour_column = "ontLvl_geneCount_ratio")
 #' plt <- ggnetwork_plot(phenoNet = phenoNet,
 #'                       colour_column = "ontLvl_geneCount_ratio",
-#'                       colour_label = "OntLvl/nGenes")
+#'                       colour_label = "ontLvl_genes")
 ggnetwork_plot <- function(phenoNet,
                            colour_column = "fold_change",
-                           colour_label = "Fold change",
-                           interactive = FALSE,
+                           colour_label = gsub("_","",colour_column),
+                           interactive = TRUE,
                            tooltip = "hover",
-                           verbose = TRUE) {
+                           verbose = TRUE,
+                           ...) {
   requireNamespace("ggplot2")
+  x <- y <- xend <- yend <- hover <- label <- NULL;
+
   messager("Creating ggnetwork plot.",v=verbose)
   network_plot <- ggplot(phenoNet,
                          aes(x = x,
@@ -56,8 +54,10 @@ ggnetwork_plot <- function(phenoNet,
       theme_void() #  use tooltip = "hover" with ggplotly for hover box
 
   if(isTRUE(interactive)){
-    requireNamespace("plotly")
-    return(plotly::ggplotly(network_plot, tooltip = tooltip))
+    return(plotly::ggplotly(p = network_plot,
+                            tooltip = tooltip,
+                            ...) |> plotly::layout(
+                              hoverlabel = list(align = "left")))
   } else {
     return(network_plot)
   }

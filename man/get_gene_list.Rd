@@ -10,8 +10,9 @@ get_gene_list(phenotype, phenotype_to_genes)
 \item{phenotype}{A phenotype (name) from the HPO
 (e.g. "Phenotypic abnormality") \<string\>.}
 
-\item{phenotype_to_genes}{The phenotype_to_genes.txt file from HPO that
-contains gene annotations for HPO phenotypes.}
+\item{phenotype_to_genes}{Output of
+\link[HPOExplorer]{load_phenotype_to_genes} mapping phenotypes
+to gene annotations.}
 }
 \value{
 a character vector of genes associated with the selected phenotype.

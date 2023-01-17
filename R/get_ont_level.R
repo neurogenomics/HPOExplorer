@@ -10,27 +10,28 @@
 #' Typically this function should be used to get the level of a single term,
 #' but you can supply a vector of multiple terms and it will return the level of
 #' the highest level term in that vector.
-#'
-#' @param hpo The Human phenotype ontology data object,
-#' available in ontologyIndex package \<list\>
 #' @param term_ids A HPO Id (e.g. "HP:0000001") or a
-#' vector of multiple Ids \<string\> or \<vector_string\>
-#'
-#' @returns Ontology level of HPO Id
-#'
-#' @examples
-#' library(ontologyIndex)
-#' data(hpo)
-#' term_ids <- "HP:0000001"
-#' get_ont_level(hpo, term_ids)
+#' vector of multiple Ids \<string\> or \<vector_string\>.
+#' @inheritParams make_phenos_dataframe
+#' @returns Ontology level of HPO ID.
 #'
 #' @export
-get_ont_level <- function(hpo,
-                          term_ids) {
-    children <- unique(setdiff(unlist(hpo$children[term_ids]), term_ids))
+#' @examples
+#' lvl <- get_ont_level(term_ids = "HP:0000001")
+get_ont_level <- function(term_ids,
+                          hpo = get_hpo(),
+                          verbose = FALSE) {
+    messager("Getting ontology level for:", paste(term_ids,collapse = ", "),
+             v=verbose)
+    children <- unique(
+      setdiff(unlist(hpo$children[term_ids]),
+              term_ids)
+    )
     if (length(children) == 0) {
         return(0)
     } else {
-        return(1 + get_ont_level(hpo, children)) #<- recursion..
+        return(1 + get_ont_level(term_ids = children,
+                                 hpo = hpo,
+                                 verbose = verbose)) #<- recursion..
     }
 }

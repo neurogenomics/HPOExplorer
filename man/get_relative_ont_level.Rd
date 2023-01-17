@@ -4,12 +4,12 @@
 \alias{get_relative_ont_level}
 \title{Get relative ont level (for terms in a connected component of HPO subset)}
 \usage{
-get_relative_ont_level(phenotype, phenoAdj, hpo)
+get_relative_ont_level(phenotype, adjacency, hpo = get_hpo())
 }
 \arguments{
 \item{phenotype}{HPO term Id \<string\>}
 
-\item{phenoAdj}{A adjacency matrix (produced by the adjacency_matrix function)}
+\item{adjacency}{A adjacency matrix (produced by the adjacency_matrix function)}
 
 \item{hpo}{The HPO ontology data object}
 }
@@ -32,10 +32,8 @@ It would also be possible to just use absolute ontology level,
 so that "Phenotypic abnormality" would always be the largest datapoint etc.
 }
 \examples{
-library(ontologyIndex)
-data(hpo)
 pheno_ids <- c("HP:000001", "HP:000002")
-phenoAdj <- adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
-rel_ont_lvls <- get_relative_ont_level("HP:000002", phenoAdj, hpo)
-
+adjacency <- adjacency_matrix(pheno_ids)
+rel_ont_lvls <- get_relative_ont_level(phenotype="HP:000002",
+                                       adjacency = adjacency)
 }

@@ -7,10 +7,11 @@
 ggnetwork_plot(
   phenoNet,
   colour_column = "fold_change",
-  colour_label = "Fold change",
-  interactive = FALSE,
+  colour_label = gsub("_", "", colour_column),
+  interactive = TRUE,
   tooltip = "hover",
-  verbose = TRUE
+  verbose = TRUE,
+  ...
 )
 }
 \arguments{
@@ -31,6 +32,23 @@ also control the order they appear. For example, use
 colour last.}
 
 \item{verbose}{Print messages.}
+
+\item{...}{
+  Arguments passed on to \code{\link[plotly:ggplotly]{plotly::ggplotly}}
+  \describe{
+    \item{\code{p}}{a ggplot object.}
+    \item{\code{width}}{Width of the plot in pixels (optional, defaults to automatic sizing).}
+    \item{\code{height}}{Height of the plot in pixels (optional, defaults to automatic sizing).}
+    \item{\code{dynamicTicks}}{should plotly.js dynamically generate axis tick labels?
+Dynamic ticks are useful for updating ticks in response to zoom/pan
+interactions; however, they can not always reproduce labels as they
+would appear in the static ggplot2 image.}
+    \item{\code{layerData}}{data from which layer should be returned?}
+    \item{\code{originalData}}{should the "original" or "scaled" data be returned?}
+    \item{\code{source}}{a character string of length 1. Match the value of this string
+with the source argument in \code{\link[plotly:event_data]{event_data()}} to retrieve the
+event data corresponding to a specific plot (shiny apps can have multiple plots).}
+  }}
 }
 \value{
 A network plot (compatible with interactive plotly rendering).
@@ -42,18 +60,10 @@ It makes it possible to hover box that includes your results related to
 each phenotype and/or a description of the phenotypes.
 }
 \examples{
-library(ontologyIndex)
-data(hpo)
-phenos = make_phenos_dataframe(hpo = hpo,
-                               ancestor = "Neurodevelopmental delay",
-                               add_description = FALSE)
-phenos <- make_hoverboxes(phenos_dataframe = phenos)
-adjacency <- adjacency_matrix(unique(phenos$HPO_Id), hpo)
+phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
 phenoNet <- make_network_object(phenos = phenos,
-                                adjacency = adjacency,
-                                hpo = hpo,
                                 colour_column = "ontLvl_geneCount_ratio")
 plt <- ggnetwork_plot(phenoNet = phenoNet,
                       colour_column = "ontLvl_geneCount_ratio",
-                      colour_label = "OntLvl/nGenes")
+                      colour_label = "ontLvl_genes")
 }

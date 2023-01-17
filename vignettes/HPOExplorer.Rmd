@@ -37,8 +37,7 @@ selected from the graph.
 # Load ontology data 
 
 ```{r dependencies, message=FALSE, warning=FALSE}
-library(ontologyIndex)
-data(hpo) 
+hpo <- get_hpo()
 ```
 
 # Choose subset of HPO phenotypes to plot
@@ -64,7 +63,7 @@ For this example we will have to make up a parameter for demonstration purposes.
 
 `HPOExplorer` has some useful functions for obtaining the ontology level of terms. Ontology level describes the number of generations of descendants vertically below a term (note that this is not the same as the raw number of descendants which is also capturing the horizontal spread of branching off terms). For example "Phenotypic abnormality" is high up in the HPO and all other disease phenotypes are descendants of it. It is at ontology level 13. A term with no descendants is at ontology level 0. 
 
-```{r phenos_dataframe, message = FALSE, warning = FALSE} 
+```{r phenos, message = FALSE, warning = FALSE} 
 phenos <- make_phenos_dataframe(hpo = hpo, 
                                 ancestor = ancestor, 
                                 add_description = FALSE)
@@ -74,13 +73,7 @@ phenos <- make_phenos_dataframe(hpo = hpo,
 The hoverbox is useful for making interactive plots in shiny apps. It allows the user to hover their mouse over a phenotype and see a description of it and any results relating to it from your analysis. This function generates the hoverbox based on selected columns from the dataframe above. We then add these to a new column in the `phenos` dataframe called `hover_box`. 
 
 ```{r hover, message= FALSE, warning = FALSE}
-phenos <- make_hoverboxes(phenos_dataframe = phenos, 
-                          columns = c("HPO_Id",
-                                      "ontLvl_geneCount_ratio",
-                                      "description"),
-                          labels = c("ID",
-                                     "Ont.Lvl/n.genes",
-                                     "Description")) 
+phenos <- make_hoverboxes(phenos = phenos) 
 print("Here is an example hover box from this:")
 cat(phenos$hover[[1]])
 ```
@@ -96,7 +89,7 @@ Once we have this adjacecny matrix that represents the relationships between phe
 The `colour_column` argument is where you choose the column name from the `phenos` dataframe which you want to be mapped to the colour of the nodes. In this case we created the family arbitrary variable of ontology level to number of associated genes ratio and its column name is `ontLvl_geneCount_ratio`. 
 
 ```{r nw, warning = FALSE , message = FALSE} 
-adjacency <- adjacency_matrix(pheno_ids = unique(phenos$HPO_Id), 
+adjacency <- adjacency_matrix(pheno_ids = unique(phenos$HPO_ID), 
                               hpo = hpo)
 phenoNet <- make_network_object(phenos = phenos, 
                                 adjacency = adjacency, 
@@ -110,7 +103,7 @@ Then we can make the plot with `ggnetwork_plot`. Again you need to give the colu
 ```{r plot, warning = FALSE, message = FALSE, fig.width = 9, fig.height = 7}
 plt <- ggnetwork_plot(phenoNet = phenoNet, 
                       colour_column = "ontLvl_geneCount_ratio", 
-                      colour_label = "OntLvl/nGenes")
+                      colour_label = "OntLvl genes")
 print(plt)
 ```
 
@@ -119,9 +112,7 @@ print(plt)
 
 In cases where we are making a shiny app or html document we may want to include the interactive hoverbox. This allows the user to hover their mouse over a phenotype to get extra information about it. For this we use the `plotly` library. 
 
-```{r interactive, warning=FALSE , message=FALSE, eval = FALSE, fig.width = 9, fig.height = 7}
-if (!require("plotly"))  install.packages("plotly")
-
+```{r interactive, warning=FALSE , message=FALSE, eval = FALSE, fig.width = 9, fig.height = 7} 
 plotly::ggplotly(plt, tooltip  = "hover")
 ```
 

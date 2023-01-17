@@ -4,29 +4,21 @@
 \alias{adjacency_matrix}
 \title{Adjacency matrix}
 \usage{
-adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
+adjacency_matrix(pheno_ids, hpo = get_hpo(), as_dataframe = FALSE)
 }
 \arguments{
-\item{pheno_ids}{a character vector of HPO Ids}
+\item{pheno_ids}{Character vector of HPO IDs.}
 
-\item{hpo}{ontology object (available in ontologyIndex package)}
+\item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 
-\item{as_dataframe}{can return matrix or df \<bool\>}
+\item{as_dataframe}{Can return matrix or dataframe \<bool\>}
 }
 \value{
 adjacency matrix
 }
 \description{
-Create adjacency matrix of HPO child-parent relationships
-}
-\details{
-It may be possible to use a hash table for \link[ggnetwork]{ggnetwork},
-which may be more efficient than the matrix in a shiny app ?
+Create adjacency matrix of HPO child-parent relationships.
 }
 \examples{
-library(ontologyIndex)
-data(hpo)
-pheno_ids <- c("HP:000001", "HP:000002")
-phenoAdj <- adjacency_matrix(pheno_ids, hpo, as_dataframe = FALSE)
-
+adjacency <- adjacency_matrix(pheno_ids = c("HP:000001", "HP:000002"))
 }

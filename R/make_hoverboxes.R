@@ -9,47 +9,65 @@
 #' This function expects a dataframe of with a "Phenotype" column that has the
 #' name of each phenotype. It must then include columns
 #'  for all of the parameters you wish to include in the hoverbox.
-#'
-#' @inheritParams make_hoverbox
+#' @inheritParams make_phenos_dataframe
+#' @inheritParams make_network_object
+#' @inheritParams base::round
+#' @inheritParams stringr::str_wrap
 #' @returns A nicely formatted string with newlines etc,
 #' to be used as a hoverbox.
-#' @export
 #'
+#' @export
+#' @importFrom stats setNames
+#' @importFrom data.table :=
+#' @importFrom stringr str_wrap
 #' @examples
-#' library(ontologyIndex)
-#' data(hpo)
-#' phenos = make_phenos_dataframe(hpo = hpo,
-#'                                ancestor = "Neurodevelopmental delay",
-#'                                add_description = FALSE)
-#' phenos <- make_hoverboxes(phenos_dataframe = phenos)
-make_hoverboxes <- function(phenos_dataframe,
-                            columns = c("HPO_Id",
-                                        "ontLvl_geneCount_ratio",
-                                        "description"),
-                            labels = c("ID",
-                                       "Ont.Lvl/n.genes",
-                                       "Description")) {
+#' phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay",
+#'                                 add_hoverboxes = FALSE)
+#' phenos <- make_hoverboxes(phenos = phenos)
+make_hoverboxes <- function(phenos,
+                            columns = list(
+                              Phenotype="Phenotype",
+                              ID="HPO_ID",
+                              ontLvl_genes="ontLvl_geneCount_ratio",
+                              Description="description"),
+                            interactive = TRUE,
+                            width = 60,
+                            digits = 3,
+                            verbose = TRUE) {
+  # templateR:::source_all()
+  # templateR:::args2vars(make_hoverboxes)
 
-  phenos_dataframe$hover <- lapply(unique(phenos_dataframe$Phenotype),
-                                   function(phenotype){
-    if (length(columns) > 0 & length(labels) > 0) {
-      if (!length(columns) == length(labels)) {
-        message("number of columns must be same as number of labels")
-        return(phenotype)
-      } else {
-        hoverBox <- phenotype
-        for (i in seq(1, length(columns))) {
-          cur <- phenos_dataframe[
-            phenos_dataframe$Phenotype == phenotype, columns[i]][1]
-          hoverBox <- paste0(hoverBox, " \n", labels[i], ": ", cur)
+  hover <- HPO_ID <- Phenotype <- NULL;
+
+  #### Select sep ####
+  sep <- if(isTRUE(interactive)) "<br>" else "\n"
+  columns <- columns[unname(columns) %in% names(phenos)]
+  if(length(columns)==0){
+    messager("No columns found. Making hoverboxes from HPO_ID only.",v=verbose)
+    phenos[hover:=paste("HPO_ID:",HPO_ID)]
+  } else {
+    messager("Making hoverboxes from:",
+             paste(shQuote(columns),collapse = ", "),v=verbose)
+    #### Iterate over phenotypes ####
+    hoverBoxes <- lapply(stats::setNames(
+      unique(phenos$Phenotype),
+      unique(phenos$Phenotype)
+    ), function(pheno_i){
+      lapply(seq_len(length(columns)), function(i){
+        val <- phenos[Phenotype == pheno_i, ][[columns[[i]]]]
+        val <- if(is.numeric(val)) round(val,digits = digits) else {
+          paste(
+            stringr::str_wrap(val, width = width),
+          collapse = sep
+          )
         }
-        return(hoverBox)
-      }
-    } else {
-      message("No parameters supplied to make hoverbox. ",
-              "Box will only include phenotype name")
-      return(phenotype)
-    }
-  })
-  return(phenos_dataframe)
+        paste0("<b>",names(columns)[[i]],"</b>",
+               ": ",val
+               )
+      }) |> paste(collapse = sep)
+    })
+    #### Assign to each row #####
+    phenos$hover <- unlist(hoverBoxes[phenos$Phenotype])
+  }
+  return(phenos)
 }
