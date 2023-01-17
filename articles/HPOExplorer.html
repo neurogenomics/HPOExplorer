@@ -178,7 +178,7 @@ dataframe above. We then add these to a new column in the
 <pre><code><span><span class="co">## [1] "Here is an example hover box from this:"</span></span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">phenos</span><span class="op">$</span><span class="va">hover</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## &lt;b&gt;Phenotype&lt;/b&gt;: Delayed speech and language development&lt;br&gt;&lt;b&gt;ID&lt;/b&gt;: HP:0000750&lt;br&gt;&lt;b&gt;ontLvl_genes&lt;/b&gt;: 0.003&lt;br&gt;&lt;b&gt;Description&lt;/b&gt;: A degree of language development that is significantly below</span></span>
+<pre><code><span><span class="co">## &lt;b&gt;Phenotype&lt;/b&gt;: Delayed speech and language development&lt;br&gt;&lt;b&gt;ID&lt;/b&gt;: HP:0000750&lt;br&gt;&lt;b&gt;ontLvl_genes&lt;/b&gt;: 0.002&lt;br&gt;&lt;b&gt;Description&lt;/b&gt;: A degree of language development that is significantly below</span></span>
 <span><span class="co">## the norm for a child of a specified age.</span></span></code></pre>
 </div>
 <div class="section level2">
@@ -199,32 +199,31 @@ between phenotypes, we use <code>make_network_object</code> to coerce it
 into a format suitable for plotting. Essentially this converts the
 matrix into a dataframe and gives (x,y) coodinates for each data point
 so that they can be plotted using ggplot.</p>
-<p>The <code>colour_column</code> argument is where you choose the
-column name from the <code>phenos</code> dataframe which you want to be
-mapped to the colour of the nodes. In this case we created the family
-arbitrary variable of ontology level to number of associated genes ratio
-and its column name is <code>ontLvl_geneCount_ratio</code>.</p>
+<p>The <code>colour_var</code> argument is where you choose the column
+name from the <code>phenos</code> dataframe which you want to be mapped
+to the colour of the nodes. In this case we created the family arbitrary
+variable of ontology level to number of associated genes ratio and its
+column name is <code>ontLvl_geneCount_ratio</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">adjacency</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/adjacency_matrix.html">adjacency_matrix</a></span><span class="op">(</span>pheno_ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">phenos</span><span class="op">$</span><span class="va">HPO_ID</span><span class="op">)</span>, </span>
+<code class="sourceCode R"><span><span class="va">adjacency</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/adjacency_matrix.html">adjacency_matrix</a></span><span class="op">(</span>terms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">phenos</span><span class="op">$</span><span class="va">HPO_ID</span><span class="op">)</span>, </span>
 <span>                              hpo <span class="op">=</span> <span class="va">hpo</span><span class="op">)</span></span>
 <span><span class="va">phenoNet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_network_object.html">make_network_object</a></span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span>, </span>
 <span>                                adjacency <span class="op">=</span> <span class="va">adjacency</span>, </span>
 <span>                                hpo <span class="op">=</span> <span class="va">hpo</span>, </span>
-<span>                                colour_column <span class="op">=</span> <span class="st">"ontLvl_geneCount_ratio"</span><span class="op">)</span></span></code></pre></div>
+<span>                                colour_var <span class="op">=</span> <span class="st">"ontLvl_geneCount_ratio"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="plot-it">Plot it<a class="anchor" aria-label="anchor" href="#plot-it"></a>
 </h2>
 <p>Then we can make the plot with <code>ggnetwork_plot</code>. Again you
 need to give the column name for the variable you want mapped to colour
-in the <code>colour_column</code> argument. We also need to provide a
-nice label for this column in <code>colour_label</code>. This will be
-used for the figure legend.</p>
+in the <code>colour_var</code> argument. We also need to provide a nice
+label for this column in <code>colour_label</code>. This will be used
+for the figure legend.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggnetwork_plot.html">ggnetwork_plot</a></span><span class="op">(</span>phenoNet <span class="op">=</span> <span class="va">phenoNet</span>, </span>
-<span>                      colour_column <span class="op">=</span> <span class="st">"ontLvl_geneCount_ratio"</span>, </span>
-<span>                      colour_label <span class="op">=</span> <span class="st">"OntLvl genes"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">plt</span><span class="op">)</span></span></code></pre></div>
+<span>                      colour_var <span class="op">=</span> <span class="st">"ontLvl_geneCount_ratio"</span><span class="op">)</span></span>
+<span><span class="fu">methods</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/methods/show.html" class="external-link">show</a></span><span class="op">(</span><span class="va">plt</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="interactive-hoverbox">Interactive hoverbox<a class="anchor" aria-label="anchor" href="#interactive-hoverbox"></a>

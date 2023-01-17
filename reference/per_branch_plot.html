@@ -72,7 +72,7 @@ using the raw HPO data to get an overview of how many phenotypes there are.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">per_branch_plot</span><span class="op">(</span></span>
 <span>  <span class="va">highlighted_branches</span>,</span>
-<span>  ancestor <span class="op">=</span> <span class="st">"Abnormality of the nervous system"</span>,</span>
+<span>  <span class="va">ancestor</span>,</span>
 <span>  hpo <span class="op">=</span> <span class="fu"><a href="get_hpo.html">get_hpo</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  background_branches <span class="op">=</span> <span class="va">hpo</span><span class="op">$</span><span class="va">children</span><span class="op">[</span><span class="va">hpo</span><span class="op">$</span><span class="va">id</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">ancestor</span>, <span class="va">hpo</span><span class="op">$</span><span class="va">name</span><span class="op">)</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>  phenotype_to_genes <span class="op">=</span> <span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -123,7 +123,7 @@ branches.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Selecting child terms of</span></span></span>
-<span class="r-in"><span><span class="co">## "Abnormality of the nervous system" as background branches"</span></span></span>
+<span class="r-in"><span><span class="co">## "Abnormality of the nervous system" as background branches</span></span></span>
 <span class="r-in"><span><span class="va">plt</span> <span class="op">&lt;-</span>  <span class="fu">per_branch_plot</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    highlighted_branches <span class="op">=</span> <span class="st">"Abnormality of nervous system physiology"</span>,</span></span>
 <span class="r-in"><span>    ancestor <span class="op">=</span> <span class="st">"Abnormality of the nervous system"</span><span class="op">)</span></span></span>

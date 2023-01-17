@@ -67,9 +67,9 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_phenos_dataframe</span><span class="op">(</span></span>
+<span>  <span class="va">ancestor</span>,</span>
 <span>  hpo <span class="op">=</span> <span class="fu"><a href="get_hpo.html">get_hpo</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  phenotype_to_genes <span class="op">=</span> <span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  ancestor <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  add_description <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_hoverboxes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Phenotype <span class="op">=</span> <span class="st">"Phenotype"</span>, ID <span class="op">=</span> <span class="st">"HPO_ID"</span>, ontLvl_genes <span class="op">=</span></span>
@@ -82,7 +82,12 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>hpo</dt>
+    <dl><dt>ancestor</dt>
+<dd><p>The ancestor to get all descendants of. If <code>NULL</code>,
+returns the entirely ontology.</p></dd>
+
+
+<dt>hpo</dt>
 <dd><p>Human Phenotype Ontology object, loaded from <span class="pkg">ontologyIndex</span>.</p></dd>
 
 
@@ -90,11 +95,6 @@
 <dd><p>Output of
 <a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a> mapping phenotypes
 to gene annotations.</p></dd>
-
-
-<dt>ancestor</dt>
-<dd><p>The ancestor to get all descendants of. If <code>NULL</code>,
-returns the entirely ontology.</p></dd>
 
 
 <dt>add_description</dt>
@@ -137,8 +137,10 @@ to add to the hoverdata via <a href="make_hoverboxes.html">make_hoverboxes</a>.<
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing existing file: /github/home/.cache/R/HPOExplorer/data/phenotype_to_genes.txt</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting data for 17 descendents.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing gene counts.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Computing ontology level.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Getting ontology level for 17 HPO IDs.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating adjacency matrix for 17 terms.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing ontology level / gene count ratio</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Gathering term descriptions.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Making hoverboxes from: 'Phenotype', 'HPO_ID', 'ontLvl_geneCount_ratio', 'description'</span>
 </code></pre></div>
     </div>

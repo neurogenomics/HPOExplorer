@@ -74,10 +74,23 @@
 </ul></li>
 <li>Add <code>hpo_tiers</code> data from Momoko’s thesis.</li>
 <li>Make <code>make_phenos_dataframe</code> far more efficient.</li>
+<li>
+<code>adjacency_matrix</code>:
+<ul><li>Simply turn into a shallow wrapper for nearly identical function: <code><a href="https://rdrr.io/pkg/ontologyIndex/man/get_term_descendancy_matrix.html" class="external-link">ontologyIndex::get_term_descendancy_matrix</a></code>
+</li>
+</ul></li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-99-2">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-2"></a></h3>
 <ul><li>Remove <em>globals.R</em>.</li>
+<li>Avoid redundancy with:
+<ul><li>
+<code>get_relative_ont_level</code> ~= <code>find_parent</code> ~= <code>get_ont_level</code> –&gt; <code>get_ont_lvl</code>
+</li>
+<li>
+<code>get_relative_ont_level_multiple</code> ~= <code>get_hierarchy</code> –&gt; <code>get_ont_lvls</code>
+</li>
+</ul></li>
 </ul></div>
 </div>
     <div class="section level2">

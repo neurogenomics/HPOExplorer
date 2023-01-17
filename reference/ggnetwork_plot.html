@@ -74,8 +74,9 @@ each phenotype and/or a description of the phenotypes.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggnetwork_plot</span><span class="op">(</span></span>
 <span>  <span class="va">phenoNet</span>,</span>
-<span>  colour_column <span class="op">=</span> <span class="st">"fold_change"</span>,</span>
-<span>  colour_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"_"</span>, <span class="st">""</span>, <span class="va">colour_column</span><span class="op">)</span>,</span>
+<span>  colour_var <span class="op">=</span> <span class="st">"fold_change"</span>,</span>
+<span>  colour_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"_"</span>, <span class="st">" "</span>, <span class="va">colour_var</span><span class="op">)</span>,</span>
+<span>  size_var <span class="op">=</span> <span class="st">"ontLvl"</span>,</span>
 <span>  interactive <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  tooltip <span class="op">=</span> <span class="st">"hover"</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -89,13 +90,16 @@ each phenotype and/or a description of the phenotypes.</p>
 <dd><p>The network object created using create_network_object</p></dd>
 
 
-<dt>colour_column</dt>
-<dd><p>column name of the variable to be mapped
-to colour \&lt;string\&gt;</p></dd>
+<dt>colour_var</dt>
+<dd><p>Column  to be mapped to node colour.</p></dd>
 
 
 <dt>colour_label</dt>
 <dd><p>A label for the colour figure legend \&lt;string\&gt;.</p></dd>
+
+
+<dt>size_var</dt>
+<dd><p>Column name to be mapped  to node size.</p></dd>
 
 
 <dt>interactive</dt>
@@ -159,15 +163,17 @@ event data corresponding to a specific plot (shiny apps can have multiple plots)
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing existing file: /github/home/.cache/R/HPOExplorer/data/phenotype_to_genes.txt</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting data for 17 descendents.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing gene counts.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Computing ontology level.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Getting ontology level for 17 HPO IDs.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating adjacency matrix for 17 terms.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing ontology level / gene count ratio</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Gathering term descriptions.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Making hoverboxes from: 'Phenotype', 'HPO_ID', 'ontLvl_geneCount_ratio', 'description'</span>
 <span class="r-in"><span><span class="va">phenoNet</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_network_object.html">make_network_object</a></span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span>,</span></span>
-<span class="r-in"><span>                                colour_column <span class="op">=</span> <span class="st">"ontLvl_geneCount_ratio"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                                colour_var <span class="op">=</span> <span class="st">"ontLvl_geneCount_ratio"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Making phenotype network object.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> adjacency_matrix</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating adjacency matrix for 17 terms.</span>
 <span class="r-in"><span><span class="va">plt</span> <span class="op">&lt;-</span> <span class="fu">ggnetwork_plot</span><span class="op">(</span>phenoNet <span class="op">=</span> <span class="va">phenoNet</span>,</span></span>
-<span class="r-in"><span>                      colour_column <span class="op">=</span> <span class="st">"ontLvl_geneCount_ratio"</span>,</span></span>
+<span class="r-in"><span>                      colour_var <span class="op">=</span> <span class="st">"ontLvl_geneCount_ratio"</span>,</span></span>
 <span class="r-in"><span>                      colour_label <span class="op">=</span> <span class="st">"ontLvl_genes"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Creating ggnetwork plot.</span>
 </code></pre></div>

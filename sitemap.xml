@@ -28,13 +28,7 @@
     <loc>/reference/adjacency_matrix.html</loc>
   </url>
   <url>
-    <loc>/reference/find_parent.html</loc>
-  </url>
-  <url>
     <loc>/reference/get_gene_list.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_hierarchy.html</loc>
   </url>
   <url>
     <loc>/reference/get_hpo.html</loc>
@@ -46,13 +40,13 @@
     <loc>/reference/get_hpo_id_direct.html</loc>
   </url>
   <url>
-    <loc>/reference/get_ont_level.html</loc>
+    <loc>/reference/get_ont_lvl.html</loc>
   </url>
   <url>
-    <loc>/reference/get_relative_ont_level.html</loc>
+    <loc>/reference/get_ont_lvls.html</loc>
   </url>
   <url>
-    <loc>/reference/get_relative_ont_level_multiple.html</loc>
+    <loc>/reference/get_ont_lvls2.html</loc>
   </url>
   <url>
     <loc>/reference/get_term_definition.html</loc>
