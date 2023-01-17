@@ -45,7 +45,7 @@ Suggests:
     knitr,
     devtools,
     BiocStyle,
-    badger,
+    rworkflows,
     here,
     httr,
     jsonlite,
