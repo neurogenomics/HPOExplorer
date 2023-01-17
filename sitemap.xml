@@ -22,19 +22,28 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/add_hpo_id.html</loc>
+  </url>
+  <url>
     <loc>/reference/adjacency_matrix.html</loc>
   </url>
   <url>
-    <loc>/reference/get_disease_description_dataframe.html</loc>
+    <loc>/reference/find_parent.html</loc>
   </url>
   <url>
     <loc>/reference/get_gene_list.html</loc>
   </url>
   <url>
-    <loc>/reference/get_hpo_termID.html</loc>
+    <loc>/reference/get_hierarchy.html</loc>
   </url>
   <url>
-    <loc>/reference/get_hpo_termID_direct.html</loc>
+    <loc>/reference/get_hpo.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_hpo_id.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_hpo_id_direct.html</loc>
   </url>
   <url>
     <loc>/reference/get_ont_level.html</loc>
@@ -55,19 +64,16 @@
     <loc>/reference/ggnetwork_plot.html</loc>
   </url>
   <url>
-    <loc>/reference/hpo_get_term_definition.html</loc>
+    <loc>/reference/hpo_meta.html</loc>
   </url>
   <url>
-    <loc>/reference/hpo_meta.html</loc>
+    <loc>/reference/hpo_tiers.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
     <loc>/reference/load_phenotype_to_genes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/make_hoverbox.html</loc>
   </url>
   <url>
     <loc>/reference/make_hoverboxes.html</loc>
@@ -82,6 +88,6 @@
     <loc>/reference/newlines_to_definition.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_n_phenotypes_per_branch_hpo.html</loc>
+    <loc>/reference/per_branch_plot.html</loc>
   </url>
 </urlset>

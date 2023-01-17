@@ -87,7 +87,7 @@
 </h4></h4>
             
             <h4 data-toc-skip class="date"><h4> ¶ Most recent update:
-<i>Jan-12-2023</i> ¶ </h4></h4>
+<i>Jan-17-2023</i> ¶ </h4></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/HPOExplorer/blob/HEAD/vignettes/HPOExplorer.Rmd" class="external-link"><code>vignettes/HPOExplorer.Rmd</code></a></small>
       <div class="hidden name"><code>HPOExplorer.Rmd</code></div>
@@ -122,8 +122,7 @@ from the graph.</p>
 <h2 id="load-ontology-data">Load ontology data<a class="anchor" aria-label="anchor" href="#load-ontology-data"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ontologyIndex</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">hpo</span><span class="op">)</span> </span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hpo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_hpo.html">get_hpo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="choose-subset-of-hpo-phenotypes-to-plot">Choose subset of HPO phenotypes to plot<a class="anchor" aria-label="anchor" href="#choose-subset-of-hpo-phenotypes-to-plot"></a>
@@ -174,21 +173,13 @@ This function generates the hoverbox based on selected columns from the
 dataframe above. We then add these to a new column in the
 <code>phenos</code> dataframe called <code>hover_box</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_hoverboxes.html">make_hoverboxes</a></span><span class="op">(</span>phenos_dataframe <span class="op">=</span> <span class="va">phenos</span>, </span>
-<span>                          columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HPO_Id"</span>,</span>
-<span>                                      <span class="st">"ontLvl_geneCount_ratio"</span>,</span>
-<span>                                      <span class="st">"description"</span><span class="op">)</span>,</span>
-<span>                          labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ID"</span>,</span>
-<span>                                     <span class="st">"Ont.Lvl/n.genes"</span>,</span>
-<span>                                     <span class="st">"Description"</span><span class="op">)</span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_hoverboxes.html">make_hoverboxes</a></span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"Here is an example hover box from this:"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "Here is an example hover box from this:"</span></span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">phenos</span><span class="op">$</span><span class="va">hover</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Delayed speech and language development </span></span>
-<span><span class="co">## ID: HPO_Id </span></span>
-<span><span class="co">## Ont.Lvl/n.genes: ontLvl_geneCount_ratio </span></span>
-<span><span class="co">## Description: description</span></span></code></pre>
+<pre><code><span><span class="co">## &lt;b&gt;Phenotype&lt;/b&gt;: Delayed speech and language development&lt;br&gt;&lt;b&gt;ID&lt;/b&gt;: HP:0000750&lt;br&gt;&lt;b&gt;ontLvl_genes&lt;/b&gt;: 0.003&lt;br&gt;&lt;b&gt;Description&lt;/b&gt;: A degree of language development that is significantly below</span></span>
+<span><span class="co">## the norm for a child of a specified age.</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="network-object">Network object<a class="anchor" aria-label="anchor" href="#network-object"></a>
@@ -214,7 +205,7 @@ mapped to the colour of the nodes. In this case we created the family
 arbitrary variable of ontology level to number of associated genes ratio
 and its column name is <code>ontLvl_geneCount_ratio</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">adjacency</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/adjacency_matrix.html">adjacency_matrix</a></span><span class="op">(</span>pheno_ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">phenos</span><span class="op">$</span><span class="va">HPO_Id</span><span class="op">)</span>, </span>
+<code class="sourceCode R"><span><span class="va">adjacency</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/adjacency_matrix.html">adjacency_matrix</a></span><span class="op">(</span>pheno_ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">phenos</span><span class="op">$</span><span class="va">HPO_ID</span><span class="op">)</span>, </span>
 <span>                              hpo <span class="op">=</span> <span class="va">hpo</span><span class="op">)</span></span>
 <span><span class="va">phenoNet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_network_object.html">make_network_object</a></span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span>, </span>
 <span>                                adjacency <span class="op">=</span> <span class="va">adjacency</span>, </span>
@@ -232,9 +223,8 @@ used for the figure legend.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggnetwork_plot.html">ggnetwork_plot</a></span><span class="op">(</span>phenoNet <span class="op">=</span> <span class="va">phenoNet</span>, </span>
 <span>                      colour_column <span class="op">=</span> <span class="st">"ontLvl_geneCount_ratio"</span>, </span>
-<span>                      colour_label <span class="op">=</span> <span class="st">"OntLvl/nGenes"</span><span class="op">)</span></span>
+<span>                      colour_label <span class="op">=</span> <span class="st">"OntLvl genes"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">plt</span><span class="op">)</span></span></code></pre></div>
-<p><img src="HPOExplorer_files/figure-html/plot-1.png" width="864"></p>
 </div>
 <div class="section level2">
 <h2 id="interactive-hoverbox">Interactive hoverbox<a class="anchor" aria-label="anchor" href="#interactive-hoverbox"></a>
@@ -244,16 +234,14 @@ to include the interactive hoverbox. This allows the user to hover their
 mouse over a phenotype to get extra information about it. For this we
 use the <code>plotly</code> library.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://plotly-r.com" class="external-link">"plotly"</a></span><span class="op">)</span><span class="op">)</span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"plotly"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">plotly</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plotly/man/ggplotly.html" class="external-link">ggplotly</a></span><span class="op">(</span><span class="va">plt</span>, tooltip  <span class="op">=</span> <span class="st">"hover"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">plotly</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plotly/man/ggplotly.html" class="external-link">ggplotly</a></span><span class="op">(</span><span class="va">plt</span>, tooltip  <span class="op">=</span> <span class="st">"hover"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="session-info">Session Info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <details><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## R Under development (unstable) (2023-01-10 r83596)</span></span>
+<pre><code><span><span class="co">## R Under development (unstable) (2023-01-11 r83598)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
 <span><span class="co">## Running under: Ubuntu 22.04.1 LTS</span></span>
 <span><span class="co">## </span></span>
@@ -276,30 +264,32 @@ use the <code>plotly</code> library.</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] ontologyIndex_2.10 HPOExplorer_0.99.2 BiocStyle_2.27.0  </span></span>
+<span><span class="co">## [1] HPOExplorer_0.99.2 BiocStyle_2.27.0  </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] sass_0.4.4           utf8_1.2.2           generics_0.1.3      </span></span>
-<span><span class="co">##  [4] lattice_0.20-45      stringi_1.7.12       digest_0.6.31       </span></span>
-<span><span class="co">##  [7] magrittr_2.0.3       statnet.common_4.7.0 evaluate_0.19       </span></span>
-<span><span class="co">## [10] grid_4.3.0           bookdown_0.31        fastmap_1.1.0       </span></span>
-<span><span class="co">## [13] rprojroot_2.0.3      jsonlite_1.8.4       ggnetwork_0.5.10    </span></span>
-<span><span class="co">## [16] network_1.18.0       DBI_1.1.3            BiocManager_1.30.19 </span></span>
-<span><span class="co">## [19] purrr_1.0.1          fansi_1.0.3          scales_1.2.1        </span></span>
-<span><span class="co">## [22] textshaping_0.3.6    jquerylib_0.1.4      cli_3.6.0           </span></span>
-<span><span class="co">## [25] rlang_1.0.6          munsell_0.5.0        withr_2.5.0         </span></span>
-<span><span class="co">## [28] cachem_1.0.6         yaml_2.3.6           tools_4.3.0         </span></span>
-<span><span class="co">## [31] memoise_2.0.1        coda_0.19-4          dplyr_1.0.10        </span></span>
-<span><span class="co">## [34] colorspace_2.0-3     ggplot2_3.4.0        assertthat_0.2.1    </span></span>
-<span><span class="co">## [37] vctrs_0.5.1          R6_2.5.1             lifecycle_1.0.3     </span></span>
-<span><span class="co">## [40] stringr_1.5.0        fs_1.5.2             ragg_1.2.5          </span></span>
-<span><span class="co">## [43] sna_2.7              pkgconfig_2.0.3      desc_1.4.2          </span></span>
-<span><span class="co">## [46] pkgdown_2.0.7        bslib_0.4.2          pillar_1.8.1        </span></span>
-<span><span class="co">## [49] gtable_0.3.1         wesanderson_0.3.6    data.table_1.14.6   </span></span>
-<span><span class="co">## [52] glue_1.6.2           systemfonts_1.0.4    highr_0.10          </span></span>
-<span><span class="co">## [55] xfun_0.36            tibble_3.1.8         tidyselect_1.2.0    </span></span>
-<span><span class="co">## [58] knitr_1.41           farver_2.1.1         htmltools_0.5.4     </span></span>
-<span><span class="co">## [61] labeling_0.4.2       rmarkdown_2.19       compiler_4.3.0</span></span></code></pre>
+<span><span class="co">##  [1] gtable_0.3.1         xfun_0.36            bslib_0.4.2         </span></span>
+<span><span class="co">##  [4] ggplot2_3.4.0        htmlwidgets_1.6.1    lattice_0.20-45     </span></span>
+<span><span class="co">##  [7] vctrs_0.5.1          tools_4.3.0          crosstalk_1.2.0     </span></span>
+<span><span class="co">## [10] generics_0.1.3       tibble_3.1.8         fansi_1.0.3         </span></span>
+<span><span class="co">## [13] pkgconfig_2.0.3      data.table_1.14.6    desc_1.4.2          </span></span>
+<span><span class="co">## [16] assertthat_0.2.1     lifecycle_1.0.3      compiler_4.3.0      </span></span>
+<span><span class="co">## [19] farver_2.1.1         stringr_1.5.0        textshaping_0.3.6   </span></span>
+<span><span class="co">## [22] munsell_0.5.0        htmltools_0.5.4      sass_0.4.4          </span></span>
+<span><span class="co">## [25] yaml_2.3.6           lazyeval_0.2.2       plotly_4.10.1       </span></span>
+<span><span class="co">## [28] pillar_1.8.1         pkgdown_2.0.7        jquerylib_0.1.4     </span></span>
+<span><span class="co">## [31] tidyr_1.2.1          ellipsis_0.3.2       cachem_1.0.6        </span></span>
+<span><span class="co">## [34] network_1.18.0       tidyselect_1.2.0     digest_0.6.31       </span></span>
+<span><span class="co">## [37] stringi_1.7.12       dplyr_1.0.10         purrr_1.0.1         </span></span>
+<span><span class="co">## [40] bookdown_0.31        labeling_0.4.2       rprojroot_2.0.3     </span></span>
+<span><span class="co">## [43] fastmap_1.1.0        grid_4.3.0           colorspace_2.0-3    </span></span>
+<span><span class="co">## [46] cli_3.6.0            magrittr_2.0.3       utf8_1.2.2          </span></span>
+<span><span class="co">## [49] scales_1.2.1         ggnetwork_0.5.10     rmarkdown_2.19      </span></span>
+<span><span class="co">## [52] httr_1.4.4           ragg_1.2.5           sna_2.7             </span></span>
+<span><span class="co">## [55] coda_0.19-4          memoise_2.0.1        evaluate_0.19       </span></span>
+<span><span class="co">## [58] knitr_1.41           viridisLite_0.4.1    rlang_1.0.6         </span></span>
+<span><span class="co">## [61] ontologyIndex_2.10   glue_1.6.2           DBI_1.1.3           </span></span>
+<span><span class="co">## [64] BiocManager_1.30.19  jsonlite_1.8.4       R6_2.5.1            </span></span>
+<span><span class="co">## [67] statnet.common_4.7.0 systemfonts_1.0.4    fs_1.5.2</span></span></code></pre>
 </details><hr>
 </div>
   </div>

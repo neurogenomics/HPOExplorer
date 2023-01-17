@@ -75,24 +75,45 @@ information and data associated with each phenotype.</p>
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_hoverboxes</span><span class="op">(</span></span>
-<span>  <span class="va">phenos_dataframe</span>,</span>
-<span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HPO_Id"</span>, <span class="st">"ontLvl_geneCount_ratio"</span>, <span class="st">"description"</span><span class="op">)</span>,</span>
-<span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ID"</span>, <span class="st">"Ont.Lvl/n.genes"</span>, <span class="st">"Description"</span><span class="op">)</span></span>
+<span>  <span class="va">phenos</span>,</span>
+<span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Phenotype <span class="op">=</span> <span class="st">"Phenotype"</span>, ID <span class="op">=</span> <span class="st">"HPO_ID"</span>, ontLvl_genes <span class="op">=</span></span>
+<span>    <span class="st">"ontLvl_geneCount_ratio"</span>, Description <span class="op">=</span> <span class="st">"description"</span><span class="op">)</span>,</span>
+<span>  interactive <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  width <span class="op">=</span> <span class="fl">60</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>phenos_dataframe</dt>
-<dd><p>The dataframe of phenotypes and parameters to be included</p></dd>
+    <dl><dt>phenos</dt>
+<dd><p>dataframe of phenotypes and values / parameters.</p></dd>
 
 
 <dt>columns</dt>
-<dd><p>chr vector of column names from the phenos_dataframe</p></dd>
+<dd><p>A named vector of columns in <code>phenos</code>
+to add to the hoverdata via make_hoverboxes.</p></dd>
 
 
-<dt>labels</dt>
-<dd><p>chr vector of labels for the selected columns</p></dd>
+<dt>interactive</dt>
+<dd><p>Make the plot interactive with <a href="https://rdrr.io/pkg/plotly/man/ggplotly.html" class="external-link">ggplotly</a>.</p></dd>
+
+
+<dt>width</dt>
+<dd><p>Positive integer giving target line width (in number of
+characters). A width less than or equal to 1 will put each word on its
+own line.</p></dd>
+
+
+<dt>digits</dt>
+<dd><p>integer indicating the number of decimal places
+    (<code>round</code>) or significant digits (<code>signif</code>) to be used.
+    For <code>round</code>, negative values are allowed (see ‘Details’).</p></dd>
+
+
+<dt>verbose</dt>
+<dd><p>Print messages.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -111,31 +132,15 @@ for all of the parameters you wish to include in the hoverbox.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ontologyIndex</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">hpo</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">phenos</span> <span class="op">=</span> <span class="fu"><a href="make_phenos_dataframe.html">make_phenos_dataframe</a></span><span class="op">(</span>hpo <span class="op">=</span> <span class="va">hpo</span>,</span></span>
-<span class="r-in"><span>                               ancestor <span class="op">=</span> <span class="st">"Neurodevelopmental delay"</span>,</span></span>
-<span class="r-in"><span>                               add_description <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_phenos_dataframe.html">make_phenos_dataframe</a></span><span class="op">(</span>ancestor <span class="op">=</span> <span class="st">"Neurodevelopmental delay"</span>,</span></span>
+<span class="r-in"><span>                                add_hoverboxes <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing existing file: /github/home/.cache/R/HPOExplorer/data/phenotype_to_genes.txt</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting data for 17 descendents.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Delayed speech and language development</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Global developmental delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Motor delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Absent speech</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Delayed gross motor development</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Expressive language delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Severe expressive language delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Delayed fine motor development</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Receptive language delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Mild global developmental delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Moderate global developmental delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Severe global developmental delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Moderate receptive language delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Severe receptive language delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Delayed social development</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Profound global developmental delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Neurodevelopmental delay</span>
-<span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu">make_hoverboxes</span><span class="op">(</span>phenos_dataframe <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Computing gene counts.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Computing ontology level.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Computing ontology level / gene count ratio</span>
+<span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu">make_hoverboxes</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Making hoverboxes from: 'Phenotype', 'HPO_ID', 'ontLvl_geneCount_ratio', 'description'</span>
 </code></pre></div>
     </div>
   </div>

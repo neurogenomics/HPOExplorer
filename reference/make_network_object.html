@@ -72,8 +72,8 @@ and relative ontology level parameters to each node in the network.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_network_object</span><span class="op">(</span></span>
 <span>  <span class="va">phenos</span>,</span>
-<span>  <span class="va">adjacency</span>,</span>
-<span>  <span class="va">hpo</span>,</span>
+<span>  hpo <span class="op">=</span> <span class="fu"><a href="get_hpo.html">get_hpo</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  adjacency <span class="op">=</span> <span class="fu"><a href="adjacency_matrix.html">adjacency_matrix</a></span><span class="op">(</span>pheno_ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">phenos</span><span class="op">$</span><span class="va">HPO_ID</span><span class="op">)</span>, hpo <span class="op">=</span> <span class="va">hpo</span><span class="op">)</span>,</span>
 <span>  colour_column <span class="op">=</span> <span class="st">"fold_change"</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -82,15 +82,15 @@ and relative ontology level parameters to each node in the network.</p>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>phenos</dt>
-<dd><p>dataframe of phenotypes and values/ parameters.</p></dd>
+<dd><p>dataframe of phenotypes and values / parameters.</p></dd>
+
+
+<dt>hpo</dt>
+<dd><p>Human Phenotype Ontology object, loaded from <span class="pkg">ontologyIndex</span>.</p></dd>
 
 
 <dt>adjacency</dt>
 <dd><p>adjacency matrix (see <code>\?adjacency_matrix</code>) \&lt;matrix\&gt;</p></dd>
-
-
-<dt>hpo</dt>
-<dd><p>The HPO ontology data object</p></dd>
 
 
 <dt>colour_column</dt>
@@ -111,43 +111,22 @@ to map to node colour.</p></dd>
     <div id="details">
     <h2>Details</h2>
     <p>It expects there to be a column of HPO IDs in the phenos dataframe called
-HPO_Id.</p>
+HPO_ID.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ontologyIndex</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">hpo</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">phenos</span> <span class="op">=</span> <span class="fu"><a href="make_phenos_dataframe.html">make_phenos_dataframe</a></span><span class="op">(</span>hpo <span class="op">=</span> <span class="va">hpo</span>,</span></span>
-<span class="r-in"><span>                               ancestor <span class="op">=</span> <span class="st">"Neurodevelopmental delay"</span>,</span></span>
-<span class="r-in"><span>                               add_description <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_phenos_dataframe.html">make_phenos_dataframe</a></span><span class="op">(</span>ancestor <span class="op">=</span> <span class="st">"Neurodevelopmental delay"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing existing file: /github/home/.cache/R/HPOExplorer/data/phenotype_to_genes.txt</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting data for 17 descendents.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Delayed speech and language development</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Global developmental delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Motor delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Absent speech</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Delayed gross motor development</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Expressive language delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Severe expressive language delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Delayed fine motor development</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Receptive language delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Mild global developmental delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Moderate global developmental delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Severe global developmental delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Moderate receptive language delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Severe receptive language delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Delayed social development</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Profound global developmental delay</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: Neurodevelopmental delay</span>
-<span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_hoverboxes.html">make_hoverboxes</a></span><span class="op">(</span>phenos_dataframe <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">adjacency</span> <span class="op">&lt;-</span> <span class="fu"><a href="adjacency_matrix.html">adjacency_matrix</a></span><span class="op">(</span>pheno_ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">phenos</span><span class="op">$</span><span class="va">HPO_Id</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                              hpo <span class="op">=</span> <span class="va">hpo</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> adjacency_matrix</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Computing gene counts.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Computing ontology level.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Computing ontology level / gene count ratio</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Making hoverboxes from: 'Phenotype', 'HPO_ID', 'ontLvl_geneCount_ratio', 'description'</span>
 <span class="r-in"><span><span class="va">phenoNet</span> <span class="op">&lt;-</span> <span class="fu">make_network_object</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span>,</span></span>
-<span class="r-in"><span>                                adjacency <span class="op">=</span> <span class="va">adjacency</span>,</span></span>
-<span class="r-in"><span>                                hpo <span class="op">=</span> <span class="va">hpo</span>,</span></span>
 <span class="r-in"><span>                                colour_column <span class="op">=</span> <span class="st">"ontLvl_geneCount_ratio"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Making phenotype network object.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> adjacency_matrix</span>
 </code></pre></div>
     </div>
   </div>
