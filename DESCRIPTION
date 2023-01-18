@@ -50,7 +50,11 @@ Suggests:
     here,
     httr,
     jsonlite,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    EnsDb.Hsapiens.v75,
+    ensembldb,
+    AnnotationFilter,
+    GenomicRanges
 VignetteBuilder: knitr
 biocViews:
     Genetics, Preprocessing, GeneTarget, SystemsBiology,

@@ -4,7 +4,7 @@
 \alias{get_hpo_id_direct}
 \title{Get HPO term ID direct}
 \usage{
-get_hpo_id_direct(phenotype = "Phenotypic abnormality", hpo = get_hpo())
+get_hpo_id_direct(phenotype, hpo = get_hpo())
 }
 \arguments{
 \item{phenotype}{The phenotype of interest \<string\>}

@@ -6,8 +6,9 @@
 \usage{
 add_hpo_id(
   phenos,
-  phenotype_to_genes = HPOExplorer::load_phenotype_to_genes(),
-  hpo = HPOExplorer::get_hpo()
+  phenotype_to_genes = load_phenotype_to_genes(),
+  hpo = get_hpo(),
+  verbose = FALSE
 )
 }
 \arguments{
@@ -18,6 +19,8 @@ add_hpo_id(
 to gene annotations.}
 
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 The subset of EWCE results dataframe with a HPO Id column added.

@@ -18,11 +18,13 @@
 #' phenos2 <- add_hpo_id(phenos=phenos)
 add_hpo_id <- function(phenos,
                        phenotype_to_genes =
-                           HPOExplorer::load_phenotype_to_genes(),
-                       hpo = HPOExplorer::get_hpo()) {
+                           load_phenotype_to_genes(),
+                       hpo = get_hpo(),
+                       verbose = FALSE) {
   HPO_term_valid <- HPO_ID <- NULL;
 
   if(!all(c("HPO_ID","HPO_term_valid") %in% names(phenos))){
+    messager("Adding information_content scores.",v=verbose)
     pheno_dict <- unique(phenotype_to_genes[,c("ID","Phenotype")])
     data.table::setkeyv(pheno_dict,"Phenotype")
     phenos$HPO_ID <- pheno_dict[phenos$Phenotype,]$ID

@@ -4,7 +4,7 @@
 \alias{get_hpo_id}
 \title{Get HPO ID from phenotype name}
 \usage{
-get_hpo_id(phenotype, phenotype_to_genes)
+get_hpo_id(phenotype, phenotype_to_genes = load_phenotype_to_genes())
 }
 \arguments{
 \item{phenotype}{Phenotype name from the HPO \<string\>}

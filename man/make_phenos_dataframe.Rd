@@ -10,6 +10,8 @@ make_phenos_dataframe(
   phenotype_to_genes = load_phenotype_to_genes(),
   add_description = TRUE,
   add_hoverboxes = TRUE,
+  add_age_onset = FALSE,
+  add_severity_tiers = FALSE,
   columns = list(Phenotype = "Phenotype", ID = "HPO_ID", ontLvl_genes =
     "ontLvl_geneCount_ratio", Description = "description"),
   line_length = FALSE,
@@ -32,6 +34,12 @@ well (slower).}
 
 \item{add_hoverboxes}{Add hoverdata with
 \link[HPOExplorer]{make_hoverboxes}.}
+
+\item{add_age_onset}{Add age of onset columns using
+\link[HPOExplorer]{add_onset}.}
+
+\item{add_severity_tiers}{Add severity Tiers column using
+\link[HPOExplorer]{add_tiert}.}
 
 \item{columns}{A named vector of columns in \code{phenos}
 to add to the hoverdata via \link[HPOExplorer]{make_hoverboxes}.}

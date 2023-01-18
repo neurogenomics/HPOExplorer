@@ -2,23 +2,32 @@
 % Please edit documentation in R/load_phenotype_to_genes.R
 \name{load_phenotype_to_genes}
 \alias{load_phenotype_to_genes}
-\title{Load phenotype_to_genes.txt}
+\title{Load phenotype_to_genes}
+\source{
+\href{https://hpo.jax.org/app/data/annotations}{HPO source data}
+}
 \usage{
 load_phenotype_to_genes(
-  pheno_to_genes_txt_file = file.path(tools::R_user_dir("HPOExplorer", which = "cache"),
-    "data", "phenotype_to_genes.txt")
+  filename = "phenotype_to_genes.txt",
+  save_dir = file.path(tools::R_user_dir("HPOExplorer", which = "cache"), "data"),
+  verbose = TRUE
 )
 }
 \arguments{
-\item{pheno_to_genes_txt_file}{path to the phenotype to genes text
-file from the HPO. It contains phenotypes annotated with associated genes}
+\item{filename}{Name of the file.}
+
+\item{save_dir}{Folder where the phenotype to genes text
+file is/will be stored.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 a dataframe of the phenotype_to_genes.txt file from HPO
 }
 \description{
-This is a function for loading the phenotype to genes text file from HPO.
-It adds the collumn names and returns as a dataframe
+This is a function for loading the HPO phenotype to genes text file from HPO.
+It adds the column names and returns as a dataframe.
+It contains phenotypes annotated with associated genes.
 }
 \examples{
 phenotype_to_genes <- load_phenotype_to_genes()

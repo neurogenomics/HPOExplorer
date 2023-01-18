@@ -11,6 +11,10 @@
 #'  well (slower).
 #' @param add_hoverboxes Add hoverdata with
 #' \link[HPOExplorer]{make_hoverboxes}.
+#' @param add_age_onset Add age of onset columns using
+#' \link[HPOExplorer]{add_onset}.
+#' @param add_severity_tiers Add severity Tiers column using
+#' \link[HPOExplorer]{add_tiert}.
 #' @param columns A named vector of columns in \code{phenos}
 #'  to add to the hoverdata via \link[HPOExplorer]{make_hoverboxes}.
 #' @param verbose Print messages.
@@ -29,6 +33,8 @@ make_phenos_dataframe <- function(ancestor,
                                     load_phenotype_to_genes(),
                                   add_description = TRUE,
                                   add_hoverboxes = TRUE,
+                                  add_age_onset = FALSE,
+                                  add_severity_tiers = FALSE,
                                   columns = list(
                                     Phenotype="Phenotype",
                                     ID="HPO_ID",
@@ -65,8 +71,21 @@ make_phenos_dataframe <- function(ancestor,
   phenos[,ontLvl:=get_ont_lvls(terms = HPO_ID, hpo = hpo, verbose = verbose)]
   messager("Computing ontology level / gene count ratio",v=verbose)
   phenos[,ontLvl_geneCount_ratio:=(ontLvl/geneCount)]
+  phenos <- add_info_content(phenos = phenos,
+                             hpo = hpo,
+                             verbose = verbose)
   messager("Gathering term descriptions.",v=verbose)
   phenos[,description:=sapply(HPO_ID,get_term_definition)]
+  #### Add age of onset ####
+  if(isTRUE(add_age_onset)){
+    phenos <- add_onset(phenos = phenos,
+                        verbose = verbose)
+  }
+  #### Add Tiers ####
+  if(isTRUE(add_severity_tiers)){
+    phenos <- add_tier(phenos = phenos,
+                        verbose = verbose)
+  }
   #### Add hoverboxes ####
   if(isTRUE(add_hoverboxes)){
     phenos <- make_hoverboxes(phenos = phenos,

@@ -13,6 +13,16 @@
 * `adjacency_matrix`:
   - Simply turn into a shallow wrapper for nearly identical function: 
     `ontologyIndex::get_term_descendancy_matrix`
+* `load_phenotype_to_genes`:
+  - Can now downlaod either *phenotypes_to_genes* or *genes_to_phenotypes*.
+* New functions supporting gene target prioritisation: 
+  - `phenos_to_granges`
+  - `add_onset`
+  - `add_tier`
+  - `harmonise_phenotypes`
+  - `get_gene_lists`
+  - `get_gene_lengths`
+  - `list_onsets`
 
 ## Bug fixes
 

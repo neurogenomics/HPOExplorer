@@ -17,7 +17,7 @@
 #' @export
 #' @examples
 #' pheno_abnormality_id <- get_hpo_id_direct("Phenotypic abnormality")
-get_hpo_id_direct <- function(phenotype = "Phenotypic abnormality",
-                                  hpo = get_hpo()) {
+get_hpo_id_direct <- function(phenotype,
+                              hpo = get_hpo()) {
     return(hpo$id[which(phenotype == hpo$name)])
 }

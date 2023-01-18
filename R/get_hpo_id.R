@@ -13,6 +13,6 @@
 #' phenotype <- "Phenotypic abnormality"
 #' pheno_abnorm_id <- get_hpo_id(phenotype, genedata)
 get_hpo_id <- function(phenotype,
-                           phenotype_to_genes) {
+                       phenotype_to_genes = load_phenotype_to_genes()) {
     return(phenotype_to_genes$ID[phenotype_to_genes$Phenotype == phenotype][1])
 }
