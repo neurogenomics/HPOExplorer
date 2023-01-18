@@ -78,8 +78,9 @@ it caused an error in the ontologyPlot package.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_hpo_id</span><span class="op">(</span></span>
 <span>  <span class="va">phenos</span>,</span>
-<span>  phenotype_to_genes <span class="op">=</span> <span class="fu">HPOExplorer</span><span class="fu">::</span><span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  hpo <span class="op">=</span> <span class="fu">HPOExplorer</span><span class="fu">::</span><span class="fu"><a href="get_hpo.html">get_hpo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  phenotype_to_genes <span class="op">=</span> <span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  hpo <span class="op">=</span> <span class="fu"><a href="get_hpo.html">get_hpo</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -97,6 +98,10 @@ to gene annotations.</p></dd>
 
 <dt>hpo</dt>
 <dd><p>Human Phenotype Ontology object, loaded from <span class="pkg">ontologyIndex</span>.</p></dd>
+
+
+<dt>verbose</dt>
+<dd><p>Print messages.</p></dd>
 
 </dl></div>
     <div id="value">

@@ -72,6 +72,8 @@
 <span>  phenotype_to_genes <span class="op">=</span> <span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  add_description <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_hoverboxes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  add_age_onset <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_severity_tiers <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Phenotype <span class="op">=</span> <span class="st">"Phenotype"</span>, ID <span class="op">=</span> <span class="st">"HPO_ID"</span>, ontLvl_genes <span class="op">=</span></span>
 <span>    <span class="st">"ontLvl_geneCount_ratio"</span>, Description <span class="op">=</span> <span class="st">"description"</span><span class="op">)</span>,</span>
 <span>  line_length <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -107,6 +109,16 @@ well (slower).</p></dd>
 <a href="make_hoverboxes.html">make_hoverboxes</a>.</p></dd>
 
 
+<dt>add_age_onset</dt>
+<dd><p>Add age of onset columns using
+<a href="add_onset.html">add_onset</a>.</p></dd>
+
+
+<dt>add_severity_tiers</dt>
+<dd><p>Add severity Tiers column using
+<a href="add_tier.html">add_tier</a>.</p></dd>
+
+
 <dt>columns</dt>
 <dd><p>A named vector of columns in <code>phenos</code>
 to add to the hoverdata via <a href="make_hoverboxes.html">make_hoverboxes</a>.</p></dd>
@@ -140,6 +152,7 @@ to add to the hoverdata via <a href="make_hoverboxes.html">make_hoverboxes</a>.<
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Getting ontology level for 17 HPO IDs.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Creating adjacency matrix for 17 terms.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing ontology level / gene count ratio</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding information_content scores.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Gathering term descriptions.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Making hoverboxes from: 'Phenotype', 'HPO_ID', 'ontLvl_geneCount_ratio', 'description'</span>
 </code></pre></div>
