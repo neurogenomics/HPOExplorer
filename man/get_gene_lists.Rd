@@ -13,6 +13,9 @@ get_gene_lists(
 )
 }
 \arguments{
+\item{phenotypes}{One or more phenotype name from the HPO
+(e.g. "Phenotypic abnormality") \<string\>.}
+
 \item{phenotype_to_genes}{Output of
 \link[HPOExplorer]{load_phenotype_to_genes} mapping phenotypes
 to gene annotations.}
@@ -23,9 +26,6 @@ to gene annotations.}
 
 \item{hpo_id_labels}{Label the gene lists with HPO IDs
 (instead of phenotype names).}
-
-\item{phenotype}{A phenotype (name) from the HPO
-(e.g. "Phenotypic abnormality") \<string\>.}
 }
 \value{
 a character vector of genes associated with the selected phenotype.

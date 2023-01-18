@@ -14,7 +14,7 @@
 #' @param add_age_onset Add age of onset columns using
 #' \link[HPOExplorer]{add_onset}.
 #' @param add_severity_tiers Add severity Tiers column using
-#' \link[HPOExplorer]{add_tiert}.
+#' \link[HPOExplorer]{add_tier}.
 #' @param columns A named vector of columns in \code{phenos}
 #'  to add to the hoverdata via \link[HPOExplorer]{make_hoverboxes}.
 #' @param verbose Print messages.
@@ -49,7 +49,7 @@ make_phenos_dataframe <- function(ancestor,
   # ancestor = "Neurodevelopmental delay"
 
   description <- ontLvl <- geneCount <- ontLvl_geneCount_ratio <-
-    ID <- HPO_ID <- NULL;
+    ID <- HPO_ID <- . <- NULL;
 
   if(!is.null(ancestor)){
     IDx <- get_hpo_id_direct(hpo = hpo,

@@ -4,7 +4,7 @@
 #'  particular phenotype.
 #' It uses the \code{phenotype_to_genes.txt} file from the HPO.
 #'
-#' @param phenotype A phenotype (name) from the HPO
+#' @param phenotypes One or more phenotype name from the HPO
 #' (e.g. "Phenotypic abnormality") \<string\>.
 #' @param hpo_id_labels Label the gene lists with HPO IDs
 #' (instead of phenotype names).

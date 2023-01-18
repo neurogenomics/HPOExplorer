@@ -39,7 +39,7 @@ well (slower).}
 \link[HPOExplorer]{add_onset}.}
 
 \item{add_severity_tiers}{Add severity Tiers column using
-\link[HPOExplorer]{add_tiert}.}
+\link[HPOExplorer]{add_tier}.}
 
 \item{columns}{A named vector of columns in \code{phenos}
 to add to the hoverdata via \link[HPOExplorer]{make_hoverboxes}.}

@@ -40,7 +40,11 @@ Imports:
     ggnetwork,
     tools,
     data.table,
-    stringr
+    stringr,
+    EnsDb.Hsapiens.v75,
+    ensembldb,
+    AnnotationFilter,
+    GenomicRanges
 Suggests: 
     rmarkdown,
     knitr,
@@ -50,11 +54,7 @@ Suggests:
     here,
     httr,
     jsonlite,
-    testthat (>= 3.0.0),
-    EnsDb.Hsapiens.v75,
-    ensembldb,
-    AnnotationFilter,
-    GenomicRanges
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
 biocViews:
     Genetics, Preprocessing, GeneTarget, SystemsBiology,

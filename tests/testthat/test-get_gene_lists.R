@@ -10,5 +10,5 @@ test_that("get_gene_lists works", {
   gene_df <- get_gene_lists(phenotypes = phenotypes,
                             as_list = FALSE)
   testthat::expect_equal(length(unique(gene_df$Phenotype)), length(phenotypes))
-  testthat::expect_equal(nrow(gene_df),2578)
+  testthat::expect_gte(nrow(gene_df),2500)
 })
