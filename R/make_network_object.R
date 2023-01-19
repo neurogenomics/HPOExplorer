@@ -61,5 +61,7 @@ make_network_object <- function(phenos,
                                  phenos = phenos,
                                  phenos_column = colour_var,
                                  verbose = verbose)
+    #### Add number of total edges for each node ####
+    phenoNet$n_edges <- rowSums(adjacency)[phenoNet$vertex.names]
     return(phenoNet)
 }

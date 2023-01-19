@@ -34,6 +34,9 @@ ggnetwork_plot <- function(phenoNet,
                            tooltip = "hover",
                            verbose = TRUE,
                            ...) {
+  # templateR:::source_all()
+  # templateR:::args2vars(ggnetwork_plot)
+
   requireNamespace("ggplot2")
   x <- y <- xend <- yend <- hover <- label <- NULL;
 
@@ -44,21 +47,27 @@ ggnetwork_plot <- function(phenoNet,
                              xend = xend,
                              yend = yend,
                              text = hover)) +
-      ggnetwork::geom_edges(color = "darkgray") +
       geom_point(aes_string(colour = colour_var,
-                            size = size_var)) + # , text= hover)) +
+                            size = size_var)) +
       geom_text(aes(label = label), color = "black") +
       scale_colour_gradient2(low = "white", mid = "yellow", high = "red") +
       scale_size(trans = "exp") +
       guides(size = "none") +
       labs(colour = colour_label) +
-      theme_void() #  use tooltip = "hover" with ggplotly for hover box
+      theme_void()
+  #### Only add edges if any of the nodes are connected ####
+  ## Otherwise, ggplotly gets confused and throws an error
+  if(sum(phenoNet$n_edges)>0){
+    network_plot <- network_plot + ggnetwork::geom_edges(color = "darkgray")
 
+  }
+  #### Make interactive ####
   if(isTRUE(interactive)){
     return(plotly::ggplotly(p = network_plot,
                             tooltip = tooltip,
-                            ...) |> plotly::layout(
-                              hoverlabel = list(align = "left")))
+                            ...) |>
+           plotly::layout(hoverlabel = list(align = "left"))
+           )
   } else {
     return(network_plot)
   }
