@@ -33,6 +33,7 @@ Subset a \code{phenos} datatable to only
 descendants of an ancestor HPO ID term.
 }
 \examples{
- phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
-phenos <- subset_descendants(ancestor = "Neurodevelopmental delay")
+phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
+phenos2 <- subset_descendants(phenos = phenos,
+                              ancestor = "Motor delay")
 }

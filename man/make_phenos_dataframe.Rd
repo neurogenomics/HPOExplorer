@@ -13,8 +13,7 @@ make_phenos_dataframe(
   add_age_onset = FALSE,
   add_severity_tiers = FALSE,
   columns = list(Phenotype = "Phenotype", ID = "HPO_ID", ontLvl_genes =
-    "ontLvl_geneCount_ratio", Description = "description"),
-  line_length = FALSE,
+    "ontLvl_geneCount_ratio", Definition = "definition"),
   interactive = TRUE,
   verbose = TRUE
 )
@@ -43,8 +42,6 @@ well (slower).}
 
 \item{columns}{A named vector of columns in \code{phenos}
 to add to the hoverdata via \link[HPOExplorer]{make_hoverboxes}.}
-
-\item{line_length}{The number of desired words per line \<int\>}
 
 \item{interactive}{Make the plot interactive with \link[plotly]{ggplotly}.}
 

@@ -18,7 +18,6 @@
 #' @param columns A named vector of columns in \code{phenos}
 #'  to add to the hoverdata via \link[HPOExplorer]{make_hoverboxes}.
 #' @param verbose Print messages.
-#' @inheritParams get_term_definition
 #' @inheritParams ggnetwork_plot
 #' @returns The HPO in dataframe format.
 #'
@@ -38,9 +37,9 @@ make_phenos_dataframe <- function(ancestor,
                                   columns = list(
                                     Phenotype="Phenotype",
                                     ID="HPO_ID",
+                                    ontLvl="ontLvl",
                                     ontLvl_genes="ontLvl_geneCount_ratio",
-                                    Description="description"),
-                                  line_length = FALSE,
+                                    Definition="definition"),
                                   interactive = TRUE,
                                   verbose = TRUE
                                   ){
@@ -67,15 +66,14 @@ make_phenos_dataframe <- function(ancestor,
   messager("Computing gene counts.",v=verbose)
   phenos <- descendants[,.(geneCount=.N), by=c("ID","Phenotype")]
   data.table::setnames(phenos, "ID","HPO_ID")
-  # messager("Computing ontology level.",v=verbose)
-  phenos[,ontLvl:=get_ont_lvls(terms = HPO_ID, hpo = hpo, verbose = verbose)]
-  messager("Computing ontology level / gene count ratio",v=verbose)
-  phenos[,ontLvl_geneCount_ratio:=(ontLvl/geneCount)]
+  phenos <- add_ont_lvl(phenos = phenos,
+                        hpo = hpo,
+                        verbose = verbose)
   phenos <- add_info_content(phenos = phenos,
                              hpo = hpo,
                              verbose = verbose)
-  messager("Gathering term descriptions.",v=verbose)
-  phenos[,description:=sapply(HPO_ID,get_term_definition)]
+  phenos <- add_hpo_definition(phenos = phenos,
+                               verbose = verbose)
   #### Add age of onset ####
   if(isTRUE(add_age_onset)){
     phenos <- add_onset(phenos = phenos,

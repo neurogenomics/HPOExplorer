@@ -4,12 +4,10 @@
 \alias{get_term_definition_api}
 \title{Get term definition: API}
 \usage{
-get_term_definition_api(ontologyId, line_length = FALSE)
+get_term_definition_api(term, line_length = FALSE)
 }
 \arguments{
-\item{ontologyId}{A HPO term Id (e.g. "HP:0000002") \<string\>}
-
-\item{line_length}{The number of desired words per line \<int\>}
+\item{term}{One or more HPO IDs.}
 }
 \value{
 Character vector of definitions.

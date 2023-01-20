@@ -4,14 +4,14 @@
 #' HPO term. If a \code{line_length} \> 0 is passed to the function, it will add
 #' newlines every nth word. This can be useful when displaying the description
 #' in plots with limited space.
-#' @inheritParams get_term_definition
+#' @param term One or more HPO IDs.
 #' @returns Character vector of definitions.
 #' @keywords internal
-get_term_definition_api <- function(ontologyId,
+get_term_definition_api <- function(term,
                                     line_length = FALSE){
   requireNamespace("httr")
   requireNamespace("jsonlite")
- lapply(stats::setNames(ontologyId,ontologyId), function(oid){
+ lapply(stats::setNames(term,term), function(oid){
    hpo_termdetails <- tryCatch(expr = {
      httr::GET(paste0("hpo.jax.org/api/hpo/term/",
                       oid))

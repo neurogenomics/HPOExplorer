@@ -1,12 +1,13 @@
-get_term_definition_data <- function(ontologyId,
+get_term_definition_data <- function(term,
                                      line_length){
 
-  utils::data(hpo_meta, package = "HPOExplorer")
-  hpo_meta <- get("hpo_meta")
   hpo_id <- NULL;
 
-  ontologyId <- gsub(":","_",ontologyId)
-  hpo_meta_sub <- hpo_meta[hpo_id %in% ontologyId]
+  #### Import data ####
+  utils::data(hpo_meta, package = "HPOExplorer")
+  hpo_meta <- get("hpo_meta")
+  term <- gsub(":","_",term)
+  hpo_meta_sub <- hpo_meta[hpo_id %in% term]
   definitions <- stats::setNames(hpo_meta_sub$definition,
                                  gsub("_",":",hpo_meta_sub$hpo_id))
   if (line_length > 0) {
