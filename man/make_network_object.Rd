@@ -7,8 +7,9 @@
 make_network_object(
   phenos,
   hpo = get_hpo(),
-  adjacency = adjacency_matrix(terms = unique(phenos$HPO_ID), hpo = hpo),
+  adjacency = adjacency_matrix(terms = phenos$HPO_ID, hpo = hpo),
   colour_var = "fold_change",
+  add_ontLvl = FALSE,
   verbose = TRUE
 )
 }
@@ -22,6 +23,9 @@ by \link[HPOExplorer]{adjacency_matrix}.}
 
 \item{colour_var}{The column from phenos that you wish
 to map to node colour.}
+
+\item{add_ontLvl}{Add the "ontLvl" (ontology level)
+column if not already present.}
 
 \item{verbose}{Print messages.}
 }

@@ -11,6 +11,8 @@
 #' by \link[HPOExplorer]{adjacency_matrix}.
 #' @param colour_var The column from phenos that you wish
 #' to map to node colour.
+#' @param add_ontLvl Add the "ontLvl" (ontology level)
+#' column if not already present.
 #' @inheritParams make_phenos_dataframe
 #' @returns A ggnetwork graph/ network object of a subset of the RD EWCE results.
 #'
@@ -26,21 +28,23 @@ make_network_object <- function(phenos,
                                 hpo = get_hpo(),
                                 adjacency =
                                   adjacency_matrix(
-                                    terms = unique(phenos$HPO_ID),
+                                    terms = phenos$HPO_ID,
                                     hpo = hpo),
                                 colour_var = "fold_change",
+                                add_ontLvl = FALSE,
                                 verbose = TRUE) {
 
     messager("Making phenotype network object.",v=verbose)
     adjacency <- adjacency[phenos$HPO_ID, phenos$HPO_ID]
-    if(!"ontLvl" %in% names(phenos)){
-      hierarchy <- get_ont_lvls(terms = rownames(adjacency),
-                                adjacency = adjacency,
-                                hpo = hpo,
-                                reverse = TRUE)
-      phenos$ontLvl <- hierarchy[phenos$HPO_ID]
+    if(!"ontLvl" %in% names(phenos) &&
+       isTRUE(add_ontLvl)){
+      phenos <- add_ont_lvl(phenos = phenos,
+                            hpo = hpo,
+                            adjacency = adjacency,
+                            verbose = verbose)
     }
     #### Create phenoNet obj ####
+    messager("Creating ggnetwork object.",v=verbose)
     phenoNet <- ggnetwork::ggnetwork(x = adjacency,
                                      arrow.gap = 0)
     #### Add metadata to phenoNet ####
@@ -63,5 +67,6 @@ make_network_object <- function(phenos,
                                  verbose = verbose)
     #### Add number of total edges for each node ####
     phenoNet$n_edges <- rowSums(adjacency)[phenoNet$vertex.names]
+    phenoNet <- unique(phenoNet)
     return(phenoNet)
 }

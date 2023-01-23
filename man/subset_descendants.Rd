@@ -13,6 +13,8 @@ subset_descendants(
 )
 }
 \arguments{
+\item{phenos}{dataframe of phenotypes and values / parameters.}
+
 \item{ancestor}{Phenotype names (or HPO ID) of an ancestor in the
 \href{https://hpo.jax.org/}{Human Phenotype Ontology}.
 Only phenotypes that are descendants of this ancestor will be kept.

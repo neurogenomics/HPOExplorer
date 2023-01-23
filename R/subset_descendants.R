@@ -7,6 +7,7 @@
 #'  Only phenotypes that are descendants of this ancestor will be kept.
 #'  Set to \code{NULL} (default) to skip this filtering step.
 #' @inheritParams make_phenos_dataframe
+#' @inheritParams make_network_object
 #' @inheritParams harmonise_phenotypes
 #' @returns data.table of phenotypes, with additional columns:
 #' "ancestor", "ancestor_id"
@@ -23,6 +24,8 @@ subset_descendants <- function(phenos,
                                hpo = get_hpo(),
                                ignore_case = TRUE,
                                verbose = TRUE){
+
+  HPO_ID <- NULL;
 
   if(!is.null(ancestor)){
     messager("Subsetting phenotypes to only ancestors of:",

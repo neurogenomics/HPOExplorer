@@ -33,12 +33,14 @@ get_ont_lvls <- function(terms,
                          reverse = TRUE,
                          verbose = TRUE) {
 
+    terms <- unique(terms)
     messager("Getting ontology level for",
              formatC(length(terms),big.mark = ","),"HPO IDs.", v=verbose)
     if(isTRUE(absolute)){
       adjacency <- adjacency_matrix(hpo = hpo,
                                     verbose = verbose)
     }
+
     hierarchy <- lapply(stats::setNames(terms,
                                         terms),
                         function(term){

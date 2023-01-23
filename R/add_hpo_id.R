@@ -24,7 +24,7 @@ add_hpo_id <- function(phenos,
   HPO_term_valid <- HPO_ID <- NULL;
 
   if(!all(c("HPO_ID","HPO_term_valid") %in% names(phenos))){
-    messager("Adding information_content scores.",v=verbose)
+    messager("Adding HPO IDs.",v=verbose)
     pheno_dict <- unique(phenotype_to_genes[,c("ID","Phenotype")])
     data.table::setkeyv(pheno_dict,"Phenotype")
     phenos$HPO_ID <- pheno_dict[phenos$Phenotype,]$ID

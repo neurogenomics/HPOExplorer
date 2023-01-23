@@ -4,12 +4,19 @@
 \alias{adjacency_matrix}
 \title{Adjacency matrix}
 \usage{
-adjacency_matrix(hpo = get_hpo(), terms = unique(hpo$id), verbose = TRUE)
+adjacency_matrix(
+  hpo = get_hpo(),
+  terms = unique(hpo$id),
+  method = "HPOExplorer",
+  verbose = TRUE
+)
 }
 \arguments{
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 
 \item{terms}{Character vector of HPO IDs.}
+
+\item{method}{Method to use to create the adjacency matrix.}
 
 \item{verbose}{Print messages.}
 }
@@ -20,5 +27,6 @@ adjacency matrix
 Create adjacency matrix of HPO child-parent relationships.
 }
 \examples{
-adjacency <- adjacency_matrix(terms = c("HP:0000001", "HP:0000002"))
+terms <- get_hpo()$id[seq_len(1000)]
+adjacency <- adjacency_matrix(terms = terms)
 }

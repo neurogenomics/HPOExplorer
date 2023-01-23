@@ -55,7 +55,7 @@ make_hoverboxes <- function(phenos,
       unique(phenos$Phenotype)
     ), function(pheno_i){
       lapply(seq_len(length(columns)), function(i){
-        val <- phenos[Phenotype == pheno_i, ][[columns[[i]]]]
+        val <- phenos[Phenotype == pheno_i, ][1,][[columns[[i]]]]
         val <- if(is.numeric(val)) round(val,digits = digits) else {
           paste(
             stringr::str_wrap(val, width = width),

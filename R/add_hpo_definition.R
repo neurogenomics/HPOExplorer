@@ -21,7 +21,7 @@ add_hpo_definition <- function(phenos,
                                line_length = FALSE,
                                use_api = FALSE,
                                verbose = TRUE) {
-  definition <- NULL;
+  definition <- HPO_ID <- NULL;
 
   messager("Adding term definitions.",v=verbose)
   if(isTRUE(use_api)){

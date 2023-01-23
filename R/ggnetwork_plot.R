@@ -40,6 +40,13 @@ ggnetwork_plot <- function(phenoNet,
   requireNamespace("ggplot2")
   x <- y <- xend <- yend <- hover <- label <- NULL;
 
+  #### Check size_var ####
+  if(!size_var %in% names(phenoNet)){
+    messager(paste0("size_var=",shQuote(size_var)),"not found in phenoNet.",
+             "Setting size_var=colour_var",v=verbose)
+    size_var <- colour_var
+  }
+  #### Create plot ####
   messager("Creating ggnetwork plot.",v=verbose)
   network_plot <- ggplot(phenoNet,
                          aes(x = x,
