@@ -19,14 +19,18 @@ add_ont_lvl <- function(phenos,
 
   ontLvl_geneCount_ratio <- geneCount <- HPO_ID <- ontLvl <- NULL;
 
-  lvls_dict <- get_ont_lvls(terms = unique(phenos$HPO_ID),
-                            hpo = hpo,
-                            adjacency = adjacency,
-                            verbose = TRUE)
-  phenos[,ontLvl:=lvls_dict[HPO_ID]]
-  messager("Computing ontology level / gene count ratio",v=verbose)
-  if("geneCount" %in% names(phenos)){
-    phenos[,ontLvl_geneCount_ratio:=(ontLvl/geneCount)]
+  if("HPO_ID" %in% names(phenos)){
+    lvls_dict <- get_ont_lvls(terms = unique(phenos$HPO_ID),
+                              hpo = hpo,
+                              adjacency = adjacency,
+                              verbose = TRUE)
+    phenos[,ontLvl:=lvls_dict[HPO_ID]]
+    messager("Computing ontology level / gene count ratio",v=verbose)
+    if("geneCount" %in% names(phenos)){
+      phenos[,ontLvl_geneCount_ratio:=(ontLvl/geneCount)]
+    }
+  } else {
+    messager("HPO_ID column not found. Cannot add ontology level.",v=verbose)
   }
   return(phenos)
 }

@@ -13,8 +13,10 @@
 #' to map to node colour.
 #' @param add_ontLvl Add the "ontLvl" (ontology level)
 #' column if not already present.
+#' @param cols Columns to add to metadata of \link[ggnetwork]{ggnetwork} object.
 #' @inheritParams make_phenos_dataframe
-#' @returns A ggnetwork graph/ network object of a subset of the RD EWCE results.
+#' @returns A \link[ggnetwork]{ggnetwork} object
+#' of a subset of the RD EWCE results.
 #'
 #' @export
 #' @import network
@@ -32,10 +34,22 @@ make_network_object <- function(phenos,
                                     hpo = hpo),
                                 colour_var = "fold_change",
                                 add_ontLvl = FALSE,
+                                cols = c("HPO_ID",
+                                         "hover",
+                                         "ontLvl",
+                                         "Phenotype",
+                                         "CellType",
+                                          grep("_count$|_values$",
+                                               names(phenos),
+                                               value = TRUE),
+                                          colour_var),
                                 verbose = TRUE) {
 
     messager("Making phenotype network object.",v=verbose)
-    adjacency <- adjacency[phenos$HPO_ID, phenos$HPO_ID]
+    if("HPO_ID" %in% names(phenos)){
+      adjacency <- adjacency[unique(phenos$HPO_ID),
+                             unique(phenos$HPO_ID)]
+    }
     if(!"ontLvl" %in% names(phenos) &&
        isTRUE(add_ontLvl)){
       phenos <- add_ont_lvl(phenos = phenos,
@@ -47,26 +61,19 @@ make_network_object <- function(phenos,
     messager("Creating ggnetwork object.",v=verbose)
     phenoNet <- ggnetwork::ggnetwork(x = adjacency,
                                      arrow.gap = 0)
-    #### Add metadata to phenoNet ####
-    phenoNet <- create_node_data(phenoNet = phenoNet,
-                                 phenos = phenos,
-                                 phenos_column = "hover",
-                                 verbose = verbose)
-    phenoNet <- create_node_data(phenoNet = phenoNet,
-                                 phenos = phenos,
-                                 phenos_column = "ontLvl",
-                                 verbose = verbose)
-    phenoNet <- create_node_data(phenoNet = phenoNet,
-                                 phenos = phenos,
-                                 phenos_column = "Phenotype",
-                                 new_column = "label",
-                                 verbose = verbose)
-    phenoNet <- create_node_data(phenoNet = phenoNet,
-                                 phenos = phenos,
-                                 phenos_column = colour_var,
-                                 verbose = verbose)
+    cols <- cols[cols %in% names(phenos)]
+    for(col in cols){
+      #### Add metadata to phenoNet ####
+      phenoNet <- create_node_data(phenoNet = phenoNet,
+                                   phenos = phenos,
+                                   phenos_column = col,
+                                   verbose = verbose)
+    }
     #### Add number of total edges for each node ####
-    phenoNet$n_edges <- rowSums(adjacency)[phenoNet$vertex.names]
+    if("HPO_ID" %in% names(phenos)){
+      messager("Adding n_edges per node.",v=verbose)
+      phenoNet$n_edges <- rowSums(adjacency)[phenoNet$vertex.names]
+    }
     phenoNet <- unique(phenoNet)
     return(phenoNet)
 }

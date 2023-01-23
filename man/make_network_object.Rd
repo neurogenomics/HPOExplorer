@@ -10,6 +10,8 @@ make_network_object(
   adjacency = adjacency_matrix(terms = phenos$HPO_ID, hpo = hpo),
   colour_var = "fold_change",
   add_ontLvl = FALSE,
+  cols = c("HPO_ID", "hover", "ontLvl", "Phenotype", "CellType", grep("_count$|_values$",
+    names(phenos), value = TRUE), colour_var),
   verbose = TRUE
 )
 }
@@ -27,10 +29,13 @@ to map to node colour.}
 \item{add_ontLvl}{Add the "ontLvl" (ontology level)
 column if not already present.}
 
+\item{cols}{Columns to add to metadata of \link[ggnetwork]{ggnetwork} object.}
+
 \item{verbose}{Print messages.}
 }
 \value{
-A ggnetwork graph/ network object of a subset of the RD EWCE results.
+A \link[ggnetwork]{ggnetwork} object
+of a subset of the RD EWCE results.
 }
 \description{
 This uses the network package to coerce the adjacency matrix into a

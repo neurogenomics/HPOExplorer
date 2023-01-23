@@ -38,13 +38,17 @@ ggnetwork_plot <- function(phenoNet,
   # templateR:::args2vars(ggnetwork_plot)
 
   requireNamespace("ggplot2")
-  x <- y <- xend <- yend <- hover <- label <- NULL;
+  x <- y <- xend <- yend <- hover <- Phenotype <- NULL;
 
   #### Check size_var ####
   if(!size_var %in% names(phenoNet)){
     messager(paste0("size_var=",shQuote(size_var)),"not found in phenoNet.",
              "Setting size_var=colour_var",v=verbose)
     size_var <- colour_var
+  }
+  #### Check
+  if(!tooltip %in% names(phenoNet)){
+    tooltip <- "all"
   }
   #### Create plot ####
   messager("Creating ggnetwork plot.",v=verbose)
@@ -56,7 +60,7 @@ ggnetwork_plot <- function(phenoNet,
                              text = hover)) +
       geom_point(aes_string(colour = colour_var,
                             size = size_var)) +
-      geom_text(aes(label = label), color = "black") +
+      geom_text(aes(label = Phenotype), color = "black") +
       scale_colour_gradient2(low = "white", mid = "yellow", high = "red") +
       scale_size(trans = "exp") +
       guides(size = "none") +
