@@ -44,7 +44,8 @@ Imports:
     EnsDb.Hsapiens.v75,
     ensembldb,
     AnnotationFilter,
-    GenomicRanges
+    GenomicRanges,
+    AnnotationHub
 Suggests: 
     rmarkdown,
     knitr,
