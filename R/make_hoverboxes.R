@@ -25,12 +25,7 @@
 #'                                 add_hoverboxes = FALSE)
 #' phenos <- make_hoverboxes(phenos = phenos)
 make_hoverboxes <- function(phenos,
-                            columns = list(
-                              Phenotype="Phenotype",
-                              ID="HPO_ID",
-                              ontLvl="ontLvl",
-                              ontLvl_genes="ontLvl_geneCount_ratio",
-                              Definition="definition"),
+                            columns = list_columns(),
                             interactive = TRUE,
                             width = 60,
                             digits = 3,

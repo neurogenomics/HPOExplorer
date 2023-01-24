@@ -34,12 +34,7 @@ make_phenos_dataframe <- function(ancestor,
                                   add_hoverboxes = TRUE,
                                   add_age_onset = FALSE,
                                   add_severity_tiers = FALSE,
-                                  columns = list(
-                                    Phenotype="Phenotype",
-                                    ID="HPO_ID",
-                                    ontLvl="ontLvl",
-                                    ontLvl_genes="ontLvl_geneCount_ratio",
-                                    Definition="definition"),
+                                  columns = list_columns(),
                                   interactive = TRUE,
                                   verbose = TRUE
                                   ){
@@ -47,8 +42,7 @@ make_phenos_dataframe <- function(ancestor,
   # templateR:::args2vars(make_phenos_dataframe)
   # ancestor = "Neurodevelopmental delay"
 
-  description <- ontLvl <- geneCount <- ontLvl_geneCount_ratio <-
-    ID <- HPO_ID <- . <- NULL;
+  ID <- . <- NULL;
 
   if(!is.null(ancestor)){
     IDx <- get_hpo_id_direct(hpo = hpo,

@@ -12,8 +12,7 @@ make_phenos_dataframe(
   add_hoverboxes = TRUE,
   add_age_onset = FALSE,
   add_severity_tiers = FALSE,
-  columns = list(Phenotype = "Phenotype", ID = "HPO_ID", ontLvl = "ontLvl", ontLvl_genes
-    = "ontLvl_geneCount_ratio", Definition = "definition"),
+  columns = list_columns(),
   interactive = TRUE,
   verbose = TRUE
 )

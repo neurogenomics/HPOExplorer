@@ -6,8 +6,7 @@
 \usage{
 make_hoverboxes(
   phenos,
-  columns = list(Phenotype = "Phenotype", ID = "HPO_ID", ontLvl = "ontLvl", ontLvl_genes
-    = "ontLvl_geneCount_ratio", Definition = "definition"),
+  columns = list_columns(),
   interactive = TRUE,
   width = 60,
   digits = 3,
