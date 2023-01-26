@@ -68,6 +68,8 @@ make_phenos_dataframe <- function(ancestor,
                              verbose = verbose)
   phenos <- add_hpo_definition(phenos = phenos,
                                verbose = verbose)
+  phenos <- add_ancestor(phenos = phenos,
+                         verbose = verbose)
   #### Add age of onset ####
   if(isTRUE(add_age_onset)){
     phenos <- add_onset(phenos = phenos,
