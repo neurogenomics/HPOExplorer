@@ -1,3 +1,17 @@
+# HPOExplorer 0.99.3
+
+## Bug fixes
+
+* `get_ont_lvls`: 
+  - Worked w Bobby to clarify the role of each ontology level function.
+  - Added new internal function to get the max ontology level: `get_max_ont_lvl`
+  - Rewrote function description to make the differences between 
+    absolute/relative level more clear.
+* `make_network_object`:
+  - Use `list_columns` so that `ontLvl_relative` gets added to network obj.
+*  `list_columns`
+  - Add new arg `extra_cols`
+
 # HPOExplorer 0.99.2
 
 ## New features

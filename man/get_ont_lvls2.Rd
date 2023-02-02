@@ -18,7 +18,7 @@ get_ont_lvls2(
 
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 
-\item{adjacency}{AN adjacency matrix generated
+\item{adjacency}{An adjacency matrix generated
 by \link[HPOExplorer]{adjacency_matrix}.}
 
 \item{absolute}{Make the levels absolute in the sense that they consider

@@ -2,19 +2,26 @@
 % Please edit documentation in R/get_ont_lvl.R
 \name{get_ont_lvl}
 \alias{get_ont_lvl}
-\title{Get HPO term ontology level}
+\title{Get HPO term level}
 \source{
 \code{
-lvl <- get_ontvl(term = "HP:0000001")
+lvl_absolute <- get_ont_lvl(term = "HP:0000001", absolute=TRUE)
+lvl_relative <- get_ont_lvl(term = "HP:0000001", absolute=FALSE)
 }
 }
 \usage{
-get_ont_lvl(term, hpo = get_hpo(), adjacency, verbose = FALSE)
+get_ont_lvl(
+  term,
+  hpo = get_hpo(),
+  adjacency = NULL,
+  absolute = TRUE,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 
-\item{adjacency}{AN adjacency matrix generated
+\item{adjacency}{An adjacency matrix generated
 by \link[HPOExplorer]{adjacency_matrix}.}
 
 \item{verbose}{Print messages.}
@@ -29,10 +36,5 @@ the HPO is term "HP:0000001", the longest path to a term with no child terms
 is 14. In other words there are 14 generations of "is-a" relationships below
 HP:0000001 and it is therefore at ontology level 14. A term with no
 sub-phenotypes below it (a leaf node), is at ontology level 0.
-}
-\details{
-Typically this function should be used to get the level of a single term,
-but you can supply a vector of multiple terms and it will return the level of
-the highest level term in that vector.
 }
 \keyword{internal}

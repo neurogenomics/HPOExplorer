@@ -1,6 +1,7 @@
 #' Add ontology level
 #'
 #' Add the relative ontology level for each HPO ID.
+#' @inheritParams get_ont_lvls
 #' @inheritParams make_network_object
 #' @inheritParams data.table::merge.data.table
 #' @returns phenos data.table with extra column
@@ -12,21 +13,31 @@
 #' phenos2 <- add_ont_lvl(phenos = phenos)
 add_ont_lvl <- function(phenos,
                         hpo = get_hpo(),
-                        adjacency =
-                          adjacency_matrix(terms = phenos$HPO_ID,
-                                           hpo = hpo),
-                         verbose=TRUE){
+                        adjacency = NULL,
+                        absolute = TRUE,
+                        exclude_top_lvl = TRUE,
+                        reverse = TRUE,
+                        verbose = TRUE){
 
-  ontLvl_geneCount_ratio <- geneCount <- HPO_ID <- ontLvl <- NULL;
+  ontLvl_geneCount_ratio <- geneCount <- HPO_ID <- ontLvl <- tmp <- NULL;
 
+  col <- if(isTRUE(absolute)) "ontLvl" else "ontLvl_relative"
+  if(col %in% names(phenos)) return(phenos)
   if("HPO_ID" %in% names(phenos)){
     lvls_dict <- get_ont_lvls(terms = unique(phenos$HPO_ID),
                               hpo = hpo,
                               adjacency = adjacency,
-                              verbose = TRUE)
-    phenos[,ontLvl:=lvls_dict[HPO_ID]]
-    messager("Computing ontology level / gene count ratio",v=verbose)
-    if("geneCount" %in% names(phenos)){
+                              absolute = absolute,
+                              reverse = reverse,
+                              exclude_top_lvl = exclude_top_lvl,
+                              verbose = verbose)
+    #### Add the new column ####
+    phenos[,tmp:=lvls_dict[HPO_ID]]
+
+    data.table::setnames(phenos,old = "tmp", new = col)
+    #### Compute gene ratio ####
+    if(all(c("ontLvl","geneCount") %in% names(phenos))){
+      messager("Computing ontology level / gene count ratio.",v=verbose)
       phenos[,ontLvl_geneCount_ratio:=(ontLvl/geneCount)]
     }
   } else {

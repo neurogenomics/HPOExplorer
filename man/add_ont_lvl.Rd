@@ -7,7 +7,10 @@
 add_ont_lvl(
   phenos,
   hpo = get_hpo(),
-  adjacency = adjacency_matrix(terms = phenos$HPO_ID, hpo = hpo),
+  adjacency = NULL,
+  absolute = TRUE,
+  exclude_top_lvl = TRUE,
+  reverse = TRUE,
   verbose = TRUE
 )
 }
@@ -16,8 +19,22 @@ add_ont_lvl(
 
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 
-\item{adjacency}{AN adjacency matrix generated
+\item{adjacency}{An adjacency matrix generated
 by \link[HPOExplorer]{adjacency_matrix}.}
+
+\item{absolute}{Make the levels absolute in the sense that they consider
+the entire HPO ontology (\code{TRUE}).
+Otherwise, levels will be relative to only the HPO terms that are in
+the provided subset of \code{terms} AND are directly adjacent (connected)
+to a given cluster of terms (\code{FALSE}).}
+
+\item{exclude_top_lvl}{Exclude the top level term of the HPO
+(i.e. "All" (HP:0000001)) when computing \emph{absolute} levels.
+This argument is not used when computing \emph{relative} levels.}
+
+\item{reverse}{If \code{TRUE}, ontology
+level numbers with be revered such that the level of the parent terms
+are larger than the child terms.}
 
 \item{verbose}{Print messages.}
 }

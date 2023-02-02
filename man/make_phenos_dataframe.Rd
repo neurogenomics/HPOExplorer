@@ -8,6 +8,9 @@ make_phenos_dataframe(
   ancestor,
   hpo = get_hpo(),
   phenotype_to_genes = load_phenotype_to_genes(),
+  adjacency = NULL,
+  add_ont_lvl_absolute = TRUE,
+  add_ont_lvl_relative = FALSE,
   add_description = TRUE,
   add_hoverboxes = TRUE,
   add_age_onset = FALSE,
@@ -26,6 +29,15 @@ returns the entirely ontology.}
 \item{phenotype_to_genes}{Output of
 \link[HPOExplorer]{load_phenotype_to_genes} mapping phenotypes
 to gene annotations.}
+
+\item{adjacency}{An adjacency matrix generated
+by \link[HPOExplorer]{adjacency_matrix}.}
+
+\item{add_ont_lvl_absolute}{Add the absolute ontology level of each HPO term.
+See \link[HPOExplorer]{get_ont_lvls} for more details.}
+
+\item{add_ont_lvl_relative}{Add the relative ontology level of each HPO term.
+See \link[HPOExplorer]{get_ont_lvls} for more details.}
 
 \item{add_description}{Whether to get the phenotype descriptions as
 well (slower).}

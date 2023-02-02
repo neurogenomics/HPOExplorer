@@ -69,7 +69,8 @@ ggnetwork_plot <- function(phenoNet,
   #### Only add edges if any of the nodes are connected ####
   ## Otherwise, ggplotly gets confused and throws an error
   if(sum(phenoNet$n_edges)>0){
-    network_plot <- network_plot + ggnetwork::geom_edges(color = "darkgray")
+    network_plot <- network_plot +
+      ggnetwork::geom_edges(color = "darkgray")
 
   }
   #### Make interactive ####

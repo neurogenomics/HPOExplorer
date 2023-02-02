@@ -31,5 +31,5 @@ Assign each HPO ID to the higher-order ancestral term that it is part of.
 }
 \examples{
 phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
-phenos2 <- add_ancestor(phenos = phenos)
+phenos2 <- add_ancestor(phenos = phenos, lvl=5)
 }

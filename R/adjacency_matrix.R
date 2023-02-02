@@ -18,7 +18,7 @@ adjacency_matrix <- function(hpo = get_hpo(),
                              verbose = TRUE) {
 
    messager("Creating adjacency matrix for",
-            formatC(length(terms),big.mark = ","),"terms.",
+            formatC(length(terms),big.mark = ","),"term(s).",
             v=verbose)
   if(tolower(method)=="ontologyindex"){
     #### ontologyIndex method ####

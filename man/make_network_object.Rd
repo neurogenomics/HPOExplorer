@@ -9,9 +9,9 @@ make_network_object(
   hpo = get_hpo(),
   adjacency = adjacency_matrix(terms = phenos$HPO_ID, hpo = hpo),
   colour_var = "fold_change",
-  add_ontLvl = FALSE,
-  cols = c("HPO_ID", "hover", "ontLvl", "Phenotype", "CellType", grep("_count$|_values$",
-    names(phenos), value = TRUE), colour_var),
+  add_ont_lvl_absolute = FALSE,
+  cols = list_columns(extra_cols = c(colour_var, grep("_count$|_values$", names(phenos),
+    value = TRUE))),
   verbose = TRUE
 )
 }
@@ -20,14 +20,14 @@ make_network_object(
 
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 
-\item{adjacency}{AN adjacency matrix generated
+\item{adjacency}{An adjacency matrix generated
 by \link[HPOExplorer]{adjacency_matrix}.}
 
 \item{colour_var}{The column from phenos that you wish
 to map to node colour.}
 
-\item{add_ontLvl}{Add the "ontLvl" (ontology level)
-column if not already present.}
+\item{add_ont_lvl_absolute}{Add the absolute ontology level of each HPO term.
+See \link[HPOExplorer]{get_ont_lvls} for more details.}
 
 \item{cols}{Columns to add to metadata of \link[ggnetwork]{ggnetwork} object.}
 

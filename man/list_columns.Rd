@@ -4,13 +4,15 @@
 \alias{list_columns}
 \title{List columns}
 \usage{
-list_columns(columns = NULL, add_gene_cols = FALSE)
+list_columns(columns = NULL, add_gene_cols = FALSE, extra_cols = NULL)
 }
 \arguments{
 \item{columns}{A named vector of columns in \code{phenos}
 to add to the hoverdata via \link[HPOExplorer]{make_hoverboxes}.}
 
 \item{add_gene_cols}{Add columns related to genes.}
+
+\item{extra_cols}{Additional user-specified column names.}
 }
 \value{
 Named list of columns.

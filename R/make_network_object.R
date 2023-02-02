@@ -7,12 +7,10 @@
 #' It expects there to be a column of HPO IDs in the phenos dataframe called
 #' HPO_ID.
 #' @param phenos dataframe of phenotypes and values / parameters.
-#' @param adjacency AN adjacency matrix generated
+#' @param adjacency An adjacency matrix generated
 #' by \link[HPOExplorer]{adjacency_matrix}.
 #' @param colour_var The column from phenos that you wish
 #' to map to node colour.
-#' @param add_ontLvl Add the "ontLvl" (ontology level)
-#' column if not already present.
 #' @param cols Columns to add to metadata of \link[ggnetwork]{ggnetwork} object.
 #' @inheritParams make_phenos_dataframe
 #' @returns A \link[ggnetwork]{ggnetwork} object
@@ -33,16 +31,15 @@ make_network_object <- function(phenos,
                                     terms = phenos$HPO_ID,
                                     hpo = hpo),
                                 colour_var = "fold_change",
-                                add_ontLvl = FALSE,
-                                cols = c("HPO_ID",
-                                         "hover",
-                                         "ontLvl",
-                                         "Phenotype",
-                                         "CellType",
-                                          grep("_count$|_values$",
-                                               names(phenos),
-                                               value = TRUE),
-                                          colour_var),
+                                add_ont_lvl_absolute = FALSE,
+                                cols = list_columns(
+                                  extra_cols = c(
+                                    colour_var,
+                                    grep("_count$|_values$",
+                                         names(phenos),
+                                         value = TRUE)
+                                    )
+                                  ),
                                 verbose = TRUE) {
 
     messager("Making phenotype network object.",v=verbose)
@@ -51,10 +48,10 @@ make_network_object <- function(phenos,
                              unique(phenos$HPO_ID)]
     }
     if(!"ontLvl" %in% names(phenos) &&
-       isTRUE(add_ontLvl)){
+       isTRUE(add_ont_lvl_absolute)){
       phenos <- add_ont_lvl(phenos = phenos,
                             hpo = hpo,
-                            adjacency = adjacency,
+                            absolute = TRUE,
                             verbose = verbose)
     }
     #### Create phenoNet obj ####

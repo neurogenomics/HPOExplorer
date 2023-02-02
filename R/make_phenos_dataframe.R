@@ -7,6 +7,10 @@
 #' to gene annotations.
 #' @param ancestor The ancestor to get all descendants of. If \code{NULL},
 #' returns the entirely ontology.
+#' @param add_ont_lvl_absolute Add the absolute ontology level of each HPO term.
+#' See \link[HPOExplorer]{get_ont_lvls} for more details.
+#' @param add_ont_lvl_relative Add the relative ontology level of each HPO term.
+#' See \link[HPOExplorer]{get_ont_lvls} for more details.
 #' @param add_description Whether to get the phenotype descriptions as
 #'  well (slower).
 #' @param add_hoverboxes Add hoverdata with
@@ -19,6 +23,7 @@
 #'  to add to the hoverdata via \link[HPOExplorer]{make_hoverboxes}.
 #' @param verbose Print messages.
 #' @inheritParams ggnetwork_plot
+#' @inheritParams make_network_object
 #' @returns The HPO in dataframe format.
 #'
 #' @export
@@ -30,6 +35,9 @@ make_phenos_dataframe <- function(ancestor,
                                   hpo = get_hpo(),
                                   phenotype_to_genes =
                                     load_phenotype_to_genes(),
+                                  adjacency = NULL,
+                                  add_ont_lvl_absolute = TRUE,
+                                  add_ont_lvl_relative = FALSE,
                                   add_description = TRUE,
                                   add_hoverboxes = TRUE,
                                   add_age_onset = FALSE,
@@ -60,9 +68,22 @@ make_phenos_dataframe <- function(ancestor,
   messager("Computing gene counts.",v=verbose)
   phenos <- descendants[,.(geneCount=.N), by=c("ID","Phenotype")]
   data.table::setnames(phenos, "ID","HPO_ID")
-  phenos <- add_ont_lvl(phenos = phenos,
-                        hpo = hpo,
-                        verbose = verbose)
+  #### Add ontology levels: absolute ####
+  if(isTRUE(add_ont_lvl_absolute)){
+    phenos <- add_ont_lvl(phenos = phenos,
+                          hpo = hpo,
+                          absolute = TRUE,
+                          verbose = verbose)
+  }
+  #### Add ontology levels: relative ####
+  if(isTRUE(add_ont_lvl_relative)){
+    phenos <- add_ont_lvl(phenos = phenos,
+                          hpo = hpo,
+                          adjacency = adjacency,
+                          absolute = FALSE,
+                          verbose = verbose)
+  }
+
   phenos <- add_info_content(phenos = phenos,
                              hpo = hpo,
                              verbose = verbose)
