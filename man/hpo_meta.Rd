@@ -9,6 +9,7 @@ data.table
 }
 \source{
 \href{https://bioportal.bioontology.org/ontologies/HP}{BioPortal}
+
 \code{
 URL <- "https://data.bioontology.org/ontologies/HP/download?apikey=8b5b7825-538d-40e0-9e9e-5ab9274a9aeb&download_format=csv"
 tmp <- tempfile(fileext = "hpo.csv.gz")
@@ -21,7 +22,9 @@ hpo_meta <- hp[,cols, with=FALSE]
 names(hpo_meta) <- gsub(" +","",tolower(names(hpo_meta)))
 ### Make ASCI-friendly
 hpo_meta <- HPOExplorer:::as_ascii(dt=hpo_meta)
-data.table::fwrite(hpo_meta,"~/Desktop/hpo_meta.csv.gz")
+hpo_meta$hpo_id=gsub("_",":",hpo_meta$hpo_id)
+data.table::setnames(hpo_meta,"hpo_id","HPO_ID")
+# data.table::fwrite(hpo_meta,"~/Desktop/hpo_meta.csv.gz")
 usethis::use_data(hpo_meta, overwrite = TRUE)
 }
 }

@@ -30,8 +30,9 @@ harmonise_phenotypes <- function(phenotypes,
     if(length(ptypes)>0) {
       id_dict <- stats::setNames(names(hpo$name),
                                  unname(hpo$name))
-      hpo_ids <- c(phenotypes[!phenotypes %in% ptypes],
-                   unname(id_dict[ptypes]))
+      input_ids <- phenotypes[!phenotypes %in% ptypes]
+      hpo_ids <- c(stats::setNames(input_ids,input_ids),
+                   id_dict[ptypes])
     }
     hpo_ids <- hpo_ids[hpo_ids %in% unname(hpo$id)]
     return(hpo_ids)

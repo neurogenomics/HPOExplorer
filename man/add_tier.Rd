@@ -7,7 +7,9 @@
 add_tier(
   phenos,
   all.x = TRUE,
-  include_disease_characteristics = FALSE,
+  include_disease_characteristics = TRUE,
+  auto_assign = TRUE,
+  hpo = get_hpo(),
   verbose = TRUE
 )
 }
@@ -23,13 +25,38 @@ from \code{y}.  The default is \code{FALSE}, so that only rows with data from bo
 \item{include_disease_characteristics}{Include \code{phenotypes} that
 are also high-level \code{include_disease_characteristics}.}
 
+\item{auto_assign}{Automatically assing HPO IDs to Tiers by conducting
+regex searches for keywords that appear in the term name,
+or the names of its descendants or ancestors.}
+
+\item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
+
 \item{verbose}{Print messages.}
 }
 \value{
 phenos data.table with extra column
 }
 \description{
-Add age of onset for each HPO ID.
+Add severity Tier for each HPO ID, in accordance with the
+rating system provided by
+\href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4262393/}{
+Lazarin et al (2014)}.
+In order of increasing severity:
+\itemize{
+\item{Tier 4 }{Reduced fertility}
+\item{Tier 3 }{Sensory impairment: vision,
+Immunodeficiency/cancer,
+Sensory impairment: hearing,
+Sensory impairment: touch, other (including pain),
+Mental illness,
+Dysmorphic features}
+\item{Tier 2 }{Shortened life span: premature adulthood,
+Impaired mobility,
+Internal physical malformation}
+\item{Tier 1 }{Shortened life span: infancy,
+Shortened life span: childhood/adolescence,
+Intellectual disability}
+}
 }
 \examples{
 phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")

@@ -25,9 +25,18 @@ add_hpo_id <- function(phenos,
 
   if(!all(c("HPO_ID","HPO_term_valid") %in% names(phenos))){
     messager("Adding HPO IDs.",v=verbose)
-    pheno_dict <- unique(phenotype_to_genes[,c("ID","Phenotype")])
-    data.table::setkeyv(pheno_dict,"Phenotype")
-    phenos$HPO_ID <- pheno_dict[phenos$Phenotype,]$ID
+    alt_names <- grep("hpo_id","^id$",names(phenos),
+                      value=TRUE, ignore.case = TRUE)
+    if(length(alt_names)>0){
+      data.table::setnames(phenos,alt_names[[1]],"HPO_ID")
+      return(phenos)
+    } else {
+      pheno_dict <- unique(phenotype_to_genes[,c("ID","Phenotype")])
+      data.table::setkeyv(pheno_dict,"Phenotype")
+      # pheno_dict <- harmonise_phenotypes(phenotypes = phenos$Phenotype,
+      #                                    as_hpo_ids = TRUE)
+      phenos$HPO_ID <- pheno_dict[phenos$Phenotype,]$ID
+    }
     phenos[,HPO_term_valid:=(HPO_ID %in% hpo$id)]
   }
   return(phenos)

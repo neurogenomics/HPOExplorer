@@ -39,7 +39,7 @@ load_phenotype_to_genes <- function(filename = "phenotype_to_genes.txt",
   }
   #### Download files if necessary ####
   if (file.exists(file)) {
-      messager("Importing existing file:",file,v=verbose)
+      messager("Importing existing file: ...",basename(file),v=verbose)
   }else {
     dir.create(dirname(file), showWarnings = FALSE,recursive = TRUE)
       utils::download.file(url = URL,

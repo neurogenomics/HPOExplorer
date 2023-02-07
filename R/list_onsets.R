@@ -1,7 +1,7 @@
 #' List onsets
 #'
 #' List Onset phenotypes in the HPO.
-#' @param postnatal_only Only include postnatal onsets.
+#' @param exclude_onsets Onset names to exclude.
 #' @param as_hpo_ids Return as a character vector vector HPO IDs only.
 #' @param include_na Include NA values for Onset.
 #' @inheritParams make_phenos_dataframe
@@ -11,8 +11,8 @@
 #' @examples
 #' onsets <- list_onsets()
 list_onsets <- function(hpo = get_hpo(),
-                        postnatal_only = FALSE,
-                        as_hpo_ids = TRUE,
+                        exclude_onsets = FALSE, #c("Antenatal","Fetal")
+                        as_hpo_ids = FALSE,
                         include_na = TRUE,
                         verbose = TRUE){
   Onset <- NULL;
@@ -21,8 +21,9 @@ list_onsets <- function(hpo = get_hpo(),
                                    verbose = verbose)
   annot <- annot[Onset!="",]
   onsets <- hpo$name[unique(annot$Onset)]
-  if(isTRUE(postnatal_only)){
-    onsets <- onsets[!grepl("Antenatal|Fetal",onsets,ignore.case = TRUE)]
+  if(!is.null(exclude_onsets)){
+    onsets <- onsets[!grepl(paste(exclude_onsets,collapse = "|"),onsets,
+                            ignore.case = TRUE)]
   }
   if(isTRUE(as_hpo_ids)){
     ids <- names(onsets)

@@ -6,8 +6,8 @@
 \usage{
 list_onsets(
   hpo = get_hpo(),
-  postnatal_only = FALSE,
-  as_hpo_ids = TRUE,
+  exclude_onsets = FALSE,
+  as_hpo_ids = FALSE,
   include_na = TRUE,
   verbose = TRUE
 )
@@ -15,7 +15,7 @@ list_onsets(
 \arguments{
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 
-\item{postnatal_only}{Only include postnatal onsets.}
+\item{exclude_onsets}{Onset names to exclude.}
 
 \item{as_hpo_ids}{Return as a character vector vector HPO IDs only.}
 

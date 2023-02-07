@@ -10,9 +10,11 @@ data.table
 \source{
 \href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4262393/}{
 Lazarin et al (2014)}
+
 \code{
 hpo_tiers <- data.table::fread("~/Downloads/hpo_tiers.csv")
 hpo_tiers <- HPOExplorer:::as_ascii(dt=hpo_tiers)
+data.table::setnames(hpo_tiers,"hpo_id","HPO_ID")
 usethis::use_data(hpo_tiers, overwrite = TRUE)
 }
 }

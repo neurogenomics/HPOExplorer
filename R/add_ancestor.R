@@ -16,6 +16,7 @@
 #' @returns phenos data.table with extra column
 #'
 #' @export
+#' @importFrom data.table :=
 #' @examples
 #' phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
 #' phenos2 <- add_ancestor(phenos = phenos, lvl=5)
@@ -24,11 +25,17 @@ add_ancestor <- function(phenos,
                          hpo = get_hpo(),
                          verbose=TRUE){
 
+  ancestor_name <- ancestor <- NULL;
   if("HPO_ID" %in% names(phenos)){
-    messager(paste0("Adding level-"),lvl," ancestor to each HPO ID.",v=verbose)
-    phenos$ancestor <- unlist(lapply(hpo$ancestors[phenos$HPO_ID],
-                                     function(x){x[lvl]}))
-    phenos$ancestor_name <- hpo$name[phenos$ancestor]
+    messager(paste0("Adding level-",lvl),"ancestor to each HPO ID.",v=verbose)
+    phenos$ancestor <- lapply(hpo$ancestors[phenos$HPO_ID],
+                              function(x){
+                                if(length(x)>0){
+                                  x[lvl]
+                                } else {NA}
+                              }) |> unlist()
+    # phenos[,.(ancestor=unlist(ancestor))]
+    phenos[,ancestor_name:=hpo$name[ancestor]]
 
   } else {
     messager("HPO_ID column not found. Cannot add ancestors.",v=verbose)

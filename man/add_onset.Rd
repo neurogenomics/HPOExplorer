@@ -4,7 +4,7 @@
 \alias{add_onset}
 \title{Add age of onset}
 \usage{
-add_onset(phenos, all.x = TRUE, allow.cartesian = TRUE, verbose = TRUE)
+add_onset(phenos, all.x = TRUE, allow.cartesian = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{phenos}{dataframe of phenotypes and values / parameters.}
@@ -20,10 +20,36 @@ from \code{y}.  The default is \code{FALSE}, so that only rows with data from bo
 \item{verbose}{Print messages.}
 }
 \value{
-phenos data.table with extra column
+phenos data.table with extra columns:
+\itemize{
+\item{"Onset": }{Onset HPO IDs of disease phenotypes associated
+with the target HPO_ID phenotype.}
+\item{"Onset_names": }{Onset HPO names of disease phenotypes associated
+with the target HPO_ID phenotype.}
+\item{"Onset_counts": }{The number of times each term in
+"Onset_names" appears across associated disease phenotypes.}
+\item{"Onset_score_mean": }{Mean onset score.}
+\item{"Onset_score_min": }{Minimum onset score.}
+\item{"Onset_top": }{The most common onset term.}
+\item{"Onset_earliest": }{The developmentally earliest onset.}
+}
 }
 \description{
 Add age of onset for each HPO ID.
+Onset IDs and assigned "Onset_score" values:
+\itemize{
+\item{HP:0011461 }{"Fetal onset" (Onset_score=1)}
+\item{HP:0030674 }{"Antenatal onset" (Onset_score=2)}
+\item{HP:0003577 }{"Congenital onset" (Onset_score=3)}
+\item{HP:0003623 }{"Neonatal onset" (Onset_score=4)}
+\item{HP:0003593 }{"Infantile onset" (Onset_score=5)}
+\item{HP:0011463 }{"Childhood onset" (Onset_score=6)}
+\item{HP:0003621 }{"Juvenile onset" (Onset_score=7)}
+\item{HP:0011462 }{"Young adult onset" (Onset_score=8)}
+\item{HP:0003581 }{"Adult onset" (Onset_score=9)}
+\item{HP:0003596 }{"Middle age onset" (Onset_score=10)}
+\item{HP:0003584 }{"Late onset" (Onset_score=11)}
+}
 }
 \examples{
 phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
