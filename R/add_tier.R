@@ -33,7 +33,7 @@
 #' @importFrom data.table merge.data.table :=
 #' @importFrom utils data
 #' @examples
-#' phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
+#' phenos <- example_phenos()
 #' phenos2 <- add_tier(phenos = phenos)
 add_tier <- function(phenos,
                      all.x = TRUE,
@@ -44,7 +44,7 @@ add_tier <- function(phenos,
 
   # templateR:::args2vars(add_tier)
   disease_characteristic <- phenotype <- tier_auto <- HPO_ID <-
-    Onset_score_min <- NULL;
+    Onset_score_min <- tier <- tier_merge <- NULL;
 
   if(!all(c("tier","disease_characteristic") %in% names(phenos))){
     messager("Annotating phenos with Tiers.",v=verbose)
@@ -52,11 +52,11 @@ add_tier <- function(phenos,
     utils::data("hpo_tiers", package = "HPOExplorer")
     hpo_tiers <- get("hpo_tiers")
     if(isFALSE(include_disease_characteristics)){
-      hpo_tiers <- hpo_tiers[phenotype!=disease_characteristic,]
+      hpo_tiers <- hpo_tiers[Phenotype!=disease_characteristic,]
     }
     phenos <- data.table::merge.data.table(
       phenos,
-      hpo_tiers[,c("HPO_ID","tier","disease_characteristic")],
+      hpo_tiers[,c("HPO_ID","disease_characteristic","tier")],
       by = "HPO_ID",
       all.x = all.x)
   }
@@ -71,5 +71,8 @@ add_tier <- function(phenos,
       by = "HPO_ID",
       all.x = all.x)
   }
+  #### Add merged tier col ####
+  phenos[,tier_merge:=pmin(tier,tier_auto, na.rm = TRUE)]
+  # lapply(c("tier","tier_auto","tier_merge"), function(x){sum(!is.na(phenos[[x]]))})
   return(phenos)
 }

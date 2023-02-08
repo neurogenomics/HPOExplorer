@@ -31,6 +31,6 @@ newlines every nth word. This can be useful when displaying the description
 in plots with limited space.
 }
 \examples{
-phenos <- data.table::data.table(HPO_ID=get_hpo()$id[seq_len(10)])
+phenos <- example_phenos()
 phenos2 <- add_hpo_definition(phenos = phenos)
 }

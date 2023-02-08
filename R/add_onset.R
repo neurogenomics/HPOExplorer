@@ -33,7 +33,7 @@
 #' @export
 #' @importFrom data.table merge.data.table .EACHI
 #' @examples
-#' phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
+#' phenos <- example_phenos()
 #' phenos2 <- add_onset(phenos = phenos)
 add_onset <- function(phenos,
                       all.x = TRUE,

@@ -9,7 +9,7 @@
 #' @importFrom data.table :=
 #' @importFrom ontologyIndex get_term_info_content
 #' @examples
-#' phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
+#' phenos <- example_phenos()
 #' phenos2 <- add_info_content(phenos = phenos)
 add_info_content <- function(phenos,
                              hpo = get_hpo(),

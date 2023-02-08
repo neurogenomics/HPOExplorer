@@ -1,6 +1,6 @@
 Package: HPOExplorer
 Title: Analysis and Visualisation of the Human Phenotype Ontology
-Version: 0.99.3
+Version: 0.99.4
 Authors@R:
     c(person(given = "Robert",
            family = "Gordon-Smith",

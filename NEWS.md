@@ -1,3 +1,18 @@
+# HPOExplorer 0.99.4
+
+## New features
+* `example_phenos`: 
+  - Simplified and fast
+  - Used in all applicable examples.
+
+## Bug fixes
+
+* `hpo_tiers`:
+  - Found lots of typos, outdated phenotype names, and mismatched HPO IDs.
+    We through and manually re-curated all of these and checked that they match up with the 
+    `harmonise_phenotypes` output.
+  - Add original `hpo_tiers` csv to *inst/extdata*.
+
 # HPOExplorer 0.99.3
 
 ## Bug fixes

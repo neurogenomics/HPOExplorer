@@ -12,11 +12,11 @@ add_ancestor(phenos, lvl = 3, hpo = get_hpo(), verbose = TRUE)
 \item{lvl}{How many levels deep into the ontology to get ancestors from.
 For example:
 \itemize{
-\item{1:}{"All"}
-\item{2:}{"Phenotypic abnormality"}
-\item{3:}{"Abnormality of the nervous system"}
-\item{4:}{"Abnormality of nervous system physiology"}
-\item{5:}{"Neurodevelopmental abnormality" or "Behavioral abnormality"}
+\item{1: }{"All"}
+\item{2: }{"Phenotypic abnormality"}
+\item{3: }{"Abnormality of the nervous system"}
+\item{4: }{"Abnormality of nervous system physiology"}
+\item{5: }{"Neurodevelopmental abnormality" or "Behavioral abnormality"}
 }}
 
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
@@ -30,6 +30,6 @@ phenos data.table with extra column
 Assign each HPO ID to the higher-order ancestral term that it is part of.
 }
 \examples{
-phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
+phenos <- example_phenos()
 phenos2 <- add_ancestor(phenos = phenos, lvl=5)
 }

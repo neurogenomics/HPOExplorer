@@ -25,6 +25,6 @@ Add phenotype-level frequency, i.e.
 how often a phenotype occurs in a given disease.
 }
 \examples{
-phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
+phenos <- example_phenos()
 phenos2 <- add_pheno_frequency(phenos = phenos)
 }

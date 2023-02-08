@@ -11,7 +11,7 @@
 #' @importFrom utils data
 #' @importFrom stringr str_split
 #' @examples
-#' phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
+#' phenos <- example_phenos()
 #' phenos2 <- add_pheno_frequency(phenos = phenos)
 add_pheno_frequency <- function(phenos,
                                 all.x = TRUE,

@@ -15,7 +15,7 @@
 #' @importFrom stats setNames
 #' @importFrom data.table :=
 #' @examples
-#' phenos <- data.table::data.table(HPO_ID=get_hpo()$id[seq_len(10)])
+#' phenos <- example_phenos()
 #' phenos2 <- add_hpo_definition(phenos = phenos)
 add_hpo_definition <- function(phenos,
                                line_length = FALSE,

@@ -20,6 +20,6 @@ phenos data.table with extra column
 Add a column containing the information content score  for each HPO ID.
 }
 \examples{
-phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
+phenos <- example_phenos()
 phenos2 <- add_info_content(phenos = phenos)
 }

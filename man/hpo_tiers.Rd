@@ -12,9 +12,8 @@ data.table
 Lazarin et al (2014)}
 
 \code{
-hpo_tiers <- data.table::fread("~/Downloads/hpo_tiers.csv")
-hpo_tiers <- HPOExplorer:::as_ascii(dt=hpo_tiers)
-data.table::setnames(hpo_tiers,"hpo_id","HPO_ID")
+file <- system.file("extdata","hpo_tiers.csv.gz",package = "HPOExplorer")
+hpo_tiers <- data.table::fread(file)
 usethis::use_data(hpo_tiers, overwrite = TRUE)
 }
 }

@@ -34,6 +34,6 @@ In order of increasing severity:
 }
 }
 \examples{
-phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
+phenos <- example_phenos()
 phenos2 <- add_modifier(phenos = phenos)
 }

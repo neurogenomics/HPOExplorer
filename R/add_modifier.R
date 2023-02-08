@@ -17,7 +17,7 @@
 #' @importFrom data.table merge.data.table
 #' @importFrom utils data
 #' @examples
-#' phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
+#' phenos <- example_phenos()
 #' phenos2 <- add_modifier(phenos = phenos)
 add_modifier <- function(phenos,
                          hpo = get_hpo(),
@@ -29,6 +29,7 @@ add_modifier <- function(phenos,
     messager("Annotating phenos with Modifiers",v=verbose)
     utils::data("hpo_modifiers", package = "HPOExplorer")
     hpo_modifiers <- get("hpo_modifiers")
+    hpo_modifiers[Severity_score_min==Inf,]$Severity_score_min <- NA
 
     #### Add diseases ####
     # DiseaseNames <- hpo$name[hpo$name %in% unique(hpo_modifiers$DiseaseName)]
