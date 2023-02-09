@@ -36,6 +36,6 @@ particular phenotype.
 It uses the \code{phenotype_to_genes.txt} file from the HPO.
 }
 \examples{
-phenotypes <- c("Focal motor seizures","HP:0000002","HP:0000003")
+phenotypes <- c("Focal motor seizure","HP:0000002","HP:0000003")
 gene_lists <- get_gene_lists(phenotypes = phenotypes)
 }

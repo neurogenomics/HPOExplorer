@@ -16,8 +16,8 @@ data.table
 annot <- load_phenotype_to_genes(filename = "phenotype.hpoa")
 annot <- annot[Modifier!=""]
 parse_mod <- function(x){
-unique(harmonise_phenotypes(strsplit(x,";")[[1]]))
-}
+  unique(harmonise_phenotypes(strsplit(x,";")[[1]]))
+  }
 annot <- annot[,Modifier_name:=lapply(Modifier,parse_mod)][Modifier!="",]
 annot <- annot[,.(Modifier_name=unlist(Modifier_name)),
                by=c("HPO_ID","Modifier","DiseaseName","Aspect")]
@@ -31,6 +31,7 @@ hpo_modifiers <- annot[,list(
   Severity_score_mean=mean(Severity_score, na.rm=TRUE),
   Severity_score_min=min(Severity_score, na.rm=TRUE)
 ), by="HPO_ID"]
+hpo_modifiers[Severity_score_min==Inf,]$Severity_score_min <- NA
 hpo_modifiers[Severity_score_min<0,]$Severity_score_min <- NA
 hpo_modifiers$Modifer_top <- lapply(seq_len(nrow(hpo_modifiers)),
                                     function(i){

@@ -4,13 +4,24 @@
 \alias{get_hpo}
 \title{Get Human Phenotype Ontology (HPO)}
 \usage{
-get_hpo()
+get_hpo(package = c("HPOExplorer", "ontologyIndex"))
+}
+\arguments{
+\item{package}{
+    a character vector giving the package(s) to look
+    in for data sets, or \code{NULL}.
+
+    By default, all packages in the search path are used, then
+    the \file{data} subdirectory (if present) of the current working
+    directory.
+  }
 }
 \value{
 Ontology
 }
 \description{
 Import the HPO as an R object.
+See \link[HPOExplorer]{hpo} for details.
 }
 \examples{
 hpo <- get_hpo()

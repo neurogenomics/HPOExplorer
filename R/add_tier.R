@@ -44,7 +44,7 @@ add_tier <- function(phenos,
 
   # templateR:::args2vars(add_tier)
   disease_characteristic <- phenotype <- tier_auto <- HPO_ID <-
-    Onset_score_min <- tier <- tier_merge <- NULL;
+    Onset_score_min <- tier <- tier_merge <- Phenotype <- NULL;
 
   if(!all(c("tier","disease_characteristic") %in% names(phenos))){
     messager("Annotating phenos with Tiers.",v=verbose)

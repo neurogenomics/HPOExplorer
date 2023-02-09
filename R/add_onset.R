@@ -40,7 +40,7 @@ add_onset <- function(phenos,
                       allow.cartesian = FALSE,
                       verbose = TRUE){
 
-  # templateR:::args2vars(add_age_of_onset)
+  # templateR:::args2vars(add_onset)
 
   HPO_ID <- Onset <- Onset_name <- Onset_score <- . <- NULL;
 
@@ -49,7 +49,8 @@ add_onset <- function(phenos,
     annot <- load_phenotype_to_genes(filename = "phenotype.hpoa",
                                      verbose = verbose)
     annot <- annot[Onset!="" & HPO_ID %in% phenos$HPO_ID,]
-    annot$Onset_name <- harmonise_phenotypes(annot$Onset)
+    annot$Onset_name <- harmonise_phenotypes(phenotypes = annot$Onset,
+                                             as_hpo_ids = FALSE)
     dict <- c('Fetal onset'=1,
               'Antenatal onset'=2,
               'Congenital onset'=3,

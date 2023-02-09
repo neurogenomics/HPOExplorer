@@ -1,7 +1,6 @@
 test_that("get_gene_lists works", {
 
-  phenotypes <- c("Focal motor seizures","HP:0000002","HP:0000003")
-
+  phenotypes <- c("Focal motor seizure","HP:0000002","HP:0000003")
   #### list ####
   gene_list <- get_gene_lists(phenotypes = phenotypes,
                              as_list = TRUE)

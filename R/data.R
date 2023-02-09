@@ -1,3 +1,35 @@
+#' Human Phenotype Ontology (HPO)
+#'
+#' @description
+#' Updated version of Human Phenotype Ontology (HPO) from 2023-01-27.
+#' Created from the OBO files distributed by
+#' \href{https://bioportal.bioontology.org/ontologies/HP}{BioPortal}.
+#' By comparison, the \code{hpo} data from \pkg{ontologyIndex} is from 2016.
+#' Note that the maximum ontology level depth in the 2016 version was 14,
+#' whereas in the 2023 version the maximum ontology level depth is 16
+#'  (due to an expansion of the HPO).
+#' @source \href{https://bioportal.bioontology.org/ontologies/HP}{BioPortal}
+#' @source
+#' \code{
+#' URL <- paste0(
+#'   "https://data.bioontology.org/ontologies/HP/submissions/599/download",
+#'   "?apikey=8b5b7825-538d-40e0-9e9e-5ab9274a9aeb"
+#' )
+#' tmp <- tempfile(fileext = "hpo.obo")
+#' utils::download.file(URL, tmp)
+#' hpo <- ontologyIndex::get_OBO(tmp)
+#' #' ### Fix non-ASCII characters in metadata ####
+#' func <- function(v){
+#'   Encoding(v) <- "latin1"
+#'   iconv(v, "latin1", "UTF-8")
+#' }
+#' attributes(hpo)$version <- func(attributes(hpo)$version)
+#' usethis::use_data(hpo, overwrite = TRUE)
+#' }
+#' @format ontology_index
+#' @usage data("hpo")
+"hpo"
+
 #' Human Phenotype Ontology: metadata
 #'
 #' @description
@@ -88,8 +120,8 @@
 #' annot <- load_phenotype_to_genes(filename = "phenotype.hpoa")
 #' annot <- annot[Modifier!=""]
 #' parse_mod <- function(x){
-#' unique(harmonise_phenotypes(strsplit(x,";")[[1]]))
-#' }
+#'   unique(harmonise_phenotypes(strsplit(x,";")[[1]]))
+#'   }
 #' annot <- annot[,Modifier_name:=lapply(Modifier,parse_mod)][Modifier!="",]
 #' annot <- annot[,.(Modifier_name=unlist(Modifier_name)),
 #'                by=c("HPO_ID","Modifier","DiseaseName","Aspect")]
@@ -103,6 +135,7 @@
 #'   Severity_score_mean=mean(Severity_score, na.rm=TRUE),
 #'   Severity_score_min=min(Severity_score, na.rm=TRUE)
 #' ), by="HPO_ID"]
+#' hpo_modifiers[Severity_score_min==Inf,]$Severity_score_min <- NA
 #' hpo_modifiers[Severity_score_min<0,]$Severity_score_min <- NA
 #' hpo_modifiers$Modifer_top <- lapply(seq_len(nrow(hpo_modifiers)),
 #'                                     function(i){

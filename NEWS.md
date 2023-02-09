@@ -4,6 +4,11 @@
 * `example_phenos`: 
   - Simplified and fast
   - Used in all applicable examples.
+* Create new `hpo` object:
+  - This updates the HPO from 2016 (distributed by `ontologyIndex`) with an updated 
+    one from 2023.
+  - Updated all *data* objects in `HPOExplorer` that may
+    have relied on `hpo` to be generated.
 
 ## Bug fixes
 
@@ -12,6 +17,8 @@
     We through and manually re-curated all of these and checked that they match up with the 
     `harmonise_phenotypes` output.
   - Add original `hpo_tiers` csv to *inst/extdata*.
+* Delete `get_hpo_id` function in favor of `get_hpo_id_direct` 
+  which is more reliable and comprehensive.
 
 # HPOExplorer 0.99.3
 

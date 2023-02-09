@@ -52,20 +52,20 @@ ggnetwork_plot <- function(phenoNet,
   }
   #### Create plot ####
   messager("Creating ggnetwork plot.",v=verbose)
-  network_plot <- ggplot(phenoNet,
-                         aes(x = x,
+  network_plot <- ggplot2::ggplot(phenoNet,
+                                  ggplot2::aes(x = x,
                              y = y,
                              xend = xend,
                              yend = yend,
                              text = hover)) +
-      geom_point(aes_string(colour = colour_var,
+    ggplot2::geom_point(ggplot2::aes_string(colour = colour_var,
                             size = size_var)) +
-      geom_text(aes(label = Phenotype), color = "black") +
-      scale_colour_gradient2(low = "white", mid = "yellow", high = "red") +
-      scale_size(trans = "exp") +
-      guides(size = "none") +
-      labs(colour = colour_label) +
-      theme_void()
+    ggplot2::geom_text(ggplot2::aes(label = Phenotype), color = "black") +
+    ggplot2::scale_colour_gradient2(low = "white", mid = "yellow", high = "red") +
+    ggplot2::scale_size(trans = "exp") +
+    ggplot2::guides(size = "none") +
+    ggplot2::labs(colour = colour_label) +
+    ggplot2::theme_void()
   #### Only add edges if any of the nodes are connected ####
   ## Otherwise, ggplotly gets confused and throws an error
   if(sum(phenoNet$n_edges)>0){

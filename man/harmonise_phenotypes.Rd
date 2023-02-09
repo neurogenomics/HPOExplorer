@@ -8,7 +8,10 @@ harmonise_phenotypes(
   phenotypes,
   hpo = get_hpo(),
   as_hpo_ids = FALSE,
-  ignore_case = TRUE
+  validate = TRUE,
+  ignore_case = TRUE,
+  keep_order = TRUE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -19,17 +22,27 @@ harmonise_phenotypes(
 \item{as_hpo_ids}{Return all \code{phenotypes} as HPO IDs (\code{TRUE}),
 or phenotype names (\code{FALSE}).}
 
+\item{validate}{Remove any phenotype names or IDs that cannot be found in the
+\code{hpo}.}
+
 \item{ignore_case}{Ignore casing when searching for matches.}
+
+\item{keep_order}{Return a named list of the same length and order
+as \code{phenotypes}.
+If \code{FALSE}, return a named list of only the unique \code{phenotypes},
+sometimes in a different order.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 Character vector
 }
 \description{
-Harmonise a mixed vector of phenotype names (e.g. "Focal motor seizures")
+Harmonise a mixed vector of phenotype names (e.g. "Focal motor seizure")
 and HPO IDs (e.g. c("HP:0000002","HP:0000003")).
 }
 \examples{
-phenotypes <- c("Focal motor seizures","HP:0000002","HP:0000003")
+phenotypes <- c("Focal motor seizure","HP:0000002","HP:0000003")
 #### As phenotype names ####
 pheno_names <- harmonise_phenotypes(phenotypes=phenotypes)
 #### As HPO IDs ####

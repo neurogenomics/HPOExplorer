@@ -46,15 +46,14 @@ make_phenos_dataframe <- function(ancestor,
                                   interactive = TRUE,
                                   verbose = TRUE
                                   ){
-  # templateR:::source_all()
   # templateR:::args2vars(make_phenos_dataframe)
   # ancestor = "Neurodevelopmental delay"
 
   ID <- . <- NULL;
 
   if(!is.null(ancestor)){
-    IDx <- get_hpo_id_direct(hpo = hpo,
-                             phenotype = ancestor)
+    IDx <- get_hpo_id_direct(phenotype = ancestor,
+                             hpo = hpo)
     IDx_all <- ontologyIndex::get_descendants(ontology = hpo,
                                               roots = IDx,
                                               exclude_roots = FALSE)

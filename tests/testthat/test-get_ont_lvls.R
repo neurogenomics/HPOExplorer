@@ -9,7 +9,7 @@ test_that("get_ont_lvls works", {
   lvls1 <- get_ont_lvls(terms = terms1, absolute = TRUE)
   testthat::expect_length(lvls1, length(terms1))
   testthat::expect_equal(min(lvls1),1)
-  testthat::expect_equal(max(lvls1),14)
+  testthat::expect_equal(max(lvls1),16) ## Increased from 14 to 16 in 2023 version
 
   #### Using all descendants ####
   terms2 <- ontologyIndex::get_descendants(ontology = hpo,
