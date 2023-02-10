@@ -17,9 +17,8 @@
 #' phenos <- unique(phenotype_to_genes[,c("ID","Phenotype")])
 #' phenos2 <- add_hpo_id(phenos=phenos)
 add_hpo_id <- function(phenos,
-                       phenotype_to_genes =
-                           load_phenotype_to_genes(),
                        hpo = get_hpo(),
+                       phenotype_to_genes = NULL,
                        verbose = FALSE) {
   HPO_term_valid <- HPO_ID <- NULL;
 
@@ -31,11 +30,11 @@ add_hpo_id <- function(phenos,
       data.table::setnames(phenos,alt_names[[1]],"HPO_ID")
       return(phenos)
     } else {
-      pheno_dict <- unique(phenotype_to_genes[,c("ID","Phenotype")])
-      data.table::setkeyv(pheno_dict,"Phenotype")
-      # pheno_dict <- harmonise_phenotypes(phenotypes = phenos$Phenotype,
-      #                                    as_hpo_ids = TRUE)
-      phenos$HPO_ID <- pheno_dict[phenos$Phenotype,]$ID
+      if(is.null(phenotype_to_genes)) {
+        phenotype_to_genes <- load_phenotype_to_genes()
+      }
+      phenos <- fix_hpo_ids(dt=phenos,
+                            phenotype_to_genes=phenotype_to_genes)
     }
     phenos[,HPO_term_valid:=(HPO_ID %in% hpo$id)]
   }

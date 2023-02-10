@@ -9,6 +9,8 @@
     one from 2023.
   - Updated all *data* objects in `HPOExplorer` that may
     have relied on `hpo` to be generated.
+*  `fix_hpo_ids`
+  - New function for fixing issues with missing HPO IDs.
 
 ## Bug fixes
 
