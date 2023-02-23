@@ -1,6 +1,19 @@
+# HPOExplorer 0.99.5
+
+## New features
+
+* New functions:
+  - `make_igraph_network`
+  - `network_3d`
+* `make_network_object`: Now takes additional arguments 
+  to control the network layout.
+  
+
+
 # HPOExplorer 0.99.4
 
 ## New features
+
 * `example_phenos`: 
   - Simplified and fast
   - Used in all applicable examples.

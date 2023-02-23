@@ -1,6 +1,6 @@
 Package: HPOExplorer
 Title: Analysis and Visualisation of the Human Phenotype Ontology
-Version: 0.99.4
+Version: 0.99.5
 Authors@R:
     c(person(given = "Robert",
            family = "Gordon-Smith",
@@ -57,7 +57,11 @@ Suggests:
     here,
     httr,
     jsonlite,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    igraph,
+    pals,
+    MASS,
+    scales
 VignetteBuilder: knitr
 biocViews:
     Genetics, Preprocessing, GeneTarget, SystemsBiology,

@@ -1,4 +1,4 @@
-#' Make network object
+#' Make a \link[ggnetwork]{ggnetwork} object
 #'
 #' This uses the network package to coerce the adjacency matrix into a
 #' network object. It also adds the fold change, label,
@@ -13,8 +13,9 @@
 #' to map to node colour.
 #' @param cols Columns to add to metadata of \link[ggnetwork]{ggnetwork} object.
 #' @inheritParams make_phenos_dataframe
-#' @returns A \link[ggnetwork]{ggnetwork} object
-#' of a subset of the RD EWCE results.
+#' @inheritParams ggnetwork::fortify.network
+#' @inheritDotParams ggnetwork::ggnetwork
+#' @returns A \link[ggnetwork]{ggnetwork} object.
 #'
 #' @export
 #' @import network
@@ -40,7 +41,9 @@ make_network_object <- function(phenos,
                                          value = TRUE)
                                     )
                                   ),
-                                verbose = TRUE) {
+                                layout = "fruchtermanreingold",
+                                verbose = TRUE,
+                                ...) {
 
     messager("Making phenotype network object.",v=verbose)
     if("HPO_ID" %in% names(phenos)){
@@ -57,7 +60,9 @@ make_network_object <- function(phenos,
     #### Create phenoNet obj ####
     messager("Creating ggnetwork object.",v=verbose)
     phenoNet <- ggnetwork::ggnetwork(x = adjacency,
-                                     arrow.gap = 0)
+                                     arrow.gap = 0,
+                                     layout = layout,
+                                     ...)
     cols <- cols[cols %in% names(phenos)]
     for(col in cols){
       #### Add metadata to phenoNet ####

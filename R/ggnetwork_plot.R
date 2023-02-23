@@ -61,7 +61,9 @@ ggnetwork_plot <- function(phenoNet,
     ggplot2::geom_point(ggplot2::aes_string(colour = colour_var,
                             size = size_var)) +
     ggplot2::geom_text(ggplot2::aes(label = Phenotype), color = "black") +
-    ggplot2::scale_colour_gradient2(low = "white", mid = "yellow", high = "red") +
+    ggplot2::scale_colour_gradient2(low = "white",
+                                    mid = "yellow",
+                                    high = "red") +
     ggplot2::scale_size(trans = "exp") +
     ggplot2::guides(size = "none") +
     ggplot2::labs(colour = colour_label) +
