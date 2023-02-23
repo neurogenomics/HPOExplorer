@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.5</span>
       </span>
     </div>
 
@@ -60,6 +60,64 @@
       <small>Source: <a href="https://github.com/neurogenomics/HPOExplorer/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.99.5" id="hpoexplorer-0995">HPOExplorer 0.99.5<a class="anchor" aria-label="anchor" href="#hpoexplorer-0995"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-99-5">New features<a class="anchor" aria-label="anchor" href="#new-features-0-99-5"></a></h3>
+<ul><li>New functions:
+<ul><li><code>make_igraph_network</code></li>
+<li><code>network_3d</code></li>
+</ul></li>
+<li>
+<code>make_network_object</code>: Now takes additional arguments to control the network layout.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.99.4" id="hpoexplorer-0994">HPOExplorer 0.99.4<a class="anchor" aria-label="anchor" href="#hpoexplorer-0994"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-99-4">New features<a class="anchor" aria-label="anchor" href="#new-features-0-99-4"></a></h3>
+<ul><li>
+<code>example_phenos</code>:
+<ul><li>Simplified and fast</li>
+<li>Used in all applicable examples.</li>
+</ul></li>
+<li>Create new <code>hpo</code> object:
+<ul><li>This updates the HPO from 2016 (distributed by <code>ontologyIndex</code>) with an updated one from 2023.</li>
+<li>Updated all <em>data</em> objects in <code>HPOExplorer</code> that may have relied on <code>hpo</code> to be generated.</li>
+</ul></li>
+<li><code>fix_hpo_ids</code></li>
+<li>New function for fixing issues with missing HPO IDs.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-99-4">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-4"></a></h3>
+<ul><li>
+<code>hpo_tiers</code>:
+<ul><li>Found lots of typos, outdated phenotype names, and mismatched HPO IDs. We through and manually re-curated all of these and checked that they match up with the <code>harmonise_phenotypes</code> output.</li>
+<li>Add original <code>hpo_tiers</code> csv to <em>inst/extdata</em>.</li>
+</ul></li>
+<li>Delete <code>get_hpo_id</code> function in favor of <code>get_hpo_id_direct</code> which is more reliable and comprehensive.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.99.3" id="hpoexplorer-0993">HPOExplorer 0.99.3<a class="anchor" aria-label="anchor" href="#hpoexplorer-0993"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-0-99-3">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-3"></a></h3>
+<ul><li>
+<code>get_ont_lvls</code>:
+<ul><li>Worked w Bobby to clarify the role of each ontology level function.</li>
+<li>Added new internal function to get the max ontology level: <code>get_max_ont_lvl</code>
+</li>
+<li>Rewrote function description to make the differences between absolute/relative level more clear.</li>
+</ul></li>
+<li>
+<code>make_network_object</code>:
+<ul><li>Use <code>list_columns</code> so that <code>ontLvl_relative</code> gets added to network obj.</li>
+</ul></li>
+<li><code>list_columns</code></li>
+<li>Add new arg <code>extra_cols</code>
+</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.99.2" id="hpoexplorer-0992">HPOExplorer 0.99.2<a class="anchor" aria-label="anchor" href="#hpoexplorer-0992"></a></h2>
 <div class="section level3">

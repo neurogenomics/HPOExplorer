@@ -20,7 +20,7 @@ HPO IDs of all the terms are displayed in the right column."><!-- mathjax --><sc
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.5</span>
       </span>
     </div>
 
@@ -82,10 +82,10 @@ HPO IDs of all the terms are displayed in the right column.</p>
     <div id="source">
     <h2>Source</h2>
     <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4262393/" class="external-link">
-Lazarin et al (2014)</a>
-<code>
-hpo_tiers &lt;- data.table::fread("~/Downloads/hpo_tiers.csv")
-hpo_tiers &lt;- HPOExplorer:::as_ascii(dt=hpo_tiers)
+Lazarin et al (2014)</a></p>
+<p><code>
+file &lt;- system.file("extdata","hpo_tiers.csv.gz",package = "HPOExplorer")
+hpo_tiers &lt;- data.table::fread(file)
 usethis::use_data(hpo_tiers, overwrite = TRUE)
 </code></p>
     </div>

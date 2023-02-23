@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.5</span>
       </span>
     </div>
 
@@ -75,8 +75,8 @@
     </div>
     <div id="source">
     <h2>Source</h2>
-    <p><a href="https://bioportal.bioontology.org/ontologies/HP" class="external-link">BioPortal</a>
-<code>
+    <p><a href="https://bioportal.bioontology.org/ontologies/HP" class="external-link">BioPortal</a></p>
+<p><code>
 URL &lt;- "https://data.bioontology.org/ontologies/HP/download?apikey=8b5b7825-538d-40e0-9e9e-5ab9274a9aeb&amp;download_format=csv"
 tmp &lt;- tempfile(fileext = "hpo.csv.gz")
 utils::download.file(URL, tmp)
@@ -88,7 +88,9 @@ hpo_meta &lt;- hp[,cols, with=FALSE]
 names(hpo_meta) &lt;- gsub(" +","",tolower(names(hpo_meta)))
 ### Make ASCI-friendly
 hpo_meta &lt;- HPOExplorer:::as_ascii(dt=hpo_meta)
-data.table::fwrite(hpo_meta,"~/Desktop/hpo_meta.csv.gz")
+hpo_meta$hpo_id=gsub("_",":",hpo_meta$hpo_id)
+data.table::setnames(hpo_meta,"hpo_id","HPO_ID")
+# data.table::fwrite(hpo_meta,"~/Desktop/hpo_meta.csv.gz")
 usethis::use_data(hpo_meta, overwrite = TRUE)
 </code></p>
     </div>
