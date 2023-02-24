@@ -1,5 +1,3 @@
-HPOExplorer
-================
 <img src= 'https://github.com/neurogenomics/HPOExplorer/raw/master/inst/hex/hex.png' height= '300' ><br><br><br><br>
 [![](https://img.shields.io/badge/devel%20version-0.99.5-black.svg)](https://github.com/neurogenomics/HPOExplorer)
 [![R build
@@ -13,7 +11,7 @@ GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-pro
 Authors: <i>Robert Gordon-Smith, Brian Schilder, Nathan Skene</i>  
 </h4>
 <h4>  
-Most recent update: <i>Feb-23-2023</i>  
+Most recent update: <i>Feb-24-2023</i>  
 </h4>
 
 ## Intro
