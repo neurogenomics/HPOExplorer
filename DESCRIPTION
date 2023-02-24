@@ -38,6 +38,7 @@ Imports:
     ontologyIndex,
     utils,
     stats,
+    methods,
     network,
     ggnetwork,
     tools,

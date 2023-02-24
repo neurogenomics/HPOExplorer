@@ -1,16 +1,20 @@
 HPOExplorer
 ================
-[![](https://img.shields.io/badge/devel%20version-0.99.3-black.svg)](https://github.com/neurogenomics/HPOExplorer)
+<img src= 'https://github.com/neurogenomics/HPOExplorer/raw/master/inst/hex/hex.png' height= '300' ><br><br><br><br>
+[![](https://img.shields.io/badge/devel%20version-0.99.5-black.svg)](https://github.com/neurogenomics/HPOExplorer)
 [![R build
 status](https://github.com/neurogenomics/HPOExplorer/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/HPOExplorer/actions)
 [![](https://img.shields.io/github/last-commit/neurogenomics/HPOExplorer.svg)](https://github.com/neurogenomics/HPOExplorer/commits/master)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/HPOExplorer.svg)](https://github.com/neurogenomics/HPOExplorer)
 [![](https://codecov.io/gh/neurogenomics/HPOExplorer/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/HPOExplorer)
 [![License:
-GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
-¶ <h4> ¶ Authors: <i>Robert Gordon-Smith, Brian Schilder, Nathan
-Skene</i> ¶ </h4>
-<h4> ¶ Most recent update: <i>Feb-03-2023</i> ¶ </h4>
+GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)  
+<h4>  
+Authors: <i>Robert Gordon-Smith, Brian Schilder, Nathan Skene</i>  
+</h4>
+<h4>  
+Most recent update: <i>Feb-23-2023</i>  
+</h4>
 
 ## Intro
 
@@ -79,7 +83,7 @@ utils::sessionInfo()
     ## [25] vctrs_0.5.2         dlstats_0.1.6       rprojroot_2.0.3    
     ## [28] grid_4.2.1          tidyselect_1.2.0    here_1.0.1         
     ## [31] glue_1.6.2          R6_2.5.1            fansi_1.0.4        
-    ## [34] rmarkdown_2.20      ggplot2_3.4.0       badger_0.2.3       
+    ## [34] rmarkdown_2.20.1    ggplot2_3.4.1       badger_0.2.3       
     ## [37] magrittr_2.0.3      scales_1.2.1        htmltools_0.5.4    
     ## [40] rworkflows_0.99.6   colorspace_2.1-0    utf8_1.2.3         
     ## [43] munsell_0.5.0

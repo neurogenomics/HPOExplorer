@@ -5,9 +5,9 @@
 * New functions:
   - `make_igraph_network`
   - `network_3d`
+  - `kde_surface`
 * `make_network_object`: Now takes additional arguments 
   to control the network layout.
-  
 
 
 # HPOExplorer 0.99.4
