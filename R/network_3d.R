@@ -21,7 +21,7 @@
 #' \href{https://plotly.com/python/reference/layout/scene/#layout-scene-aspectmode}{
 #' plotly documentation site} for details.
 #' @param hover_width Maximum width of the hover text.
-#' @param hover_width Maximum width of the label text.
+#' @param label_width Maximum width of the label text.
 #' @param seed Random seed to enable reproducibility.
 #' @param show_plot Print the plot after it's been generated.
 #' @param verbose Print messages.

@@ -78,7 +78,9 @@ below the 3D scatter plot (i.e. the "mountains" beneath the points).}
 \href{https://plotly.com/python/reference/layout/scene/#layout-scene-aspectmode}{
 plotly documentation site} for details.}
 
-\item{hover_width}{Maximum width of the label text.}
+\item{hover_width}{Maximum width of the hover text.}
+
+\item{label_width}{Maximum width of the label text.}
 
 \item{seed}{Random seed to enable reproducibility.}
 
