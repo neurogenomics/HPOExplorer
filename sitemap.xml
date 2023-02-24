@@ -109,7 +109,13 @@
     <loc>/reference/hpo_tiers_auto.html</loc>
   </url>
   <url>
+    <loc>/reference/igraph_to_plotly.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/kde_surface.html</loc>
   </url>
   <url>
     <loc>/reference/list_columns.html</loc>
