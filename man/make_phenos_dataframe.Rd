@@ -14,6 +14,7 @@ make_phenos_dataframe(
   add_description = TRUE,
   add_hoverboxes = TRUE,
   add_age_onset = FALSE,
+  add_age_death = FALSE,
   add_severity_tiers = FALSE,
   columns = list_columns(),
   interactive = TRUE,
@@ -47,6 +48,9 @@ well (slower).}
 
 \item{add_age_onset}{Add age of onset columns using
 \link[HPOExplorer]{add_onset}.}
+
+\item{add_age_death}{Add age of death columns using
+\link[HPOExplorer]{add_death}.}
 
 \item{add_severity_tiers}{Add severity Tiers column using
 \link[HPOExplorer]{add_tier}.}

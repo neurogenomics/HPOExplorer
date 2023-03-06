@@ -11,27 +11,16 @@ get_term_definition_api <- function(term,
                                     line_length = FALSE){
   requireNamespace("httr")
   requireNamespace("jsonlite")
- lapply(stats::setNames(term,term), function(oid){
-   hpo_termdetails <- tryCatch(expr = {
-     httr::GET(paste0("hpo.jax.org/api/hpo/term/",
-                      oid))
-
-   },
-   error = function(e){
-     httr::set_config(httr::config(ssl_verifypeer = FALSE))
-     httr::GET(paste0("hpo.jax.org/api/hpo/term/",
-                      oid))
-   })
-   hpo_termdetails_char <- rawToChar(hpo_termdetails$content)
-   hpo_termdetails_data <- jsonlite::fromJSON(hpo_termdetails_char)
-   if (line_length > 0) {
-     definition <- newlines_to_definition(
-       hpo_termdetails_data$details$definition,
-       line_length
-     )
-   } else {
-     definition <- hpo_termdetails_data$details$definition
-   }
-   return(definition)
- }) |> unlist()
+  lapply(stats::setNames(term,term), function(hpo_id){
+    hpo_termdetails_data <- hpo_api(hpo_id = hpo_id)
+    if (line_length > 0) {
+      definition <- newlines_to_definition(
+        hpo_termdetails_data$details$definition,
+        line_length
+      )
+    } else {
+      definition <- hpo_termdetails_data$details$definition
+    }
+    return(definition)
+  }) |> unlist()
 }

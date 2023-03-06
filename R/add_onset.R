@@ -28,10 +28,11 @@
 #' \item{"Onset_score_mean": }{Mean onset score.}
 #' \item{"Onset_score_min": }{Minimum onset score.}
 #' \item{"Onset_top": }{The most common onset term.}
-#' \item{"Onset_earliest": }{The developmentally earliest onset.}
+#' \item{"Onset_earliest": }{The earliest age of onset.}
+#' \item{"Onset_latest": }{The latest age of onset.}
 #' }
 #' @export
-#' @importFrom data.table merge.data.table .EACHI
+#' @importFrom data.table merge.data.table
 #' @examples
 #' phenos <- example_phenos()
 #' phenos2 <- add_onset(phenos = phenos)
@@ -41,33 +42,27 @@ add_onset <- function(phenos,
                       verbose = TRUE){
 
   # templateR:::args2vars(add_onset)
-
   HPO_ID <- Onset <- Onset_name <- Onset_score <- . <- NULL;
 
-  if(!all(c("Onset","Onset_names","Onset_earliest") %in% names(phenos))){
+  if(!all(c("Onset",
+            "Onset_names",
+            "Onset_earliest") %in% names(phenos))){
+
     messager("Annotating phenos with Onset.",v=verbose)
     annot <- load_phenotype_to_genes(filename = "phenotype.hpoa",
                                      verbose = verbose)
     annot <- annot[Onset!="" & HPO_ID %in% phenos$HPO_ID,]
     annot$Onset_name <- harmonise_phenotypes(phenotypes = annot$Onset,
-                                             as_hpo_ids = FALSE)
-    dict <- c('Fetal onset'=1,
-              'Antenatal onset'=2,
-              'Congenital onset'=3,
-              'Neonatal onset'=4,
-              'Infantile onset'=5,
-              'Childhood onset'=6,
-              'Juvenile onset'=7,
-              'Young adult onset'=8,
-              'Adult onset'=9,
-              'Middle age onset'=10,
-              'Late onset'=11)
+                                             as_hpo_ids = FALSE,
+                                             verbose = verbose)
+    dict <- hpo_dict(type = "Onset")
     annot$Onset_score <- dict[annot$Onset_name]
     annot_agg <- annot[,.(Onset=paste(unique(Onset),collapse = ";"),
                           Onset_names=paste(unique(Onset_name),collapse = ";"),
                           Onset_counts=paste(table(Onset_name),collapse = ";"),
                           Onset_score_mean=mean(Onset_score,na.rm=TRUE),
-                          Onset_score_min=min(Onset_score,na.rm=TRUE)
+                          Onset_score_min=min(Onset_score,na.rm=TRUE),
+                          Onset_score_max=max(Onset_score,na.rm=TRUE)
                           ),
                        by="HPO_ID"]
     annot_agg$Onset_top <- lapply(seq_len(nrow(annot_agg)),
@@ -79,6 +74,9 @@ add_onset <- function(phenos,
     }) |> unlist()
     annot_agg$Onset_earliest <- stats::setNames(names(dict),unname(dict))[
       as.character(annot_agg$Onset_score_min)
+    ]
+    annot_agg$Onset_latest <- stats::setNames(names(dict),unname(dict))[
+      as.character(annot_agg$Onset_score_max)
     ]
     #### Merge ##@#
     phenos <- data.table::merge.data.table(x = phenos,

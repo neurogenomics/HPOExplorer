@@ -17,6 +17,8 @@
 #' \link[HPOExplorer]{make_hoverboxes}.
 #' @param add_age_onset Add age of onset columns using
 #' \link[HPOExplorer]{add_onset}.
+#' @param add_age_death Add age of death columns using
+#' \link[HPOExplorer]{add_death}.
 #' @param add_severity_tiers Add severity Tiers column using
 #' \link[HPOExplorer]{add_tier}.
 #' @param columns A named vector of columns in \code{phenos}
@@ -41,6 +43,7 @@ make_phenos_dataframe <- function(ancestor,
                                   add_description = TRUE,
                                   add_hoverboxes = TRUE,
                                   add_age_onset = FALSE,
+                                  add_age_death = FALSE,
                                   add_severity_tiers = FALSE,
                                   columns = list_columns(),
                                   interactive = TRUE,
@@ -67,45 +70,19 @@ make_phenos_dataframe <- function(ancestor,
   messager("Computing gene counts.",v=verbose)
   phenos <- descendants[,.(geneCount=.N), by=c("ID","Phenotype")]
   data.table::setnames(phenos, "ID","HPO_ID")
-  #### Add ontology levels: absolute ####
-  if(isTRUE(add_ont_lvl_absolute)){
-    phenos <- add_ont_lvl(phenos = phenos,
-                          hpo = hpo,
-                          absolute = TRUE,
-                          verbose = verbose)
-  }
-  #### Add ontology levels: relative ####
-  if(isTRUE(add_ont_lvl_relative)){
-    phenos <- add_ont_lvl(phenos = phenos,
-                          hpo = hpo,
-                          adjacency = adjacency,
-                          absolute = FALSE,
-                          verbose = verbose)
-  }
-
-  phenos <- add_info_content(phenos = phenos,
-                             hpo = hpo,
-                             verbose = verbose)
-  phenos <- add_hpo_definition(phenos = phenos,
-                               verbose = verbose)
-  phenos <- add_ancestor(phenos = phenos,
-                         verbose = verbose)
-  #### Add age of onset ####
-  if(isTRUE(add_age_onset)){
-    phenos <- add_onset(phenos = phenos,
-                        verbose = verbose)
-  }
-  #### Add Tiers ####
-  if(isTRUE(add_severity_tiers)){
-    phenos <- add_tier(phenos = phenos,
-                        verbose = verbose)
-  }
-  #### Add hoverboxes ####
-  if(isTRUE(add_hoverboxes)){
-    phenos <- make_hoverboxes(phenos = phenos,
-                              interactive = interactive,
-                              columns = columns,
-                              verbose = verbose)
-  }
+  #### Annotate phenotypes ####
+  phenos <- annotate_phenos(phenos = phenos,
+                            hpo = hpo,
+                            adjacency = adjacency,
+                            add_ont_lvl_absolute = add_ont_lvl_absolute,
+                            add_ont_lvl_relative = add_ont_lvl_relative,
+                            add_description = add_description,
+                            add_hoverboxes = add_hoverboxes,
+                            add_age_onset = add_age_onset,
+                            add_age_death = add_age_death,
+                            add_severity_tiers = add_severity_tiers,
+                            columns = columns,
+                            interactive = interactive,
+                            verbose = verbose)
   return(phenos)
 }

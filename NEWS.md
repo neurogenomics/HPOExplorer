@@ -1,3 +1,10 @@
+# HPOExplorer 0.99.6
+
+## New features
+
+* New function for creating gene x phenotype matrix
+  - `hpo_to_matrix`
+
 # HPOExplorer 0.99.5
 
 ## New features

@@ -20,14 +20,16 @@ parse_mod <- function(x){
   }
 annot <- annot[,Modifier_name:=lapply(Modifier,parse_mod)][Modifier!="",]
 annot <- annot[,.(Modifier_name=unlist(Modifier_name)),
-               by=c("HPO_ID","Modifier","DiseaseName","Aspect")]
-dict <- c("Mild"=4,"Borderline"=3,"Severe"=2,"Profound"=1)
+               by=c("HPO_ID","Modifier","DiseaseName","Aspect","#DatabaseID")]
+dict <- HPOExplorer:::hpo_dict(type="severity")
 annot$Severity_score <- dict[annot$Modifier_name]
 hpo_modifiers <- annot[,list(
   Modifier=paste(unique(Modifier),collapse=";"),
   Modifier_name=paste(unique(Modifier_name),collapse=";"),
   Modifier_count=paste(table(unlist(Modifier_name)),collapse=";"),
   DiseaseNames=paste(unique(DiseaseName),collapse = ";"),
+  DiseaseNames_count=length(unique(DiseaseName)),
+  DatabaseID_count=length(unique(`#DatabaseID`)),
   Severity_score_mean=mean(Severity_score, na.rm=TRUE),
   Severity_score_min=min(Severity_score, na.rm=TRUE)
 ), by="HPO_ID"]
@@ -39,8 +41,7 @@ hpo_modifiers$Modifer_top <- lapply(seq_len(nrow(hpo_modifiers)),
   mn <- strsplit(r$Modifier_name,";")[[1]]
   mc <- strsplit(r$Modifier_count,";")[[1]]
   mn[mc==max(mc)][[1]]
-})
-hpo_modifiers$Modifer_top <- unlist(hpo_modifiers$Modifer_top)
+}) |> unlist()
 usethis::use_data(hpo_modifiers, overwrite = TRUE)
 }
 }

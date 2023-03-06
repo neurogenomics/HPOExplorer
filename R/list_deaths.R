@@ -1,23 +1,21 @@
-#' List age of onset HPO terms
+#' List age of death HPO terms
 #'
-#' List age of onset phenotypes in the HPO.
-#' @param exclude HPO phenotype names to exclude.
-#' @param as_hpo_ids Return as a character vector vector HPO IDs only.
-#' @param include_na Include NA values for Onset.
+#' List age of death phenotypes in the HPO.
+#' @inheritParams list_onsets
 #' @inheritParams make_phenos_dataframe
 #' @returns Named list of HPO IDs.
 #'
 #' @export
 #' @examples
-#' onsets <- list_onsets()
-list_onsets <- function(hpo = get_hpo(),
-                        exclude = FALSE, #c("Antenatal","Fetal","Congenital")
+#' deaths <- list_deaths()
+list_deaths <- function(hpo = get_hpo(),
+                        exclude = FALSE,# c("Miscarriage","Stillbirth","Prenatal death" )
                         as_hpo_ids = FALSE,
                         include_na = TRUE,
                         verbose = TRUE){
-  # templateR:::args2vars(list_onsets)
+  # templateR:::args2vars(list_opts)
 
-  opts <- harmonise_phenotypes(phenotypes = names(hpo_dict(type = "Onset")),
+  opts <- harmonise_phenotypes(phenotypes = names(hpo_dict(type = "AgeOfDeath")),
                                hpo = hpo,
                                as_hpo_ids = TRUE,
                                keep_order = FALSE,

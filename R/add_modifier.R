@@ -11,7 +11,7 @@
 #' }
 #' @inheritParams make_network_object
 #' @inheritParams data.table::merge.data.table
-#' @returns phenos data.table with extra column
+#' @returns phenos data.table with extra columns
 #'
 #' @export
 #' @importFrom data.table merge.data.table

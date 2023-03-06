@@ -16,7 +16,9 @@
 #' @importFrom data.table fread
 #' @examples
 #' phenotype_to_genes <- load_phenotype_to_genes()
-load_phenotype_to_genes <- function(filename = "phenotype_to_genes.txt",
+load_phenotype_to_genes <- function(filename = c("phenotype_to_genes.txt",
+                                                 "genes_to_phenotype.txt",
+                                                 "phenotype.hpoa"),
                                     save_dir = file.path(
                                       tools::R_user_dir("HPOExplorer",
                                                         which="cache"),
@@ -24,6 +26,7 @@ load_phenotype_to_genes <- function(filename = "phenotype_to_genes.txt",
                                     verbose = TRUE
                                     ) {
   #### Get right URL #####
+  filename <- filename[[1]]
   file <- file.path(save_dir, filename)
   if(basename(file)=="phenotype.hpoa"){
     URL <- "http://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa"

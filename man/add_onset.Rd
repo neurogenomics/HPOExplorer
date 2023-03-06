@@ -31,7 +31,8 @@ with the target HPO_ID phenotype.}
 \item{"Onset_score_mean": }{Mean onset score.}
 \item{"Onset_score_min": }{Minimum onset score.}
 \item{"Onset_top": }{The most common onset term.}
-\item{"Onset_earliest": }{The developmentally earliest onset.}
+\item{"Onset_earliest": }{The earliest age of onset.}
+\item{"Onset_latest": }{The latest age of onset.}
 }
 }
 \description{

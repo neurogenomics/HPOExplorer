@@ -11,6 +11,7 @@ harmonise_phenotypes(
   validate = TRUE,
   ignore_case = TRUE,
   keep_order = TRUE,
+  invert = FALSE,
   verbose = TRUE
 )
 }
@@ -31,6 +32,9 @@ or phenotype names (\code{FALSE}).}
 as \code{phenotypes}.
 If \code{FALSE}, return a named list of only the unique \code{phenotypes},
 sometimes in a different order.}
+
+\item{invert}{Invert the keys/values of the dictionary,
+such that the key becomes the values (and vice versa).}
 
 \item{verbose}{Print messages.}
 }

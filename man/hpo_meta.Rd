@@ -24,7 +24,14 @@ names(hpo_meta) <- gsub(" +","",tolower(names(hpo_meta)))
 hpo_meta <- HPOExplorer:::as_ascii(dt=hpo_meta)
 hpo_meta$hpo_id=gsub("_",":",hpo_meta$hpo_id)
 data.table::setnames(hpo_meta,"hpo_id","HPO_ID")
-# data.table::fwrite(hpo_meta,"~/Desktop/hpo_meta.csv.gz")
+for(nm in c("UMLS","SNOMEDCT_US","MSH")){
+  hpo_meta[[paste0(nm,"_ID")]] <- lapply(
+    strsplit(hpo_meta$database_cross_reference,"\\|"),
+                                     function(x){
+    s <- grep(paste0(nm,":"),x,value = TRUE)
+    if(length(s)==0)NA else s
+                                     })
+}
 usethis::use_data(hpo_meta, overwrite = TRUE)
 }
 }

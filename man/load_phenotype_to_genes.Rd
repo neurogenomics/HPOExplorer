@@ -8,7 +8,7 @@
 }
 \usage{
 load_phenotype_to_genes(
-  filename = "phenotype_to_genes.txt",
+  filename = c("phenotype_to_genes.txt", "genes_to_phenotype.txt", "phenotype.hpoa"),
   save_dir = file.path(tools::R_user_dir("HPOExplorer", which = "cache"), "data"),
   verbose = TRUE
 )

@@ -12,6 +12,8 @@
 #' sometimes in a different order.
 #' @param validate Remove any phenotype names or IDs that cannot be found in the
 #' \code{hpo}.
+#' @param invert Invert the keys/values of the dictionary,
+#' such that the key becomes the values (and vice versa).
 #' @param verbose Print messages.
 #' @inheritParams make_phenos_dataframe
 #' @returns Character vector
@@ -30,6 +32,7 @@ harmonise_phenotypes <- function(phenotypes,
                                  validate = TRUE,
                                  ignore_case = TRUE,
                                  keep_order = TRUE,
+                                 invert = FALSE,
                                  verbose = TRUE){
 
   # templateR:::args2vars(harmonise_phenotypes)
@@ -66,11 +69,15 @@ harmonise_phenotypes <- function(phenotypes,
     messager("+ Returning a dictionary of phenotypes",
              "(different order as input).",
              v=verbose)
-    return(out)
   } else {
     messager("+ Returning a vector of phenotypes",
              "(same order as input).",
              v=verbose)
-    return(out[phenotypes_og])
+    out <- out[phenotypes_og]
   }
+  #### Invert ####
+  if(isTRUE(invert)){
+    out <- stats::setNames(names(out), unname(out))
+  }
+  return(out)
 }
