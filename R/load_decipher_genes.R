@@ -1,5 +1,6 @@
 load_decipher_genes <- function(verbose=TRUE){
 
+  requireNamespace("R.utils")
   disease_name <- DiseaseName <- ID <- `#DatabaseID` <- NULL;
 
   messager("Loading DECIPHER genes.",v=verbose)

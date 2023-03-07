@@ -5,6 +5,10 @@
 * New function for creating gene x phenotype matrix
   - `hpo_to_matrix`
 
+## Bug fixes
+
+* Add `R.utils` as Suggest.
+
 # HPOExplorer 0.99.5
 
 ## New features
