@@ -18,7 +18,7 @@ and HPO IDs (e.g. c("HP:0000002","HP:0000003")).'><!-- mathjax --><script src="h
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.6</span>
       </span>
     </div>
 
@@ -75,6 +75,7 @@ and HPO IDs (e.g. c("HP:0000002","HP:0000003")).</p>
 <span>  validate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ignore_case <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  keep_order <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  invert <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -110,6 +111,11 @@ If <code>FALSE</code>, return a named list of only the unique <code>phenotypes</
 sometimes in a different order.</p></dd>
 
 
+<dt>invert</dt>
+<dd><p>Invert the keys/values of the dictionary,
+such that the key becomes the values (and vice versa).</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Print messages.</p></dd>
 
@@ -142,7 +148,7 @@ sometimes in a different order.</p></dd>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Robert Gordon-Smith, Brian Schilder, Nathan Skene.</p>
+  <p></p><p>Developed by Brian Schilder, Robert Gordon-Smith, Nathan Skene.</p>
 </div>
 
 <div class="pkgdown">

@@ -25,6 +25,12 @@
     <loc>/reference/add_ancestor.html</loc>
   </url>
   <url>
+    <loc>/reference/add_death.html</loc>
+  </url>
+  <url>
+    <loc>/reference/add_disease_genes.html</loc>
+  </url>
+  <url>
     <loc>/reference/add_gene_frequency.html</loc>
   </url>
   <url>
@@ -94,6 +100,12 @@
     <loc>/reference/hpo.html</loc>
   </url>
   <url>
+    <loc>/reference/hpo_api.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hpo_death.html</loc>
+  </url>
+  <url>
     <loc>/reference/hpo_frequency.html</loc>
   </url>
   <url>
@@ -109,6 +121,9 @@
     <loc>/reference/hpo_tiers_auto.html</loc>
   </url>
   <url>
+    <loc>/reference/hpo_to_matrix.html</loc>
+  </url>
+  <url>
     <loc>/reference/igraph_to_plotly.html</loc>
   </url>
   <url>
@@ -121,7 +136,13 @@
     <loc>/reference/list_columns.html</loc>
   </url>
   <url>
+    <loc>/reference/list_deaths.html</loc>
+  </url>
+  <url>
     <loc>/reference/list_onsets.html</loc>
+  </url>
+  <url>
+    <loc>/reference/load_disease_genes.html</loc>
   </url>
   <url>
     <loc>/reference/load_phenotype_to_genes.html</loc>
