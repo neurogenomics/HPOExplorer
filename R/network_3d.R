@@ -8,6 +8,8 @@
 #' @param edge_color_var Variable in the edge metadata to color edges by.
 #' @param text_color_var Variable in the node metadata to color text by.
 #' @param node_symbol_var Variable in the vertex metadata to shape nodes by.
+#' @param node_opacity Node opacity.
+#' @param edge_opacity Edge opacity.
 #' @param node_palette Color palette function for the nodes/points.
 #' @param edge_palette Color palette function for the edges/lines.
 #' @param kde_palette Color palette function for the KDE plot.
@@ -23,7 +25,10 @@
 #' @param hover_width Maximum width of the hover text.
 #' @param label_width Maximum width of the label text.
 #' @param seed Random seed to enable reproducibility.
+#' @param showlegend Show node fill legend.
 #' @param show_plot Print the plot after it's been generated.
+#' @param save_path Path to save interactive plot to
+#' as a self-contained HTML file.
 #' @param verbose Print messages.
 #' @returns A 3D interactive \link[plotly]{plotly} object.
 #'
@@ -53,19 +58,23 @@ network_3d <- function(g,
                        edge_color_var = "zend",
                        text_color_var = node_color_var,
                        node_symbol_var = "ancestor_name",
-                       node_palette = pals::ocean.phase,
-                       edge_palette = node_palette,
+                       node_palette = pals::kovesi.cyclic_mrybm_35_75_c68_s25,
+                       edge_palette = pals::kovesi.cyclic_mrybm_35_75_c68_s25,
+                       node_opacity = .75,
+                       edge_opacity = .5,
                        kde_palette = pals::gnuplot,
                        add_kde = TRUE,
                        extend_kde = 1.5,
                        bg_color = kde_palette(6)[1],
-                       add_labels = TRUE,
+                       add_labels = FALSE,
                        keep_grid = FALSE,
                        aspectmode = 'cube',
                        hover_width=80,
                        label_width=80,
                        seed = 2023,
+                       showlegend = TRUE,
                        show_plot = TRUE,
+                       save_path = tempfile(fileext = "network_3d.html"),
                        verbose = TRUE){
   # templateR:::args2vars(network_3d)
   # anc <- "Abnormality of the nervous system"
@@ -74,6 +83,7 @@ network_3d <- function(g,
   # g <- readRDS("~/Downloads/priotised_igraph.rds")
   requireNamespace("plotly")
   requireNamespace("pals")
+  requireNamespace("htmlwidgets")
   label <- Phenotype <- NULL;
 
   #### Convert igraph to plotly data ####
@@ -98,11 +108,11 @@ network_3d <- function(g,
                       yend = ~yend,
                       # zend = ~zend,
                       color = ~get(edge_color_var),
-                      colors = edge_palette(10),
+                      colors = rev(edge_palette(50)),
                       line = list(shape = "spline"),
                       type = "scatter3d",
                       name = "edge",
-                      opacity = .5,
+                      opacity = edge_opacity,
                       mode = "lines",
                       hoverinfo = "none",
                       showlegend = FALSE,
@@ -117,10 +127,10 @@ network_3d <- function(g,
                         ),
                         # size = ~ontLvl,
                         color = ~ get(node_color_var),
-                        colors = rev(
+                        colors = (
                           node_palette(length(
                             unique(vdf[[node_color_var]])
-                          )+1)
+                          ))
                         ),
                         marker = list(
                           line = list(
@@ -137,8 +147,8 @@ network_3d <- function(g,
                             sep = "<br>"),
                           width = hover_width
                         ),
-                        opacity = .9,
-                        showlegend = TRUE,
+                        opacity = node_opacity,
+                        showlegend = showlegend,
                         type = "scatter3d",
                         mode = "markers")
   #### Add KDE ####
@@ -168,10 +178,10 @@ network_3d <- function(g,
                        z = ~z,
                        text = ~label,
                        color = ~ get(text_color_var),
-                       colors = rev(
+                       colors = (
                          node_palette(length(
                            unique(vdf[[text_color_var]])
-                         )+1)
+                         ))
                        ),
                        # textfont = list(color="rbga(255,255,255,.8"),
                        hoverinfo = "none",
@@ -210,5 +220,12 @@ network_3d <- function(g,
   # reticulate::py_install(packages = "kaleido",)
   # plotly::save_image(p = fig,file = file, width = 10, height =10)
   if(isTRUE(show_plot)) methods::show(fig)
+  if(!is.null(save_path)) {
+    messager("Saving interactive plot -->",save_path,v=verbose)
+    dir.create(dirname(save_path),showWarnings = FALSE, recursive = TRUE)
+    htmlwidgets::saveWidget(widget = fig,
+                            file = save_path,
+                            selfcontained = TRUE)
+  }
   return(fig)
 }
