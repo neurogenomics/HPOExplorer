@@ -4,10 +4,22 @@
 \alias{add_pheno_frequency}
 \title{Add phenotype frequency}
 \usage{
-add_pheno_frequency(phenos, all.x = TRUE, verbose = TRUE)
+add_pheno_frequency(
+  phenos,
+  pheno_frequency_threshold = NULL,
+  all.x = TRUE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{phenos}{dataframe of phenotypes and values / parameters.}
+
+\item{pheno_frequency_threshold}{Only keep phenotypes with frequency
+above the set threshold. Frequency ranges from 0-100 where 100 is
+a phenotype that occurs 100\% of the time in all associated diseases.
+Include \code{NA} if you wish to retain phenotypes that
+do not have any frequency data.
+See \link[HPOExplorer]{add_pheno_frequency} for details.}
 
 \item{all.x}{logical; if \code{TRUE}, then extra rows will be added to the
 output, one for each row in \code{x} that has no matching row in \code{y}.

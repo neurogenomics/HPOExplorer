@@ -35,7 +35,7 @@ harmonise_phenotypes <- function(phenotypes,
                                  invert = FALSE,
                                  verbose = TRUE){
 
-  # templateR:::args2vars(harmonise_phenotypes)
+  # devoptera::args2vars(harmonise_phenotypes)
   phenotypes_og <- phenotypes
   phenotypes <- unique(phenotypes)
   hpo_ids <- grep("^HP:|^HP_",phenotypes,

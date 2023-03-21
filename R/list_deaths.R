@@ -13,7 +13,7 @@ list_deaths <- function(hpo = get_hpo(),
                         as_hpo_ids = FALSE,
                         include_na = TRUE,
                         verbose = TRUE){
-  # templateR:::args2vars(list_opts)
+  # devoptera::args2vars(list_opts)
 
   opts <- harmonise_phenotypes(phenotypes = names(hpo_dict(type = "AgeOfDeath")),
                                hpo = hpo,

@@ -21,10 +21,10 @@ phenos_to_granges <- function(phenos,
                                 load_phenotype_to_genes(),
                               hpo = get_hpo(),
                               keep_seqnames = c(seq_len(22),"X","Y"),
-                              split.field = "ID",
+                              split.field = "HPO_ID",
                               verbose = TRUE){
   # templateR:::source_all()
-  # templateR:::args2vars(phenos_to_granges)
+  # devoptera::args2vars(phenos_to_granges)
   requireNamespace("GenomicRanges")
 
   messager("Converting phenos to",

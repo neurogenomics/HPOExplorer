@@ -14,7 +14,7 @@
 #' @examples
 #' dat <- load_disease_genes()
 load_disease_genes <- function(verbose=TRUE){
-  # templateR:::args2vars(load_disease_genes)
+  # devoptera::args2vars(load_disease_genes)
 
   #### Import data ####
   decipher <- load_decipher_genes(verbose = verbose)

@@ -34,7 +34,7 @@ per_branch_plot <- function(highlighted_branches,
                             phenotype_to_genes = load_phenotype_to_genes()) {
 
   # templateR:::source_all()
-  # templateR:::args2vars(per_branch_plot)
+  # devoptera::args2vars(per_branch_plot)
 
   requireNamespace("ggplot2")
   n_phenos <- branch <- target <- NULL;

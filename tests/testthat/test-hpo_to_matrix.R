@@ -10,7 +10,7 @@ test_that("hpo_to_matrix works", {
 
 
   X <- hpo_to_matrix(terms = phenos$HPO_ID,
-                     formula = "Gene ~ ID")
+                     formula = "Gene ~ HPO_ID")
   testthat::expect_true(methods::is(X,"dgCMatrix"))
   testthat::expect_gte(nrow(X),4204)
   ## Two phenotypes don't have gene annotations

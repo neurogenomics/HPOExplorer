@@ -6,6 +6,7 @@
 \usage{
 add_gene_frequency(
   phenotype_to_genes = load_phenotype_to_genes(),
+  gene_frequency_threshold = NULL,
   all.x = TRUE,
   verbose = TRUE
 )
@@ -14,6 +15,13 @@ add_gene_frequency(
 \item{phenotype_to_genes}{Output of
 \link[HPOExplorer]{load_phenotype_to_genes} mapping phenotypes
 to gene annotations.}
+
+\item{gene_frequency_threshold}{Only keep genes with frequency
+above the set threshold. Frequency ranges from 0-100 where 100 is
+a gene that occurs 100\% of the time in a given phenotype.
+Include \code{NA} if you wish to retain genes that
+do not have any frequency data.
+See \link[HPOExplorer]{add_gene_frequency} for details.}
 
 \item{all.x}{logical; if \code{TRUE}, then extra rows will be added to the
 output, one for each row in \code{x} that has no matching row in \code{y}.

@@ -1,6 +1,6 @@
 Package: HPOExplorer
 Title: Analysis and Visualisation of the Human Phenotype Ontology
-Version: 0.99.6
+Version: 0.99.7
 Authors@R:
     c(
     person(given = "Brian",
@@ -73,4 +73,5 @@ biocViews:
     Genetics, Preprocessing, GeneTarget, SystemsBiology,
     GraphAndNetwork, Annotation, Network
 LazyData: true
+LazyDataCompression: gzip
 Config/testthat/edition: 3

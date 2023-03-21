@@ -26,6 +26,9 @@
 #' @param auto_assign Automatically assing HPO IDs to Tiers by conducting
 #' regex searches for keywords that appear in the term name,
 #'  or the names of its descendants or ancestors.
+#' @param keep_tiers Tiers from \link[HPOExplorer]{hpo_tiers} to keep.
+#'  Include \code{NA} if you wish to retain phenotypes that
+#'  do not have any Tier assignment.
 #' @inheritParams data.table::merge.data.table
 #' @returns phenos data.table with extra column
 #'
@@ -40,11 +43,12 @@ add_tier <- function(phenos,
                      include_disease_characteristics = TRUE,
                      auto_assign=TRUE,
                      hpo = get_hpo(),
+                     keep_tiers = NULL,
                      verbose = TRUE){
 
-  # templateR:::args2vars(add_tier)
-  disease_characteristic <- phenotype <- tier_auto <- HPO_ID <-
-    Onset_score_min <- tier <- tier_merge <- Phenotype <- NULL;
+  # devoptera::args2vars(add_tier)
+  disease_characteristic <- tier_auto <- HPO_ID <-
+    tier <- tier_merge <- Phenotype <- NULL;
 
   if(!all(c("tier","disease_characteristic") %in% names(phenos))){
     messager("Annotating phenos with Tiers.",v=verbose)
@@ -73,6 +77,9 @@ add_tier <- function(phenos,
   }
   #### Add merged tier col ####
   phenos[,tier_merge:=pmin(tier,tier_auto, na.rm = TRUE)]
-  # lapply(c("tier","tier_auto","tier_merge"), function(x){sum(!is.na(phenos[[x]]))})
+  #### Filter ####
+  if(!is.null(keep_tiers)){
+    phenos <- phenos[tier_merge %in% keep_tiers]
+  }
   return(phenos)
 }

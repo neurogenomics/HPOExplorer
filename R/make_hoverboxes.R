@@ -31,7 +31,7 @@ make_hoverboxes <- function(phenos,
                             digits = 3,
                             verbose = TRUE) {
   # templateR:::source_all()
-  # templateR:::args2vars(make_hoverboxes)
+  # devoptera::args2vars(make_hoverboxes)
 
   hover <- HPO_ID <- Phenotype <- NULL;
 

@@ -7,7 +7,8 @@
 #' By default, full phenotype names are used as the column names
 #'  (e.g. "Abnormality of body height"),
 #'  however you can instead set them to the HPO IDs
-#'  by changing the \code{formula} argument to: \code{formula = "Gene ~ ID"}.
+#'  by changing the \code{formula} argument to:
+#'   \code{formula = "Gene ~ HPO_ID"}.
 #' Phenotypes that are not present in the \code{phenotype_to_genes} annotations
 #' are omitted from the final matrix.
 #' @param terms A subset of HPO IDs to include.
@@ -41,11 +42,11 @@ hpo_to_matrix <- function(terms = NULL,
                           method = "pearson",
                           verbose = TRUE){
   requireNamespace("Matrix")
-  ID <- dummy <- NULL;
+  HPO_ID <- dummy <- NULL;
 
   messager("Constructing HPO gene x phenotype matrix.",v=verbose)
   if(!is.null(terms)){
-    phenotype_to_genes <- phenotype_to_genes[ID %in% unique(terms),]
+    phenotype_to_genes <- phenotype_to_genes[HPO_ID %in% unique(terms),]
   }
   #### Cast into gene x phenotype matrix ####
   X_dt <- phenotype_to_genes[,dummy:=1] |>

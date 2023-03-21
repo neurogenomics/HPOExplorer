@@ -1,6 +1,7 @@
 parse_pheno_frequency <- function(annot){
-  HPO_ID <- DiseaseName <- NULL;
+  HPO_ID <- DatabaseID <- Frequency <- NULL;
 
+  annot <- annot[Frequency!=""]
   freq_dt <- lapply(seq_len(nrow(annot)), function(i){
     f <- annot[i,]$Frequency
     if(grepl("^HP",f)){
@@ -24,7 +25,7 @@ parse_pheno_frequency <- function(annot){
     } else {
       return(NULL)
     }
-    dt[,HPO_ID:=annot[i,]$HPO_ID][,DiseaseName:=annot[i,]$DiseaseName]
+    dt[,HPO_ID:=annot[i,]$HPO_ID][,DatabaseID:=annot[i,]$DatabaseID]
     return(dt)
   }) |> data.table::rbindlist(fill=TRUE)
   freq_dt$pheno_freq_mean <- rowMeans(

@@ -1,6 +1,9 @@
 #' Add ontology level
 #'
 #' Add the relative ontology level for each HPO ID.
+#' @param keep_ont_levels Only keep phenotypes at certain \emph{absolute}
+#'  ontology levels to keep.
+#' See \link[HPOExplorer]{add_ont_lvl} for details.
 #' @inheritParams get_ont_lvls
 #' @inheritParams make_network_object
 #' @inheritParams data.table::merge.data.table
@@ -16,6 +19,7 @@ add_ont_lvl <- function(phenos,
                         adjacency = NULL,
                         absolute = TRUE,
                         exclude_top_lvl = TRUE,
+                        keep_ont_levels = NULL,
                         reverse = TRUE,
                         verbose = TRUE){
 
@@ -33,7 +37,6 @@ add_ont_lvl <- function(phenos,
                               verbose = verbose)
     #### Add the new column ####
     phenos[,tmp:=lvls_dict[HPO_ID]]
-
     data.table::setnames(phenos,old = "tmp", new = col)
     #### Compute gene ratio ####
     if(all(c("ontLvl","geneCount") %in% names(phenos))){
@@ -42,6 +45,10 @@ add_ont_lvl <- function(phenos,
     }
   } else {
     messager("HPO_ID column not found. Cannot add ontology level.",v=verbose)
+  }
+  #### Filter ####
+  if(!is.null(keep_ont_levels)){
+    phenos <- phenos[ontLvl %in% keep_ont_levels,]
   }
   return(phenos)
 }

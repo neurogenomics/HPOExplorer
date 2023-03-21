@@ -4,10 +4,24 @@
 \alias{add_onset}
 \title{Add age of onset}
 \usage{
-add_onset(phenos, all.x = TRUE, allow.cartesian = FALSE, verbose = TRUE)
+add_onset(
+  phenos,
+  keep_onsets = NULL,
+  agg_by = NULL,
+  all.x = TRUE,
+  allow.cartesian = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{phenos}{dataframe of phenotypes and values / parameters.}
+
+\item{keep_onsets}{The age of onset associated with each HPO ID to keep.
+If >1 age of onset is associated with the term,
+only the earliest age is considered.
+See \link[HPOExplorer]{add_onset} for details.}
+
+\item{agg_by}{Column to aggregate age of onset metadata by.}
 
 \item{all.x}{logical; if \code{TRUE}, then extra rows will be added to the
 output, one for each row in \code{x} that has no matching row in \code{y}.

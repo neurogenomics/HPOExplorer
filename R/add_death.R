@@ -15,6 +15,11 @@
 #' \item{HP:0033763 }{"Death in adulthood" (AgeOfDeath_score=7)}
 #' \item{HP:0033765 }{"Death in late adulthood" (AgeOfDeath_score=8)}
 #' }
+#' @param keep_deaths The age of death associated with each HPO ID to keep.
+#'  If >1 age of death is associated with the term,
+#'  only the earliest age is considered.
+#'  See \link[HPOExplorer]{add_death} for details.
+#' @param agg_by Column to aggregate age of death metadata by.
 #' @inheritParams make_network_object
 #' @inheritParams data.table::merge.data.table
 #' @returns phenos data.table with extra columns:
@@ -38,48 +43,41 @@
 #' phenos <- example_phenos()
 #' phenos2 <- add_death(phenos = phenos)
 add_death <- function(phenos,
+                      keep_deaths = NULL,
                       all.x = TRUE,
                       allow.cartesian = FALSE,
+                      agg_by = NULL,
                       verbose = TRUE){
 
-  # templateR:::args2vars(add_death)
-  HPO_ID <- AgeOfDeath <- AgeOfDeath_name <- AgeOfDeath_score <- . <- NULL;
+  # devoptera::args2vars(add_death)
+  AgeOfDeath_score <- NULL;
 
   if(!all(c("AgeOfDeath",
-            "AgeOfDeath_names",
-            "AgeOfDeath_earliest") %in% names(phenos))){
-
+            "AgeOfDeath_name") %in% names(phenos))){
     messager("Annotating phenos with AgeOfDeath",v=verbose)
-    utils::data("hpo_death",package = "HPOExplorer")
-    hpo_death <- get("hpo_death")
-    dict <- hpo_dict(type = "AgeOfDeath")
-    annot_agg <- hpo_death[HPO_ID %in% unique(phenos$HPO_ID),.(
-      AgeOfDeath=paste(unique(AgeOfDeath),collapse = ";"),
-      AgeOfDeath_names=paste(unique(AgeOfDeath_name),collapse = ";"),
-      AgeOfDeath_counts=paste(table(AgeOfDeath_name),collapse = ";"),
-      AgeOfDeath_score_mean=mean(AgeOfDeath_score,na.rm=TRUE),
-      AgeOfDeath_score_min=min(AgeOfDeath_score,na.rm=TRUE),
-      AgeOfDeath_score_max=max(AgeOfDeath_score,na.rm=TRUE)
-    ), by="HPO_ID"]
-    annot_agg$AgeOfDeath_top <- lapply(seq_len(nrow(annot_agg)),
-                                  function(i){
-                                    r <- annot_agg[i,]
-                                    on <- strsplit(r$AgeOfDeath_names,";")[[1]]
-                                    oc <- strsplit(r$AgeOfDeath_counts,";")[[1]]
-                                    on[oc==min(oc)][[1]]
-                                  }) |> unlist()
-    annot_agg$AgeOfDeath_earliest <- stats::setNames(names(dict),unname(dict))[
-      as.character(annot_agg$AgeOfDeath_score_min)
-    ]
-    annot_agg$AgeOfDeath_latest <- stats::setNames(names(dict),unname(dict))[
-      as.character(annot_agg$AgeOfDeath_score_max)
-    ]
-    #### Merge ##@#
+    phenos <- add_disease(phenos = phenos,
+                           verbose = verbose)
+    utils::data("hpo_deaths",package = "HPOExplorer")
+    annot <- get("hpo_deaths")
+    annot <- annot[,c("DatabaseID",
+                      "AgeOfDeath_name",
+                      "AgeOfDeath_score")]
+    #### Each disease can have >1 AgeofDeath ####
+    if(!is.null(agg_by)){
+      annot <- hpo_death_agg(phenos = phenos,
+                             hpo_deaths = annot,
+                             by = agg_by)
+    }
+    ## AgeOfDeath annotations are only at level of Disease,
+    ## so merge by DatabaseID alone.
     phenos <- data.table::merge.data.table(x = phenos,
-                                           y = annot_agg,
-                                           by = "HPO_ID",
+                                           y = annot,
+                                           by = "DatabaseID",
                                            allow.cartesian = allow.cartesian,
                                            all.x = all.x)
+  }
+  if(!is.null(keep_deaths)){
+    phenos <- phenos[AgeOfDeath_score %in% keep_deaths,]
   }
   return(phenos)
 }

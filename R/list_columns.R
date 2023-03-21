@@ -15,7 +15,7 @@ list_columns <- function(columns=NULL,
                          extra_cols=NULL){
   cols <- list(
     Phenotype="Phenotype",
-    ID="HPO_ID",
+    HPO_ID="HPO_ID",
     ontLvl="ontLvl",
     ontLvl_relative="ontLvl_relative",
     ontLvl_geneCount_ratio="ontLvl_geneCount_ratio",

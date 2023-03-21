@@ -1,7 +1,7 @@
 load_decipher_genes <- function(verbose=TRUE){
 
   requireNamespace("R.utils")
-  disease_name <- DiseaseName <- ID <- `#DatabaseID` <- NULL;
+  disease_name <- DiseaseName <- ID <- `DatabaseID` <- NULL;
 
   messager("Loading DECIPHER genes.",v=verbose)
   #### UCSC bigbed file ####
@@ -15,8 +15,8 @@ load_decipher_genes <- function(verbose=TRUE){
   ## Bizarrely, the do not provide their disease IDs in their own database.
   ## Have to instead infer from the HPO data
   d <- load_phenotype_to_genes("phenotype.hpoa")
-  d <- d[grepl("DECIPHER",d$`#DatabaseID`),]
-  d[,ID:=`#DatabaseID`][,DiseaseName:=tolower(DiseaseName)]
+  d <- d[grepl("DECIPHER",d$DatabaseID),]
+  d[,ID:=DatabaseID][,DiseaseName:=tolower(DiseaseName)]
   dat <- data.table::merge.data.table(dat,
                                d[,c("ID","DiseaseName")],
                                by.x = "disease_name",

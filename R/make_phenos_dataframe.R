@@ -49,10 +49,10 @@ make_phenos_dataframe <- function(ancestor,
                                   interactive = TRUE,
                                   verbose = TRUE
                                   ){
-  # templateR:::args2vars(make_phenos_dataframe)
+  # devoptera::args2vars(make_phenos_dataframe)
   # ancestor = "Neurodevelopmental delay"
 
-  ID <- . <- NULL;
+  HPO_ID <- . <- NULL;
 
   if(!is.null(ancestor)){
     IDx <- get_hpo_id_direct(phenotype = ancestor,
@@ -60,7 +60,7 @@ make_phenos_dataframe <- function(ancestor,
     IDx_all <- ontologyIndex::get_descendants(ontology = hpo,
                                               roots = IDx,
                                               exclude_roots = FALSE)
-    descendants <- phenotype_to_genes[ID %in% IDx_all,]
+    descendants <- phenotype_to_genes[HPO_ID %in% IDx_all,]
   } else {
     descendants <- phenotype_to_genes
   }
@@ -68,8 +68,7 @@ make_phenos_dataframe <- function(ancestor,
            formatC(length(unique(descendants$Phenotype)),big.mark = ","),
            "descendents.",v=verbose)
   messager("Computing gene counts.",v=verbose)
-  phenos <- descendants[,.(geneCount=.N), by=c("ID","Phenotype")]
-  data.table::setnames(phenos, "ID","HPO_ID")
+  phenos <- descendants[,.(geneCount=.N), by=c("HPO_ID","Phenotype")]
   #### Annotate phenotypes ####
   phenos <- annotate_phenos(phenos = phenos,
                             hpo = hpo,

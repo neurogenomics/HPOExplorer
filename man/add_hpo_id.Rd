@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_hpo_id.R
 \name{add_hpo_id}
 \alias{add_hpo_id}
-\title{Add HPO term ID column to dataframe}
+\title{Add HPO ID column to dataframe}
 \usage{
 add_hpo_id(phenos, hpo = get_hpo(), phenotype_to_genes = NULL, verbose = FALSE)
 }
@@ -30,6 +30,6 @@ it caused an error in the ontologyPlot package.
 }
 \examples{
 phenotype_to_genes <- load_phenotype_to_genes()
-phenos <- unique(phenotype_to_genes[,c("ID","Phenotype")])
+phenos <- unique(phenotype_to_genes[,c("HPO_ID","Phenotype")])
 phenos2 <- add_hpo_id(phenos=phenos)
 }

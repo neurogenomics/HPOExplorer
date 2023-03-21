@@ -10,6 +10,7 @@ add_tier(
   include_disease_characteristics = TRUE,
   auto_assign = TRUE,
   hpo = get_hpo(),
+  keep_tiers = NULL,
   verbose = TRUE
 )
 }
@@ -30,6 +31,10 @@ regex searches for keywords that appear in the term name,
 or the names of its descendants or ancestors.}
 
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
+
+\item{keep_tiers}{Tiers from \link[HPOExplorer]{hpo_tiers} to keep.
+Include \code{NA} if you wish to retain phenotypes that
+do not have any Tier assignment.}
 
 \item{verbose}{Print messages.}
 }

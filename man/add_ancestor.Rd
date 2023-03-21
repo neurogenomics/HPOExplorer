@@ -4,7 +4,13 @@
 \alias{add_ancestor}
 \title{Add ancestor}
 \usage{
-add_ancestor(phenos, lvl = 3, hpo = get_hpo(), verbose = TRUE)
+add_ancestor(
+  phenos,
+  lvl = 3,
+  hpo = get_hpo(),
+  remove_descendants = NULL,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{phenos}{dataframe of phenotypes and values / parameters.}
@@ -20,6 +26,12 @@ For example:
 }}
 
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
+
+\item{remove_descendants}{Remove HPO terms that are descendants of a given
+ancestral HPO term. Ancestral terms be provided as a character vector of
+phenotype names (e.g. \code{c("Clinical course")}),
+HPO IDs (e.g. \code{"HP:0031797" }) or a mixture of the two.
+See \link[HPOExplorer]{add_ancestor} for details.}
 
 \item{verbose}{Print messages.}
 }

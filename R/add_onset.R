@@ -15,6 +15,11 @@
 #' \item{HP:0003596 }{"Middle age onset" (Onset_score=10)}
 #' \item{HP:0003584 }{"Late onset" (Onset_score=11)}
 #' }
+#' @param keep_onsets The age of onset associated with each HPO ID to keep.
+#'  If >1 age of onset is associated with the term,
+#'  only the earliest age is considered.
+#'  See \link[HPOExplorer]{add_onset} for details.
+#' @param agg_by Column to aggregate age of onset metadata by.
 #' @inheritParams make_network_object
 #' @inheritParams data.table::merge.data.table
 #' @returns phenos data.table with extra columns:
@@ -37,88 +42,37 @@
 #' phenos <- example_phenos()
 #' phenos2 <- add_onset(phenos = phenos)
 add_onset <- function(phenos,
+                      keep_onsets = NULL,
+                      agg_by = NULL,
                       all.x = TRUE,
                       allow.cartesian = FALSE,
                       verbose = TRUE){
 
-  # templateR:::args2vars(add_onset)
-  HPO_ID <- Onset <- Onset_name <- Onset_score <- . <- NULL;
+  # devoptera::args2vars(add_onset)
+  Onset_latest <- NULL;
 
   if(!all(c("Onset",
-            "Onset_names",
-            "Onset_earliest") %in% names(phenos))){
-
+            "Onset_names") %in% names(phenos))){
     messager("Annotating phenos with Onset.",v=verbose)
-    annot <- load_phenotype_to_genes(filename = "phenotype.hpoa",
-                                     verbose = verbose)
-    annot <- annot[Onset!="" & HPO_ID %in% phenos$HPO_ID,]
-    annot$Onset_name <- harmonise_phenotypes(phenotypes = annot$Onset,
-                                             as_hpo_ids = FALSE,
-                                             verbose = verbose)
-    dict <- hpo_dict(type = "Onset")
-    annot$Onset_score <- dict[annot$Onset_name]
-    annot_agg <- annot[,.(Onset=paste(unique(Onset),collapse = ";"),
-                          Onset_names=paste(unique(Onset_name),collapse = ";"),
-                          Onset_counts=paste(table(Onset_name),collapse = ";"),
-                          Onset_score_mean=mean(Onset_score,na.rm=TRUE),
-                          Onset_score_min=min(Onset_score,na.rm=TRUE),
-                          Onset_score_max=max(Onset_score,na.rm=TRUE)
-                          ),
-                       by="HPO_ID"]
-    annot_agg$Onset_top <- lapply(seq_len(nrow(annot_agg)),
-                                        function(i){
-      r <- annot_agg[i,]
-      on <- strsplit(r$Onset_names,";")[[1]]
-      oc <- strsplit(r$Onset_counts,";")[[1]]
-      on[oc==min(oc)][[1]]
-    }) |> unlist()
-    annot_agg$Onset_earliest <- stats::setNames(names(dict),unname(dict))[
-      as.character(annot_agg$Onset_score_min)
-    ]
-    annot_agg$Onset_latest <- stats::setNames(names(dict),unname(dict))[
-      as.character(annot_agg$Onset_score_max)
-    ]
-    #### Merge ##@#
+    phenos <- add_disease(phenos = phenos,
+                          allow.cartesian = allow.cartesian,
+                          verbose = verbose)
+    utils::data("hpo_onsets",package = "HPOExplorer")
+    hpo_onsets <- get("hpo_onsets")
+    if(!is.null(agg_by)){
+      hpo_onsets <- hpo_onsets_agg(hpo_onsets = hpo_onsets,
+                                   phenos = phenos,
+                                   agg_by = agg_by)
+    }
     phenos <- data.table::merge.data.table(x = phenos,
-                                           y = annot_agg,
-                                           by = "HPO_ID",
+                                           y = hpo_onsets,
+                                           by = c("DatabaseID","HPO_ID"),
                                            allow.cartesian = allow.cartesian,
                                            all.x = all.x)
   }
+  #### Filter ####
+  if(!is.null(keep_onsets)){
+    phenos <- phenos[Onset_latest %in% keep_onsets,]
+  }
   return(phenos)
-
-  # onset_terms <- grep("onset$",hpo$name, value = TRUE)
-  #### Get by gene overlap #####
-  # "All phenotype terms associated with any disease that is associated with
-  # variants in a gene are assigned to that gene in this file.
-  # Other files are available on our Jenkins server that filter terms
-  # according to provenance of the annotation and frequency
-  # of the features in the disease."
-
-  # X <- data.table::rbindlist(
-  #   list(phenos_genes = data.table::as.data.table(unlist(phenos_genes)),
-  #        onset_genes= data.table::as.data.table(unlist(onset_genes))),
-  #   use.names = TRUE, idcol = "group") |>
-  #   data.table::dcast.data.table(formula = "ID ~ Gene",
-  #                                fun.aggregate = length)
-  # X <- methods::as(as.matrix(X[,-1]),"sparseMatrix",) |>
-  #   `rownames<-`(X$ID) |> t()
-  # ?stats::dist
-  # heatmap(cor(as.matrix(X)))
-  # res <- lapply(phenos_genes,
-  #               function(gr){
-  #   data.table::as.data.table(
-  #     # GeneOverlap::newGeneOverlap(listA = gr$Gene,
-  #     #                             listB = onset_genes$`HP:0003577`$Gene)
-  #       data.frame(overlap=GenomicRanges::countOverlaps(query = onset_genes,
-  #                                                       subject = gr),
-  #                  gr1_size=length(gr),
-  #                  gr2_size=length(unlist(onset_genes)),
-  #                  genome_size=length(unique(unlist(onset_genes)$Gene))
-  #                  ),
-  #     keep.rownames = "onset_ID"
-  #   )
-  # }) |> data.table::rbindlist(fill=TRUE,
-  #                             use.names = TRUE, idcol = "HPO_ID")
-
 }

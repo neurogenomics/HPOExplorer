@@ -35,7 +35,7 @@ ggnetwork_plot <- function(phenoNet,
                            verbose = TRUE,
                            ...) {
   # templateR:::source_all()
-  # templateR:::args2vars(ggnetwork_plot)
+  # devoptera::args2vars(ggnetwork_plot)
 
   requireNamespace("ggplot2")
   x <- y <- xend <- yend <- hover <- Phenotype <- NULL;

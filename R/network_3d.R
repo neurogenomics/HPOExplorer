@@ -76,7 +76,7 @@ network_3d <- function(g,
                        show_plot = TRUE,
                        save_path = tempfile(fileext = "network_3d.html"),
                        verbose = TRUE){
-  # templateR:::args2vars(network_3d)
+  # devoptera::args2vars(network_3d)
   # anc <- "Abnormality of the nervous system"
   # phenos <- make_phenos_dataframe(ancestor = anc)[ancestor_name==anc,]
   # g <- make_igraph_object(phenos = phenos)

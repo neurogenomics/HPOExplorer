@@ -1,4 +1,4 @@
-#' Add HPO term ID column to dataframe
+#' Add HPO ID column to dataframe
 #'
 #' This adds the HPO term id column to the subset of ewce results data
 #' to be plotted
@@ -14,7 +14,7 @@
 #' @importFrom data.table := setkeyv
 #' @examples
 #' phenotype_to_genes <- load_phenotype_to_genes()
-#' phenos <- unique(phenotype_to_genes[,c("ID","Phenotype")])
+#' phenos <- unique(phenotype_to_genes[,c("HPO_ID","Phenotype")])
 #' phenos2 <- add_hpo_id(phenos=phenos)
 add_hpo_id <- function(phenos,
                        hpo = get_hpo(),

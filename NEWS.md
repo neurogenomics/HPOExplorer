@@ -1,3 +1,15 @@
+# HPOExplorer 0.99.7
+
+## New features
+
+* `prioritise_targets`
+  - Move filtering steps and arg docs inside respective `HPOExplorer::add_*` functions.
+  
+## Bug fixes
+
+* De-aggregate `add_*` functions so that everything occurs at the level 
+  of "DatabaseID" + "HPO_ID".
+
 # HPOExplorer 0.99.6
 
 ## New features

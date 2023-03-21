@@ -15,7 +15,7 @@ fix_hpo_ids <- function(dt,
   HPO_ID <- NULL;
 
   dt$HPO_ID <- harmonise_phenotypes(dt$Phenotype, as_hpo_ids = TRUE)
-  dict <- stats::setNames(phenotype_to_genes$ID,
+  dict <- stats::setNames(phenotype_to_genes$HPO_ID,
                           phenotype_to_genes$Phenotype)
   dt[is.na(HPO_ID)]$HPO_ID <- dict[dt[is.na(HPO_ID)]$Phenotype]
   #### Check if any IDs are still missing ####

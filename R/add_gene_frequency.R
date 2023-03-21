@@ -3,6 +3,12 @@
 #' Add gene-level frequency, i.e. how often mutations in a given gene
 #' are associated with a given phenotype.
 #' Numeric frequency columns are on a 0-100% scale.
+#' @param gene_frequency_threshold Only keep genes with frequency
+#'  above the set threshold. Frequency ranges from 0-100 where 100 is
+#'  a gene that occurs 100% of the time in a given phenotype.
+#'  Include \code{NA} if you wish to retain genes that
+#'  do not have any frequency data.
+#'  See \link[HPOExplorer]{add_gene_frequency} for details.
 #' @inheritParams make_phenos_dataframe
 #' @inheritParams data.table::merge.data.table
 #' @returns phenos data.table with extra column
@@ -15,11 +21,12 @@
 #' phenotype_to_genes <- load_phenotype_to_genes()[seq_len(1000),]
 #' phenos2 <- add_gene_frequency(phenotype_to_genes = phenotype_to_genes)
 add_gene_frequency <- function(phenotype_to_genes = load_phenotype_to_genes(),
+                               gene_frequency_threshold = NULL,
                                all.x = TRUE,
                                verbose = TRUE){
 
-  FrequencyHPO <- gene_freq_name <- gene_freq_min <- gene_freq_max <- . <-
-    NULL;
+  FrequencyHPO <- gene_freq_name <- gene_freq_mean <-
+    gene_freq_min <- gene_freq_max <- . <- NULL;
   phenotype_to_genes <- add_hpo_id(phenos = phenotype_to_genes,
                                    phenotype_to_genes= phenotype_to_genes,
                                    verbose = verbose)
@@ -29,7 +36,6 @@ add_gene_frequency <- function(phenotype_to_genes = load_phenotype_to_genes(),
   if(!all(new_cols %in% names(phenotype_to_genes))){
     messager("Annotating gene frequencies.",v=verbose)
     g2p <- load_phenotype_to_genes("genes_to_phenotype.txt")
-    data.table::setnames(g2p,"ID","HPO_ID")
     g2p <- g2p[FrequencyHPO!="",]
     #### Parse freq data ####
     g2p[,gene_freq_name:=get_freq_dict()[g2p$FrequencyHPO]]
@@ -52,6 +58,17 @@ add_gene_frequency <- function(phenotype_to_genes = load_phenotype_to_genes(),
     #                   gene_freq_mean=mean(gene_freq_mean)
     #        ),
     #     by="Phenotype"]
+  }
+  #### Filter ####
+  if(!is.null(gene_frequency_threshold)){
+    if(any(is.na(gene_frequency_threshold))){
+      phenotype_to_genes <- phenotype_to_genes[
+        gene_freq_mean>=min(gene_frequency_threshold,na.rm = TRUE) |
+          is.na(gene_freq_mean),]
+    } else{
+      phenotype_to_genes <- phenotype_to_genes[gene_freq_mean>=
+                               min(gene_frequency_threshold,na.rm = TRUE),]
+    }
   }
   return(phenotype_to_genes)
 }

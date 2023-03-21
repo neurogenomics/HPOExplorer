@@ -13,7 +13,7 @@
 #' @export
 #' @importFrom utils download.file
 #' @importFrom tools R_user_dir
-#' @importFrom data.table fread
+#' @importFrom data.table fread setnames
 #' @examples
 #' phenotype_to_genes <- load_phenotype_to_genes()
 load_phenotype_to_genes <- function(filename = c("phenotype_to_genes.txt",
@@ -27,6 +27,10 @@ load_phenotype_to_genes <- function(filename = c("phenotype_to_genes.txt",
                                     ) {
   #### Get right URL #####
   filename <- filename[[1]]
+  #### Use index to select file ####
+  if(is.numeric(filename)){
+    filename <- eval(formals(load_phenotype_to_genes)$filename)[[filename]]
+  }
   file <- file.path(save_dir, filename)
   if(basename(file)=="phenotype.hpoa"){
     URL <- "http://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa"
@@ -62,6 +66,12 @@ load_phenotype_to_genes <- function(filename = c("phenotype_to_genes.txt",
       header = FALSE,
       col.names = col.names
     )
+  }
+  if("#DatabaseID" %in% names(phenotype_to_genes)){
+    data.table::setnames(phenotype_to_genes,"#DatabaseID","DatabaseID")
+  }
+  if("ID" %in% names(phenotype_to_genes)){
+    data.table::setnames(phenotype_to_genes,"ID","HPO_ID")
   }
   return(phenotype_to_genes)
 }

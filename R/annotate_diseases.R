@@ -1,7 +1,7 @@
 annotate_diseases <- function(d = load_phenotype_to_genes("phenotype.hpoa"),
                               verbose = TRUE){
 
-  # templateR:::args2vars(annotate_diseases)
+  # devoptera::args2vars(annotate_diseases)
   requireNamespace("ontoProc")
   Disease_MONDO_ID <- HPO_ID <- MONDO_ID <- NULL;
 
@@ -10,7 +10,7 @@ annotate_diseases <- function(d = load_phenotype_to_genes("phenotype.hpoa"),
 
   mondo <- ontoProc::getMondoOnto()
   # do <- ontoProc::getDiseaseOnto()
-  prefixes <- unique(stringr::str_split(d$`#DatabaseID`,":",simplify=TRUE)[,1])
+  prefixes <- unique(stringr::str_split(d$`DatabaseID`,":",simplify=TRUE)[,1])
   id_to_mondo <- grep(paste(paste0(prefixes,":"),collapse = "|"),
                       unlist(mondo$xref), value = TRUE) |>
     invert_dict()
@@ -18,7 +18,7 @@ annotate_diseases <- function(d = load_phenotype_to_genes("phenotype.hpoa"),
   hpo_meta[,MONDO_ID:=invert_dict(mondo_to_hp)[HPO_ID]]
   ### Add new columns ####
   data.table::setnames(d,"HPO_ID","HPO_ID_og")
-  d[,Disease_MONDO_ID:=id_to_mondo[d$`#DatabaseID`]]
+  d[,Disease_MONDO_ID:=id_to_mondo[d$`DatabaseID`]]
   d[,HPO_ID:=mondo_to_hp[Disease_MONDO_ID]]
   d[!is.na(HPO_ID),]
   ### Annotate diseases with HPO IDs ####

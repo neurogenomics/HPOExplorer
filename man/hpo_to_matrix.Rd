@@ -61,7 +61,8 @@ according to the HPO annotation, and 0 indicates it is not.
 By default, full phenotype names are used as the column names
 (e.g. "Abnormality of body height"),
 however you can instead set them to the HPO IDs
-by changing the \code{formula} argument to: \code{formula = "Gene ~ ID"}.
+by changing the \code{formula} argument to:
+\code{formula = "Gene ~ HPO_ID"}.
 Phenotypes that are not present in the \code{phenotype_to_genes} annotations
 are omitted from the final matrix.
 }

@@ -63,7 +63,7 @@ assign_tiers <- function(hpo=get_hpo(),
                          as_datatable=FALSE,
                          verbose=TRUE){
 
-  # templateR:::args2vars(assign_tiers)
+  # devoptera::args2vars(assign_tiers)
 
   DiseaseName <- definition <- NULL;
   #### Gather sets of IDs in the HPO that would qualify ####

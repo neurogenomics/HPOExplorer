@@ -8,6 +8,6 @@ test_that("phenos_to_granges works", {
   gr <- phenos_to_granges(phenos = phenos,
                           split.field = NULL)
   testthat::expect_true(methods::is(gr,"GRanges"))
-  testthat::expect_length(unique(gr$ID),
+  testthat::expect_length(unique(gr$HPO_ID),
                           length(unique(phenos$HPO_ID)))
 })

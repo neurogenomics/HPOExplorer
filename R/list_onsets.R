@@ -15,7 +15,7 @@ list_onsets <- function(hpo = get_hpo(),
                         as_hpo_ids = FALSE,
                         include_na = TRUE,
                         verbose = TRUE){
-  # templateR:::args2vars(list_onsets)
+  # devoptera::args2vars(list_onsets)
 
   opts <- harmonise_phenotypes(phenotypes = names(hpo_dict(type = "Onset")),
                                hpo = hpo,

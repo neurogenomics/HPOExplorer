@@ -10,6 +10,7 @@ add_ont_lvl(
   adjacency = NULL,
   absolute = TRUE,
   exclude_top_lvl = TRUE,
+  keep_ont_levels = NULL,
   reverse = TRUE,
   verbose = TRUE
 )
@@ -31,6 +32,10 @@ to a given cluster of terms (\code{FALSE}).}
 \item{exclude_top_lvl}{Exclude the top level term of the HPO
 (i.e. "All" (HP:0000001)) when computing \emph{absolute} levels.
 This argument is not used when computing \emph{relative} levels.}
+
+\item{keep_ont_levels}{Only keep phenotypes at certain \emph{absolute}
+ontology levels to keep.
+See \link[HPOExplorer]{add_ont_lvl} for details.}
 
 \item{reverse}{If \code{TRUE}, ontology
 level numbers with be revered such that the level of the parent terms

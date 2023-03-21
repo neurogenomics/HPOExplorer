@@ -13,35 +13,18 @@ data.table
 \href{https://hpo-annotation-qc.readthedocs.io/en/latest/annotationFormat.html}{Column explanations}
 
 \code{
-annot <- load_phenotype_to_genes(filename = "phenotype.hpoa")
+annot <- HPOExplorer::load_phenotype_to_genes(3)
 annot <- annot[Modifier!=""]
 parse_mod <- function(x){
-  unique(harmonise_phenotypes(strsplit(x,";")[[1]]))
-  }
+  unique(HPOExplorer::harmonise_phenotypes(strsplit(x,";")[[1]]))
+}
 annot <- annot[,Modifier_name:=lapply(Modifier,parse_mod)][Modifier!="",]
 annot <- annot[,.(Modifier_name=unlist(Modifier_name)),
-               by=c("HPO_ID","Modifier","DiseaseName","Aspect","#DatabaseID")]
+               by=c("HPO_ID","Modifier","DiseaseName","Aspect","DatabaseID")]
+data.table::setnames(annot,"DatabaseID","DatabaseID")
 dict <- HPOExplorer:::hpo_dict(type="severity")
 annot$Severity_score <- dict[annot$Modifier_name]
-hpo_modifiers <- annot[,list(
-  Modifier=paste(unique(Modifier),collapse=";"),
-  Modifier_name=paste(unique(Modifier_name),collapse=";"),
-  Modifier_count=paste(table(unlist(Modifier_name)),collapse=";"),
-  DiseaseNames=paste(unique(DiseaseName),collapse = ";"),
-  DiseaseNames_count=length(unique(DiseaseName)),
-  DatabaseID_count=length(unique(`#DatabaseID`)),
-  Severity_score_mean=mean(Severity_score, na.rm=TRUE),
-  Severity_score_min=min(Severity_score, na.rm=TRUE)
-), by="HPO_ID"]
-hpo_modifiers[Severity_score_min==Inf,]$Severity_score_min <- NA
-hpo_modifiers[Severity_score_min<0,]$Severity_score_min <- NA
-hpo_modifiers$Modifer_top <- lapply(seq_len(nrow(hpo_modifiers)),
-                                    function(i){
-  r <- hpo_modifiers[i,]
-  mn <- strsplit(r$Modifier_name,";")[[1]]
-  mc <- strsplit(r$Modifier_count,";")[[1]]
-  mn[mc==max(mc)][[1]]
-}) |> unlist()
+hpo_modifiers <- annot
 usethis::use_data(hpo_modifiers, overwrite = TRUE)
 }
 }

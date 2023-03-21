@@ -32,7 +32,7 @@ kde_surface <- function(xyz,
                         n = 50,
                         extend_kde = 1,
                         rescale_z = TRUE){
-  # templateR:::args2vars(kde_surface)
+  # devoptera::args2vars(kde_surface)
   requireNamespace("MASS")
   requireNamespace("scales")
 

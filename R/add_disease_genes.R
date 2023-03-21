@@ -9,14 +9,15 @@
 #' @importFrom data.table merge.data.table
 #' @importFrom utils data
 #' @examples
-#' phenos <- load_phenotype_to_genes()[,HPO_ID:=ID]
-#' phenos2 <- add_modifier(phenos = phenos)
+#' \dontrun{
+#' phenos <- load_phenotype_to_genes()
+#' phenos2 <- add_severity(phenos = phenos)
+#' }
 add_disease_genes <- function(phenos,
                               all.x = TRUE,
                               verbose = TRUE){
 
-  # templateR:::args2vars(add_disease_genes)
-  DiseaseName_og <- NULL;
+  # devoptera::args2vars(add_disease_genes)
 
   if(!"Gene" %in% names(phenos)){
     stp <-"'Gene' column must be present in phenos."
@@ -32,9 +33,9 @@ add_disease_genes <- function(phenos,
     # dgenes <- load_disease_genes()
     # dgenes <- data.table::merge.data.table(
     #   dgenes,
-    #   annot[,c("#DatabaseID","DiseaseName","HPO_ID")],
+    #   annot[,c("DatabaseID","DiseaseName","HPO_ID")],
     #   by.x = "DiseaseID",
-    #   by.y = "#DatabaseID",
+    #   by.y = "DatabaseID",
     #   all = FALSE,
     #   allow.cartesian = TRUE)
     # dgenes[,DiseaseName_og:=NULL]
@@ -42,12 +43,10 @@ add_disease_genes <- function(phenos,
     if(!"DiseaseName" %in% names(phenos)){
       phenos <- data.table::merge.data.table(
         phenos,
-        dannot[,c("#DatabaseID","DiseaseName","HPO_ID")],
+        dannot[,c("DatabaseID","DiseaseName","HPO_ID")],
         by = "HPO_ID",
         allow.cartesian = TRUE,
         all.x = all.x)
-      # length(unique(phenos[HPO_ID %in% annot$ID]$Phenotype))/
-      #   length(unique(phenos$Phenotype))
     }
   }
   return(phenos)

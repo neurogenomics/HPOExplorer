@@ -9,7 +9,7 @@ phenos_to_granges(
   phenotype_to_genes = load_phenotype_to_genes(),
   hpo = get_hpo(),
   keep_seqnames = c(seq_len(22), "X", "Y"),
-  split.field = "ID",
+  split.field = "HPO_ID",
   verbose = TRUE
 )
 }

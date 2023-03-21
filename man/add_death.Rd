@@ -4,10 +4,22 @@
 \alias{add_death}
 \title{Add age of death}
 \usage{
-add_death(phenos, all.x = TRUE, allow.cartesian = FALSE, verbose = TRUE)
+add_death(
+  phenos,
+  keep_deaths = NULL,
+  all.x = TRUE,
+  allow.cartesian = FALSE,
+  agg_by = NULL,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{phenos}{dataframe of phenotypes and values / parameters.}
+
+\item{keep_deaths}{The age of death associated with each HPO ID to keep.
+If >1 age of death is associated with the term,
+only the earliest age is considered.
+See \link[HPOExplorer]{add_death} for details.}
 
 \item{all.x}{logical; if \code{TRUE}, then extra rows will be added to the
 output, one for each row in \code{x} that has no matching row in \code{y}.
@@ -16,6 +28,8 @@ from \code{y}.  The default is \code{FALSE}, so that only rows with data from bo
 \code{x} and \code{y} are included in the output.}
 
 \item{allow.cartesian}{See \code{allow.cartesian} in \code{\link[data.table]{[.data.table}}.}
+
+\item{agg_by}{Column to aggregate age of death metadata by.}
 
 \item{verbose}{Print messages.}
 }
