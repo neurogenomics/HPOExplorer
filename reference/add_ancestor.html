@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
       </span>
     </div>
 
@@ -66,7 +66,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_ancestor</span><span class="op">(</span><span class="va">phenos</span>, lvl <span class="op">=</span> <span class="fl">3</span>, hpo <span class="op">=</span> <span class="fu"><a href="get_hpo.html">get_hpo</a></span><span class="op">(</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_ancestor</span><span class="op">(</span></span>
+<span>  <span class="va">phenos</span>,</span>
+<span>  lvl <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  hpo <span class="op">=</span> <span class="fu"><a href="get_hpo.html">get_hpo</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  remove_descendants <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -87,6 +93,14 @@ For example:</p><ul><li><p>1: "All"</p></li>
 
 <dt>hpo</dt>
 <dd><p>Human Phenotype Ontology object, loaded from <span class="pkg">ontologyIndex</span>.</p></dd>
+
+
+<dt>remove_descendants</dt>
+<dd><p>Remove HPO terms that are descendants of a given
+ancestral HPO term. Ancestral terms be provided as a character vector of
+phenotype names (e.g. <code>c("Clinical course")</code>),
+HPO IDs (e.g. <code>"HP:0031797" </code>) or a mixture of the two.
+See add_ancestor for details.</p></dd>
 
 
 <dt>verbose</dt>

@@ -36,7 +36,7 @@ Intellectual disability
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
       </span>
     </div>
 
@@ -107,6 +107,7 @@ Intellectual disability</p></li>
 <span>  include_disease_characteristics <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  auto_assign <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  hpo <span class="op">=</span> <span class="fu"><a href="get_hpo.html">get_hpo</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  keep_tiers <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -138,6 +139,12 @@ or the names of its descendants or ancestors.</p></dd>
 
 <dt>hpo</dt>
 <dd><p>Human Phenotype Ontology object, loaded from <span class="pkg">ontologyIndex</span>.</p></dd>
+
+
+<dt>keep_tiers</dt>
+<dd><p>Tiers from <a href="hpo_tiers.html">hpo_tiers</a> to keep.
+Include <code>NA</code> if you wish to retain phenotypes that
+do not have any Tier assignment.</p></dd>
 
 
 <dt>verbose</dt>

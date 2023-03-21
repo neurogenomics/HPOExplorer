@@ -19,7 +19,7 @@ Numeric frequency columns are on a 0-100% scale."><!-- mathjax --><script src="h
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
       </span>
     </div>
 
@@ -72,6 +72,7 @@ Numeric frequency columns are on a 0-100% scale.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_gene_frequency</span><span class="op">(</span></span>
 <span>  phenotype_to_genes <span class="op">=</span> <span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  gene_frequency_threshold <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  all.x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -83,6 +84,15 @@ Numeric frequency columns are on a 0-100% scale.</p>
 <dd><p>Output of
 <a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a> mapping phenotypes
 to gene annotations.</p></dd>
+
+
+<dt>gene_frequency_threshold</dt>
+<dd><p>Only keep genes with frequency
+above the set threshold. Frequency ranges from 0-100 where 100 is
+a gene that occurs 100% of the time in a given phenotype.
+Include <code>NA</code> if you wish to retain genes that
+do not have any frequency data.
+See add_gene_frequency for details.</p></dd>
 
 
 <dt>all.x</dt>

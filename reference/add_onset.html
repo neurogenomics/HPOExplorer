@@ -31,7 +31,7 @@ HP:0003584 "Late onset" (Onset_score=11)
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
       </span>
     </div>
 
@@ -91,13 +91,31 @@ Onset IDs and assigned "Onset_score" values:</p><ul><li><p>HP:0011461 "Fetal ons
 </ul></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_onset</span><span class="op">(</span><span class="va">phenos</span>, all.x <span class="op">=</span> <span class="cn">TRUE</span>, allow.cartesian <span class="op">=</span> <span class="cn">FALSE</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_onset</span><span class="op">(</span></span>
+<span>  <span class="va">phenos</span>,</span>
+<span>  keep_onsets <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  agg_by <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  all.x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allow.cartesian <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>phenos</dt>
 <dd><p>dataframe of phenotypes and values / parameters.</p></dd>
+
+
+<dt>keep_onsets</dt>
+<dd><p>The age of onset associated with each HPO ID to keep.
+If &gt;1 age of onset is associated with the term,
+only the earliest age is considered.
+See add_onset for details.</p></dd>
+
+
+<dt>agg_by</dt>
+<dd><p>Column to aggregate age of onset metadata by.</p></dd>
 
 
 <dt>all.x</dt>
@@ -138,9 +156,8 @@ with the target HPO_ID phenotype.</p></li>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="example_phenos.html">example_phenos</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_onset</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenos with Onset.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenos with Disease</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing existing file: ... phenotype.hpoa</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Translating all phenotypes to names.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Returning a vector of phenotypes (same order as input).</span>
 </code></pre></div>
     </div>
   </div>

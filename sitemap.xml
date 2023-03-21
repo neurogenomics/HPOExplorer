@@ -28,6 +28,9 @@
     <loc>/reference/add_death.html</loc>
   </url>
   <url>
+    <loc>/reference/add_disease.html</loc>
+  </url>
+  <url>
     <loc>/reference/add_disease_genes.html</loc>
   </url>
   <url>
@@ -43,9 +46,6 @@
     <loc>/reference/add_info_content.html</loc>
   </url>
   <url>
-    <loc>/reference/add_modifier.html</loc>
-  </url>
-  <url>
     <loc>/reference/add_onset.html</loc>
   </url>
   <url>
@@ -53,6 +53,9 @@
   </url>
   <url>
     <loc>/reference/add_pheno_frequency.html</loc>
+  </url>
+  <url>
+    <loc>/reference/add_severity.html</loc>
   </url>
   <url>
     <loc>/reference/add_tier.html</loc>
@@ -103,16 +106,19 @@
     <loc>/reference/hpo_api.html</loc>
   </url>
   <url>
-    <loc>/reference/hpo_death.html</loc>
+    <loc>/reference/hpo_deaths.html</loc>
   </url>
   <url>
-    <loc>/reference/hpo_frequency.html</loc>
+    <loc>/reference/hpo_frequencies.html</loc>
   </url>
   <url>
     <loc>/reference/hpo_meta.html</loc>
   </url>
   <url>
     <loc>/reference/hpo_modifiers.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hpo_onsets.html</loc>
   </url>
   <url>
     <loc>/reference/hpo_tiers.html</loc>

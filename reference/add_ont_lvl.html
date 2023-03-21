@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
       </span>
     </div>
 
@@ -72,6 +72,7 @@
 <span>  adjacency <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  absolute <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  exclude_top_lvl <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  keep_ont_levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  reverse <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -104,6 +105,12 @@ to a given cluster of terms (<code>FALSE</code>).</p></dd>
 <dd><p>Exclude the top level term of the HPO
 (i.e. "All" (HP:0000001)) when computing <em>absolute</em> levels.
 This argument is not used when computing <em>relative</em> levels.</p></dd>
+
+
+<dt>keep_ont_levels</dt>
+<dd><p>Only keep phenotypes at certain <em>absolute</em>
+ontology levels to keep.
+See add_ont_lvl for details.</p></dd>
 
 
 <dt>reverse</dt>
