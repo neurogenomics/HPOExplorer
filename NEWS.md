@@ -4,6 +4,7 @@
 
 * `prioritise_targets`
   - Move filtering steps and arg docs inside respective `HPOExplorer::add_*` functions.
+* New func: `add_ndisease`
   
 ## Bug fixes
 

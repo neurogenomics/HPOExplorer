@@ -50,7 +50,7 @@ add_death <- function(phenos,
                       verbose = TRUE){
 
   # devoptera::args2vars(add_death)
-  AgeOfDeath_score <- NULL;
+  AgeOfDeath_earliest <- AgeOfDeath_name <- NULL;
 
   if(!all(c("AgeOfDeath",
             "AgeOfDeath_name") %in% names(phenos))){
@@ -64,8 +64,7 @@ add_death <- function(phenos,
                       "AgeOfDeath_score")]
     #### Each disease can have >1 AgeofDeath ####
     if(!is.null(agg_by)){
-      annot <- hpo_death_agg(phenos = phenos,
-                             hpo_deaths = annot,
+      annot <- hpo_death_agg(hpo_deaths = annot,
                              by = agg_by)
     }
     ## AgeOfDeath annotations are only at level of Disease,
@@ -76,8 +75,13 @@ add_death <- function(phenos,
                                            allow.cartesian = allow.cartesian,
                                            all.x = all.x)
   }
+  #### Filter ####
   if(!is.null(keep_deaths)){
-    phenos <- phenos[AgeOfDeath_score %in% keep_deaths,]
+    if("AgeOfDeath_earliest" %in% names(phenos)){
+      phenos <- phenos[AgeOfDeath_earliest %in% keep_deaths,]
+    } else if("AgeOfDeath_name" %in% names(phenos)){
+      phenos <- phenos[AgeOfDeath_name %in% keep_deaths,]
+    }
   }
   return(phenos)
 }
