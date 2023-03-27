@@ -3,6 +3,7 @@
 export(add_ancestor)
 export(add_death)
 export(add_disease)
+export(add_disease_definition)
 export(add_disease_genes)
 export(add_gene_frequency)
 export(add_hpo_definition)
