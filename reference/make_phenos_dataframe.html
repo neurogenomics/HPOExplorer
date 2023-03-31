@@ -67,17 +67,22 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_phenos_dataframe</span><span class="op">(</span></span>
-<span>  <span class="va">ancestor</span>,</span>
+<span>  ancestor <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hpo <span class="op">=</span> <span class="fu"><a href="get_hpo.html">get_hpo</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  phenotype_to_genes <span class="op">=</span> <span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  adjacency <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  add_ont_lvl_absolute <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_ont_lvl_relative <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_info_contents <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  add_description <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  add_disease_data <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_ndiseases <span class="op">=</span> <span class="va">add_disease_data</span>,</span>
+<span>  add_onsets <span class="op">=</span> <span class="va">add_disease_data</span>,</span>
+<span>  add_deaths <span class="op">=</span> <span class="va">add_disease_data</span>,</span>
+<span>  add_pheno_frequencies <span class="op">=</span> <span class="va">add_disease_data</span>,</span>
+<span>  add_tiers <span class="op">=</span> <span class="va">add_disease_data</span>,</span>
+<span>  add_severities <span class="op">=</span> <span class="va">add_disease_data</span>,</span>
 <span>  add_hoverboxes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  add_age_onset <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  add_age_death <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  add_severity_tiers <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  columns <span class="op">=</span> <span class="fu"><a href="list_columns.html">list_columns</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  interactive <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -116,29 +121,52 @@ See <a href="get_ont_lvls.html">get_ont_lvls</a> for more details.</p></dd>
 See <a href="get_ont_lvls.html">get_ont_lvls</a> for more details.</p></dd>
 
 
+<dt>add_info_contents</dt>
+<dd><p>Add information content column for each phenotype.</p></dd>
+
+
 <dt>add_description</dt>
 <dd><p>Whether to get the phenotype descriptions as
 well (slower).</p></dd>
 
 
-<dt>add_hoverboxes</dt>
-<dd><p>Add hoverdata with
-<a href="make_hoverboxes.html">make_hoverboxes</a>.</p></dd>
+<dt>add_disease_data</dt>
+<dd><p>Add all disease metadata columns.
+This will expand the data using <code>allow.cartesion=TRUE</code>.</p></dd>
 
 
-<dt>add_age_onset</dt>
+<dt>add_ndiseases</dt>
+<dd><p>Add the number of diseases per phenotype.</p></dd>
+
+
+<dt>add_onsets</dt>
 <dd><p>Add age of onset columns using
 <a href="add_onset.html">add_onset</a>.</p></dd>
 
 
-<dt>add_age_death</dt>
+<dt>add_deaths</dt>
 <dd><p>Add age of death columns using
 <a href="add_death.html">add_death</a>.</p></dd>
 
 
-<dt>add_severity_tiers</dt>
+<dt>add_pheno_frequencies</dt>
+<dd><p>Add the frequency of each phenotype in
+each disease.</p></dd>
+
+
+<dt>add_tiers</dt>
 <dd><p>Add severity Tiers column using
 <a href="add_tier.html">add_tier</a>.</p></dd>
+
+
+<dt>add_severities</dt>
+<dd><p>Add severity column using
+<a href="add_severity.html">add_severity</a>.</p></dd>
+
+
+<dt>add_hoverboxes</dt>
+<dd><p>Add hoverdata with
+<a href="make_hoverboxes.html">make_hoverboxes</a>.</p></dd>
 
 
 <dt>columns</dt>
@@ -169,7 +197,6 @@ to add to the hoverdata via <a href="make_hoverboxes.html">make_hoverboxes</a>.<
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing gene counts.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Getting absolute ontology level for 23 HPO IDs.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing ontology level / gene count ratio.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding information_content scores.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding term definitions.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding level-3 ancestor to each HPO ID.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Making hoverboxes from: 'Phenotype', 'HPO_ID', 'ontLvl', 'ontLvl_geneCount_ratio', 'definition', 'ancestor', 'ancestor_name'</span>
