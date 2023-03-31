@@ -44,6 +44,7 @@ make_network_object <- function(phenos,
                                 layout = "fruchtermanreingold",
                                 verbose = TRUE,
                                 ...) {
+  # devoptera::args2vars(make_network_object, reassign = TRUE)
 
     messager("Making phenotype network object.",v=verbose)
     if("HPO_ID" %in% names(phenos)){

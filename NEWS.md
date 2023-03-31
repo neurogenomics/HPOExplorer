@@ -12,6 +12,7 @@
 
 * De-aggregate `add_*` functions so that everything occurs at the level 
   of "DatabaseID" + "HPO_ID".
+* Remove Roxygen links to `MultiEWCE`
 
 # HPOExplorer 0.99.6
 

@@ -24,9 +24,9 @@ annotate_diseases <- function(d = load_phenotype_to_genes("phenotype.hpoa"),
   ### Annotate diseases with HPO IDs ####
   # nms_og <- names(data.table::copy(d))
   d <- annotate_phenos(phenos = d,
-                       add_age_onset = TRUE,
-                       add_age_death = TRUE,
-                       add_severity_tiers = TRUE,
+                       add_onsets = TRUE,
+                       add_deaths = TRUE,
+                       add_severities = TRUE,
                        add_hoverboxes = FALSE,
                        verbose = verbose)
   return(d)

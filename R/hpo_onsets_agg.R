@@ -3,11 +3,10 @@ hpo_onsets_agg <- function(hpo_onsets,
                            agg_by=c("DatabaseID","HPO_ID")){
   HPO_ID <- Onset <- Onset_name <- Onset_score <- . <- NULL;
 
-  dict <- hpo_dict(type = "Onset")
+
   if("HPO_ID" %in% names(phenos)){
     hpo_onsets <- hpo_onsets[HPO_ID %in% unique(phenos$HPO_ID)]
   }
-  hpo_onsets$Onset_score <- dict[hpo_onsets$Onset_name]
   annot_agg <- hpo_onsets[,.(Onset=paste(unique(Onset),collapse = ";"),
                         Onset_names=paste(unique(Onset_name),collapse = ";"),
                         Onset_counts=paste(table(Onset_name),collapse = ";"),

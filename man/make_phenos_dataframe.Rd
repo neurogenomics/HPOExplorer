@@ -5,17 +5,22 @@
 \title{Make phenotypes dataframe}
 \usage{
 make_phenos_dataframe(
-  ancestor,
+  ancestor = NULL,
   hpo = get_hpo(),
   phenotype_to_genes = load_phenotype_to_genes(),
   adjacency = NULL,
   add_ont_lvl_absolute = TRUE,
   add_ont_lvl_relative = FALSE,
+  add_info_contents = FALSE,
   add_description = TRUE,
+  add_disease_data = FALSE,
+  add_ndiseases = add_disease_data,
+  add_onsets = add_disease_data,
+  add_deaths = add_disease_data,
+  add_pheno_frequencies = add_disease_data,
+  add_tiers = add_disease_data,
+  add_severities = add_disease_data,
   add_hoverboxes = TRUE,
-  add_age_onset = FALSE,
-  add_age_death = FALSE,
-  add_severity_tiers = FALSE,
   columns = list_columns(),
   interactive = TRUE,
   verbose = TRUE
@@ -40,20 +45,33 @@ See \link[HPOExplorer]{get_ont_lvls} for more details.}
 \item{add_ont_lvl_relative}{Add the relative ontology level of each HPO term.
 See \link[HPOExplorer]{get_ont_lvls} for more details.}
 
+\item{add_info_contents}{Add information content column for each phenotype.}
+
 \item{add_description}{Whether to get the phenotype descriptions as
 well (slower).}
 
-\item{add_hoverboxes}{Add hoverdata with
-\link[HPOExplorer]{make_hoverboxes}.}
+\item{add_disease_data}{Add all disease metadata columns.
+This will expand the data using \code{allow.cartesion=TRUE}.}
 
-\item{add_age_onset}{Add age of onset columns using
+\item{add_ndiseases}{Add the number of diseases per phenotype.}
+
+\item{add_onsets}{Add age of onset columns using
 \link[HPOExplorer]{add_onset}.}
 
-\item{add_age_death}{Add age of death columns using
+\item{add_deaths}{Add age of death columns using
 \link[HPOExplorer]{add_death}.}
 
-\item{add_severity_tiers}{Add severity Tiers column using
+\item{add_pheno_frequencies}{Add the frequency of each phenotype in
+each disease.}
+
+\item{add_tiers}{Add severity Tiers column using
 \link[HPOExplorer]{add_tier}.}
+
+\item{add_severities}{Add severity column using
+\link[HPOExplorer]{add_severity}.}
+
+\item{add_hoverboxes}{Add hoverdata with
+\link[HPOExplorer]{make_hoverboxes}.}
 
 \item{columns}{A named vector of columns in \code{phenos}
 to add to the hoverdata via \link[HPOExplorer]{make_hoverboxes}.}

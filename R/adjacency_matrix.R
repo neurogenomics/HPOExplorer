@@ -17,6 +17,9 @@ adjacency_matrix <- function(hpo = get_hpo(),
                              method = "HPOExplorer",
                              verbose = TRUE) {
 
+  if(is.null(terms)){
+    terms <- hpo$id
+  }
    messager("Creating adjacency matrix for",
             formatC(length(terms),big.mark = ","),"term(s).",
             v=verbose)

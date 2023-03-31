@@ -51,8 +51,7 @@ where the entire ontology is considered when assigning levels, or
 relative mode (\code{absolute=FALSE}) where only a subset of the ontology
 that is connected to a given term is considered when assigning levels.
 Relative mode can be helpful when trying to make plot where nodes are
-scaled to the ontology level, as in \link[MultiEWCE]{ggnetwork_plot_full}.
-This calls the \link[HPOExplorer]{get_ont_lvl} function internally
+scaled to the ontology level.
 }
 \examples{
 terms <- ontologyIndex::get_descendants(ontology = get_hpo(),

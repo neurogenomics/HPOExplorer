@@ -49,16 +49,18 @@ add_onset <- function(phenos,
                       verbose = TRUE){
 
   # devoptera::args2vars(add_onset)
-  Onset_latest <- NULL;
+  Onset_latest <- Onset_score <- NULL;
 
-  if(!all(c("Onset",
-            "Onset_names") %in% names(phenos))){
+  if(!any(c("Onset","Onset_name","Onset_names","Onset_score")
+          %in% names(phenos))){
     messager("Annotating phenos with Onset.",v=verbose)
     phenos <- add_disease(phenos = phenos,
                           allow.cartesian = allow.cartesian,
                           verbose = verbose)
     utils::data("hpo_onsets",package = "HPOExplorer")
     hpo_onsets <- get("hpo_onsets")
+    dict <- hpo_dict(type = "Onset")
+    hpo_onsets[,Onset_score:=dict[Onset_name]]
     if(!is.null(agg_by)){
       hpo_onsets <- hpo_onsets_agg(hpo_onsets = hpo_onsets,
                                    phenos = phenos,
