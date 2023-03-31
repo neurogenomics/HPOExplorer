@@ -1,7 +1,7 @@
 <img src='https://github.com/neurogenomics/HPOExplorer/raw/master/inst/hex/hex.png' title='Hex sticker for HPOExplorer' height='300'><br>
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
-[![](https://img.shields.io/badge/devel%20version-0.99.6-black.svg)](https://github.com/neurogenomics/HPOExplorer)
+[![](https://img.shields.io/badge/devel%20version-0.99.7-black.svg)](https://github.com/neurogenomics/HPOExplorer)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/HPOExplorer.svg)](https://github.com/neurogenomics/HPOExplorer)
 [![](https://img.shields.io/github/last-commit/neurogenomics/HPOExplorer.svg)](https://github.com/neurogenomics/HPOExplorer/commits/master)
 <br> [![R build
@@ -13,7 +13,7 @@ status](https://github.com/neurogenomics/HPOExplorer/workflows/rworkflows/badge.
 Authors: <i>Brian Schilder, Robert Gordon-Smith, Nathan Skene</i>  
 </h4>
 <h4>  
-Most recent update: <i>Mar-07-2023</i>  
+Most recent update: <i>Mar-31-2023</i>  
 </h4>
 
 ## Intro
@@ -49,6 +49,17 @@ Click
 for instructions on how to create a Docker or Singularity container with
 `HPOExplorer` and Rstudio pre-installed.
 
+# Citation
+
+If you use `HPOExplorer`, please cite:
+
+<!-- Modify this by editing the file: inst/CITATION  -->
+
+> Kitty B. Murphy, Robert Gordon-Smith, Jai Chapman, Momoko Otani, Brian
+> M. Schilder, Nathan G. Skene (2023) Identification of cell
+> type-specific gene targets underlying thousands of rare diseases and
+> subtraits. medRxiv, <https://doi.org/10.1101/2023.02.13.23285820>
+
 # Session Info
 
 <details>
@@ -72,24 +83,35 @@ utils::sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] pillar_1.8.1        compiler_4.2.1      RColorBrewer_1.1-3 
-    ##  [4] BiocManager_1.30.20 bitops_1.0-7        yulab.utils_0.0.6  
-    ##  [7] tools_4.2.1         digest_0.6.31       jsonlite_1.8.4     
-    ## [10] evaluate_0.20       lifecycle_1.0.3     tibble_3.1.8       
-    ## [13] gtable_0.3.1        pkgconfig_2.0.3     rlang_1.0.6        
-    ## [16] graph_1.76.0        cli_3.6.0           rstudioapi_0.14    
-    ## [19] rvcheck_0.2.1       yaml_2.3.7          xfun_0.37          
-    ## [22] fastmap_1.1.0       dplyr_1.1.0         knitr_1.42         
-    ## [25] generics_0.1.3      desc_1.4.2          vctrs_0.5.2        
-    ## [28] dlstats_0.1.6       stats4_4.2.1        rprojroot_2.0.3    
-    ## [31] grid_4.2.1          tidyselect_1.2.0    here_1.0.1         
-    ## [34] Biobase_2.58.0      glue_1.6.2          R6_2.5.1           
-    ## [37] fansi_1.0.4         XML_3.99-0.13       RBGL_1.74.0        
-    ## [40] rmarkdown_2.20.1    ggplot2_3.4.1       badger_0.2.3       
-    ## [43] magrittr_2.0.3      BiocGenerics_0.44.0 biocViews_1.66.2   
-    ## [46] scales_1.2.1        htmltools_0.5.4     rworkflows_0.99.7  
-    ## [49] RUnit_0.4.32        colorspace_2.1-0    renv_0.17.0        
-    ## [52] utf8_1.2.3          RCurl_1.98-1.10     munsell_0.5.0
+    ##  [1] here_1.0.1          rprojroot_2.0.3     digest_0.6.31      
+    ##  [4] utf8_1.2.3          BiocFileCache_2.6.1 R6_2.5.1           
+    ##  [7] stats4_4.2.1        RSQLite_2.3.0       evaluate_0.20      
+    ## [10] httr_1.4.5          ggplot2_3.4.1       pillar_1.9.0       
+    ## [13] yulab.utils_0.0.6   rworkflows_0.99.8   biocViews_1.66.3   
+    ## [16] rlang_1.1.0         curl_5.0.0          data.table_1.14.8  
+    ## [19] rstudioapi_0.14     whisker_0.4.1       blob_1.2.4         
+    ## [22] DT_0.27             RUnit_0.4.32        rmarkdown_2.20.1   
+    ## [25] desc_1.4.2          readr_2.1.4         stringr_1.5.0      
+    ## [28] htmlwidgets_1.6.2   dlstats_0.1.6       BiocPkgTools_1.16.1
+    ## [31] igraph_1.4.1        RCurl_1.98-1.10     bit_4.0.5          
+    ## [34] munsell_0.5.0       compiler_4.2.1      xfun_0.37          
+    ## [37] pkgconfig_2.0.3     BiocGenerics_0.44.0 rorcid_0.7.0       
+    ## [40] htmltools_0.5.4     tidyselect_1.2.0    tibble_3.2.1       
+    ## [43] httpcode_0.3.0      XML_3.99-0.14       fansi_1.0.4        
+    ## [46] dplyr_1.1.1         tzdb_0.3.0          dbplyr_2.3.2       
+    ## [49] bitops_1.0-7        rappdirs_0.3.3      crul_1.3           
+    ## [52] grid_4.2.1          RBGL_1.74.0         jsonlite_1.8.4     
+    ## [55] gtable_0.3.3        lifecycle_1.0.3     DBI_1.1.3          
+    ## [58] magrittr_2.0.3      scales_1.2.1        graph_1.76.0       
+    ## [61] cli_3.6.0           stringi_1.7.12      cachem_1.0.7       
+    ## [64] renv_0.17.2         fauxpas_0.5.0       xml2_1.3.3         
+    ## [67] rvcheck_0.2.1       filelock_1.0.2      generics_0.1.3     
+    ## [70] vctrs_0.6.1         gh_1.4.0            RColorBrewer_1.1-3 
+    ## [73] tools_4.2.1         bit64_4.0.5         Biobase_2.58.0     
+    ## [76] glue_1.6.2          hms_1.1.3           fastmap_1.1.1      
+    ## [79] yaml_2.3.7          colorspace_2.1-0    BiocManager_1.30.20
+    ## [82] rvest_1.0.3         memoise_2.0.1       badger_0.2.3       
+    ## [85] knitr_1.42
 
 </details>
 <hr>

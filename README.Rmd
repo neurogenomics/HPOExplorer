@@ -10,6 +10,8 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+pkg <- read.dcf(file="DESCRIPTION",
+                fields = "Package")[[1]]
 ```
  
 ## Intro
@@ -44,6 +46,12 @@ Click
 for instructions on how to create a Docker or Singularity
 container with `HPOExplorer` and Rstudio pre-installed. 
 
+# Citation
+
+If you use ``r pkg``, please cite: 
+
+<!-- Modify this by editing the file: inst/CITATION  -->
+> `r utils::citation(pkg)$textVersion`
 
 # Session Info 
 
