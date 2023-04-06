@@ -37,7 +37,7 @@
 #' \item{"Onset_latest": }{The latest age of onset.}
 #' }
 #' @export
-#' @importFrom data.table merge.data.table
+#' @importFrom data.table merge.data.table=
 #' @examples
 #' phenos <- example_phenos()
 #' phenos2 <- add_onset(phenos = phenos)
@@ -49,7 +49,7 @@ add_onset <- function(phenos,
                       verbose = TRUE){
 
   # devoptera::args2vars(add_onset)
-  Onset_latest <- Onset_score <- NULL;
+  Onset_latest <- Onset_score <- Onset_name <- NULL;
 
   if(!any(c("Onset","Onset_name","Onset_names","Onset_score")
           %in% names(phenos))){
