@@ -20,6 +20,10 @@
   - Remove as this information is now stored within new `hpo` tags:
     `hpo$def`, `hpo$xref`, etc.
 
+## Bug fixes
+
+* Update/simplify `HPOExplorer` vignette.
+
 # HPOExplorer 0.99.7
 
 ## New features
