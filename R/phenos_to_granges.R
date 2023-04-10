@@ -5,6 +5,7 @@
 #' to a \link[GenomicRanges]{GRangesList} split by HPO ID.
 #' The resulting object will contain genes (and gene metadata) for all
 #' genes associated with each phenotypes.
+#' @param as_datatable Return as a \link[data.table]{data.table}.
 #' @param keep_seqnames Chromosomes to keep.
 #' @inheritParams make_network_object
 #' @inheritParams make_phenos_dataframe
@@ -16,40 +17,54 @@
 #' @examples
 #' phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
 #' grl <- phenos_to_granges(phenos = phenos)
-phenos_to_granges <- function(phenos,
+phenos_to_granges <- function(phenos = NULL,
                               phenotype_to_genes =
                                 load_phenotype_to_genes(),
                               hpo = get_hpo(),
                               keep_seqnames = c(seq_len(22),"X","Y"),
                               split.field = "HPO_ID",
+                              as_datatable = FALSE,
                               verbose = TRUE){
-  # templateR:::source_all()
   # devoptera::args2vars(phenos_to_granges)
   requireNamespace("GenomicRanges")
 
   messager("Converting phenos to",
            if(is.null(split.field))"GRanges."else"GRangesList.",
            v=verbose)
+  phenotype_to_genes <- data.table::copy(phenotype_to_genes)
   if(is.character(phenos)){
    phenos <- data.table::data.table(HPO_ID=names(phenos),
                                     Phenotype=unname(phenos))
+  } else if(is.null(phenos)){
+    phenos <- phenotype_to_genes[,c("HPO_ID","Phenotype")] |> unique()
   }
   phenos <- add_hpo_id(phenos = phenos,
                        phenotype_to_genes = phenotype_to_genes,
                        hpo = hpo)
-  phenos_genes <- get_gene_lists(phenotypes = phenos$HPO_ID,
-                                 phenotype_to_genes = phenotype_to_genes,
-                                 hpo = hpo,
-                                 as_list = FALSE)
-  gr <- get_gene_lengths(gene_list = phenos_genes$Gene,
+  # phenos_genes <- get_gene_lists(phenotypes = phenos$HPO_ID,
+  #                                phenotype_to_genes = phenotype_to_genes,
+  #                                hpo = hpo,
+  #                                as_list = FALSE)
+  data.table::setnames(phenos,"LinkID","DatabaseID",
+                       skip_absent = TRUE)
+  data.table::setnames(phenotype_to_genes,"LinkID","DatabaseID",
+                       skip_absent = TRUE)
+  by <- c("HPO_ID","DatabaseID")
+  by <- by[by %in% names(phenos)]
+  phenos <- data.table::merge.data.table(
+    phenos,
+    phenotype_to_genes[,c(by,"Gene","EntrezID"),with=FALSE],
+    by = by)
+  gr <- get_gene_lengths(gene_list = phenos$Gene,
                          keep_seqnames = keep_seqnames,
                          verbose = verbose)
   #### Merge in gene data ####
   gr_dt <- data.table::merge.data.table(
-    phenos_genes,
+    phenos,
     data.table::as.data.table(gr),
     by.x = "Gene",
     by.y = "symbol")
+  if(isTRUE(as_datatable)) return(gr_dt)
   gr <- GenomicRanges::makeGRangesFromDataFrame(df = gr_dt,
                                                 keep.extra.columns = TRUE)
   if(is.null(split.field)) {

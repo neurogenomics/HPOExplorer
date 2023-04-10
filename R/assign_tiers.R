@@ -67,8 +67,6 @@ assign_tiers <- function(hpo=get_hpo(),
 
   DiseaseName <- definition <- NULL;
   #### Gather sets of IDs in the HPO that would qualify ####
-  utils::data("hpo_meta", package = "HPOExplorer")
-  hpo_meta <- get("hpo_meta")
   annot <- load_phenotype_to_genes("phenotype.hpoa")
   hpo_sets <- lapply(stats::setNames(names(keyword_sets),
                                      names(keyword_sets)),
@@ -76,20 +74,21 @@ assign_tiers <- function(hpo=get_hpo(),
     k <- keyword_sets[[nm]]
     ids <- c()
     #### Matched in the name #####
-    if(check_names){
+    if(isTRUE(check_names)){
       ids1 <- grep(paste(k,collapse = "|"),
                    hpo$name,value = TRUE, ignore.case = TRUE)
       ids <- c(ids,ids1)
     }
     #### Matched in the definition ####
-    if(check_definitions){
-      hpo_meta_sub <- hpo_meta[grepl(paste(k,collapse = "|"), definition,
-                                     ignore.case = TRUE),]
-      ids2 <- hpo$name[names(hpo$name) %in% hpo_meta_sub$HPO_ID]
+    if(isTRUE(check_definitions)){
+      hp_sub <- grep(paste(k,collapse = "|"),
+                     hpo$def,
+                     ignore.case = TRUE,value = TRUE)
+      ids2 <- hpo$name[names(hp_sub)]
       ids <- c(ids,ids2)
     }
     #### Matches in the disease association ####
-    if(check_diseases){
+    if(isTRUE(check_diseases)){
       annot_sub <- annot[grepl(paste(k,collapse = "|"), DiseaseName,
                                ignore.case = TRUE),]
       ids3 <- hpo$name[names(hpo$name) %in% annot_sub$HPO_ID]

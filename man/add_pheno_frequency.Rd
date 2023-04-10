@@ -8,6 +8,7 @@ add_pheno_frequency(
   phenos,
   pheno_frequency_threshold = NULL,
   all.x = TRUE,
+  allow.cartesian = FALSE,
   verbose = TRUE
 )
 }
@@ -26,6 +27,8 @@ output, one for each row in \code{x} that has no matching row in \code{y}.
 These rows will have 'NA's in those columns that are usually filled with values
 from \code{y}.  The default is \code{FALSE}, so that only rows with data from both
 \code{x} and \code{y} are included in the output.}
+
+\item{allow.cartesian}{See \code{allow.cartesian} in \code{\link[data.table]{[.data.table}}.}
 
 \item{verbose}{Print messages.}
 }

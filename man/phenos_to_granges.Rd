@@ -5,11 +5,12 @@
 \title{Phenotypes to \link[GenomicRanges]{GenomicRanges}}
 \usage{
 phenos_to_granges(
-  phenos,
+  phenos = NULL,
   phenotype_to_genes = load_phenotype_to_genes(),
   hpo = get_hpo(),
   keep_seqnames = c(seq_len(22), "X", "Y"),
   split.field = "HPO_ID",
+  as_datatable = FALSE,
   verbose = TRUE
 )
 }
@@ -31,6 +32,8 @@ to gene annotations.}
       \code{split.field} is not provided the \code{df} will be split by the
       number of rows.
   }
+
+\item{as_datatable}{Return as a \link[data.table]{data.table}.}
 
 \item{verbose}{Print messages.}
 }

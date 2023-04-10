@@ -5,7 +5,10 @@ get_gene_lengths <- function(gene_list,
 
   requireNamespace("ensembldb")
   requireNamespace("AnnotationFilter")
-  messager("Gathering gene metadata",v=verbose)
+
+  gene_list <- unique(gene_list)
+  messager("Gathering metadata for",length(gene_list),"unique genes.",
+           v=verbose)
   keep_seqnames <- unique(
     c(tolower(keep_seqnames),
       paste0("chr",keep_seqnames),
@@ -27,7 +30,7 @@ get_gene_lengths <- function(gene_list,
     txdb,
     columns = c(ensembldb::listColumns(txdb, "gene"), "entrezid"),
     filter=AnnotationFilter::AnnotationFilterList(
-      AnnotationFilter::SymbolFilter(value = unique(gene_list)),
+      AnnotationFilter::SymbolFilter(value = gene_list),
       AnnotationFilter::SeqNameFilter(value = keep_seqnames)
     ))
   return(tx_gr)

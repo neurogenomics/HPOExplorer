@@ -37,7 +37,7 @@
 #' \item{"Onset_latest": }{The latest age of onset.}
 #' }
 #' @export
-#' @importFrom data.table merge.data.table=
+#' @importFrom data.table merge.data.table :=
 #' @examples
 #' phenos <- example_phenos()
 #' phenos2 <- add_onset(phenos = phenos)
@@ -55,6 +55,7 @@ add_onset <- function(phenos,
           %in% names(phenos))){
     messager("Annotating phenos with Onset.",v=verbose)
     phenos <- add_disease(phenos = phenos,
+                          all.x = all.x,
                           allow.cartesian = allow.cartesian,
                           verbose = verbose)
     utils::data("hpo_onsets",package = "HPOExplorer")

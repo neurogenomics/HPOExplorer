@@ -1,3 +1,25 @@
+# HPOExplorer 0.99.8
+
+## New features
+
+* HPO data
+  - Update from Bioportal: 2023-04-05
+  - Recreate HPO with `extract_tags = "everything"`. 
+  - Now includes useful tags like `xref` to get HPO ID mappings 
+    with other databases (MESH, SNOMED, UMLS). 
+  - store in Releases via `piggyback` to reduce package size.
+  
+* MONDO data
+  - Create updated ontology_index obj and store in Releases.
+  - New func: `get_mondo`
+  - Now includes useful tags like `xref` to get HPO ID mappings 
+    with other databases (DOID, MESH, ICD9, GARD, EFO, SCTID, NCIT UMLS, Orphanet). 
+* `get_data`
+  - New internal support func to get `piggyback` data.
+* `hpo_meta`
+  - Remove as this information is now stored within new `hpo` tags:
+    `hpo$def`, `hpo$xref`, etc.
+
 # HPOExplorer 0.99.7
 
 ## New features

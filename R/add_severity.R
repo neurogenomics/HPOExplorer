@@ -27,6 +27,7 @@
 add_severity <- function(phenos,
                          hpo = get_hpo(),
                          all.x = TRUE,
+                         allow.cartesian = FALSE,
                          severity_threshold = NULL,
                          verbose = TRUE){
 
@@ -36,6 +37,8 @@ add_severity <- function(phenos,
   if(!all(c("Modifier","Modifier_name") %in% names(phenos))){
     messager("Annotating phenos with Modifiers",v=verbose)
     phenos <- add_disease(phenos = phenos,
+                          all.x = all.x,
+                          allow.cartesian = allow.cartesian,
                           verbose = verbose)
     utils::data("hpo_modifiers", package = "HPOExplorer")
     hpo_mod <- get("hpo_modifiers")

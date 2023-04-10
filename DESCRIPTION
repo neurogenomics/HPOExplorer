@@ -1,6 +1,6 @@
 Package: HPOExplorer
 Title: Analysis and Visualisation of the Human Phenotype Ontology
-Version: 0.99.7
+Version: 0.99.8
 Authors@R:
     c(
     person(given = "Brian",
@@ -65,9 +65,9 @@ Suggests:
     Matrix,
     MASS,
     scales,
-    ontoProc,
     htmlwidgets,
-    R.utils
+    R.utils,
+    piggyback
 VignetteBuilder: knitr
 biocViews:
     Genetics, Preprocessing, GeneTarget, SystemsBiology,

@@ -6,6 +6,8 @@
 #' See
 #' \href{https://hpo-annotation-qc.readthedocs.io/en/latest/annotationFormat.html}{
 #' here for column descriptions}.
+#' @param add_definitions Add disease definitions using
+#' \link[HPOExplorer]{add_disease_definition}.
 #' @inheritParams make_network_object
 #' @inheritParams data.table::merge.data.table
 #' @returns phenos data.table with extra columns
@@ -21,6 +23,7 @@ add_disease <- function(phenos,
                         extra_cols = NULL,
                         all.x = TRUE,
                         allow.cartesian = FALSE,
+                        add_definitions = TRUE,
                         verbose = TRUE){
 
   # devoptera::args2vars(add_disease)
@@ -51,6 +54,12 @@ add_disease <- function(phenos,
       by = by,
       all.x = all.x,
       allow.cartesian = allow.cartesian)
+  }
+  #### Add Definitions column and fill out missing DiseaseName columns ####
+  if(isTRUE(add_definitions)){
+    phenos <- add_disease_definition(phenos = phenos,
+                                     all.x = all.x,
+                                     verbose = verbose)
   }
   return(phenos)
 }

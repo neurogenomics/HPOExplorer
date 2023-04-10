@@ -54,9 +54,11 @@ add_death <- function(phenos,
 
   if(!all(c("AgeOfDeath",
             "AgeOfDeath_name") %in% names(phenos))){
-    messager("Annotating phenos with AgeOfDeath",v=verbose)
+    messager("Annotating phenos with AgeOfDeath.",v=verbose)
     phenos <- add_disease(phenos = phenos,
-                           verbose = verbose)
+                          all.x = all.x,
+                          allow.cartesian = allow.cartesian,
+                          verbose = verbose)
     utils::data("hpo_deaths",package = "HPOExplorer")
     annot <- get("hpo_deaths")
     annot <- annot[,c("DatabaseID",

@@ -22,6 +22,7 @@
 add_pheno_frequency <- function(phenos,
                                 pheno_frequency_threshold = NULL,
                                 all.x = TRUE,
+                                allow.cartesian = FALSE,
                                 verbose = TRUE){
   pheno_freq_mean <- NULL;
 
@@ -30,6 +31,8 @@ add_pheno_frequency <- function(phenos,
   if(!all(new_cols %in% names(phenos))){
     messager("Annotating phenotype frequencies.",v=verbose)
     phenos <- add_disease(phenos = phenos,
+                          all.x = all.x,
+                          allow.cartesian = allow.cartesian,
                           verbose = verbose)
     #### Get precomputed phenotype-disease frequencies ####
     utils::data("hpo_frequencies", package = "HPOExplorer")

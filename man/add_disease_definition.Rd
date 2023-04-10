@@ -6,8 +6,9 @@
 \usage{
 add_disease_definition(
   phenos,
-  cols = c("Definitions"),
+  cols = c("Definitions", "Preferred.Label"),
   save_dir = file.path(tools::R_user_dir("HPOExplorer", which = "cache")),
+  include_mondo = TRUE,
   all.x = TRUE,
   verbose = TRUE
 )
@@ -19,6 +20,9 @@ add_disease_definition(
 
 \item{save_dir}{Directory to save metadata files to.}
 
+\item{include_mondo}{Add IDs/names/definitions from MONDO via
+\link[HPOExplorer]{add_mondo}.}
+
 \item{all.x}{logical; if \code{TRUE}, then extra rows will be added to the
 output, one for each row in \code{x} that has no matching row in \code{y}.
 These rows will have 'NA's in those columns that are usually filled with values
@@ -28,7 +32,7 @@ from \code{y}.  The default is \code{FALSE}, so that only rows with data from bo
 \item{verbose}{Print messages.}
 }
 \value{
-phenos data.table with extra columns
+phenos data.table with extra columns.
 }
 \description{
 Add metadata for diseases using files from their respective databases:
