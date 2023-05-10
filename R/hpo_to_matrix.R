@@ -29,18 +29,20 @@
 #' @importFrom data.table dcast.data.table copy setnafill :=
 #' @importFrom stats terms as.formula cor
 #' @examples
-#' phenos <- HPOExplorer::example_phenos()
+#' phenos <- example_phenos()
 #' X <- hpo_to_matrix(terms = phenos$HPO_ID)
 hpo_to_matrix <- function(terms = NULL,
                           phenotype_to_genes = load_phenotype_to_genes(),
                           formula = "Gene ~ Phenotype",
                           fun.aggregate = mean,
+                          value.var = "evidence_score_mean",
                           fill = 0,
                           run_cor = FALSE,
                           as_matrix = TRUE,
                           as_sparse = TRUE,
                           method = "pearson",
                           verbose = TRUE){
+  # devoptera::args2vars(hpo_to_matrix, reassign = TRUE)
   requireNamespace("Matrix")
   HPO_ID <- dummy <- NULL;
 
@@ -48,10 +50,22 @@ hpo_to_matrix <- function(terms = NULL,
   if(!is.null(terms)){
     phenotype_to_genes <- phenotype_to_genes[HPO_ID %in% unique(terms),]
   }
+  #### ####
+  if(is.null(value.var)){
+    phenotype_to_genes[,dummy:=1]
+    value.var <- "dummy"
+  } else if(grepl("^evidence_score",value.var)){
+    phenotype_to_genes <- add_evidence(phenos = phenotype_to_genes,
+                                       verbose = verbose)
+  } else if(!value.var %in% names(phenotype_to_genes)){
+    stp <- paste("value.var not found in phenotype_to_genes.")
+    stop(stp)
+  }
   #### Cast into gene x phenotype matrix ####
-  X_dt <- phenotype_to_genes[,dummy:=1] |>
-    data.table::dcast.data.table(formula = formula,
-                                 value.var = "dummy",
+  X_dt <-
+    data.table::dcast.data.table(data = phenotype_to_genes,
+                                 formula = formula,
+                                 value.var = value.var,
                                  fun.aggregate = fun.aggregate,
                                  fill = fill,
                                  na.rm = TRUE)
@@ -61,11 +75,13 @@ hpo_to_matrix <- function(terms = NULL,
                                .SDcols=meta_vars]$rn
   #### Fill NAs ####
   if(!is.null(fill)){
-    data.table::setnafill(X_dt, fill = fill,
+    data.table::setnafill(X_dt,
+                          fill = fill,
                           cols = names(X_dt[,-meta_vars, with=FALSE]))
   }
   #### Format and return ####
-  if(isTRUE(as_matrix) | isTRUE(run_cor)){
+  if(isTRUE(as_matrix) ||
+     isTRUE(run_cor)){
     X <- as.matrix(X_dt[,-meta_vars,with=FALSE])|> `rownames<-`(rn)
     if(isTRUE(run_cor)){
       messager("Computing all parwise correlations.",v=verbose)

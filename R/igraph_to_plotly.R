@@ -22,7 +22,7 @@ igraph_to_plotly <- function(g,
     name=names(igraph::V(g)),
     layout_func(g,dim=dim) |>
       data.table::as.data.table()|>
-      `colnames<-`(c("x","y","z"))
+      `colnames<-`(c("x","y","z")[seq_len(dim)])
   )
   # d <- data.table::as.data.table(igraph::as_edgelist(g))
   d <- igraph::as_data_frame(g, what = "both")
@@ -53,8 +53,9 @@ igraph_to_plotly <- function(g,
     by.y="name"
   ) |> data.table::merge.data.table(
     data.table::copy(layout_coords) |>
-      data.table::setnames(c("x","y","z"),
-                           c("xend","yend","zend")),
+      data.table::setnames(c("x","y","z")[seq_len(dim)],
+                           c("xend","yend","zend")[seq_len(dim)]
+                           ),
     by.x="to",
     by.y="name"
   )

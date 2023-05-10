@@ -59,6 +59,13 @@ load_phenotype_to_genes <- function(filename = c("phenotype_to_genes.txt",
       input = file,
       skip = 4,
     )
+  } else if(basename(file)=="genes_to_phenotype.txt"){
+    phenotype_to_genes <- data.table::fread(
+      input = file,
+      skip = 1,
+      header = FALSE,
+      # col.names = col.names
+    )
   } else {
     phenotype_to_genes <- data.table::fread(
       input = file,

@@ -9,6 +9,7 @@ hpo_to_matrix(
   phenotype_to_genes = load_phenotype_to_genes(),
   formula = "Gene ~ Phenotype",
   fun.aggregate = mean,
+  value.var = "evidence_score_mean",
   fill = 0,
   run_cor = FALSE,
   as_matrix = TRUE,
@@ -30,6 +31,10 @@ to gene annotations.}
 \item{fun.aggregate}{Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to \code{length} with a message.
 
   To use multiple aggregation functions, pass a \code{list}; see Examples. }
+
+\item{value.var}{Name of the column whose values will be filled to cast. Function \code{guess()} tries to, well, guess this column automatically, if none is provided.
+
+  Cast multiple \code{value.var} columns simultaneously by passing their names as a \code{character} vector. See Examples. }
 
 \item{fill}{Value with which to fill missing cells. If \code{fun.aggregate} is present, takes the value by applying the function on a 0-length vector.}
 
@@ -67,6 +72,6 @@ Phenotypes that are not present in the \code{phenotype_to_genes} annotations
 are omitted from the final matrix.
 }
 \examples{
-phenos <- HPOExplorer::example_phenos()
+phenos <- example_phenos()
 X <- hpo_to_matrix(terms = phenos$HPO_ID)
 }

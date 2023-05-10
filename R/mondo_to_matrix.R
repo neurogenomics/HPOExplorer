@@ -1,7 +1,7 @@
 mondo_to_matrix <- function(species=c("Homo sapiens")){
 
   subject_taxon_label <- evidence_score <- evidence <- object_definition <-
-    object <- NULL;
+    object <-  NULL;
 
   #### Prepare data ####
   dat <- data.table::fread(paste0(
