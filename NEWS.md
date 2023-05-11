@@ -1,3 +1,10 @@
+# HPOExplorer 0.99.9
+
+## New features
+
+* `load_phenotype_to_genes`
+  - Temporary fix while the HPO annotations are being fixed (they accidentally uploaded a version without the LinkIDs): use old files which I've uploaded copies of to GitHub Releases.
+
 # HPOExplorer 0.99.8
 
 ## New features

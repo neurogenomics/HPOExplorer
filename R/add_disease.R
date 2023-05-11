@@ -23,7 +23,7 @@ add_disease <- function(phenos,
                         extra_cols = NULL,
                         all.x = TRUE,
                         allow.cartesian = FALSE,
-                        add_definitions = TRUE,
+                        add_definitions = FALSE,
                         verbose = TRUE){
 
   # devoptera::args2vars(add_disease)
@@ -42,15 +42,18 @@ add_disease <- function(phenos,
       if("DiseaseName" %in% names(phenos)){
         return(phenos)
       }
-      by <- c("HPO_ID","DatabaseID")
-    #### From HPO_ID alone ####
-    }  else {
-      by <- "HPO_ID"
     }
+    #### From HPO_ID alone ####
+    by <- c("HPO_ID","DatabaseID")
+    by <- by[by %in% names(phenos)]
+    #### Ensure there's only 1 row per Disease ####
+    annot <- annot[,unique(c("HPO_ID","DiseaseName","DatabaseID",
+                             extra_cols)),
+                   with=FALSE][,.SD[1], by=c("DatabaseID","HPO_ID")]
+    #### Merge ####
     phenos <- data.table::merge.data.table(
       phenos,
-      annot[,unique(c("HPO_ID","DiseaseName","DatabaseID",
-                      extra_cols)), with=FALSE],
+      annot,
       by = by,
       all.x = all.x,
       allow.cartesian = allow.cartesian)

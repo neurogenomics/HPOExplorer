@@ -9,7 +9,7 @@ add_disease(
   extra_cols = NULL,
   all.x = TRUE,
   allow.cartesian = FALSE,
-  add_definitions = TRUE,
+  add_definitions = FALSE,
   verbose = TRUE
 )
 }

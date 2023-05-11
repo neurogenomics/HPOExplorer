@@ -8,9 +8,8 @@ add_evidence(
   phenos,
   keep_evidence = NULL,
   all.x = TRUE,
-  allow.cartesian = TRUE,
-  agg_by = c("disease_curie", "disease_original_curie", "disease_title", "DatabaseID",
-    "gene_curie", "gene_symbol"),
+  allow.cartesian = FALSE,
+  agg_by = c("DatabaseID", "gene_symbol"),
   default_score = 1,
   verbose = TRUE
 )

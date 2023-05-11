@@ -7,8 +7,14 @@
 #' @param filename Name of the file.
 #' @param save_dir Folder where the phenotype to genes text
 #' file is/will be stored.
+#' @param method Where to download the data from:
+#' \itemize{
+#' \item{"piggyback": }{An old copy of HPO annotation files
+#'  stored in the Releases section of the \pkg{HPOExplorer} GitHub repository.}
+#' \item{"hpo": }{An up-to-date copy directly from the official HPO website.}
+#' }
 #' @param verbose Print messages.
-#' @returns a dataframe of the phenotype_to_genes.txt file from HPO
+#' @returns A \link[data.table]{data.table} of the HPO annotations.
 #'
 #' @export
 #' @importFrom utils download.file
@@ -23,35 +29,41 @@ load_phenotype_to_genes <- function(filename = c("phenotype_to_genes.txt",
                                       tools::R_user_dir("HPOExplorer",
                                                         which="cache"),
                                       "data"),
+                                    method = "piggyback",
                                     verbose = TRUE
                                     ) {
+  # devoptera::args2vars(load_phenotype_to_genes)
+
   #### Get right URL #####
   filename <- filename[[1]]
   #### Use index to select file ####
   if(is.numeric(filename)){
     filename <- eval(formals(load_phenotype_to_genes)$filename)[[filename]]
   }
-  file <- file.path(save_dir, filename)
-  if(basename(file)=="phenotype.hpoa"){
-    URL <- "http://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa"
-  } else if(basename(file)=="genes_to_phenotype.txt"){
-    URL <- "http://purl.obolibrary.org/obo/hp/hpoa/genes_to_phenotype.txt"
-    col.names <- c("EntrezID","Gene","ID","Phenotype","FrequencyRaw",
-                   "FrequencyHPO","Additional","Source","LinkID")
+  #### Stored in GitHub Releases ####
+  if(method=="piggyback"){
+    file <- get_data(fname = filename,
+                     save_dir = save_dir)
+  #### Directly from the HPO website ####
   } else {
-    URL <- "http://purl.obolibrary.org/obo/hp/hpoa/phenotype_to_genes.txt"
-    # URL <- "https://ndownloader.figshare.com/files/27722238"
-    col.names <- c("ID", "Phenotype", "EntrezID", "Gene",
-                   "Additional", "Source", "LinkID")
-  }
-  #### Download files if necessary ####
-  if (file.exists(file)) {
+    file <- file.path(save_dir, filename)
+    if(basename(file)=="phenotype.hpoa"){
+      URL <- "http://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa"
+    } else if(basename(file)=="genes_to_phenotype.txt"){
+      URL <- "http://purl.obolibrary.org/obo/hp/hpoa/genes_to_phenotype.txt"
+    } else if(basename(file)=="phenotype_to_genes.txt"){
+      URL <- "http://purl.obolibrary.org/obo/hp/hpoa/phenotype_to_genes.txt"
+      # URL <- "https://ndownloader.figshare.com/files/27722238"
+    }
+    #### Download files if necessary ####
+    if (file.exists(file)) {
       messager("Importing existing file: ...",basename(file),v=verbose)
-  }else {
-    dir.create(dirname(file), showWarnings = FALSE,recursive = TRUE)
+    }else {
+      dir.create(dirname(file), showWarnings = FALSE,recursive = TRUE)
       utils::download.file(url = URL,
                            destfile = file)
       messager("Caching file ==> ",file,v=verbose)
+    }
   }
   #### Read file ####
   if(basename(file)=="phenotype.hpoa"){
@@ -64,14 +76,16 @@ load_phenotype_to_genes <- function(filename = c("phenotype_to_genes.txt",
       input = file,
       skip = 1,
       header = FALSE,
-      # col.names = col.names
+      col.names =  c("EntrezID","Gene","ID","Phenotype","FrequencyRaw",
+                     "FrequencyHPO","Additional","Source","LinkID")
     )
   } else {
     phenotype_to_genes <- data.table::fread(
       input = file,
       skip = 1,
       header = FALSE,
-      col.names = col.names
+      col.names = c("ID", "Phenotype", "EntrezID", "Gene",
+                    "Additional", "Source", "LinkID")
     )
   }
   if("#DatabaseID" %in% names(phenotype_to_genes)){
@@ -80,5 +94,11 @@ load_phenotype_to_genes <- function(filename = c("phenotype_to_genes.txt",
   if("ID" %in% names(phenotype_to_genes)){
     data.table::setnames(phenotype_to_genes,"ID","HPO_ID")
   }
+  data.table::setnames(phenotype_to_genes,
+                       c("database_id","disease_name","hpo_id","frequency",
+                         "qualifier","modifier","onset"),
+                       c("DatabaseID", "DiseaseName", "HPO_ID","Frequency",
+                         "Qualifier","Modifier","Onset"),
+                       skip_absent = TRUE)
   return(phenotype_to_genes)
 }

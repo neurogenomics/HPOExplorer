@@ -10,6 +10,7 @@
 load_phenotype_to_genes(
   filename = c("phenotype_to_genes.txt", "genes_to_phenotype.txt", "phenotype.hpoa"),
   save_dir = file.path(tools::R_user_dir("HPOExplorer", which = "cache"), "data"),
+  method = "piggyback",
   verbose = TRUE
 )
 }
@@ -19,10 +20,17 @@ load_phenotype_to_genes(
 \item{save_dir}{Folder where the phenotype to genes text
 file is/will be stored.}
 
+\item{method}{Where to download the data from:
+\itemize{
+\item{"piggyback": }{An old copy of HPO annotation files
+stored in the Releases section of the \pkg{HPOExplorer} GitHub repository.}
+\item{"hpo": }{An up-to-date copy directly from the official HPO website.}
+}}
+
 \item{verbose}{Print messages.}
 }
 \value{
-a dataframe of the phenotype_to_genes.txt file from HPO
+A \link[data.table]{data.table} of the HPO annotations.
 }
 \description{
 This is a function for loading the HPO phenotype to genes text file from HPO.
