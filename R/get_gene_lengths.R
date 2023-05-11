@@ -9,6 +9,10 @@ get_gene_lengths <- function(gene_list,
   gene_list <- unique(gene_list)
   messager("Gathering metadata for",length(gene_list),"unique genes.",
            v=verbose)
+  if(is.null(keep_seqnames)){
+    keep_seqnames <- eval(formals(get_gene_lengths)$keep_seqnames)
+  }
+  #### Standardise seqnames ####
   keep_seqnames <- unique(
     c(tolower(keep_seqnames),
       paste0("chr",keep_seqnames),
@@ -26,6 +30,7 @@ get_gene_lengths <- function(gene_list,
     q <- AnnotationHub::query(hub, c("EnsDb",ensembl_version,"sapiens"))
     txdb <- q[[length(q)]]
   }
+  #### Set
   tx_gr <- ensembldb::genes(
     txdb,
     columns = c(ensembldb::listColumns(txdb, "gene"), "entrezid"),

@@ -9,8 +9,11 @@ phenos_to_granges(
   phenotype_to_genes = load_phenotype_to_genes(),
   hpo = get_hpo(),
   keep_seqnames = c(seq_len(22), "X", "Y"),
+  by = c("HPO_ID", "DatabaseID"),
+  gene_col = "intersection",
   split.field = "HPO_ID",
   as_datatable = FALSE,
+  allow.cartesion = FALSE,
   verbose = TRUE
 )
 }

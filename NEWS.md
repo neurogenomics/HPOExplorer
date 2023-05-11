@@ -4,6 +4,17 @@
 
 * `load_phenotype_to_genes`
   - Temporary fix while the HPO annotations are being fixed (they accidentally uploaded a version without the LinkIDs): use old files which I've uploaded copies of to GitHub Releases.
+* `get_gene_lengths`
+  - Turn off seqnames filter when `keep_seqnames=NULL`.
+  
+## Bug fixes
+
+* `phenos_to_granges`
+  - Make sure `phenotype_to_genes` is unique before.
+  - Make sure there is only one gene length per gene symbol.
+* `add_disease`
+  - Make sure `annot <- load_phenotype_to_genes(3)` only has one 
+    entry per HPO_ID/DiseaseID combination.
 
 # HPOExplorer 0.99.8
 

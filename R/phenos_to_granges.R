@@ -13,7 +13,7 @@
 #' @returns A \link[GenomicRanges]{GRangesList}.
 #'
 #' @export
-#' @importFrom data.table merge.data.table as.data.table
+#' @importFrom data.table merge.data.table as.data.table :=
 #' @examples
 #' phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
 #' grl <- phenos_to_granges(phenos = phenos)
@@ -22,8 +22,11 @@ phenos_to_granges <- function(phenos = NULL,
                                 load_phenotype_to_genes(),
                               hpo = get_hpo(),
                               keep_seqnames = c(seq_len(22),"X","Y"),
+                              by = c("HPO_ID","DatabaseID"),
+                              gene_col = "intersection",
                               split.field = "HPO_ID",
                               as_datatable = FALSE,
+                              allow.cartesion = FALSE,
                               verbose = TRUE){
   # devoptera::args2vars(phenos_to_granges)
   requireNamespace("GenomicRanges")
@@ -31,48 +34,71 @@ phenos_to_granges <- function(phenos = NULL,
   messager("Converting phenos to",
            if(is.null(split.field))"GRanges."else"GRangesList.",
            v=verbose)
+  #### Prepare gene data ####
   phenotype_to_genes <- data.table::copy(phenotype_to_genes)
+  data.table::setnames(phenotype_to_genes,"LinkID","DatabaseID",
+                       skip_absent = TRUE)
+  #### Prepare phenotypes data ####
   if(is.character(phenos)){
    phenos <- data.table::data.table(HPO_ID=names(phenos),
                                     Phenotype=unname(phenos))
   } else if(is.null(phenos)){
-    phenos <- phenotype_to_genes[,c("HPO_ID","Phenotype")] |> unique()
+    phenos <- unique(phenotype_to_genes[,c("HPO_ID","Phenotype")])
   }
+  #### Unlist intersection column ####
+  ## Genes driving celltype-symptom enrichment.
+  if(!is.null(gene_col) &&
+     gene_col %in% names(phenos)){
+    phenos <- unlist_col(dt=phenos,
+                         col=gene_col)
+    data.table::setnames(phenos,"intersection","Gene")
+    by <- c(by,"Gene")
+  }
+  #### Ensure necessary columns are in phenos ####
   phenos <- add_hpo_id(phenos = phenos,
                        phenotype_to_genes = phenotype_to_genes,
-                       hpo = hpo)
-  # phenos_genes <- get_gene_lists(phenotypes = phenos$HPO_ID,
-  #                                phenotype_to_genes = phenotype_to_genes,
-  #                                hpo = hpo,
-  #                                as_list = FALSE)
-  data.table::setnames(phenos,"LinkID","DatabaseID",
-                       skip_absent = TRUE)
-  data.table::setnames(phenotype_to_genes,"LinkID","DatabaseID",
-                       skip_absent = TRUE)
-  by <- c("HPO_ID","DatabaseID")
-  by <- by[by %in% names(phenos)]
-  phenos <- data.table::merge.data.table(
-    phenos,
-    phenotype_to_genes[,c(by,"Gene","EntrezID"),with=FALSE],
-    by = by)
+                       hpo = hpo,
+                       verbose = verbose)
+  phenos <- add_disease(phenos = phenos,
+                        allow.cartesian = allow.cartesion,
+                        verbose = verbose)
+  #### Add Gene col to data ####
+  if(!"Gene" %in% names(phenos)){
+    by <- by[by %in% names(phenos)]
+    annot <- unique(
+      phenotype_to_genes[,unique(c(by,"Gene","EntrezID")), with=FALSE]
+    )
+    phenos <- data.table::merge.data.table(phenos,
+                                           annot,
+                                           by = by,
+                                           allow.cartesion = allow.cartesion)
+  }
+  #### Get gene lengths #####
   gr <- get_gene_lengths(gene_list = phenos$Gene,
                          keep_seqnames = keep_seqnames,
                          verbose = verbose)
-  #### Merge in gene data ####
+  #### Merge in gene length data ####
   gr_dt <- data.table::merge.data.table(
     phenos,
-    data.table::as.data.table(gr),
+    #### Ensure 1 gene symbol per ####
+    data.table::as.data.table(gr)[,.SD[1],by=c("symbol")],
     by.x = "Gene",
     by.y = "symbol")
-  if(isTRUE(as_datatable)) return(gr_dt)
-  gr <- GenomicRanges::makeGRangesFromDataFrame(df = gr_dt,
-                                                keep.extra.columns = TRUE)
-  if(is.null(split.field)) {
-    return(gr)
+  #### Return ####
+  ## As data.table
+  if(isTRUE(as_datatable)) {
+    return(gr_dt)
   } else {
-    return(
-      GenomicRanges::split(gr,
-                           f = GenomicRanges::mcols(gr)[[split.field]])
-    )
+  ## As GRanges
+    gr <- GenomicRanges::makeGRangesFromDataFrame(df = gr_dt,
+                                                  keep.extra.columns = TRUE)
+    if(is.null(split.field)) {
+      return(gr)
+    } else {
+      return(
+        GenomicRanges::split(gr,
+                             f = GenomicRanges::mcols(gr)[[split.field]])
+      )
+    }
   }
 }
