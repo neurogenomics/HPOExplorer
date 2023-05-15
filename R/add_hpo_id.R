@@ -22,7 +22,7 @@ add_hpo_id <- function(phenos,
                        verbose = FALSE) {
   HPO_term_valid <- HPO_ID <- NULL;
 
-  if(!all(c("HPO_ID","HPO_term_valid") %in% names(phenos))){
+  if(!"HPO_ID" %in% names(phenos)){
     messager("Adding HPO IDs.",v=verbose)
     alt_names <- grep("hpo_id","^id$",names(phenos),
                       value=TRUE, ignore.case = TRUE)

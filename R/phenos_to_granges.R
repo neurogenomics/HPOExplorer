@@ -34,45 +34,14 @@ phenos_to_granges <- function(phenos = NULL,
   messager("Converting phenos to",
            if(is.null(split.field))"GRanges."else"GRangesList.",
            v=verbose)
-  #### Prepare gene data ####
-  phenotype_to_genes <- data.table::copy(phenotype_to_genes)
-  data.table::setnames(phenotype_to_genes,"LinkID","DatabaseID",
-                       skip_absent = TRUE)
-  #### Prepare phenotypes data ####
-  if(is.character(phenos)){
-   phenos <- data.table::data.table(HPO_ID=names(phenos),
-                                    Phenotype=unname(phenos))
-  } else if(is.null(phenos)){
-    phenos <- unique(phenotype_to_genes[,c("HPO_ID","Phenotype")])
-  }
-  #### Unlist intersection column ####
-  ## Genes driving celltype-symptom enrichment.
-  if(!is.null(gene_col) &&
-     gene_col %in% names(phenos)){
-    phenos <- unlist_col(dt=phenos,
-                         col=gene_col)
-    data.table::setnames(phenos,"intersection","Gene")
-    by <- c(by,"Gene")
-  }
-  #### Ensure necessary columns are in phenos ####
-  phenos <- add_hpo_id(phenos = phenos,
-                       phenotype_to_genes = phenotype_to_genes,
-                       hpo = hpo,
-                       verbose = verbose)
-  phenos <- add_disease(phenos = phenos,
-                        allow.cartesian = allow.cartesion,
-                        verbose = verbose)
-  #### Add Gene col to data ####
-  if(!"Gene" %in% names(phenos)){
-    by <- by[by %in% names(phenos)]
-    annot <- unique(
-      phenotype_to_genes[,unique(c(by,"Gene","EntrezID")), with=FALSE]
-    )
-    phenos <- data.table::merge.data.table(phenos,
-                                           annot,
-                                           by = by,
-                                           allow.cartesion = allow.cartesion)
-  }
+  #### Add gene annotations ####
+  phenos <- add_genes(phenos = phenos,
+                      phenotype_to_genes =phenotype_to_genes,
+                      hpo = hpo,
+                      by = by,
+                      gene_col = gene_col,
+                      allow.cartesion = allow.cartesion,
+                      verbose = verbose)
   #### Get gene lengths #####
   gr <- get_gene_lengths(gene_list = phenos$Gene,
                          keep_seqnames = keep_seqnames,

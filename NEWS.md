@@ -6,6 +6,8 @@
   - Temporary fix while the HPO annotations are being fixed (they accidentally uploaded a version without the LinkIDs): use old files which I've uploaded copies of to GitHub Releases.
 * `get_gene_lengths`
   - Turn off seqnames filter when `keep_seqnames=NULL`.
+* New function: `add_genes`
+  - Extracted from `phenos_to_granges` code.
   
 ## Bug fixes
 

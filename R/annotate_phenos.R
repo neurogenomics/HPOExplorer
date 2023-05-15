@@ -1,3 +1,11 @@
+#' Annotate phenotypes
+#'
+#' Annotate phenotypes \link[data.table]{data.table} without various types
+#' of metadata.
+#' @export
+#' @examples
+#' phenos <- example_phenos()
+#' phenos2 <- annotate_phenos(phenos)
 annotate_phenos <- function(phenos,
                             hpo = get_hpo(),
                             adjacency = NULL,
@@ -15,7 +23,7 @@ annotate_phenos <- function(phenos,
                             add_tiers = add_disease_data,
                             add_severities = add_disease_data,
                             #### Extra #####
-                            add_hoverboxes = TRUE,
+                            add_hoverboxes = FALSE,
                             columns = list_columns(),
                             interactive = TRUE,
                             verbose = TRUE){
