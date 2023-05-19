@@ -20,7 +20,7 @@ make_phenos_dataframe(
   add_pheno_frequencies = add_disease_data,
   add_tiers = add_disease_data,
   add_severities = add_disease_data,
-  add_hoverboxes = TRUE,
+  add_hoverboxes = FALSE,
   columns = list_columns(),
   interactive = TRUE,
   verbose = TRUE

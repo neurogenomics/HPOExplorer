@@ -60,7 +60,7 @@ make_phenos_dataframe <- function(ancestor = NULL,
                                   add_tiers = add_disease_data,
                                   add_severities = add_disease_data,
                                   #### Extra #####
-                                  add_hoverboxes = TRUE,
+                                  add_hoverboxes = FALSE,
                                   columns = list_columns(),
                                   interactive = TRUE,
                                   verbose = TRUE
