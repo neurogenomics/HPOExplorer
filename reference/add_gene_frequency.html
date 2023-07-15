@@ -19,7 +19,7 @@ Numeric frequency columns are on a 0-100% scale."><!-- mathjax --><script src="h
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
       </span>
     </div>
 
@@ -119,9 +119,6 @@ from <code>y</code>.  The default is <code>FALSE</code>, so that only rows with 
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">phenotype_to_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span>,<span class="op">]</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing existing file: ... phenotype_to_genes.txt</span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_gene_frequency</span><span class="op">(</span>phenotype_to_genes <span class="op">=</span> <span class="va">phenotype_to_genes</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding HPO IDs.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Translating all phenotypes to HPO IDs.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Returning a vector of phenotypes (same order as input).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating gene frequencies.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing existing file: ... genes_to_phenotype.txt</span>
 </code></pre></div>

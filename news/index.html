@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
       </span>
     </div>
 
@@ -61,6 +61,98 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.99.10" id="hpoexplorer-09910">HPOExplorer 0.99.10<a class="anchor" aria-label="anchor" href="#hpoexplorer-09910"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-99-10">New features<a class="anchor" aria-label="anchor" href="#new-features-0-99-10"></a></h3>
+<ul><li>
+<code>load_phenotype_to_genes</code>
+<ul><li>Update to use new annotation files.</li>
+</ul></li>
+<li>Switch terms:
+<ul><li>“HPO_ID” –&gt; “hpo_id”</li>
+<li>“Phenotype” –&gt; “hpo_name”</li>
+<li>“FREQUENCY” –&gt; “gene_freq”</li>
+<li>“Onset” –&gt; “onset”</li>
+<li>“Modifier” –&gt; “modifier”</li>
+<li>“Aspect” –&gt; “aspect”</li>
+<li>“Gene” –&gt; “gene_symbol”</li>
+<li>“LinkID” –&gt; “disease_id”</li>
+</ul></li>
+<li>Update all “data” objects.</li>
+<li>Update <code>hpo</code> object to “2023-06-17” release.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-99-10">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-10"></a></h3>
+<ul><li>
+<code>allow.cartesion</code> –&gt; <code>allow.cartesian</code>
+</li>
+<li>Document all args.</li>
+<li>
+<code>add_onset</code>
+<ul><li>Circumvent <code>Inf</code> warnings</li>
+</ul></li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.99.9" id="hpoexplorer-0999">HPOExplorer 0.99.9<a class="anchor" aria-label="anchor" href="#hpoexplorer-0999"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-99-9">New features<a class="anchor" aria-label="anchor" href="#new-features-0-99-9"></a></h3>
+<ul><li>
+<code>load_phenotype_to_genes</code>
+<ul><li>Temporary fix while the HPO annotations are being fixed (they accidentally uploaded a version without the LinkIDs): use old files which I’ve uploaded copies of to GitHub Releases.</li>
+</ul></li>
+<li>
+<code>get_gene_lengths</code>
+<ul><li>Turn off seqnames filter when <code>keep_seqnames=NULL</code>.</li>
+</ul></li>
+<li>New function: <code>add_genes</code>
+<ul><li>Extracted from <code>phenos_to_granges</code> code.</li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-99-9">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-9"></a></h3>
+<ul><li>
+<code>phenos_to_granges</code>
+<ul><li>Make sure <code>phenotype_to_genes</code> is unique before.</li>
+<li>Make sure there is only one gene length per gene symbol.</li>
+</ul></li>
+<li>
+<code>add_disease</code>
+<ul><li>Make sure <code>annot &lt;- load_phenotype_to_genes(3)</code> only has one entry per hpo_id/disease_id combination.</li>
+</ul></li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.99.8" id="hpoexplorer-0998">HPOExplorer 0.99.8<a class="anchor" aria-label="anchor" href="#hpoexplorer-0998"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-99-8">New features<a class="anchor" aria-label="anchor" href="#new-features-0-99-8"></a></h3>
+<ul><li>HPO data
+<ul><li>Update from Bioportal: 2023-04-05</li>
+<li>Recreate HPO with <code>extract_tags = "everything"</code>.</li>
+<li>Now includes useful tags like <code>xref</code> to get HPO ID mappings with other databases (MESH, SNOMED, UMLS).</li>
+<li>store in Releases via <code>piggyback</code> to reduce package size.</li>
+</ul></li>
+<li>MONDO data
+<ul><li>Create updated ontology_index obj and store in Releases.</li>
+<li>New func: <code>get_mondo</code>
+</li>
+<li>Now includes useful tags like <code>xref</code> to get HPO ID mappings with other databases (DOID, MESH, ICD9, GARD, EFO, SCTID, NCIT UMLS, Orphanet).</li>
+</ul></li>
+<li>
+<code>get_data</code>
+<ul><li>New internal support func to get <code>piggyback</code> data.</li>
+</ul></li>
+<li>
+<code>hpo_meta</code>
+<ul><li>Remove as this information is now stored within new <code>hpo</code> tags: <code>hpo$def</code>, <code>hpo$xref</code>, etc.</li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-99-8">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-8"></a></h3>
+<ul><li>Update/simplify <code>HPOExplorer</code> vignette.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.99.7" id="hpoexplorer-0997">HPOExplorer 0.99.7<a class="anchor" aria-label="anchor" href="#hpoexplorer-0997"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-99-7">New features<a class="anchor" aria-label="anchor" href="#new-features-0-99-7"></a></h3>
@@ -75,7 +167,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-99-7">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-7"></a></h3>
-<ul><li>De-aggregate <code>add_*</code> functions so that everything occurs at the level of “DatabaseID” + “HPO_ID”.</li>
+<ul><li>De-aggregate <code>add_*</code> functions so that everything occurs at the level of “disease_id” + “hpo_id”.</li>
 <li>Remove Roxygen links to <code>MultiEWCE</code>
 </li>
 </ul></div>

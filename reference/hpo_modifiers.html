@@ -24,7 +24,7 @@ HP:0012829 Profound (Severity_score=1)
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
       </span>
     </div>
 
@@ -90,16 +90,16 @@ In order of increasing severity:</p><ul><li><p>HP:0012825 Mild (Severity_score=4
 <p><a href="https://hpo-annotation-qc.readthedocs.io/en/latest/annotationFormat.html" class="external-link">Column explanations</a></p>
 <p><code>
 annot &lt;- HPOExplorer::load_phenotype_to_genes(3)
-annot &lt;- annot[Modifier!=""]
+annot &lt;- annot[modifier!=""]
 parse_mod &lt;- function(x){
-  unique(HPOExplorer::harmonise_phenotypes(strsplit(x,";")[[1]]))
+  unique(harmonise_phenotypes(strsplit(x,";")[[1]]))
 }
-annot &lt;- annot[,Modifier_name:=lapply(Modifier,parse_mod)][Modifier!="",]
-annot &lt;- annot[,.(Modifier_name=unlist(Modifier_name)),
-               by=c("HPO_ID","Modifier","DiseaseName","Aspect","DatabaseID")]
-data.table::setnames(annot,"DatabaseID","DatabaseID")
+annot &lt;- annot[,modifier_name:=lapply(modifier,parse_mod)][modifier!="",]
+annot &lt;- annot[,.(modifier_name=unlist(modifier_name)),
+               by=c("hpo_id","modifier","disease_name","aspect","disease_id")]
+data.table::setnames(annot,"disease_id","disease_id")
 dict &lt;- HPOExplorer:::hpo_dict(type="severity")
-annot$Severity_score &lt;- dict[annot$Modifier_name]
+annot$Severity_score &lt;- dict[annot$modifier_name]
 hpo_modifiers &lt;- annot
 usethis::use_data(hpo_modifiers, overwrite = TRUE)
 </code></p>

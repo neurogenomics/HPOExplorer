@@ -18,7 +18,7 @@ how often a phenotype occurs in a given disease."><!-- mathjax --><script src="h
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
       </span>
     </div>
 
@@ -72,6 +72,7 @@ how often a phenotype occurs in a given disease.</p>
 <span>  <span class="va">phenos</span>,</span>
 <span>  pheno_frequency_threshold <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  all.x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allow.cartesian <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -99,6 +100,10 @@ from <code>y</code>.  The default is <code>FALSE</code>, so that only rows with 
 <code>x</code> and <code>y</code> are included in the output.</p></dd>
 
 
+<dt>allow.cartesian</dt>
+<dd><p>See <code>allow.cartesian</code> in <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">[.data.table</a></code>.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Print messages.</p></dd>
 
@@ -113,6 +118,7 @@ from <code>y</code>.  The default is <code>FALSE</code>, so that only rows with 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="example_phenos.html">example_phenos</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> All local files already up-to-date!</span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_pheno_frequency</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenotype frequencies.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenos with Disease</span>

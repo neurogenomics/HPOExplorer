@@ -19,7 +19,7 @@ and relative ontology level parameters to each node in the network."><!-- mathja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
       </span>
     </div>
 
@@ -58,7 +58,7 @@ and relative ontology level parameters to each node in the network."><!-- mathja
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make an <a href="https://rdrr.io/pkg/igraph/man/aaa-igraph-package.html" class="external-link">igraph</a> object</h1>
+    <h1>Make an <a href="https://r.igraph.org/reference/aaa-igraph-package.html" class="external-link">igraph</a> object</h1>
     <small class="dont-index">Source: <a href="https://github.com/neurogenomics/HPOExplorer/blob/HEAD/R/make_igraph_object.R" class="external-link"><code>R/make_igraph_object.R</code></a></small>
     <div class="hidden name"><code>make_igraph_object.Rd</code></div>
     </div>
@@ -73,7 +73,7 @@ and relative ontology level parameters to each node in the network.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_igraph_object</span><span class="op">(</span></span>
 <span>  <span class="va">phenos</span>,</span>
 <span>  hpo <span class="op">=</span> <span class="fu"><a href="get_hpo.html">get_hpo</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  adjacency <span class="op">=</span> <span class="fu"><a href="adjacency_matrix.html">adjacency_matrix</a></span><span class="op">(</span>terms <span class="op">=</span> <span class="va">phenos</span><span class="op">$</span><span class="va">HPO_ID</span>, hpo <span class="op">=</span> <span class="va">hpo</span><span class="op">)</span>,</span>
+<span>  adjacency <span class="op">=</span> <span class="fu"><a href="adjacency_matrix.html">adjacency_matrix</a></span><span class="op">(</span>terms <span class="op">=</span> <span class="va">phenos</span><span class="op">$</span><span class="va">hpo_id</span>, hpo <span class="op">=</span> <span class="va">hpo</span><span class="op">)</span>,</span>
 <span>  colour_var <span class="op">=</span> <span class="st">"fold_change"</span>,</span>
 <span>  add_ont_lvl_absolute <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  cols <span class="op">=</span> <span class="fu"><a href="list_columns.html">list_columns</a></span><span class="op">(</span>extra_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">colour_var</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"_count$|_values$"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">phenos</span><span class="op">)</span>,</span>
@@ -127,7 +127,7 @@ matrix is used as nodes coordinates.</p></dd>
 <dt>...</dt>
 <dd><p>Arguments passed on to <code><a href="https://rdrr.io/pkg/ggnetwork/man/ggnetwork.html" class="external-link">ggnetwork::ggnetwork</a></code></p><dl><dt><code>x</code></dt>
 <dd><p>an object of class <code><a href="https://rdrr.io/pkg/network/man/network.html" class="external-link">network</a></code> or
-<code><a href="https://rdrr.io/pkg/igraph/man/aaa-igraph-package.html" class="external-link">igraph</a></code>, or any object that can be
+<code><a href="https://r.igraph.org/reference/aaa-igraph-package.html" class="external-link">igraph</a></code>, or any object that can be
 coerced to that class, such as an adjacency or incidence matrix, or an
 edge list: see <code><a href="https://rdrr.io/pkg/network/man/edgeset.constructors.html" class="external-link">edgeset.constructors</a></code> and
 <code><a href="https://rdrr.io/pkg/network/man/network.html" class="external-link">network</a></code> for details.</p></dd>
@@ -140,31 +140,34 @@ edge list: see <code><a href="https://rdrr.io/pkg/network/man/edgeset.constructo
     <h2>Value</h2>
     
 
-<p>A <a href="https://rdrr.io/pkg/igraph/man/aaa-igraph-package.html" class="external-link">igraph</a> object.</p>
+<p>A <a href="https://r.igraph.org/reference/aaa-igraph-package.html" class="external-link">igraph</a> object.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p>It expects there to be a column of HPO IDs in the phenos dataframe called
-HPO_ID.</p>
+hpo_id.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_phenos_dataframe.html">make_phenos_dataframe</a></span><span class="op">(</span>ancestor <span class="op">=</span> <span class="st">"Neurodevelopmental delay"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> All local files already up-to-date!</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing existing file: ... phenotype_to_genes.txt</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting data for 23 descendents.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing gene counts.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Getting absolute ontology level for 23 HPO IDs.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing ontology level / gene count ratio.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding term definitions.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> All local files already up-to-date!</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding level-3 ancestor to each HPO ID.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Making hoverboxes from: 'Phenotype', 'HPO_ID', 'ontLvl', 'ontLvl_geneCount_ratio', 'definition', 'ancestor', 'ancestor_name'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> All local files already up-to-date!</span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">make_igraph_object</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Making phenotype network object.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Creating adjacency matrix for 23 term(s).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> All local files already up-to-date!</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Creating ggnetwork object.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding new_column='Phenotype'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding new_column='HPO_ID'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding new_column='hpo_name'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding new_column='hpo_id'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding new_column='ontLvl'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding new_column='ontLvl_geneCount_ratio'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding new_column='definition'</span>

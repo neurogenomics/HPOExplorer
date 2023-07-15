@@ -18,7 +18,7 @@ assign_tiers."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
       </span>
     </div>
 
@@ -78,16 +78,17 @@ assign_tiers."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
     <div id="source">
     <h2>Source</h2>
     <p><code>
-hpo_tiers_auto &lt;- HPOExplorer::assign_tiers(as_datatable=TRUE)
+hpo_tiers_auto &lt;- HPOExplorer:::assign_tiers(as_datatable=TRUE)
 hpo_tiers_auto &lt;- add_onset(phenos = hpo_tiers_auto)
 #### Filter by onset criterion ####
 ### Tier 1: Shortened life span: infancy
-hpo_tiers_auto[tier_auto==1 &amp; Onset_score_min&gt;5,]$tier_auto &lt;- NA
+hpo_tiers_auto[tier_auto=="Tier1" &amp; onset_score&gt;5,]$tier_auto &lt;- NA
 ### Tier 2: Shortened life span: premature adulthood
-hpo_tiers_auto[tier_auto==2 &amp; Onset_score_min&gt;=11,]$tier_auto &lt;- NA
-hpo_tiers_auto &lt;- hpo_tiers_auto[,c("HPO_ID","tier_auto")]
+hpo_tiers_auto[tier_auto=="Tier2" &amp; onset_score&gt;=11,]$tier_auto &lt;- NA
+hpo_tiers_auto &lt;- hpo_tiers_auto[,c("hpo_id","tier_auto")]
 hpo_tiers_auto &lt;- hpo_tiers_auto[!is.na(tier_auto),]
 hpo_tiers_auto[,tier_auto:=as.integer(gsub("Tier","",tier_auto))]
+hpo_tiers_auto &lt;- unique(hpo_tiers_auto)
 usethis::use_data(hpo_tiers_auto, overwrite = TRUE)
 </code></p>
     </div>

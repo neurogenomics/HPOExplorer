@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
       </span>
     </div>
 
@@ -76,12 +76,12 @@
     <div id="source">
     <h2>Source</h2>
     <p><code>
-terms &lt;- ontologyIndex::get_descendants(ontology = hpo,
+terms &lt;- ontologyIndex::get_descendants(ontology = get_hpo(),
                                         roots = "HP:0011420",
                                         exclude_roots = TRUE)
 aod &lt;- lapply(stats::setNames(terms, terms),
               function(hpo_id){
-                messager("Extracting API data for",hpo_id)
+                message("Extracting API data for",hpo_id)
                 d &lt;- hpo_api(hpo_id = hpo_id, type = "diseases")$diseases
               }) |&gt; data.table::rbindlist(fill = TRUE,
                                           use.names = TRUE,
@@ -89,11 +89,11 @@ aod &lt;- lapply(stats::setNames(terms, terms),
 aod$AgeOfDeath_name &lt;- harmonise_phenotypes(phenotypes = aod$AgeOfDeath,
                                             as_hpo_ids = FALSE)
 #### Convert AoD to numeric scores ####
-dict &lt;- hpo_dict(type="AgeOfDeath")
+dict &lt;- HPOExplorer:::hpo_dict(type="AgeOfDeath")
 aod$AgeOfDeath_score &lt;- dict[aod$AgeOfDeath_name]
 data.table::setnames(aod,
                      c("diseaseId","diseaseName"),
-                     c("DatabaseID","DiseaseName"))
+                     c("disease_id","disease_name"))
 hpo_deaths &lt;- aod
 usethis::use_data(hpo_deaths, overwrite = TRUE)
 </code></p>

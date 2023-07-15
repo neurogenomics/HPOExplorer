@@ -31,7 +31,7 @@ HP:0033765 "Death in late adulthood" (AgeOfDeath_score=8)
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
       </span>
     </div>
 
@@ -139,9 +139,9 @@ from <code>y</code>.  The default is <code>FALSE</code>, so that only rows with 
     
 
 <p>phenos data.table with extra columns:</p><ul><li><p>"AgeOfDeath": AgeOfDeath HPO IDs of disease phenotypes associated
-with the target HPO_ID phenotype.</p></li>
+with the target hpo_id phenotype.</p></li>
 <li><p>"AgeOfDeath_names": AgeOfDeath HPO names of disease phenotypes
-associated with the target HPO_ID phenotype.</p></li>
+associated with the target hpo_id phenotype.</p></li>
 <li><p>"AgeOfDeath_counts": The number of times each term in
 "AgeOfDeath_names" appears across associated disease phenotypes.</p></li>
 <li><p>"AgeOfDeath_score_mean": Mean age of death score.</p></li>
@@ -154,8 +154,9 @@ associated with the target HPO_ID phenotype.</p></li>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="example_phenos.html">example_phenos</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> All local files already up-to-date!</span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_death</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenos with AgeOfDeath</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenos with AgeOfDeath.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenos with Disease</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing existing file: ... phenotype.hpoa</span>
 </code></pre></div>

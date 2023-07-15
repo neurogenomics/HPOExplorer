@@ -24,7 +24,7 @@ scaled to the ontology level."><!-- mathjax --><script src="https://cdnjs.cloudf
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
       </span>
     </div>
 
@@ -143,10 +143,13 @@ value is relative ontology level.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">terms</span> <span class="op">&lt;-</span> <span class="fu">ontologyIndex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ontologyIndex/man/get_descendants.html" class="external-link">get_descendants</a></span><span class="op">(</span>ontology <span class="op">=</span> <span class="fu"><a href="get_hpo.html">get_hpo</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                                        roots <span class="op">=</span> <span class="st">"HP:0000002"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> All local files already up-to-date!</span>
 <span class="r-in"><span><span class="va">lvls</span> <span class="op">&lt;-</span> <span class="fu">get_ont_lvls</span><span class="op">(</span>terms <span class="op">=</span> <span class="va">terms</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Getting absolute ontology level for 35 HPO IDs.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> All local files already up-to-date!</span>
 <span class="r-in"><span><span class="va">lvls_abs</span> <span class="op">&lt;-</span> <span class="fu">get_ont_lvls</span><span class="op">(</span>terms <span class="op">=</span> <span class="va">terms</span>, absolute<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Getting absolute ontology level for 35 HPO IDs.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> All local files already up-to-date!</span>
 </code></pre></div>
     </div>
   </div>

@@ -19,7 +19,7 @@ It contains phenotypes annotated with associated genes."><!-- mathjax --><script
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
       </span>
     </div>
 
@@ -73,6 +73,7 @@ It contains phenotypes annotated with associated genes.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">load_phenotype_to_genes</span><span class="op">(</span></span>
 <span>  filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"phenotype_to_genes.txt"</span>, <span class="st">"genes_to_phenotype.txt"</span>, <span class="st">"phenotype.hpoa"</span><span class="op">)</span>,</span>
 <span>  save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu">tools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/tools/userdir.html" class="external-link">R_user_dir</a></span><span class="op">(</span><span class="st">"HPOExplorer"</span>, which <span class="op">=</span> <span class="st">"cache"</span><span class="op">)</span>, <span class="st">"data"</span><span class="op">)</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hpo"</span>, <span class="st">"piggyback"</span><span class="op">)</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -92,6 +93,13 @@ It contains phenotypes annotated with associated genes.</p>
 file is/will be stored.</p></dd>
 
 
+<dt>method</dt>
+<dd><p>Where to download the data from:</p><ul><li><p>"piggyback": An old copy of HPO annotation files
+stored in the Releases section of the <span class="pkg">HPOExplorer</span> GitHub repository.</p></li>
+<li><p>"hpo": An up-to-date copy directly from the official HPO website.</p></li>
+</ul></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Print messages.</p></dd>
 
@@ -100,7 +108,7 @@ file is/will be stored.</p></dd>
     <h2>Value</h2>
     
 
-<p>a dataframe of the phenotype_to_genes.txt file from HPO</p>
+<p>A <a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a> of the HPO annotations.</p>
     </div>
 
     <div id="ref-examples">

@@ -26,7 +26,7 @@ HP:0040280 "Obligate (100%)"
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
       </span>
     </div>
 
@@ -93,9 +93,9 @@ In order of increasing frequency:</p><ul><li><p>HP:0040284 "Very rare (&lt;4-1%)
     <p><a href="https://hpo-annotation-qc.readthedocs.io/en/latest/annotationFormat.html" class="external-link">Column explanations</a></p>
 <p><code>
 annot &lt;- load_phenotype_to_genes("phenotype.hpoa")
-hpo_frequencies &lt;- parse_pheno_frequency(annot=annot)
+hpo_frequencies &lt;- HPOExplorer:::parse_pheno_frequency(annot=annot)
 hpo_frequencies &lt;- HPOExplorer:::as_ascii(dt=hpo_frequencies)
-data.table::setcolorder(hpo_frequencies,c("DatabaseID","HPO_ID"))
+data.table::setcolorder(hpo_frequencies,c("disease_id","hpo_id"))
 usethis::use_data(hpo_frequencies, overwrite = TRUE)
 </code></p>
     </div>
