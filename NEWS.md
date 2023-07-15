@@ -21,7 +21,7 @@
 * `allow.cartesion` --> `allow.cartesian`
 * Document all args.
 * `add_onset`
-  - Circumvent `Inf` warnings
+  - Circumvent `Inf` warnings. 
 
 # HPOExplorer 0.99.9
 
