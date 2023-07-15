@@ -1,6 +1,6 @@
 #' Get Human Phenotype Ontology (HPO)
 #'
-#' Updated version of Human Phenotype Ontology (HPO) from 2023-01-27.
+#' Updated version of Human Phenotype Ontology (HPO) from 2023-06-17.
 #' Created from the OBO files distributed by
 #' \href{https://bioportal.bioontology.org/ontologies/HP}{BioPortal}.
 #' By comparison, the \code{hpo} data from \pkg{ontologyIndex} is from 2016.
@@ -11,7 +11,7 @@
 #' \code{
 #' save_path <- file.path(tempdir(),"hpo.rds")
 #' URL <- paste0(
-#'   "https://data.bioontology.org/ontologies/HP/submissions/600/",
+#'   "https://data.bioontology.org/ontologies/HP/submissions/602/",
 #'   "download?apikey=8b5b7825-538d-40e0-9e9e-5ab9274a9aeb"
 #' )
 #' tmp <- tempfile(fileext = "hpo.obo")
@@ -19,11 +19,11 @@
 #' hpo <- ontologyIndex::get_OBO(tmp, extract_tags = "everything")
 #' saveRDS(hpo,save_path)
 #' ### Fix non-ASCII characters in metadata ####
-#' # func <- function(v){
-#' #   Encoding(v) <- "latin1"
-#' #   iconv(v, "latin1", "UTF-8")
-#' # }
-#' # attributes(hpo)$version <- func(attributes(hpo)$version)
+#' func <- function(v){
+#'   Encoding(v) <- "latin1"
+#'   iconv(v, "latin1", "UTF-8")
+#' }
+#' attributes(hpo)$version <- func(attributes(hpo)$version)
 #' piggyback::pb_upload(file = save_path,
 #'                      repo = "neurogenomics/HPOExplorer",
 #'                      overwrite = TRUE,

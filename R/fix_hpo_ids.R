@@ -21,18 +21,18 @@ fix_hpo_ids <- function(dt,
   #### Check if any IDs are still missing ####
   missing1 <- sum(is.na(dt$hpo_id))
   if(missing1>0){
-    stp <- paste(missing1,"HPO IDs are still missing")
-    stop(stp)
+    stp <- paste(missing1,"HPO IDs are still missing.")
+    warning(stp)
   }
   missing2 <- sum(!grepl("HP",dt$hpo_id))
   if(missing2>0){
-    stp <- paste(missing2,"HPO IDs are still missing")
-    stop(stp)
+    stp <- paste(missing2,"HPO IDs are still missing.")
+    warning(stp)
   }
   missing3 <- sum(is.na(dt$hpo_name))
   if(missing3>0){
-    stp <- paste(missing3,"hpo_names are still missing")
-    stop(stp)
+    stp <- paste(missing3,"hpo_names are still missing.")
+    warning(stp)
   }
   data.table::setcolorder(dt,"hpo_id")
   data.table::setkey(dt,"hpo_id")

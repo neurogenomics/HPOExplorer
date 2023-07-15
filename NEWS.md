@@ -14,11 +14,14 @@
   - "Gene" --> "gene_symbol"
   - "LinkID" --> "disease_id"
 * Update all "data" objects.
+* Update `hpo` object to "2023-06-17" release.
 
 ## Bug fixes
 
 * `allow.cartesion` --> `allow.cartesian`
 * Document all args.
+* `add_onset`
+  - Circumvent `Inf` warnings
 
 # HPOExplorer 0.99.9
 

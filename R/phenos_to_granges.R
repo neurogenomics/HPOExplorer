@@ -38,7 +38,7 @@ phenos_to_granges <- function(phenos = NULL,
            v=verbose)
   #### Add gene annotations ####
   phenos <- add_genes(phenos = phenos,
-                      phenotype_to_genes =phenotype_to_genes,
+                      phenotype_to_genes = phenotype_to_genes,
                       hpo = hpo,
                       by = by,
                       gene_col = gene_col,

@@ -19,6 +19,7 @@ hpo_tiers_auto[tier_auto=="Tier2" & onset_score>=11,]$tier_auto <- NA
 hpo_tiers_auto <- hpo_tiers_auto[,c("hpo_id","tier_auto")]
 hpo_tiers_auto <- hpo_tiers_auto[!is.na(tier_auto),]
 hpo_tiers_auto[,tier_auto:=as.integer(gsub("Tier","",tier_auto))]
+hpo_tiers_auto <- unique(hpo_tiers_auto)
 usethis::use_data(hpo_tiers_auto, overwrite = TRUE)
 }
 }
