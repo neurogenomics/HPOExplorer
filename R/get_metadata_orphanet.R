@@ -4,6 +4,7 @@ get_metadata_orphanet <- function(save_dir = file.path(
   verbose = TRUE){
   Class.ID <- id <- NULL;
 
+  options(download.file.method = "libcurl")
   messager("Importing Orphanet metadata.",v=verbose)
   f <- file.path(save_dir,"ORDO.csv.gz")
   if(!file.exists(f)){
