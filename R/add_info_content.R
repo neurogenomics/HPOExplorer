@@ -14,15 +14,15 @@
 add_info_content <- function(phenos,
                              hpo = get_hpo(),
                              verbose = TRUE){
-  info_content <- HPO_ID <- NULL;
+  info_content <- hpo_id <- NULL;
 
   if(!"info_content" %in% names(phenos)){
     messager("Adding information_content scores.",v=verbose)
     ic_dict <- ontologyIndex::get_term_info_content(
       ontology = hpo,
-      term_sets = phenos$HPO_ID,
+      term_sets = phenos$hpo_id,
       patch_missing = FALSE)
-    phenos[,info_content:=ic_dict[HPO_ID]]
+    phenos[,info_content:=ic_dict[hpo_id]]
   }
   return(phenos)
 }

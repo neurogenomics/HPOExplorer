@@ -21,16 +21,16 @@ add_hpo_definition <- function(phenos,
                                line_length = FALSE,
                                use_api = FALSE,
                                verbose = TRUE) {
-  definition <- HPO_ID <- NULL;
+  definition <- hpo_id <- NULL;
 
   messager("Adding term definitions.",v=verbose)
   if(isTRUE(use_api)){
-    definitions <- get_term_definition_api(term = phenos$HPO_ID,
+    definitions <- get_term_definition_api(term = phenos$hpo_id,
                                            line_length = line_length)
   } else {
-    definitions <- get_term_definition_data(term = phenos$HPO_ID,
+    definitions <- get_term_definition_data(term = phenos$hpo_id,
                                             line_length = line_length)
   }
-  phenos[,definition:=definitions[HPO_ID]]
+  phenos[,definition:=definitions[hpo_id]]
   return(phenos)
 }

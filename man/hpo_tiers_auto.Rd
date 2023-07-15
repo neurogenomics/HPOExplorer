@@ -9,14 +9,14 @@ data.table
 }
 \source{
 \code{
-hpo_tiers_auto <- HPOExplorer::assign_tiers(as_datatable=TRUE)
+hpo_tiers_auto <- HPOExplorer:::assign_tiers(as_datatable=TRUE)
 hpo_tiers_auto <- add_onset(phenos = hpo_tiers_auto)
 #### Filter by onset criterion ####
 ### Tier 1: Shortened life span: infancy
-hpo_tiers_auto[tier_auto==1 & Onset_score_min>5,]$tier_auto <- NA
+hpo_tiers_auto[tier_auto=="Tier1" & onset_score>5,]$tier_auto <- NA
 ### Tier 2: Shortened life span: premature adulthood
-hpo_tiers_auto[tier_auto==2 & Onset_score_min>=11,]$tier_auto <- NA
-hpo_tiers_auto <- hpo_tiers_auto[,c("HPO_ID","tier_auto")]
+hpo_tiers_auto[tier_auto=="Tier2" & onset_score>=11,]$tier_auto <- NA
+hpo_tiers_auto <- hpo_tiers_auto[,c("hpo_id","tier_auto")]
 hpo_tiers_auto <- hpo_tiers_auto[!is.na(tier_auto),]
 hpo_tiers_auto[,tier_auto:=as.integer(gsub("Tier","",tier_auto))]
 usethis::use_data(hpo_tiers_auto, overwrite = TRUE)

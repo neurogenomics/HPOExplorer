@@ -14,16 +14,16 @@ data.table
 
 \code{
 annot <- HPOExplorer::load_phenotype_to_genes(3)
-annot <- annot[Modifier!=""]
+annot <- annot[modifier!=""]
 parse_mod <- function(x){
-  unique(HPOExplorer::harmonise_phenotypes(strsplit(x,";")[[1]]))
+  unique(harmonise_phenotypes(strsplit(x,";")[[1]]))
 }
-annot <- annot[,Modifier_name:=lapply(Modifier,parse_mod)][Modifier!="",]
-annot <- annot[,.(Modifier_name=unlist(Modifier_name)),
-               by=c("HPO_ID","Modifier","DiseaseName","Aspect","DatabaseID")]
-data.table::setnames(annot,"DatabaseID","DatabaseID")
+annot <- annot[,modifier_name:=lapply(modifier,parse_mod)][modifier!="",]
+annot <- annot[,.(modifier_name=unlist(modifier_name)),
+               by=c("hpo_id","modifier","disease_name","aspect","disease_id")]
+data.table::setnames(annot,"disease_id","disease_id")
 dict <- HPOExplorer:::hpo_dict(type="severity")
-annot$Severity_score <- dict[annot$Modifier_name]
+annot$Severity_score <- dict[annot$modifier_name]
 hpo_modifiers <- annot
 usethis::use_data(hpo_modifiers, overwrite = TRUE)
 }

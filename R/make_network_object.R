@@ -5,7 +5,7 @@
 #' and relative ontology level parameters to each node in the network.
 #'
 #' It expects there to be a column of HPO IDs in the phenos dataframe called
-#' HPO_ID.
+#' hpo_id.
 #' @param phenos dataframe of phenotypes and values / parameters.
 #' @param adjacency An adjacency matrix generated
 #' by \link[HPOExplorer]{adjacency_matrix}.
@@ -29,7 +29,7 @@ make_network_object <- function(phenos,
                                 hpo = get_hpo(),
                                 adjacency =
                                   adjacency_matrix(
-                                    terms = phenos$HPO_ID,
+                                    terms = phenos$hpo_id,
                                     hpo = hpo),
                                 colour_var = "fold_change",
                                 add_ont_lvl_absolute = FALSE,
@@ -47,9 +47,9 @@ make_network_object <- function(phenos,
   # devoptera::args2vars(make_network_object, reassign = TRUE)
 
     messager("Making phenotype network object.",v=verbose)
-    if("HPO_ID" %in% names(phenos)){
-      adjacency <- adjacency[unique(phenos$HPO_ID),
-                             unique(phenos$HPO_ID)]
+    if("hpo_id" %in% names(phenos)){
+      adjacency <- adjacency[unique(phenos$hpo_id),
+                             unique(phenos$hpo_id)]
     }
     if(!"ontLvl" %in% names(phenos) &&
        isTRUE(add_ont_lvl_absolute)){
@@ -73,7 +73,7 @@ make_network_object <- function(phenos,
                                    verbose = verbose)
     }
     #### Add number of total edges for each node ####
-    if("HPO_ID" %in% names(phenos)){
+    if("hpo_id" %in% names(phenos)){
       messager("Adding n_edges per node.",v=verbose)
       phenoNet$n_edges <- rowSums(adjacency)[phenoNet$vertex.names]
     }

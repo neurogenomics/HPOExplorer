@@ -25,7 +25,7 @@ subset_descendants <- function(phenos,
                                ignore_case = TRUE,
                                verbose = TRUE){
 
-  HPO_ID <- NULL;
+  hpo_id <- NULL;
 
   if(!is.null(ancestor)){
     messager("Subsetting phenotypes to only ancestors of:",
@@ -37,7 +37,7 @@ subset_descendants <- function(phenos,
     all_ids <- ontologyIndex::get_descendants(ontology = hpo,
                                               roots = ancestor_id,
                                               exclude_roots = FALSE)
-    phenos <- phenos[HPO_ID %in% all_ids,
+    phenos <- phenos[hpo_id %in% all_ids,
     ][,ancestor:=ancestor][,ancestor_id:=ancestor_id]
     messager(formatC(nrow(phenos),big.mark = ","),
              "associations remain after filtering.",v=verbose)

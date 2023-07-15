@@ -10,7 +10,7 @@
 load_phenotype_to_genes(
   filename = c("phenotype_to_genes.txt", "genes_to_phenotype.txt", "phenotype.hpoa"),
   save_dir = file.path(tools::R_user_dir("HPOExplorer", which = "cache"), "data"),
-  method = "piggyback",
+  method = c("hpo", "piggyback"),
   verbose = TRUE
 )
 }

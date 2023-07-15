@@ -10,10 +10,10 @@ create_node_data <- function(phenoNet,
     return(phenoNet)
   }
   messager("Adding",paste0("new_column=",shQuote(new_column)),v=verbose)
-  # data.table::setkeyv(phenos,"HPO_ID")
+  # data.table::setkeyv(phenos,"hpo_id")
   # phenoNet[[new_column]] <- phenos[phenoNet$vertex.names, ][[phenos_column]]
-  dat <- unique(phenos[,c("HPO_ID",phenos_column), with=FALSE])
-  data_dict <- stats::setNames(dat[[phenos_column]], dat$HPO_ID)
+  dat <- unique(phenos[,c("hpo_id",phenos_column), with=FALSE])
+  data_dict <- stats::setNames(dat[[phenos_column]], dat$hpo_id)
   phenoNet[[new_column]] <- data_dict[phenoNet$vertex.names]
   return(phenoNet)
 }

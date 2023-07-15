@@ -31,9 +31,9 @@ add_ancestor <- function(phenos,
                          verbose=TRUE){
 
   ancestor_name <- ancestor <- NULL;
-  if("HPO_ID" %in% names(phenos)){
+  if("hpo_id" %in% names(phenos)){
     messager(paste0("Adding level-",lvl),"ancestor to each HPO ID.",v=verbose)
-    phenos$ancestor <- lapply(hpo$ancestors[phenos$HPO_ID],
+    phenos$ancestor <- lapply(hpo$ancestors[phenos$hpo_id],
                               function(x){
                                 if(length(x)>0){
                                   x[lvl]
@@ -43,7 +43,7 @@ add_ancestor <- function(phenos,
     phenos[,ancestor_name:=hpo$name[ancestor]]
 
   } else {
-    messager("HPO_ID column not found. Cannot add ancestors.",v=verbose)
+    messager("hpo_id column not found. Cannot add ancestors.",v=verbose)
   }
   #### Filter ####
   if(!is.null(remove_descendants)){

@@ -23,12 +23,12 @@ add_ont_lvl <- function(phenos,
                         reverse = TRUE,
                         verbose = TRUE){
 
-  ontLvl_geneCount_ratio <- geneCount <- HPO_ID <- ontLvl <- tmp <- NULL;
+  ontLvl_geneCount_ratio <- geneCount <- hpo_id <- ontLvl <- tmp <- NULL;
 
   col <- if(isTRUE(absolute)) "ontLvl" else "ontLvl_relative"
   if(col %in% names(phenos)) return(phenos)
-  if("HPO_ID" %in% names(phenos)){
-    lvls_dict <- get_ont_lvls(terms = unique(phenos$HPO_ID),
+  if("hpo_id" %in% names(phenos)){
+    lvls_dict <- get_ont_lvls(terms = unique(phenos$hpo_id),
                               hpo = hpo,
                               adjacency = adjacency,
                               absolute = absolute,
@@ -36,7 +36,7 @@ add_ont_lvl <- function(phenos,
                               exclude_top_lvl = exclude_top_lvl,
                               verbose = verbose)
     #### Add the new column ####
-    phenos[,tmp:=lvls_dict[HPO_ID]]
+    phenos[,tmp:=lvls_dict[hpo_id]]
     data.table::setnames(phenos,old = "tmp", new = col)
     #### Compute gene ratio ####
     if(all(c("ontLvl","geneCount") %in% names(phenos))){
@@ -44,7 +44,7 @@ add_ont_lvl <- function(phenos,
       phenos[,ontLvl_geneCount_ratio:=(ontLvl/geneCount)]
     }
   } else {
-    messager("HPO_ID column not found. Cannot add ontology level.",v=verbose)
+    messager("hpo_id column not found. Cannot add ontology level.",v=verbose)
   }
   #### Filter ####
   if(!is.null(keep_ont_levels)){

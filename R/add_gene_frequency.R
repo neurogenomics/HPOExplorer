@@ -25,31 +25,37 @@ add_gene_frequency <- function(phenotype_to_genes = load_phenotype_to_genes(),
                                all.x = TRUE,
                                verbose = TRUE){
 
-  FrequencyHPO <- gene_freq_name <- gene_freq_mean <-
+  # devoptera::args2vars(add_gene_frequency)
+  # annot <- HPOExplorer::load_phenotype_to_genes("phenotype.hpoa")
+  frequency <- gene_freq_name <- gene_freq_mean <-
     gene_freq_min <- gene_freq_max <- . <- NULL;
+
   phenotype_to_genes <- add_hpo_id(phenos = phenotype_to_genes,
                                    phenotype_to_genes= phenotype_to_genes,
                                    verbose = verbose)
-  # annot <- HPOExplorer::load_phenotype_to_genes("phenotype.hpoa")
   new_cols <- c("gene_freq_name","gene_freq_min",
                 "gene_freq_max","gene_freq_mean")
   if(!all(new_cols %in% names(phenotype_to_genes))){
     messager("Annotating gene frequencies.",v=verbose)
     g2p <- load_phenotype_to_genes("genes_to_phenotype.txt")
-    g2p <- g2p[FrequencyHPO!="",]
-    #### Parse freq data ####
-    g2p[,gene_freq_name:=get_freq_dict()[g2p$FrequencyHPO]]
-    g2p[,gene_freq_min:=get_freq_dict(type="min")[g2p$FrequencyHPO]]
-    g2p[,gene_freq_max:=get_freq_dict(type="max")[g2p$FrequencyHPO]]
-    g2p$gene_freq_mean <- rowMeans(
-      g2p[,c("gene_freq_min","gene_freq_max")], na.rm = TRUE
-    )
+    g2p <- g2p[!frequency %in% c("","-"),]
     #### Merge data ####
     phenotype_to_genes <- data.table::merge.data.table(
       x = phenotype_to_genes,
-      y = g2p[,c("HPO_ID","Gene",new_cols), with=FALSE],
-      by = c("HPO_ID","Gene"),
+      y = g2p[,c("hpo_id","gene_symbol","frequency"),with=FALSE],
+      by = c("hpo_id","gene_symbol"),
       all.x = all.x)
+    #### Parse freq data ####
+    phenotype_to_genes[,gene_freq_name:=mapply(frequency,FUN=function(f){
+      if(grepl("HP:",f)) get_freq_dict()[f] else f })]
+    phenotype_to_genes[,gene_freq_min:=mapply(frequency,FUN=parse_frequency,
+                                              type="min")]
+    phenotype_to_genes[,gene_freq_max:=mapply(frequency,FUN=parse_frequency,
+                                              type="max")]
+    phenotype_to_genes$gene_freq_mean <- rowMeans(
+      phenotype_to_genes[,c("gene_freq_min","gene_freq_max")], na.rm = TRUE
+    )
+    data.table::setnames(phenotype_to_genes,"frequency","gene_freq")
     #### Aggregate gene frequencies to phenotype-level ####
     # g2p_agg <- g2p[,.(gene_freq_name=paste(unique(gene_freq_name),
     #                                            collapse = "; "),
@@ -57,7 +63,7 @@ add_gene_frequency <- function(phenotype_to_genes = load_phenotype_to_genes(),
     #                   gene_freq_max=mean(gene_freq_max),
     #                   gene_freq_mean=mean(gene_freq_mean)
     #        ),
-    #     by="Phenotype"]
+    #     by="hpo_name"]
   }
   #### Filter ####
   if(!is.null(gene_frequency_threshold)){

@@ -19,11 +19,11 @@ add_ndisease <- function(phenos,
                          all.x = TRUE,
                          allow.cartesian = FALSE,
                          verbose = TRUE){
-  n_diseases <- LinkID <- NULL;
+  n_diseases <- disease_id <- NULL;
   # devoptera::args2vars(add_ndisease)
 
-  if(!"HPO_ID" %in% names(phenos)){
-    stp <- paste("HPO_ID column must be present in phenos.")
+  if(!"hpo_id" %in% names(phenos)){
+    stp <- paste("hpo_id column must be present in phenos.")
     stop(stp)
   }
   if(!all(c("n_diseases") %in% names(phenos))){
@@ -31,15 +31,15 @@ add_ndisease <- function(phenos,
     d1 <- load_phenotype_to_genes(1)
     d2 <- load_phenotype_to_genes(2)
     d3 <- load_phenotype_to_genes(3)
-    d <- rbind(d1[,c("HPO_ID","LinkID")],
-               d2[,c("HPO_ID","LinkID")],
-               data.table::setnames(d3[,c("HPO_ID","DatabaseID")],
-                                    "DatabaseID","LinkID"))
-    counts <- d[,list(n_diseases=length(unique(LinkID))), by="HPO_ID"]
+    d <- rbind(d1[,c("hpo_id","disease_id")],
+               d2[,c("hpo_id","disease_id")],
+               data.table::setnames(d3[,c("hpo_id","disease_id")],
+                                    "disease_id","disease_id"))
+    counts <- d[,list(n_diseases=length(unique(disease_id))), by="hpo_id"]
     phenos <- data.table::merge.data.table(
       phenos,
       counts,
-      by = "HPO_ID",
+      by = "hpo_id",
       all.x = all.x,
       allow.cartesian = allow.cartesian)
   }

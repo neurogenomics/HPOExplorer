@@ -26,7 +26,7 @@ add_disease_definition <- function(phenos,
   verbose = TRUE) {
 
   # devoptera::args2vars(add_disease_definition)
-  DiseaseName <- DatabaseID <- Preferred.Label <- Definitions <-
+  disease_name <- disease_id <- Preferred.Label <- Definitions <-
     MONDO_definition <- NULL;
 
   #### Check if already filled out ####
@@ -49,10 +49,10 @@ add_disease_definition <- function(phenos,
     return(meta)
   #### Merge metdata ####
   } else {
-    merge_col <- c("DatabaseID","LinkID")
+    merge_col <- c("disease_id","disease_id")
     merge_col <- merge_col[merge_col %in% names(phenos)]
     if(length(merge_col)==0){
-      stp <- "phenos must contain either DatabaseID or LinkID column."
+      stp <- "phenos must contain either disease_id or disease_id column."
       stop(stp)
     }
     phenos <-
@@ -61,10 +61,10 @@ add_disease_definition <- function(phenos,
                                    all.x = all.x,
                                    by.x = merge_col[1],
                                    by.y = "id")
-    if("DiseaseName" %in% names(phenos)){
+    if("disease_name" %in% names(phenos)){
       #### Report missing  ####
       report_missing(phenos = phenos,
-                     col = "DiseaseName",
+                     col = "disease_name",
                      verbose = verbose)
       report_missing(phenos = phenos,
                      col = "Definitions",
@@ -72,9 +72,9 @@ add_disease_definition <- function(phenos,
       ## Needs to be lowercase to harmonise across metadata sources, eg.:
       ## "CEREBROOCULOFACIOSKELETAL SYNDROME 1" vs.
       ## "Cerebrooculofacioskeletal syndrome 1"
-      phenos[,DiseaseName:=tolower(data.table::fcoalesce(Preferred.Label,
-                                                         DiseaseName,
-                                                         DatabaseID))]
+      phenos[,disease_name:=tolower(data.table::fcoalesce(Preferred.Label,
+                                                         disease_name,
+                                                         disease_id))]
     }
     #### Add mondo ####
     if(isTRUE(include_mondo)){

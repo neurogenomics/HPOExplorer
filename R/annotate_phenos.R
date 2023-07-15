@@ -2,6 +2,9 @@
 #'
 #' Annotate phenotypes \link[data.table]{data.table} without various types
 #' of metadata.
+#' @inheritParams make_network_object
+#' @inheritParams make_phenos_dataframe
+#'
 #' @export
 #' @examples
 #' phenos <- example_phenos()

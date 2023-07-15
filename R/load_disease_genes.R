@@ -21,7 +21,7 @@ load_disease_genes <- function(verbose=TRUE){
   orphanet <- load_orphanet_genes(verbose = verbose)
   omim <- load_omim_genes(verbose = verbose)
   #### Merge data ####
-  nms <- c("DiseaseID","DiseaseName_og","Gene")
+  nms <- c("disease_id","disease_name_og","gene_symbol")
   dgenes <- list(
     DECIPHER=decipher[,c("ID","disease_name","gene_symbol")] |> `names<-`(nms),
     ORPHANET=orphanet[,c("Orphanet_ID","phenotype","gene")] |> `names<-`(nms),

@@ -1,5 +1,5 @@
 hpo_dict <- function(type=c("AgeOfDeath",
-                            "Onset",
+                            "onset",
                             "severity")){
   type <- tolower(type)[1]
   if(type=="ageofdeath"){

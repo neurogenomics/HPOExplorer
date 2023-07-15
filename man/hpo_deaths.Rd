@@ -9,12 +9,12 @@ data.table
 }
 \source{
 \code{
-terms <- ontologyIndex::get_descendants(ontology = hpo,
+terms <- ontologyIndex::get_descendants(ontology = get_hpo(),
                                         roots = "HP:0011420",
                                         exclude_roots = TRUE)
 aod <- lapply(stats::setNames(terms, terms),
               function(hpo_id){
-                messager("Extracting API data for",hpo_id)
+                message("Extracting API data for",hpo_id)
                 d <- hpo_api(hpo_id = hpo_id, type = "diseases")$diseases
               }) |> data.table::rbindlist(fill = TRUE,
                                           use.names = TRUE,
@@ -22,11 +22,11 @@ aod <- lapply(stats::setNames(terms, terms),
 aod$AgeOfDeath_name <- harmonise_phenotypes(phenotypes = aod$AgeOfDeath,
                                             as_hpo_ids = FALSE)
 #### Convert AoD to numeric scores ####
-dict <- hpo_dict(type="AgeOfDeath")
+dict <- HPOExplorer:::hpo_dict(type="AgeOfDeath")
 aod$AgeOfDeath_score <- dict[aod$AgeOfDeath_name]
 data.table::setnames(aod,
                      c("diseaseId","diseaseName"),
-                     c("DatabaseID","DiseaseName"))
+                     c("disease_id","disease_name"))
 hpo_deaths <- aod
 usethis::use_data(hpo_deaths, overwrite = TRUE)
 }

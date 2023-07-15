@@ -43,7 +43,7 @@ of the HPO phenotypes because we can include a hoverbox that gives
 information and data associated with each phenotype.
 }
 \details{
-This function expects a dataframe of with a "Phenotype" column that has the
+This function expects a dataframe of with a "hpo_name" column that has the
 name of each phenotype. It must then include columns
 for all of the parameters you wish to include in the hoverbox.
 }

@@ -5,7 +5,7 @@
 #' and relative ontology level parameters to each node in the network.
 #'
 #' It expects there to be a column of HPO IDs in the phenos dataframe called
-#' HPO_ID.
+#' hpo_id.
 #' @inheritParams make_phenos_dataframe
 #' @inheritParams make_network_object
 #' @inheritParams ggnetwork::fortify.network
@@ -19,7 +19,7 @@
 make_igraph_object <- function(phenos,
                                hpo = get_hpo(),
                                adjacency = adjacency_matrix(
-                                 terms = phenos$HPO_ID,
+                                 terms = phenos$hpo_id,
                                  hpo = hpo),
                                colour_var = "fold_change",
                                add_ont_lvl_absolute = FALSE,
@@ -48,7 +48,7 @@ make_igraph_object <- function(phenos,
   vertices <- unique(
     phenoNet[,!names(phenoNet) %in% c("x","y","vertex.names","xend","yend")]
   )
-  rownames(vertices) <- vertices$HPO_ID
+  rownames(vertices) <- vertices$hpo_id
   g <- igraph::graph_from_adjacency_matrix(adjacency)
   for(n in names(vertices)){
     igraph::vertex_attr(g,name = n) <- vertices[names(igraph::V(g)),n]

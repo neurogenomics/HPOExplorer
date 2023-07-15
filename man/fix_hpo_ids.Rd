@@ -8,17 +8,17 @@ fix_hpo_ids(dt, phenotype_to_genes = load_phenotype_to_genes())
 }
 \arguments{
 \item{dt}{\link[data.table]{data.table}
-containing a column named "Phenotype".}
+containing a column named "hpo_name".}
 
 \item{phenotype_to_genes}{Output of
 \link[HPOExplorer]{load_phenotype_to_genes} mapping phenotypes
 to gene annotations.}
 }
 \value{
-data.table with the column "HPO_ID"
+data.table with the column "hpo_id"
 }
 \description{
-Fix missing HPO IDs by inferring their identity from the \code{Phenotype}
+Fix missing HPO IDs by inferring their identity from the \code{hpo_name}
 column using several methods.
 }
 \keyword{internal}

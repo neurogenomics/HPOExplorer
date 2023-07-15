@@ -20,7 +20,7 @@ add_mondo <- function(phenos,
                       verbose = TRUE){
 
   # devoptera::args2vars(add_mondo)
-  DatabaseID <- MONDO_definition <- MONDO_name <- MONDO_ID <- NULL;
+  disease_id <- MONDO_definition <- MONDO_name <- MONDO_ID <- NULL;
 
   if(!all(c("MONDO_ID","MONDO_name","MONDO_definition") %in% names(phenos))){
     phenos <- add_disease(phenos = phenos,
@@ -33,7 +33,7 @@ add_mondo <- function(phenos,
     dict <-  unlist(mondo$xref) |> invert_dict()
     names(dict) <- gsub("^Orphanet","ORPHA",names(dict))
     ### Add new columns ####
-    phenos[,MONDO_ID:=dict[DatabaseID]]
+    phenos[,MONDO_ID:=dict[disease_id]]
     phenos[,MONDO_name:=mondo$name[MONDO_ID]]
     phenos[,MONDO_definition:=mondo$def[MONDO_ID]]
     report_missing(phenos = phenos,

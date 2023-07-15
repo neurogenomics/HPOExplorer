@@ -23,8 +23,8 @@ test_that("add_evidence works", {
   #            data.table::data.table(
   #              evidence_score_filter=toString(x),
   #              rows=nrow(p),
-  #              diseases=length(unique(p$DatabaseID)),
-  #              phenotypes=length(unique(p$HPO_ID)),
+  #              diseases=length(unique(p$disease_id)),
+  #              phenotypes=length(unique(p$hpo_id)),
   #              genes=length(unique(p$Gene))
   #            )
   #          }) |> data.table::rbindlist(use.names = TRUE,

@@ -10,16 +10,16 @@ data.table
 \source{
 \code{
 annot <- load_phenotype_to_genes(filename = "phenotype.hpoa")
-annot <- annot[Onset!="",]
-annot$Onset_name <- harmonise_phenotypes(phenotypes = annot$Onset,
+annot <- annot[onset!="",]
+annot$onset_name <- harmonise_phenotypes(phenotypes = annot$onset,
                                          as_hpo_ids = FALSE)
-counts <- dplyr::group_by(annot, DatabaseID) |>
-  dplyr::summarise(HPO_IDs=length(unique(HPO_ID)),
-                   Onsets=length(unique(Onset)))
-## The number of Onsets partially depends on the number of HPO_IDs
-## so it's necessary to keep HPO_ID too.
-cor(counts$HPO_IDs, counts$Onsets)
-hpo_onsets <- annot[,c("DatabaseID","HPO_ID","Onset","Onset_name")]
+counts <- dplyr::group_by(annot, disease_id) |>
+  dplyr::summarise(hpo_ids=length(unique(hpo_id)),
+                   onsets=length(unique(onset)))
+## The number of onsets partially depends on the number of hpo_ids
+## so it's necessary to keep hpo_id too.
+cor(counts$hpo_ids, counts$onsets)
+hpo_onsets <- annot[,c("disease_id","hpo_id","onset","onset_name")]
 usethis::use_data(hpo_onsets, overwrite = TRUE)
 }
 }

@@ -47,8 +47,8 @@ add_tier <- function(phenos,
                      verbose = TRUE){
 
   # devoptera::args2vars(add_tier)
-  disease_characteristic <- tier_auto <- HPO_ID <-
-    tier <- tier_merge <- Phenotype <- NULL;
+  disease_characteristic <- tier_auto <- hpo_id <-
+    tier <- tier_merge <- hpo_name <- NULL;
 
   if(!all(c("tier","disease_characteristic") %in% names(phenos))){
     messager("Annotating phenos with Tiers.",v=verbose)
@@ -56,12 +56,12 @@ add_tier <- function(phenos,
     utils::data("hpo_tiers", package = "HPOExplorer")
     hpo_tiers <- get("hpo_tiers")
     if(isFALSE(include_disease_characteristics)){
-      hpo_tiers <- hpo_tiers[Phenotype!=disease_characteristic,]
+      hpo_tiers <- hpo_tiers[hpo_name!=disease_characteristic,]
     }
     phenos <- data.table::merge.data.table(
       phenos,
-      hpo_tiers[,c("HPO_ID","disease_characteristic","tier")],
-      by = "HPO_ID",
+      hpo_tiers[,c("hpo_id","disease_characteristic","tier")],
+      by = "hpo_id",
       all.x = all.x)
   }
   ##### Automatically assign tiers #####
@@ -72,7 +72,7 @@ add_tier <- function(phenos,
     phenos <- data.table::merge.data.table(
       phenos,
       hpo_tiers_auto,
-      by = "HPO_ID",
+      by = "hpo_id",
       all.x = all.x)
   }
   #### Add merged tier col ####

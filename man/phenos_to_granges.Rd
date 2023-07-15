@@ -9,11 +9,11 @@ phenos_to_granges(
   phenotype_to_genes = load_phenotype_to_genes(),
   hpo = get_hpo(),
   keep_seqnames = c(seq_len(22), "X", "Y"),
-  by = c("HPO_ID", "DatabaseID"),
+  by = c("hpo_id", "disease_id"),
   gene_col = "intersection",
-  split.field = "HPO_ID",
+  split.field = "hpo_id",
   as_datatable = FALSE,
-  allow.cartesion = FALSE,
+  allow.cartesian = FALSE,
   verbose = TRUE
 )
 }
@@ -28,6 +28,12 @@ to gene annotations.}
 
 \item{keep_seqnames}{Chromosomes to keep.}
 
+\item{by}{A vector of shared column names in \code{x} and \code{y} to merge on.
+This defaults to the shared key columns between the two tables.
+If \code{y} has no key columns, this defaults to the key of \code{x}.}
+
+\item{gene_col}{Name of the gene column.}
+
 \item{split.field}{
       A character string of a recognized column name in \code{df} that contains
       the grouping. This column defines how the rows of \code{df} are split and
@@ -37,6 +43,8 @@ to gene annotations.}
   }
 
 \item{as_datatable}{Return as a \link[data.table]{data.table}.}
+
+\item{allow.cartesian}{See \code{allow.cartesian} in \code{\link[data.table]{[.data.table}}.}
 
 \item{verbose}{Print messages.}
 }

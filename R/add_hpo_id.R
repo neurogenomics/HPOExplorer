@@ -14,20 +14,20 @@
 #' @importFrom data.table := setkeyv
 #' @examples
 #' phenotype_to_genes <- load_phenotype_to_genes()
-#' phenos <- unique(phenotype_to_genes[,c("HPO_ID","Phenotype")])
+#' phenos <- unique(phenotype_to_genes[,c("hpo_id","hpo_name")])
 #' phenos2 <- add_hpo_id(phenos=phenos)
 add_hpo_id <- function(phenos,
                        hpo = get_hpo(),
                        phenotype_to_genes = NULL,
                        verbose = FALSE) {
-  HPO_term_valid <- HPO_ID <- NULL;
+  HPO_term_valid <- hpo_id <- NULL;
 
-  if(!"HPO_ID" %in% names(phenos)){
+  if(!"hpo_id" %in% names(phenos)){
     messager("Adding HPO IDs.",v=verbose)
     alt_names <- grep("hpo_id","^id$",names(phenos),
                       value=TRUE, ignore.case = TRUE)
     if(length(alt_names)>0){
-      data.table::setnames(phenos,alt_names[[1]],"HPO_ID")
+      data.table::setnames(phenos,alt_names[[1]],"hpo_id")
       return(phenos)
     } else {
       if(is.null(phenotype_to_genes)) {
@@ -36,7 +36,7 @@ add_hpo_id <- function(phenos,
       phenos <- fix_hpo_ids(dt=phenos,
                             phenotype_to_genes=phenotype_to_genes)
     }
-    phenos[,HPO_term_valid:=(HPO_ID %in% hpo$id)]
+    phenos[,HPO_term_valid:=(hpo_id %in% hpo$id)]
   }
   return(phenos)
 }

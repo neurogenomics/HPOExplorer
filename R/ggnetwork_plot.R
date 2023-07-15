@@ -38,7 +38,7 @@ ggnetwork_plot <- function(phenoNet,
   # devoptera::args2vars(ggnetwork_plot)
 
   requireNamespace("ggplot2")
-  x <- y <- xend <- yend <- hover <- Phenotype <- NULL;
+  x <- y <- xend <- yend <- hover <- hpo_name <- NULL;
 
   #### Check size_var ####
   if(!size_var %in% names(phenoNet)){
@@ -60,7 +60,7 @@ ggnetwork_plot <- function(phenoNet,
                              text = hover)) +
     ggplot2::geom_point(ggplot2::aes_string(colour = colour_var,
                             size = size_var)) +
-    ggplot2::geom_text(ggplot2::aes(label = Phenotype), color = "black") +
+    ggplot2::geom_text(ggplot2::aes(label = hpo_name), color = "black") +
     ggplot2::scale_colour_gradient2(low = "white",
                                     mid = "yellow",
                                     high = "red") +

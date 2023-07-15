@@ -38,7 +38,7 @@ add_evidence <- function(phenos,
                          keep_evidence = NULL,
                          all.x = TRUE,
                          allow.cartesian = FALSE,
-                         agg_by = c("DatabaseID",
+                         agg_by = c("disease_id",
                                     "gene_symbol"),
                          default_score = 1,
                          verbose = TRUE){
@@ -59,8 +59,7 @@ add_evidence <- function(phenos,
     phenos <- data.table::merge.data.table(
       x = phenos,
       y = annot,
-      by.x = c("DatabaseID","Gene"),
-      by.y = c("DatabaseID","gene_symbol"),
+      by = c("disease_id","gene_symbol"),
       all.x = all.x,
       sort = FALSE,
       allow.cartesian = allow.cartesian)

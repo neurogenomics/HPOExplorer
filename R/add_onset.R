@@ -1,19 +1,19 @@
 #' Add age of onset
 #'
 #' Add age of onset for each HPO ID.
-#' Onset IDs and assigned "Onset_score" values:
+#' onset IDs and assigned "onset_score" values:
 #' \itemize{
-#' \item{HP:0011461 }{"Fetal onset" (Onset_score=1)}
-#' \item{HP:0030674 }{"Antenatal onset" (Onset_score=2)}
-#' \item{HP:0003577 }{"Congenital onset" (Onset_score=3)}
-#' \item{HP:0003623 }{"Neonatal onset" (Onset_score=4)}
-#' \item{HP:0003593 }{"Infantile onset" (Onset_score=5)}
-#' \item{HP:0011463 }{"Childhood onset" (Onset_score=6)}
-#' \item{HP:0003621 }{"Juvenile onset" (Onset_score=7)}
-#' \item{HP:0011462 }{"Young adult onset" (Onset_score=8)}
-#' \item{HP:0003581 }{"Adult onset" (Onset_score=9)}
-#' \item{HP:0003596 }{"Middle age onset" (Onset_score=10)}
-#' \item{HP:0003584 }{"Late onset" (Onset_score=11)}
+#' \item{HP:0011461 }{"Fetal onset" (onset_score=1)}
+#' \item{HP:0030674 }{"Antenatal onset" (onset_score=2)}
+#' \item{HP:0003577 }{"Congenital onset" (onset_score=3)}
+#' \item{HP:0003623 }{"Neonatal onset" (onset_score=4)}
+#' \item{HP:0003593 }{"Infantile onset" (onset_score=5)}
+#' \item{HP:0011463 }{"Childhood onset" (onset_score=6)}
+#' \item{HP:0003621 }{"Juvenile onset" (onset_score=7)}
+#' \item{HP:0011462 }{"Young adult onset" (onset_score=8)}
+#' \item{HP:0003581 }{"Adult onset" (onset_score=9)}
+#' \item{HP:0003596 }{"Middle age onset" (onset_score=10)}
+#' \item{HP:0003584 }{"Late onset" (onset_score=11)}
 #' }
 #' @param keep_onsets The age of onset associated with each HPO ID to keep.
 #'  If >1 age of onset is associated with the term,
@@ -24,17 +24,17 @@
 #' @inheritParams data.table::merge.data.table
 #' @returns phenos data.table with extra columns:
 #' \itemize{
-#' \item{"Onset": }{Onset HPO IDs of disease phenotypes associated
-#' with the target HPO_ID phenotype.}
-#' \item{"Onset_names": }{Onset HPO names of disease phenotypes associated
-#' with the target HPO_ID phenotype.}
-#' \item{"Onset_counts": }{The number of times each term in
-#' "Onset_names" appears across associated disease phenotypes.}
-#' \item{"Onset_score_mean": }{Mean onset score.}
-#' \item{"Onset_score_min": }{Minimum onset score.}
-#' \item{"Onset_top": }{The most common onset term.}
-#' \item{"Onset_earliest": }{The earliest age of onset.}
-#' \item{"Onset_latest": }{The latest age of onset.}
+#' \item{"onset": }{onset HPO IDs of disease phenotypes associated
+#' with the target hpo_id phenotype.}
+#' \item{"onset_names": }{onset HPO names of disease phenotypes associated
+#' with the target hpo_id phenotype.}
+#' \item{"onset_counts": }{The number of times each term in
+#' "onset_names" appears across associated disease phenotypes.}
+#' \item{"onset_score_mean": }{Mean onset score.}
+#' \item{"onset_score_min": }{Minimum onset score.}
+#' \item{"onset_top": }{The most common onset term.}
+#' \item{"onset_earliest": }{The earliest age of onset.}
+#' \item{"onset_latest": }{The latest age of onset.}
 #' }
 #' @export
 #' @importFrom data.table merge.data.table :=
@@ -49,19 +49,19 @@ add_onset <- function(phenos,
                       verbose = TRUE){
 
   # devoptera::args2vars(add_onset)
-  Onset_latest <- Onset_score <- Onset_name <- NULL;
+  onset_latest <- onset_score <- onset_name <- NULL;
 
-  if(!any(c("Onset","Onset_name","Onset_names","Onset_score")
+  if(!any(c("onset","onset_name","onset_names","onset_score")
           %in% names(phenos))){
-    messager("Annotating phenos with Onset.",v=verbose)
+    messager("Annotating phenos with onset.",v=verbose)
     phenos <- add_disease(phenos = phenos,
                           all.x = all.x,
                           allow.cartesian = allow.cartesian,
                           verbose = verbose)
     utils::data("hpo_onsets",package = "HPOExplorer")
     hpo_onsets <- get("hpo_onsets")
-    dict <- hpo_dict(type = "Onset")
-    hpo_onsets[,Onset_score:=dict[Onset_name]]
+    dict <- hpo_dict(type = "onset")
+    hpo_onsets[,onset_score:=dict[onset_name]]
     if(!is.null(agg_by)){
       hpo_onsets <- hpo_onsets_agg(hpo_onsets = hpo_onsets,
                                    phenos = phenos,
@@ -69,13 +69,13 @@ add_onset <- function(phenos,
     }
     phenos <- data.table::merge.data.table(x = phenos,
                                            y = hpo_onsets,
-                                           by = c("DatabaseID","HPO_ID"),
+                                           by = c("disease_id","hpo_id"),
                                            allow.cartesian = allow.cartesian,
                                            all.x = all.x)
   }
   #### Filter ####
   if(!is.null(keep_onsets)){
-    phenos <- phenos[Onset_latest %in% keep_onsets,]
+    phenos <- phenos[onset_latest %in% keep_onsets,]
   }
   return(phenos)
 }

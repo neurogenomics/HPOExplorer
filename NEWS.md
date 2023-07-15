@@ -1,3 +1,25 @@
+# HPOExplorer 0.99.10
+
+## New features
+
+* `load_phenotype_to_genes`
+  - Update to use new annotation files.
+* Switch terms:
+  - "HPO_ID" --> "hpo_id"
+  - "Phenotype" --> "hpo_name"
+  - "FREQUENCY" --> "gene_freq"
+  - "Onset" --> "onset"
+  - "Modifier" --> "modifier"
+  - "Aspect" --> "aspect"
+  - "Gene" --> "gene_symbol"
+  - "LinkID" --> "disease_id"
+* Update all "data" objects.
+
+## Bug fixes
+
+* `allow.cartesion` --> `allow.cartesian`
+* Document all args.
+
 # HPOExplorer 0.99.9
 
 ## New features
@@ -18,7 +40,7 @@
   - Make sure there is only one gene length per gene symbol.
 * `add_disease`
   - Make sure `annot <- load_phenotype_to_genes(3)` only has one 
-    entry per HPO_ID/DiseaseID combination.
+    entry per hpo_id/disease_id combination.
 
 # HPOExplorer 0.99.8
 
@@ -59,7 +81,7 @@
 ## Bug fixes
 
 * De-aggregate `add_*` functions so that everything occurs at the level 
-  of "DatabaseID" + "HPO_ID".
+  of "disease_id" + "hpo_id".
 * Remove Roxygen links to `MultiEWCE`
 
 # HPOExplorer 0.99.6

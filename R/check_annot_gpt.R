@@ -5,43 +5,53 @@
 #' @returns Named list
 #'
 #' @keywords internal
+#' @import data.table
+#' @importFrom stats na.omit
 check_annot_gpt <- function(path){
 
-  # path="~/Downloads/annot_HPO_gpt_test.csv"
+  # path="~/Downloads/gpt_hpo_annotations_scale.csv"
+  hpo_id <- phenotype <- pheno_count <- NULL;
+
   #### Read data ####
-  d <- data.table::fread(path, key = "Phenotype")
+  d <- data.table::fread(path)[,1:21]
   #### Check phenotype names ####
   annot <- HPOExplorer::load_phenotype_to_genes()
+  d <- merge(d,
+             unique(annot[,c("hpo_id","hpo_name")]),
+             by.x="phenotype",
+             by.y="hpo_name")
+  unique(d[is.na(hpo_id)]$phenotype)
   phenotype_miss_rate <-
-    length(d$Phenotype[!d$Phenotype %in% annot$Phenotype]) /
-    length(d$Phenotype)
-
+    length(d$phenotype[!d$phenotype %in% annot$hpo_name]) /
+    length(d$phenotype)
   #### Check annotation consistency ####
-  nm <- names(d)[!names(d) %in% c("Phenotype","Justification")]
-  d_mean <- d[,lapply(.SD,function(x){mean(x=="Yes")}),.SDcols=nm,
-              by="Phenotype"]
+  nm <- names(d)[!grepl("phenotype|justification|hpo_id",names(d),
+                        ignore.case = TRUE)]
+  opts <- unlist(sapply(d[,nm,with=FALSE], unique)) |> unique()
+  print(opts)
+  d[,pheno_count:=table(d$phenotype)[phenotype]]
+  d_mean <- d[pheno_count>1][,lapply(.SD,function(x){mean(tolower(x)!="never")}),
+                             .SDcols=nm,
+              by="phenotype"]
   d_consist <- lapply(d_mean[,-1], function(x)sum(x%in%c(0,1)/nrow(d_mean)))
-
   #### Check ontology classifications #####
-  d$HPO_ID <- harmonise_phenotypes(phenotypes = d$Phenotype,
-                                   as_hpo_ids = TRUE)
   ## Find matching HPO branches
   hpo <- get_hpo()
   queries <- list(
-    Intellectual_Disability=c("intellectual disability"),
-    Impaired_Mobility=c("Abnormal central motor function",
+    intellectual_disability=c("intellectual disability"),
+    impaired_mobility=c("Abnormal central motor function",
                         "Abnormality of movement"),
-    Physical_Malformations=c("malformation","morphology"),
-    Blindness=c("^blindness"),
-    Sensory_Impairments=c("Abnormality of vision",
+    physical_malformations=c("malformation","morphology"),
+    blindness=c("^blindness"),
+    sensory_impairments=c("Abnormality of vision",
                           "Abnormality of the sense of smell",
                           "Abnormality of taste sensation",
                           "Somatic sensory dysfunction",
                           "Hearing abnormality"
                           ),
-    Immunodeficiency=c("Immunodeficiency"),
-    Cancer=c("Neoplasm","Cancer"),
-    Reduced_Fertility=c("Decreased fertility")
+    immunodeficiency=c("Immunodeficiency"),
+    cancer=c("Neoplasm","Cancer"),
+    reduced_fertility=c("Decreased fertility")
     )
   tiers <- lapply(queries, function(q){
     terms <- grep(paste(q,collapse = "|"),
@@ -55,11 +65,11 @@ check_annot_gpt <- function(path){
   annot_check <- lapply(seq_len(nrow(d)), function(i){
     r <- d[i,]
     cbind(
-      r[,c("Phenotype","HPO_ID")],
+      r[,c("phenotype","hpo_id")],
       lapply(stats::setNames(names(tiers),names(tiers)),
              function(x){
-               if(r$HPO_ID %in% tiers[[x]]){
-                 r[,x,with=FALSE][[1]]=="Yes"
+               if(r$hpo_id %in% tiers[[x]]){
+                 tolower(r[,x,with=FALSE][[1]])!="no"
                } else {
                  NA
                }
@@ -67,18 +77,21 @@ check_annot_gpt <- function(path){
     )
   }) |> data.table::rbindlist()
 
-  ### Number of rows where annotation is not NA
+  ### Proportion of rows where annotation is NA
   missing_rate <- sapply(
     annot_check[,names(tiers),with=FALSE],
     function(x){sum(is.na(x))/length(x)})
-  ### Number of rows where the annotation was checkable and TRUE
+  nonmissing_count <- sapply(
+    annot_check[,names(tiers),with=FALSE],
+    function(x){sum(!is.na(x))})
+  ### Proportion of rows where the annotation was checkable and TRUE
   true_pos_rate <- sapply(
     annot_check[,names(tiers),with=FALSE],
-    function(x){sum(na.omit(x)==TRUE)/length(na.omit(x))})
-  ### Number of rows where the annotation was checkable and FALSE
+    function(x){sum(stats::na.omit(x)==TRUE)/length(stats::na.omit(x))})
+  ### Proportion of rows where the annotation was checkable and FALSE
   false_neg_rate <- sapply(
     annot_check[,names(tiers),with=FALSE],
-    function(x){sum(na.omit(x)==FALSE)/length(na.omit(x))})
+    function(x){sum(stats::na.omit(x)==FALSE)/length(stats::na.omit(x))})
   #### Return ####
   return(list(
     phenotype_miss_rate=phenotype_miss_rate,

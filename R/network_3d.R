@@ -84,7 +84,7 @@ network_3d <- function(g,
   requireNamespace("plotly")
   requireNamespace("pals")
   requireNamespace("htmlwidgets")
-  label <- Phenotype <- NULL;
+  label <- hpo_name <- NULL;
 
   #### Convert igraph to plotly data ####
   d <- igraph_to_plotly(g = g,
@@ -94,7 +94,7 @@ network_3d <- function(g,
                         verbose = verbose)
   vdf <- d$vertices
   vdf[,label:=gsub("\n","<br>",
-                   stringr::str_wrap(Phenotype, width = label_width))]
+                   stringr::str_wrap(hpo_name, width = label_width))]
   edf <- d$edges
   remove(d)
   #### Create paths and nodes ####
@@ -140,8 +140,8 @@ network_3d <- function(g,
                         hovertext = ~ stringr::str_wrap(
                           paste(
                             paste0('<b>name</b>: ',name),
-                            paste0('<b>HPO_ID</b>: ',HPO_ID),
-                            paste0('<b>Phenotype</b>: ',Phenotype),
+                            paste0('<b>hpo_id</b>: ',hpo_id),
+                            paste0('<b>hpo_name</b>: ',hpo_name),
                             paste0('<b>ontLvl</b>: ',ontLvl),
                             paste0('<b>ancestor_name</b>: ',ancestor_name),
                             sep = "<br>"),

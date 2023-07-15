@@ -8,15 +8,19 @@ add_genes(
   phenos = NULL,
   phenotype_to_genes = load_phenotype_to_genes(),
   hpo = get_hpo(),
-  by = c("HPO_ID", "DatabaseID"),
-  gene_col = "Gene",
+  by = c("hpo_id", "disease_id"),
+  gene_col = "gene_symbol",
   all.x = FALSE,
-  allow.cartesion = FALSE,
+  allow.cartesian = FALSE,
   verbose = TRUE
 )
 }
 \arguments{
 \item{phenos}{dataframe of phenotypes and values / parameters.}
+
+\item{phenotype_to_genes}{Output of
+\link[HPOExplorer]{load_phenotype_to_genes} mapping phenotypes
+to gene annotations.}
 
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 
@@ -24,11 +28,15 @@ add_genes(
 This defaults to the shared key columns between the two tables.
 If \code{y} has no key columns, this defaults to the key of \code{x}.}
 
+\item{gene_col}{Name of the gene column.}
+
 \item{all.x}{logical; if \code{TRUE}, then extra rows will be added to the
 output, one for each row in \code{x} that has no matching row in \code{y}.
 These rows will have 'NA's in those columns that are usually filled with values
 from \code{y}.  The default is \code{FALSE}, so that only rows with data from both
 \code{x} and \code{y} are included in the output.}
+
+\item{allow.cartesian}{See \code{allow.cartesian} in \code{\link[data.table]{[.data.table}}.}
 
 \item{verbose}{Print messages.}
 }

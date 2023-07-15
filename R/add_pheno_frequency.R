@@ -24,8 +24,8 @@ add_pheno_frequency <- function(phenos,
                                 all.x = TRUE,
                                 allow.cartesian = FALSE,
                                 verbose = TRUE){
+  # devoptera::args2vars(add_pheno_frequency)
   pheno_freq_mean <- NULL;
-
 
   new_cols <- c("pheno_freq_min","pheno_freq_max","pheno_freq_mean")
   if(!all(new_cols %in% names(phenos))){
@@ -43,7 +43,7 @@ add_pheno_frequency <- function(phenos,
       x = phenos,
       y = hpo_frequencies,
       all.x = all.x,
-      by = c("DatabaseID","HPO_ID"))
+      by = c("disease_id","hpo_id"))
   }
   #### Filter ####
   if(!is.null(pheno_frequency_threshold)){

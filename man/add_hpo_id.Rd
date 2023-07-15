@@ -30,6 +30,6 @@ it caused an error in the ontologyPlot package.
 }
 \examples{
 phenotype_to_genes <- load_phenotype_to_genes()
-phenos <- unique(phenotype_to_genes[,c("HPO_ID","Phenotype")])
+phenos <- unique(phenotype_to_genes[,c("hpo_id","hpo_name")])
 phenos2 <- add_hpo_id(phenos=phenos)
 }

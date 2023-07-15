@@ -25,6 +25,55 @@ annotate_phenos(
   verbose = TRUE
 )
 }
+\arguments{
+\item{phenos}{dataframe of phenotypes and values / parameters.}
+
+\item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
+
+\item{adjacency}{An adjacency matrix generated
+by \link[HPOExplorer]{adjacency_matrix}.}
+
+\item{add_ont_lvl_absolute}{Add the absolute ontology level of each HPO term.
+See \link[HPOExplorer]{get_ont_lvls} for more details.}
+
+\item{add_ont_lvl_relative}{Add the relative ontology level of each HPO term.
+See \link[HPOExplorer]{get_ont_lvls} for more details.}
+
+\item{add_info_contents}{Add information content column for each phenotype.}
+
+\item{add_description}{Whether to get the phenotype descriptions as
+well (slower).}
+
+\item{add_disease_data}{Add all disease metadata columns.
+This will expand the data using \code{allow.cartesian=TRUE}.}
+
+\item{add_ndiseases}{Add the number of diseases per phenotype.}
+
+\item{add_onsets}{Add age of onset columns using
+\link[HPOExplorer]{add_onset}.}
+
+\item{add_deaths}{Add age of death columns using
+\link[HPOExplorer]{add_death}.}
+
+\item{add_pheno_frequencies}{Add the frequency of each phenotype in
+each disease.}
+
+\item{add_tiers}{Add severity Tiers column using
+\link[HPOExplorer]{add_tier}.}
+
+\item{add_severities}{Add severity column using
+\link[HPOExplorer]{add_severity}.}
+
+\item{add_hoverboxes}{Add hoverdata with
+\link[HPOExplorer]{make_hoverboxes}.}
+
+\item{columns}{A named vector of columns in \code{phenos}
+to add to the hoverdata via \link[HPOExplorer]{make_hoverboxes}.}
+
+\item{interactive}{Make the plot interactive with \link[plotly]{ggplotly}.}
+
+\item{verbose}{Print messages.}
+}
 \description{
 Annotate phenotypes \link[data.table]{data.table} without various types
 of metadata.

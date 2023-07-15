@@ -37,9 +37,9 @@ from \code{y}.  The default is \code{FALSE}, so that only rows with data from bo
 phenos data.table with extra columns:
 \itemize{
 \item{"AgeOfDeath": }{AgeOfDeath HPO IDs of disease phenotypes associated
-with the target HPO_ID phenotype.}
+with the target hpo_id phenotype.}
 \item{"AgeOfDeath_names": }{AgeOfDeath HPO names of disease phenotypes
-associated with the target HPO_ID phenotype.}
+associated with the target hpo_id phenotype.}
 \item{"AgeOfDeath_counts": }{The number of times each term in
 "AgeOfDeath_names" appears across associated disease phenotypes.}
 \item{"AgeOfDeath_score_mean": }{Mean age of death score.}

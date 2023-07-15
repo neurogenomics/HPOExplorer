@@ -7,7 +7,7 @@
 make_igraph_object(
   phenos,
   hpo = get_hpo(),
-  adjacency = adjacency_matrix(terms = phenos$HPO_ID, hpo = hpo),
+  adjacency = adjacency_matrix(terms = phenos$hpo_id, hpo = hpo),
   colour_var = "fold_change",
   add_ont_lvl_absolute = FALSE,
   cols = list_columns(extra_cols = c(colour_var, grep("_count$|_values$", names(phenos),
@@ -60,7 +60,7 @@ and relative ontology level parameters to each node in the network.
 }
 \details{
 It expects there to be a column of HPO IDs in the phenos dataframe called
-HPO_ID.
+hpo_id.
 }
 \examples{
 phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")

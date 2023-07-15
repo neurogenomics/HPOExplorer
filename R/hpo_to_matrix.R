@@ -8,7 +8,7 @@
 #'  (e.g. "Abnormality of body height"),
 #'  however you can instead set them to the HPO IDs
 #'  by changing the \code{formula} argument to:
-#'   \code{formula = "Gene ~ HPO_ID"}.
+#'   \code{formula = "gene_symbol ~ hpo_id"}.
 #' Phenotypes that are not present in the \code{phenotype_to_genes} annotations
 #' are omitted from the final matrix.
 #' @param terms A subset of HPO IDs to include.
@@ -16,7 +16,7 @@
 #' @param run_cor Return a matrix of pairwise correlations.
 #' @param as_matrix Return the results as a matrix (\code{TRUE}).
 #' Otherwise, will return the results as a \link[data.table]{data.table}
-#' with an extra column "Gene".
+#' with an extra column "gene_symbol".
 #' @param as_sparse Convert the data to a sparse matrix.
 #' Only used when \code{as_matrix=TRUE}.
 #' @inheritParams make_phenos_dataframe
@@ -30,10 +30,10 @@
 #' @importFrom stats terms as.formula cor
 #' @examples
 #' phenos <- example_phenos()
-#' X <- hpo_to_matrix(terms = phenos$HPO_ID)
+#' X <- hpo_to_matrix(terms = phenos$hpo_id)
 hpo_to_matrix <- function(terms = NULL,
                           phenotype_to_genes = load_phenotype_to_genes(),
-                          formula = "Gene ~ Phenotype",
+                          formula = "gene_symbol ~ hpo_name",
                           fun.aggregate = mean,
                           value.var = "evidence_score_mean",
                           fill = 0,
@@ -44,11 +44,11 @@ hpo_to_matrix <- function(terms = NULL,
                           verbose = TRUE){
   # devoptera::args2vars(hpo_to_matrix, reassign = TRUE)
   requireNamespace("Matrix")
-  HPO_ID <- dummy <- NULL;
+  hpo_id <- dummy <- NULL;
 
   messager("Constructing HPO gene x phenotype matrix.",v=verbose)
   if(!is.null(terms)){
-    phenotype_to_genes <- phenotype_to_genes[HPO_ID %in% unique(terms),]
+    phenotype_to_genes <- phenotype_to_genes[hpo_id %in% unique(terms),]
   }
   #### ####
   if(is.null(value.var)){

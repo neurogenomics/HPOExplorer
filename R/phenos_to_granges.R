@@ -7,9 +7,11 @@
 #' genes associated with each phenotypes.
 #' @param as_datatable Return as a \link[data.table]{data.table}.
 #' @param keep_seqnames Chromosomes to keep.
+#' @inheritParams add_genes
 #' @inheritParams make_network_object
 #' @inheritParams make_phenos_dataframe
 #' @inheritParams GenomicRanges::makeGRangesListFromDataFrame
+#' @inheritParams data.table::merge.data.table
 #' @returns A \link[GenomicRanges]{GRangesList}.
 #'
 #' @export
@@ -22,11 +24,11 @@ phenos_to_granges <- function(phenos = NULL,
                                 load_phenotype_to_genes(),
                               hpo = get_hpo(),
                               keep_seqnames = c(seq_len(22),"X","Y"),
-                              by = c("HPO_ID","DatabaseID"),
+                              by = c("hpo_id","disease_id"),
                               gene_col = "intersection",
-                              split.field = "HPO_ID",
+                              split.field = "hpo_id",
                               as_datatable = FALSE,
-                              allow.cartesion = FALSE,
+                              allow.cartesian = FALSE,
                               verbose = TRUE){
   # devoptera::args2vars(phenos_to_granges)
   requireNamespace("GenomicRanges")
@@ -40,10 +42,10 @@ phenos_to_granges <- function(phenos = NULL,
                       hpo = hpo,
                       by = by,
                       gene_col = gene_col,
-                      allow.cartesion = allow.cartesion,
+                      allow.cartesian = allow.cartesian,
                       verbose = verbose)
   #### Get gene lengths #####
-  gr <- get_gene_lengths(gene_list = phenos$Gene,
+  gr <- get_gene_lengths(gene_list = phenos$gene_symbol,
                          keep_seqnames = keep_seqnames,
                          verbose = verbose)
   #### Merge in gene length data ####
@@ -51,7 +53,7 @@ phenos_to_granges <- function(phenos = NULL,
     phenos,
     #### Ensure 1 gene symbol per ####
     data.table::as.data.table(gr)[,.SD[1],by=c("symbol")],
-    by.x = "Gene",
+    by.x = "gene_symbol",
     by.y = "symbol")
   #### Return ####
   ## As data.table

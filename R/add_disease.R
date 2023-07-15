@@ -28,28 +28,25 @@ add_disease <- function(phenos,
 
   # devoptera::args2vars(add_disease)
 
-  if(!"HPO_ID" %in% names(phenos)){
-    stp <- paste("HPO_ID column must be present in phenos.")
+  if(!"hpo_id" %in% names(phenos)){
+    stp <- paste("hpo_id column must be present in phenos.")
     stop(stp)
   }
-  if(!all(c("DiseaseName","DatabaseID") %in% names(phenos))){
+  if(!all(c("disease_name","disease_id") %in% names(phenos))){
     messager("Annotating phenos with Disease",v=verbose)
     annot <- load_phenotype_to_genes(3)
-    #### From LinkID ####
-    if("LinkID" %in% names(phenos) &&
-       !"DatabaseID" %in% names(phenos)){
-      data.table::setnames(phenos,"LinkID","DatabaseID")
-      if("DiseaseName" %in% names(phenos)){
-        return(phenos)
-      }
+    #### From disease_id ####
+    data.table::setnames(phenos,"disease_id","disease_id", skip_absent = TRUE)
+    if("disease_name" %in% names(phenos)){
+      return(phenos)
     }
-    #### From HPO_ID alone ####
-    by <- c("HPO_ID","DatabaseID")
+    #### From hpo_id alone ####
+    by <- c("hpo_id","disease_id")
     by <- by[by %in% names(phenos)]
     #### Ensure there's only 1 row per Disease ####
-    annot <- annot[,unique(c("HPO_ID","DiseaseName","DatabaseID",
+    annot <- annot[,unique(c("hpo_id","disease_name","disease_id",
                              extra_cols)),
-                   with=FALSE][,.SD[1], by=c("DatabaseID","HPO_ID")]
+                   with=FALSE][,.SD[1], by=c("disease_id","hpo_id")]
     #### Merge ####
     phenos <- data.table::merge.data.table(
       phenos,
@@ -58,7 +55,7 @@ add_disease <- function(phenos,
       all.x = all.x,
       allow.cartesian = allow.cartesian)
   }
-  #### Add Definitions column and fill out missing DiseaseName columns ####
+  #### Add Definitions column and fill out missing disease_name columns ####
   if(isTRUE(add_definitions)){
     phenos <- add_disease_definition(phenos = phenos,
                                      all.x = all.x,

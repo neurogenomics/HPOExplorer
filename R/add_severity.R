@@ -34,8 +34,8 @@ add_severity <- function(phenos,
   # devoptera::args2vars(add_severity)
   Severity_score <- NULL;
 
-  if(!all(c("Modifier","Modifier_name") %in% names(phenos))){
-    messager("Annotating phenos with Modifiers",v=verbose)
+  if(!all(c("modifier","modifier_name") %in% names(phenos))){
+    messager("Annotating phenos with modifiers",v=verbose)
     phenos <- add_disease(phenos = phenos,
                           all.x = all.x,
                           allow.cartesian = allow.cartesian,
@@ -48,8 +48,8 @@ add_severity <- function(phenos,
     #### Add diseases ####
     phenos <- data.table::merge.data.table(
       phenos,
-      hpo_mod[,c("DatabaseID","HPO_ID","Modifier_name","Severity_score")],
-      by = c("DatabaseID","HPO_ID"),
+      hpo_mod[,c("disease_id","hpo_id","modifier_name","Severity_score")],
+      by = c("disease_id","hpo_id"),
       all.x = all.x)
   }
   #### Filter ####

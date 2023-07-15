@@ -62,7 +62,7 @@ per_branch_plot <- function(highlighted_branches,
                     color = "target", fill = "target")) +
     geom_col(width = .5) +
     labs(x="Descendants (n)",
-         y="Phenotype",
+         y="hpo_name",
          fill="Group",
          color="Group") +
     theme_bw()

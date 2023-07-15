@@ -25,9 +25,9 @@
 #' @returns phenos data.table with extra columns:
 #' \itemize{
 #' \item{"AgeOfDeath": }{AgeOfDeath HPO IDs of disease phenotypes associated
-#' with the target HPO_ID phenotype.}
+#' with the target hpo_id phenotype.}
 #' \item{"AgeOfDeath_names": }{AgeOfDeath HPO names of disease phenotypes
-#' associated with the target HPO_ID phenotype.}
+#' associated with the target hpo_id phenotype.}
 #' \item{"AgeOfDeath_counts": }{The number of times each term in
 #' "AgeOfDeath_names" appears across associated disease phenotypes.}
 #' \item{"AgeOfDeath_score_mean": }{Mean age of death score.}
@@ -61,7 +61,7 @@ add_death <- function(phenos,
                           verbose = verbose)
     utils::data("hpo_deaths",package = "HPOExplorer")
     annot <- get("hpo_deaths")
-    annot <- annot[,c("DatabaseID",
+    annot <- annot[,c("disease_id",
                       "AgeOfDeath_name",
                       "AgeOfDeath_score")]
     #### Each disease can have >1 AgeofDeath ####
@@ -70,10 +70,10 @@ add_death <- function(phenos,
                              by = agg_by)
     }
     ## AgeOfDeath annotations are only at level of Disease,
-    ## so merge by DatabaseID alone.
+    ## so merge by disease_id alone.
     phenos <- data.table::merge.data.table(x = phenos,
                                            y = annot,
-                                           by = "DatabaseID",
+                                           by = "disease_id",
                                            allow.cartesian = allow.cartesian,
                                            all.x = all.x)
   }

@@ -15,7 +15,7 @@
 #'  well (slower).
 #' @param add_info_contents Add information content column for each phenotype.
 #' @param add_disease_data Add all disease metadata columns.
-#' This will expand the data using \code{allow.cartesion=TRUE}.
+#' This will expand the data using \code{allow.cartesian=TRUE}.
 #' @param add_ndiseases Add the number of diseases per phenotype.
 #' @param add_pheno_frequencies Add the frequency of each phenotype in
 #' each disease.
@@ -68,7 +68,7 @@ make_phenos_dataframe <- function(ancestor = NULL,
   # devoptera::args2vars(make_phenos_dataframe)
   # ancestor = "Neurodevelopmental delay"
 
-  HPO_ID <- . <- NULL;
+  hpo_id <- . <- NULL;
 
   if(!is.null(ancestor)){
     IDx <- get_hpo_id_direct(phenotype = ancestor,
@@ -76,15 +76,15 @@ make_phenos_dataframe <- function(ancestor = NULL,
     IDx_all <- ontologyIndex::get_descendants(ontology = hpo,
                                               roots = IDx,
                                               exclude_roots = FALSE)
-    descendants <- phenotype_to_genes[HPO_ID %in% IDx_all,]
+    descendants <- phenotype_to_genes[hpo_id %in% IDx_all,]
   } else {
     descendants <- phenotype_to_genes
   }
   messager("Extracting data for",
-           formatC(length(unique(descendants$Phenotype)),big.mark = ","),
+           formatC(length(unique(descendants$hpo_name)),big.mark = ","),
            "descendents.",v=verbose)
   messager("Computing gene counts.",v=verbose)
-  phenos <- descendants[,.(geneCount=.N), by=c("HPO_ID","Phenotype")]
+  phenos <- descendants[,.(geneCount=.N), by=c("hpo_id","hpo_name")]
   #### Annotate phenotypes ####
   phenos <- annotate_phenos(phenos = phenos,
                             hpo = hpo,

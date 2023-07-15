@@ -51,7 +51,7 @@ See \link[HPOExplorer]{get_ont_lvls} for more details.}
 well (slower).}
 
 \item{add_disease_data}{Add all disease metadata columns.
-This will expand the data using \code{allow.cartesion=TRUE}.}
+This will expand the data using \code{allow.cartesian=TRUE}.}
 
 \item{add_ndiseases}{Add the number of diseases per phenotype.}
 

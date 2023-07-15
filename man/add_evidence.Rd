@@ -9,7 +9,7 @@ add_evidence(
   keep_evidence = NULL,
   all.x = TRUE,
   allow.cartesian = FALSE,
-  agg_by = c("DatabaseID", "gene_symbol"),
+  agg_by = c("disease_id", "gene_symbol"),
   default_score = 1,
   verbose = TRUE
 )

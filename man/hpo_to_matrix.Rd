@@ -7,7 +7,7 @@
 hpo_to_matrix(
   terms = NULL,
   phenotype_to_genes = load_phenotype_to_genes(),
-  formula = "Gene ~ Phenotype",
+  formula = "gene_symbol ~ hpo_name",
   fun.aggregate = mean,
   value.var = "evidence_score_mean",
   fill = 0,
@@ -42,7 +42,7 @@ to gene annotations.}
 
 \item{as_matrix}{Return the results as a matrix (\code{TRUE}).
 Otherwise, will return the results as a \link[data.table]{data.table}
-with an extra column "Gene".}
+with an extra column "gene_symbol".}
 
 \item{as_sparse}{Convert the data to a sparse matrix.
 Only used when \code{as_matrix=TRUE}.}
@@ -67,11 +67,11 @@ By default, full phenotype names are used as the column names
 (e.g. "Abnormality of body height"),
 however you can instead set them to the HPO IDs
 by changing the \code{formula} argument to:
-\code{formula = "Gene ~ HPO_ID"}.
+\code{formula = "gene_symbol ~ hpo_id"}.
 Phenotypes that are not present in the \code{phenotype_to_genes} annotations
 are omitted from the final matrix.
 }
 \examples{
 phenos <- example_phenos()
-X <- hpo_to_matrix(terms = phenos$HPO_ID)
+X <- hpo_to_matrix(terms = phenos$hpo_id)
 }

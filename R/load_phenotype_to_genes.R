@@ -29,13 +29,14 @@ load_phenotype_to_genes <- function(filename = c("phenotype_to_genes.txt",
                                       tools::R_user_dir("HPOExplorer",
                                                         which="cache"),
                                       "data"),
-                                    method = "piggyback",
+                                    method = c("hpo","piggyback"),
                                     verbose = TRUE
                                     ) {
   # devoptera::args2vars(load_phenotype_to_genes)
 
   #### Get right URL #####
   filename <- filename[[1]]
+  method <- tolower(method)[1]
   #### Use index to select file ####
   if(is.numeric(filename)){
     filename <- eval(formals(load_phenotype_to_genes)$filename)[[filename]]
@@ -71,34 +72,9 @@ load_phenotype_to_genes <- function(filename = c("phenotype_to_genes.txt",
       input = file,
       skip = 4,
     )
-  } else if(basename(file)=="genes_to_phenotype.txt"){
-    phenotype_to_genes <- data.table::fread(
-      input = file,
-      skip = 1,
-      header = FALSE,
-      col.names =  c("EntrezID","Gene","ID","Phenotype","FrequencyRaw",
-                     "FrequencyHPO","Additional","Source","LinkID")
-    )
+    data.table::setnames(phenotype_to_genes,"database_id","disease_id")
   } else {
-    phenotype_to_genes <- data.table::fread(
-      input = file,
-      skip = 1,
-      header = FALSE,
-      col.names = c("ID", "Phenotype", "EntrezID", "Gene",
-                    "Additional", "Source", "LinkID")
-    )
+    phenotype_to_genes <- data.table::fread(input = file)
   }
-  if("#DatabaseID" %in% names(phenotype_to_genes)){
-    data.table::setnames(phenotype_to_genes,"#DatabaseID","DatabaseID")
-  }
-  if("ID" %in% names(phenotype_to_genes)){
-    data.table::setnames(phenotype_to_genes,"ID","HPO_ID")
-  }
-  data.table::setnames(phenotype_to_genes,
-                       c("database_id","disease_name","hpo_id","frequency",
-                         "qualifier","modifier","onset"),
-                       c("DatabaseID", "DiseaseName", "HPO_ID","Frequency",
-                         "Qualifier","Modifier","Onset"),
-                       skip_absent = TRUE)
   return(phenotype_to_genes)
 }

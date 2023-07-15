@@ -1,5 +1,5 @@
 hpo_frequencies_agg <- function(hpo_frequencies,
-                                by=c("DatabaseID","HPO_ID")){
+                                by=c("disease_id","hpo_id")){
   by <- by[1]
   pheno_freq_min <- pheno_freq_max <- pheno_freq_mean <- NULL
   annot_agg <- hpo_frequencies[,list(

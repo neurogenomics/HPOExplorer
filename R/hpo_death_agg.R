@@ -1,5 +1,5 @@
 hpo_death_agg <- function(hpo_deaths,
-                          by=c("DatabaseID","HPO_ID")){
+                          by=c("disease_id","hpo_id")){
   AgeOfDeath <- AgeOfDeath_name <- AgeOfDeath_score <- . <- NULL;
 
   by <- by[by %in% names(hpo_deaths)]

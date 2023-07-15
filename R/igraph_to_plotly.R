@@ -31,7 +31,7 @@ igraph_to_plotly <- function(g,
   #   igraph_to_ggnetwork(g)
   # )[,-c("x","y","xend","yend")]
   # if("node_type" %in% names(gnet)){
-  #   gnet <- unique(gnet[node_type %in% c("Phenotype","ancestor_name")])
+  #   gnet <- unique(gnet[node_type %in% c("hpo_name","ancestor_name")])
   # }
 
   #### Vertex data ####
@@ -60,9 +60,9 @@ igraph_to_plotly <- function(g,
     by.y="name"
   )
 
-  if(!"Phenotype" %in% names(vdf)){
-    vdf$Phenotype <- harmonise_phenotypes(phenotypes = vdf$HPO_ID,
-                                          as_hpo_ids = FALSE)
+  if(!"hpo_name" %in% names(vdf)){
+    vdf$hpo_name <- harmonise_phenotypes(phenotypes = vdf$hpo_id,
+                                         as_hpo_ids = FALSE)
   }
   return(list(vertices=vdf,
               edges=edf))

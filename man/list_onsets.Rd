@@ -19,7 +19,7 @@ list_onsets(
 
 \item{as_hpo_ids}{Return as a character vector vector HPO IDs only.}
 
-\item{include_na}{Include NA values for Onset.}
+\item{include_na}{Include NA values for onset.}
 
 \item{verbose}{Print messages.}
 }

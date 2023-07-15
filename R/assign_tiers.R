@@ -65,7 +65,7 @@ assign_tiers <- function(hpo=get_hpo(),
 
   # devoptera::args2vars(assign_tiers)
 
-  DiseaseName <- definition <- NULL;
+  disease_name <- definition <- NULL;
   #### Gather sets of IDs in the HPO that would qualify ####
   annot <- load_phenotype_to_genes("phenotype.hpoa")
   hpo_sets <- lapply(stats::setNames(names(keyword_sets),
@@ -89,9 +89,9 @@ assign_tiers <- function(hpo=get_hpo(),
     }
     #### Matches in the disease association ####
     if(isTRUE(check_diseases)){
-      annot_sub <- annot[grepl(paste(k,collapse = "|"), DiseaseName,
+      annot_sub <- annot[grepl(paste(k,collapse = "|"), disease_name,
                                ignore.case = TRUE),]
-      ids3 <- hpo$name[names(hpo$name) %in% annot_sub$HPO_ID]
+      ids3 <- hpo$name[names(hpo$name) %in% annot_sub$hpo_id]
       ids <- c(ids,ids3)
     }
     ids <- ids[!duplicated(names(ids))]
@@ -136,10 +136,10 @@ assign_tiers <- function(hpo=get_hpo(),
                    }) |> unlist()
   #### Return ####
   if(isTRUE(as_datatable)){
-    dt <- data.table::data.table(HPO_ID=names(tiers),
+    dt <- data.table::data.table(hpo_id=names(tiers),
                                  tier_auto=unname(tiers),
-                                 key="HPO_ID")
-    dups <- dt$HPO_ID[duplicated(dt$HPO_ID)]
+                                 key="hpo_id")
+    dups <- dt$hpo_id[duplicated(dt$hpo_id)]
     return(dt)
   } else {
     return(tiers)

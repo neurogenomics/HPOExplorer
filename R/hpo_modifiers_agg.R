@@ -1,28 +1,28 @@
 hpo_modifiers_agg <- function(dt,
-                              by = c("DatabaseID","HPO_ID")){
-  Modifier <- Modifier_name <- DiseaseName <- DiseaseName <- DatabaseID <-
-    Severity_score <- Severity_score_min <- HPO_ID <- NULL;
+                              by = c("disease_id","hpo_id")){
+  modifier <- modifier_name <- disease_name <- disease_name <- disease_id <-
+    Severity_score <- Severity_score_min <- hpo_id <- NULL;
 
   by <- by[1]
-  if(by=="HPO_ID"){
+  if(by=="hpo_id"){
     dt2 <- dt[,list(
-      Modifier=paste(unique(Modifier),collapse=";"),
-      Modifier_name=paste(unique(Modifier_name),collapse=";"),
-      Modifier_count=paste(table(unlist(Modifier_name)),collapse=";"),
-      DiseaseNames=paste(unique(DiseaseName),collapse = ";"),
-      DiseaseNames_count=length(unique(DiseaseName)),
-      DatabaseID_count=length(unique(DatabaseID)),
+      modifier=paste(unique(modifier),collapse=";"),
+      modifier_name=paste(unique(modifier_name),collapse=";"),
+      modifier_count=paste(table(unlist(modifier_name)),collapse=";"),
+      disease_names=paste(unique(disease_name),collapse = ";"),
+      disease_names_count=length(unique(disease_name)),
+      disease_id_count=length(unique(disease_id)),
       Severity_score_mean=mean(Severity_score, na.rm=TRUE),
       Severity_score_min=min(Severity_score, na.rm=TRUE)
     ), by=by]
-  } else if (by=="DatabaseID"){
+  } else if (by=="disease_id"){
     dt2 <- dt[,list(
-      DiseaseName=DiseaseName,
-      Modifier=paste(unique(Modifier),collapse=";"),
-      Modifier_name=paste(unique(Modifier_name),collapse=";"),
-      Modifier_count=paste(table(unlist(Modifier_name)),collapse=";"),
-      HPO_IDs=paste(unique(HPO_ID),collapse = ";"),
-      HPO_ID_count=length(unique(HPO_ID)),
+      disease_name=disease_name,
+      modifier=paste(unique(modifier),collapse=";"),
+      modifier_name=paste(unique(modifier_name),collapse=";"),
+      modifier_count=paste(table(unlist(modifier_name)),collapse=";"),
+      hpo_ids=paste(unique(hpo_id),collapse = ";"),
+      hpo_id_count=length(unique(hpo_id)),
       Severity_score_count=length(stats::na.omit(unique(Severity_score))),
       Severity_score_mean=mean(Severity_score, na.rm=TRUE),
       Severity_score_min=min(Severity_score, na.rm=TRUE)
@@ -34,8 +34,8 @@ hpo_modifiers_agg <- function(dt,
   dt2$Modifer_top <- lapply(seq_len(nrow(dt2)),
                             function(i){
                                   r <- dt2[i,]
-                                  mn <- strsplit(r$Modifier_name,";")[[1]]
-                                  mc <- strsplit(r$Modifier_count,";")[[1]]
+                                  mn <- strsplit(r$modifier_name,";")[[1]]
+                                  mc <- strsplit(r$modifier_count,";")[[1]]
                                   mn[mc==max(mc)][[1]]
                                 }) |> unlist()
   return(dt2)

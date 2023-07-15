@@ -36,34 +36,34 @@ from \code{y}.  The default is \code{FALSE}, so that only rows with data from bo
 \value{
 phenos data.table with extra columns:
 \itemize{
-\item{"Onset": }{Onset HPO IDs of disease phenotypes associated
-with the target HPO_ID phenotype.}
-\item{"Onset_names": }{Onset HPO names of disease phenotypes associated
-with the target HPO_ID phenotype.}
-\item{"Onset_counts": }{The number of times each term in
-"Onset_names" appears across associated disease phenotypes.}
-\item{"Onset_score_mean": }{Mean onset score.}
-\item{"Onset_score_min": }{Minimum onset score.}
-\item{"Onset_top": }{The most common onset term.}
-\item{"Onset_earliest": }{The earliest age of onset.}
-\item{"Onset_latest": }{The latest age of onset.}
+\item{"onset": }{onset HPO IDs of disease phenotypes associated
+with the target hpo_id phenotype.}
+\item{"onset_names": }{onset HPO names of disease phenotypes associated
+with the target hpo_id phenotype.}
+\item{"onset_counts": }{The number of times each term in
+"onset_names" appears across associated disease phenotypes.}
+\item{"onset_score_mean": }{Mean onset score.}
+\item{"onset_score_min": }{Minimum onset score.}
+\item{"onset_top": }{The most common onset term.}
+\item{"onset_earliest": }{The earliest age of onset.}
+\item{"onset_latest": }{The latest age of onset.}
 }
 }
 \description{
 Add age of onset for each HPO ID.
-Onset IDs and assigned "Onset_score" values:
+onset IDs and assigned "onset_score" values:
 \itemize{
-\item{HP:0011461 }{"Fetal onset" (Onset_score=1)}
-\item{HP:0030674 }{"Antenatal onset" (Onset_score=2)}
-\item{HP:0003577 }{"Congenital onset" (Onset_score=3)}
-\item{HP:0003623 }{"Neonatal onset" (Onset_score=4)}
-\item{HP:0003593 }{"Infantile onset" (Onset_score=5)}
-\item{HP:0011463 }{"Childhood onset" (Onset_score=6)}
-\item{HP:0003621 }{"Juvenile onset" (Onset_score=7)}
-\item{HP:0011462 }{"Young adult onset" (Onset_score=8)}
-\item{HP:0003581 }{"Adult onset" (Onset_score=9)}
-\item{HP:0003596 }{"Middle age onset" (Onset_score=10)}
-\item{HP:0003584 }{"Late onset" (Onset_score=11)}
+\item{HP:0011461 }{"Fetal onset" (onset_score=1)}
+\item{HP:0030674 }{"Antenatal onset" (onset_score=2)}
+\item{HP:0003577 }{"Congenital onset" (onset_score=3)}
+\item{HP:0003623 }{"Neonatal onset" (onset_score=4)}
+\item{HP:0003593 }{"Infantile onset" (onset_score=5)}
+\item{HP:0011463 }{"Childhood onset" (onset_score=6)}
+\item{HP:0003621 }{"Juvenile onset" (onset_score=7)}
+\item{HP:0011462 }{"Young adult onset" (onset_score=8)}
+\item{HP:0003581 }{"Adult onset" (onset_score=9)}
+\item{HP:0003596 }{"Middle age onset" (onset_score=10)}
+\item{HP:0003584 }{"Late onset" (onset_score=11)}
 }
 }
 \examples{

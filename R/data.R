@@ -25,16 +25,16 @@
 #' @source
 #' \code{
 #' annot <- load_phenotype_to_genes(filename = "phenotype.hpoa")
-#' annot <- annot[Onset!="",]
-#' annot$Onset_name <- harmonise_phenotypes(phenotypes = annot$Onset,
+#' annot <- annot[onset!="",]
+#' annot$onset_name <- harmonise_phenotypes(phenotypes = annot$onset,
 #'                                          as_hpo_ids = FALSE)
-#' counts <- dplyr::group_by(annot, DatabaseID) |>
-#'   dplyr::summarise(HPO_IDs=length(unique(HPO_ID)),
-#'                    Onsets=length(unique(Onset)))
-#' ## The number of Onsets partially depends on the number of HPO_IDs
-#' ## so it's necessary to keep HPO_ID too.
-#' cor(counts$HPO_IDs, counts$Onsets)
-#' hpo_onsets <- annot[,c("DatabaseID","HPO_ID","Onset","Onset_name")]
+#' counts <- dplyr::group_by(annot, disease_id) |>
+#'   dplyr::summarise(hpo_ids=length(unique(hpo_id)),
+#'                    onsets=length(unique(onset)))
+#' ## The number of onsets partially depends on the number of hpo_ids
+#' ## so it's necessary to keep hpo_id too.
+#' cor(counts$hpo_ids, counts$onsets)
+#' hpo_onsets <- annot[,c("disease_id","hpo_id","onset","onset_name")]
 #' usethis::use_data(hpo_onsets, overwrite = TRUE)
 #' }
 #' @format data.table
@@ -49,14 +49,14 @@
 #' \link[HPOExplorer]{assign_tiers}.
 #' @source
 #' \code{
-#' hpo_tiers_auto <- HPOExplorer::assign_tiers(as_datatable=TRUE)
+#' hpo_tiers_auto <- HPOExplorer:::assign_tiers(as_datatable=TRUE)
 #' hpo_tiers_auto <- add_onset(phenos = hpo_tiers_auto)
 #' #### Filter by onset criterion ####
 #' ### Tier 1: Shortened life span: infancy
-#' hpo_tiers_auto[tier_auto==1 & Onset_score_min>5,]$tier_auto <- NA
+#' hpo_tiers_auto[tier_auto=="Tier1" & onset_score>5,]$tier_auto <- NA
 #' ### Tier 2: Shortened life span: premature adulthood
-#' hpo_tiers_auto[tier_auto==2 & Onset_score_min>=11,]$tier_auto <- NA
-#' hpo_tiers_auto <- hpo_tiers_auto[,c("HPO_ID","tier_auto")]
+#' hpo_tiers_auto[tier_auto=="Tier2" & onset_score>=11,]$tier_auto <- NA
+#' hpo_tiers_auto <- hpo_tiers_auto[,c("hpo_id","tier_auto")]
 #' hpo_tiers_auto <- hpo_tiers_auto[!is.na(tier_auto),]
 #' hpo_tiers_auto[,tier_auto:=as.integer(gsub("Tier","",tier_auto))]
 #' usethis::use_data(hpo_tiers_auto, overwrite = TRUE)
@@ -82,16 +82,16 @@
 #' @source
 #' \code{
 #' annot <- HPOExplorer::load_phenotype_to_genes(3)
-#' annot <- annot[Modifier!=""]
+#' annot <- annot[modifier!=""]
 #' parse_mod <- function(x){
-#'   unique(HPOExplorer::harmonise_phenotypes(strsplit(x,";")[[1]]))
+#'   unique(harmonise_phenotypes(strsplit(x,";")[[1]]))
 #' }
-#' annot <- annot[,Modifier_name:=lapply(Modifier,parse_mod)][Modifier!="",]
-#' annot <- annot[,.(Modifier_name=unlist(Modifier_name)),
-#'                by=c("HPO_ID","Modifier","DiseaseName","Aspect","DatabaseID")]
-#' data.table::setnames(annot,"DatabaseID","DatabaseID")
+#' annot <- annot[,modifier_name:=lapply(modifier,parse_mod)][modifier!="",]
+#' annot <- annot[,.(modifier_name=unlist(modifier_name)),
+#'                by=c("hpo_id","modifier","disease_name","aspect","disease_id")]
+#' data.table::setnames(annot,"disease_id","disease_id")
 #' dict <- HPOExplorer:::hpo_dict(type="severity")
-#' annot$Severity_score <- dict[annot$Modifier_name]
+#' annot$Severity_score <- dict[annot$modifier_name]
 #' hpo_modifiers <- annot
 #' usethis::use_data(hpo_modifiers, overwrite = TRUE)
 #' }
@@ -117,9 +117,9 @@
 #' @source
 #' \code{
 #' annot <- load_phenotype_to_genes("phenotype.hpoa")
-#' hpo_frequencies <- parse_pheno_frequency(annot=annot)
+#' hpo_frequencies <- HPOExplorer:::parse_pheno_frequency(annot=annot)
 #' hpo_frequencies <- HPOExplorer:::as_ascii(dt=hpo_frequencies)
-#' data.table::setcolorder(hpo_frequencies,c("DatabaseID","HPO_ID"))
+#' data.table::setcolorder(hpo_frequencies,c("disease_id","hpo_id"))
 #' usethis::use_data(hpo_frequencies, overwrite = TRUE)
 #' }
 #' @format data.table
@@ -133,12 +133,12 @@
 #' Age of Death associated with each disease, and by extension, each phenotype.
 #' @source
 #' \code{
-#' terms <- ontologyIndex::get_descendants(ontology = hpo,
+#' terms <- ontologyIndex::get_descendants(ontology = get_hpo(),
 #'                                         roots = "HP:0011420",
 #'                                         exclude_roots = TRUE)
 #' aod <- lapply(stats::setNames(terms, terms),
 #'               function(hpo_id){
-#'                 messager("Extracting API data for",hpo_id)
+#'                 message("Extracting API data for",hpo_id)
 #'                 d <- hpo_api(hpo_id = hpo_id, type = "diseases")$diseases
 #'               }) |> data.table::rbindlist(fill = TRUE,
 #'                                           use.names = TRUE,
@@ -146,11 +146,11 @@
 #' aod$AgeOfDeath_name <- harmonise_phenotypes(phenotypes = aod$AgeOfDeath,
 #'                                             as_hpo_ids = FALSE)
 #' #### Convert AoD to numeric scores ####
-#' dict <- hpo_dict(type="AgeOfDeath")
+#' dict <- HPOExplorer:::hpo_dict(type="AgeOfDeath")
 #' aod$AgeOfDeath_score <- dict[aod$AgeOfDeath_name]
 #' data.table::setnames(aod,
 #'                      c("diseaseId","diseaseName"),
-#'                      c("DatabaseID","DiseaseName"))
+#'                      c("disease_id","disease_name"))
 #' hpo_deaths <- aod
 #' usethis::use_data(hpo_deaths, overwrite = TRUE)
 #' }

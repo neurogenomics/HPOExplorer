@@ -3,7 +3,7 @@
 #' List age of onset phenotypes in the HPO.
 #' @param exclude HPO phenotype names to exclude.
 #' @param as_hpo_ids Return as a character vector vector HPO IDs only.
-#' @param include_na Include NA values for Onset.
+#' @param include_na Include NA values for onset.
 #' @inheritParams make_phenos_dataframe
 #' @returns Named list of HPO IDs.
 #'
@@ -17,7 +17,7 @@ list_onsets <- function(hpo = get_hpo(),
                         verbose = TRUE){
   # devoptera::args2vars(list_onsets)
 
-  opts <- harmonise_phenotypes(phenotypes = names(hpo_dict(type = "Onset")),
+  opts <- harmonise_phenotypes(phenotypes = names(hpo_dict(type = "onset")),
                                hpo = hpo,
                                as_hpo_ids = TRUE,
                                keep_order = FALSE,

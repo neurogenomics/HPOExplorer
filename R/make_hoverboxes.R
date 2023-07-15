@@ -6,7 +6,7 @@
 #' of the HPO phenotypes because we can include a hoverbox that gives
 #' information and data associated with each phenotype.
 #'
-#' This function expects a dataframe of with a "Phenotype" column that has the
+#' This function expects a dataframe of with a "hpo_name" column that has the
 #' name of each phenotype. It must then include columns
 #'  for all of the parameters you wish to include in the hoverbox.
 #' @inheritParams make_phenos_dataframe
@@ -33,24 +33,24 @@ make_hoverboxes <- function(phenos,
   # templateR:::source_all()
   # devoptera::args2vars(make_hoverboxes)
 
-  hover <- HPO_ID <- Phenotype <- NULL;
+  hover <- hpo_id <- hpo_name <- NULL;
 
   #### Select sep ####
   sep <- if(isTRUE(interactive)) "<br>" else "\n"
   columns <- columns[unname(columns) %in% names(phenos)]
   if(length(columns)==0){
-    messager("No columns found. Making hoverboxes from HPO_ID only.",v=verbose)
-    phenos[hover:=paste("HPO_ID:",HPO_ID)]
+    messager("No columns found. Making hoverboxes from hpo_id only.",v=verbose)
+    phenos[hover:=paste("hpo_id:",hpo_id)]
   } else {
     messager("Making hoverboxes from:",
              paste(shQuote(columns),collapse = ", "),v=verbose)
     #### Iterate over phenotypes ####
     hoverBoxes <- lapply(stats::setNames(
-      unique(phenos$Phenotype),
-      unique(phenos$Phenotype)
+      unique(phenos$hpo_name),
+      unique(phenos$hpo_name)
     ), function(pheno_i){
       lapply(seq_len(length(columns)), function(i){
-        val <- phenos[Phenotype == pheno_i, ][1,][[columns[[i]]]]
+        val <- phenos[hpo_name == pheno_i, ][1,][[columns[[i]]]]
         val <- if(is.numeric(val)) round(val,digits = digits) else {
           paste(
             stringr::str_wrap(val, width = width),
@@ -63,7 +63,7 @@ make_hoverboxes <- function(phenos,
       }) |> paste(collapse = sep)
     })
     #### Assign to each row #####
-    phenos$hover <- unlist(hoverBoxes[phenos$Phenotype])
+    phenos$hover <- unlist(hoverBoxes[phenos$hpo_name])
   }
   return(phenos)
 }
