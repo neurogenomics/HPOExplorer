@@ -13,38 +13,31 @@ gpt_annot_check <- function(path,
                             ){
 
   # path="~/Downloads/gpt_hpo_annotations.csv"
-  hpo_id <- phenotype <- pheno_count <- NULL;
+  pheno_count <- NULL;
 
   #### Read data ####
-  d <- data.table::fread(path)
-  #### Check phenotype names ####
-  annot <- load_phenotype_to_genes(verbose = verbose)
-  d <- merge(d,
-             unique(annot[,c("hpo_id","hpo_name")]),
-             by.x="phenotype",
-             by.y="hpo_name")
-  messager(length(unique(d[is.na(hpo_id)]$phenotype)),
-           "phenotypes do not have matching HPO IDs.",v=verbose)
-  phenotype_miss_rate <-
-    length(d$phenotype[!d$phenotype %in% annot$hpo_name]) /
-    length(d$phenotype)
-  d <- data.frame(d)
-  d[d==""] <- NA
-  d <- data.table::data.table(d)
+  d <- gpt_annot_read(path = path,
+                      verbose = verbose)
+  #### Proportion of HPO_IDs annotated before/after chatGPT ####
+  # hpo <- get_hpo()
+  # prior_ids <- unique(HPOExplorer::hpo_modifiers$hpo_id)
+  # new_ids <- unique(d$hpo_id)
+  # length(new_ids)/length(prior_ids)
+  # length(prior_ids)/length(hpo$id)
+  # length(new_ids)/length(hpo$id)
   #### Check annotation consistency ####
   nm <- names(d)[!grepl("phenotype|justification|hpo_id",names(d),
                         ignore.case = TRUE)]
   counts <- table(tolower(unlist(d[,nm,with=FALSE])), useNA = "always")
   neg_values <- c("never","no")
   opts <- unlist(sapply(d[,nm,with=FALSE], unique)) |> unique()
-  # methods::show(opts)
-  d[,pheno_count:=table(d$phenotype)[phenotype]]
+
+  #### Compute number of non-negative answers within each column####
   d_mean <- d[pheno_count>1][,lapply(.SD,function(x){
     mean(!tolower(x) %in% neg_values)
   }),.SDcols=nm,by="phenotype"]
+  #### Compute consistency within each column ####
   d_consist <- lapply(d_mean[,-1], function(x)sum(x%in%c(0,1)/nrow(d_mean)))
-
-
   #### Check ontology classifications #####
   d_check <- lapply(seq_len(nrow(d)), function(i){
     r <- d[i,]
@@ -79,7 +72,6 @@ gpt_annot_check <- function(path,
   #### Return ####
   return(list(
     annot=d,
-    phenotype_miss_rate=phenotype_miss_rate,
     annot_mean=d_mean,
     annot_consist=d_consist,
     annot_check=d_check,

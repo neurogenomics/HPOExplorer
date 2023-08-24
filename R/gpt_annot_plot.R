@@ -1,39 +1,59 @@
-gpt_annot_plot <- function(path){
-
-  requireNamespace("ggplot2")
+gpt_annot_plot <- function(path,
+                           keep_ont_levels=seq(0,5),
+                           remove_descendants=c("Clinical course",
+                                                "Sporadic",
+                                                "Multifactorial inheritance",
+                                                "Inheritance modifier",
+                                                "Phenotypic variability"),
+                           top_n=50,
+                           verbose=TRUE
+                           ){
   # path="~/Downloads/gpt_hpo_annotations.csv"
-  res <- gpt_annot_check(path = path)
-  res_coded <- gpt_annot_codify(annot = res$annot)
-  id.vars <- grep("justification|phenotype|hpo_id|pheno_count",names(res_coded$annot),
-               value = TRUE)
-  dat <- data.table::melt.data.table(
-    data = res_coded$annot[res_coded$annot_weighted[,c("hpo_id","score")],
-                           on="hpo_id"],
-    id.vars = c(id.vars,"score"),
-    variable.factor = TRUE,
-    value.factor = TRUE)
+  requireNamespace("ggplot2")
+  requireNamespace("scales")
+  ancestor_name <- variable <- hpo_id <- phenotype <-
+    value <- severity_score_gpt <- NULL;
 
-  #### Proportion of HPO_IDs annotated before/after chatGPT ####
-  # prior_ids <- unique(HPOExplorer::hpo_modifiers$hpo_id)
-  # new_ids <- unique(dat$hpo_id)
-  # length(new_ids)/length(prior_ids)
-  # length(prior_ids)/length(hpo$id)
-  # length(new_ids)/length(hpo$id)
+  #### Prepare annotation results ####
+  annot <- gpt_annot_read(path = path,
+                          verbose = verbose)
+  res_coded <- gpt_annot_codify(annot = annot)
+  dat <- gpt_annot_melt(res_coded = res_coded)
+  #### Get top N most severe phenotypes ####
+  dat_top <- dat[hpo_id %in% unique(dat$hpo_id)[seq(top_n)]]
+  #### Filter out onset phenotypes ####
+  dat_top <- add_ont_lvl(dat_top, keep_ont_levels = keep_ont_levels)
+  #### Filter out ont levels  ####
+  dat_top <- add_ancestor(dat_top,remove_descendants = remove_descendants)
 
-  dat <- add_ont_lvl(dat)
-  dat <- add_ancestor(dat)
-
-  gp0 <- ggplot(data = dat[hpo_id %in% unique(dat$hpo_id)[seq(50)]],
+  ##### Heatmap of top N most severe phenotypes ####
+  gp0.1 <- ggplot(data = dat_top,
          aes(x=variable, y=phenotype, fill=value)) +
     geom_tile() +
     scale_y_discrete(limits=rev) +
     scale_fill_viridis_d(na.value = "grey", direction = -1, option = "plasma") +
     theme_bw() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    theme(axis.text.x = element_text(angle = 45, hjust = 1),
+          legend.position = 'right')
+  gp0.2 <-
+    ggplot(data = dat_top,
+           aes(x="severity_score_gpt", y=phenotype, fill=severity_score_gpt)) +
+    geom_tile() +
+    scale_y_discrete(limits=rev) +
+    scale_fill_viridis_c(na.value = "grey", option = "viridis") +
+    theme_bw() +
+    labs(x=NULL, y=NULL) +
+    theme(axis.text.y = element_blank(),
+          axis.ticks.y = element_blank(),
+          axis.text.x = element_text(angle = 45, hjust = 1),
+          legend.position = 'right')
+  gp0 <- patchwork::wrap_plots(gp0.1, gp0.2, ncol = 2,
+                               widths = c(1,.2),
+                               guides = "collect")
 
-  gp1 <- ggplot(dat,aes(x=variable,
-                 fill=value
-                 )) +
+  #### Stacked barplot of annotation value proportions ####
+  gp1 <- ggplot(dat,
+                aes(x=variable,fill=value)) +
     geom_bar(position = "fill") +
     scale_y_continuous(label = scales::percent) +
     scale_fill_viridis_d(na.value = "grey", direction = -1, option = "plasma") +
@@ -41,7 +61,8 @@ gpt_annot_plot <- function(path){
     theme_bw() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-  gp2 <- ggplot(dat, aes(x=value, y=score, fill=value)) +
+  ##### Boxplots: annotation values vs. severity score ####
+  gp2 <- ggplot(dat, aes(x=value, y=severity_score_gpt, fill=value)) +
     geom_boxplot() +
     facet_wrap(facets =  "variable~.", ncol = 5) +
     scale_fill_viridis_d(na.value = "grey", direction = -1, option = "plasma") +
@@ -49,11 +70,42 @@ gpt_annot_plot <- function(path){
     theme(axis.text.x = element_text(angle = 45, hjust = 1),
           strip.background = element_rect(fill = "transparent"))
 
-  gp3 <- ggplot(dat, aes(x=score, fill=factor(value))) +
-    geom_histogram(bins = 50) +
+  #### Histograms of severity scores in each HPO branch ####
+  {
+    res_coded <- gpt_annot_codify(annot = res$annot,
+                                  keep_congenital_onset = NULL)
+    dat <- gpt_annot_melt(res_coded = res_coded)
+    dat <- add_ancestor(dat, remove_descendants = NULL)
+    dat[,variable_true:=ifelse(value %in% c("always","often","varies","rarely"),
+                                      paste(variable,"TRUE",sep = ": "),NA)]
+    dat[,mean_severity_score_gpt:=mean(severity_score_gpt, na.rm=TRUE),
+               by="ancestor_name"] |>
+      data.table::setorderv("mean_severity_score_gpt", -1, na.last = TRUE)
+    dat[,ancestor_name:=factor(ancestor_name,
+                                      levels = unique(dat$ancestor_name),
+                                      ordered = TRUE)]
+  }
+  gp3 <- ggplot(dat, aes(x=severity_score_gpt
+                         # fill=factor(congenital_onset)
+                         )) +
+    geom_histogram(bins = 50, fill="slateblue") +
+    geom_vline(aes(xintercept=mean_severity_score_gpt), color="red") +
+    geom_label(data = unique(
+      dat[,list(mean_severity_score_gpt), by="ancestor_name"]
+    ),
+              aes(x=mean_severity_score_gpt,
+                  y=Inf,
+                  label=round(mean_severity_score_gpt,2)),
+    color="red", size=3, hjust = 0, vjust = 1.5, alpha=.65) +
     facet_wrap(facets = "ancestor_name~.", scales = "free_y", ncol = 3) +
-    scale_fill_viridis_d(na.value = "grey", direction = -1, option = "plasma") +
     theme_bw() +
     theme(strip.background = element_rect(fill = "transparent"))
+
+  return(
+    list(gp0=gp0,
+         gp1=gp1,
+         gp2=gp2,
+         gp3=gp3)
+  )
 
 }
