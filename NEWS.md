@@ -1,3 +1,13 @@
+# HPOExplorer 0.99.11
+
+## New features
+
+* New GPT annotation functions
+  - `gpt_annot_read`
+  - `gpt_annot_check`
+  - `gpt_annot_codify`
+  - `gpt_annot_plot`
+
 # HPOExplorer 0.99.10
 
 ## New features

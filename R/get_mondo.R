@@ -33,7 +33,7 @@ get_mondo <- function(save_dir=tools::R_user_dir("HPOExplorer",
                       overwrite = TRUE){
   #### ontoProc data outdated, from 2021 Don't use. ####
   # mondo <- ontoProc::getMondoOnto()
-  get_data(fname = "mondo.rds",
+  get_data(file = "mondo.rds",
            tag = tag,
            overwrite = overwrite,
            save_dir = save_dir)

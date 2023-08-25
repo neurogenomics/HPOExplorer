@@ -5,7 +5,7 @@
 #' @keywords internal
 #' @inheritParams piggyback::pb_download
 #' @importFrom tools R_user_dir
-get_data <- function(fname,
+get_data <- function(file,
                      tag = "latest",
                      repo = "neurogenomics/HPOExplorer",
                      save_dir = tools::R_user_dir(
@@ -18,10 +18,10 @@ get_data <- function(fname,
   requireNamespace("piggyback")
   Sys.setenv("piggyback_cache_duration" = 10)
 
-  tmp <- file.path(save_dir, fname)
+  tmp <- file.path(save_dir, file)
   dir.create(save_dir, showWarnings = FALSE, recursive = TRUE)
   piggyback::pb_download(
-    file = fname,
+    file = file,
     tag = tag,
     dest = save_dir,
     repo = repo,

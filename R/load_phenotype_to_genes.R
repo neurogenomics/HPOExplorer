@@ -43,7 +43,7 @@ load_phenotype_to_genes <- function(filename = c("phenotype_to_genes.txt",
   }
   #### Stored in GitHub Releases ####
   if(method=="piggyback"){
-    file <- get_data(fname = filename,
+    file <- get_data(file = filename,
                      save_dir = save_dir)
   #### Directly from the HPO website ####
   } else {

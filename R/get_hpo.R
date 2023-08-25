@@ -43,7 +43,7 @@ get_hpo <- function(save_dir=tools::R_user_dir("HPOExplorer",
                     overwrite = TRUE){
   #### ontologyIndex data outdated, from 2016. Don't use. ####
   # utils::data("hpo",package = "ontologyIndex")
-  get_data(fname = "hpo.rds",
+  get_data(file = "hpo.rds",
            tag = tag,
            overwrite = overwrite,
            save_dir = save_dir)

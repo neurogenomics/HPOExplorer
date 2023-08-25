@@ -1,11 +1,27 @@
-gpt_annot_codify <- function(annot,
+#' Check annotations from GPT
+#'
+#' Check GPT phenotype annotations using a several metrics.
+#' @param remove_duplicates Ensure only 1 row per phenotype.
+#' @param code_dict Numerical encodings of annotation values.
+#' @param tiers_dict Numerical encodings of annotation column.
+#' @param keep_congenital_onset Which stages of congenital onset to keep.
+#' @inheritParams gpt_annot_check
+#' @returns Named list
+#'
+#' @export
+#' @import data.table
+#' @importFrom stats na.omit
+#' @importFrom utils head
+#' @examples
+#' checks <- gpt_annot_check()
+gpt_annot_codify <- function(annot = gpt_annot_read(),
                              remove_duplicates=TRUE,
                              code_dict = c(
                                "never"=0,
                                "rarely"=1,
-                               "varies"=1,
-                               "often"=2,
-                               "always"=3
+                               "varies"=2,
+                               "often"=3,
+                               "always"=4
                              ),
                              tiers_dict=list(
                                intellectual_disability=1,
@@ -27,7 +43,7 @@ gpt_annot_codify <- function(annot,
   d <- data.table::copy(annot)
   #### Ensure only 1 row/phenotype by simply taking the first ####
   if(isTRUE(remove_duplicates)){
-    d <- d[,head(.SD,1), by=c("hpo_id","phenotype")]
+    d <- d[,utils::head(.SD,1), by=c("hpo_id","phenotype")]
   }
   cols <- names(tiers_dict)
   #### Add levels ####

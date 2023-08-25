@@ -17,19 +17,22 @@
 search_hpo <- function(hpo = get_hpo(),
                        queries = list(
                          intellectual_disability=c("intellectual disability"),
-                         impaired_mobility=c("Abnormal central motor function",
-                                             "Abnormality of movement"),
+                         impaired_mobility=c(
+                           "Abnormal central motor function",
+                           "Abnormality of movement"),
                          physical_malformations=c("malformation"#,"morphology"
                          ),
                          blindness=c("^blindness"),
-                         sensory_impairments=c("Abnormality of vision",
-                                               "Abnormality of the sense of smell",
-                                               "Abnormality of taste sensation",
-                                               "Somatic sensory dysfunction",
-                                               "Hearing abnormality"
+                         sensory_impairments=c(
+                           "Abnormality of vision",
+                           "Abnormality of the sense of smell",
+                           "Abnormality of taste sensation",
+                           "Somatic sensory dysfunction",
+                           "Hearing abnormality"
                          ),
                          immunodeficiency=c("Immunodeficiency"),
-                         cancer=c("Neoplasm","Cancer"),
+                         cancer=c("Neoplasm",
+                                  "Cancer"),
                          reduced_fertility=c("Decreased fertility")
                        ),
                        include_descendants=TRUE,

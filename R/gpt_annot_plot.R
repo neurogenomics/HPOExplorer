@@ -1,4 +1,16 @@
-gpt_annot_plot <- function(path,
+#' Plot annotations from GPT
+#'
+#' Plot annotations from GPT.
+#' @param top_n Top number of most severe phenotypes to plot in heatmap.
+#' @inheritParams gpt_annot_check
+#' @inheritParams add_ont_lvl
+#' @inheritParams add_ancestor
+#' @returns Named list of plots.
+#'
+#' @export
+#' @examples
+#' plots <- gpt_annot_plot()
+gpt_annot_plot <- function(annot = gpt_annot_read(),
                            keep_ont_levels=seq(0,5),
                            remove_descendants=c("Clinical course",
                                                 "Sporadic",
@@ -8,15 +20,15 @@ gpt_annot_plot <- function(path,
                            top_n=50,
                            verbose=TRUE
                            ){
-  # path="~/Downloads/gpt_hpo_annotations.csv"
+  # devoptera::args2vars(gpt_annot_plot)
+
   requireNamespace("ggplot2")
   requireNamespace("scales")
+  requireNamespace("patchwork")
   ancestor_name <- variable <- hpo_id <- phenotype <-
-    value <- severity_score_gpt <- NULL;
+    value <- severity_score_gpt <- mean_severity_score_gpt <- NULL;
 
   #### Prepare annotation results ####
-  annot <- gpt_annot_read(path = path,
-                          verbose = verbose)
   res_coded <- gpt_annot_codify(annot = annot)
   dat <- gpt_annot_melt(res_coded = res_coded)
   #### Get top N most severe phenotypes ####
@@ -55,7 +67,7 @@ gpt_annot_plot <- function(path,
   gp1 <- ggplot(dat,
                 aes(x=variable,fill=value)) +
     geom_bar(position = "fill") +
-    scale_y_continuous(label = scales::percent) +
+    scale_y_continuous(labels = scales::percent) +
     scale_fill_viridis_d(na.value = "grey", direction = -1, option = "plasma") +
     labs(y="Phenotype count") +
     theme_bw() +
@@ -66,18 +78,20 @@ gpt_annot_plot <- function(path,
     geom_boxplot() +
     facet_wrap(facets =  "variable~.", ncol = 5) +
     scale_fill_viridis_d(na.value = "grey", direction = -1, option = "plasma") +
+    labs(x=NULL) +
     theme_bw() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1),
+    theme(axis.text.x = element_blank(),
           strip.background = element_rect(fill = "transparent"))
 
   #### Histograms of severity scores in each HPO branch ####
   {
-    res_coded <- gpt_annot_codify(annot = res$annot,
+    res_coded <- gpt_annot_codify(annot = annot,
                                   keep_congenital_onset = NULL)
     dat <- gpt_annot_melt(res_coded = res_coded)
     dat <- add_ancestor(dat, remove_descendants = NULL)
-    dat[,variable_true:=ifelse(value %in% c("always","often","varies","rarely"),
-                                      paste(variable,"TRUE",sep = ": "),NA)]
+    # dat[,variable_true:=ifelse(
+    #   value %in% c("always","often","varies","rarely"),patchwork
+    #   paste(variable,"TRUE",sep = ": "),NA)]
     dat[,mean_severity_score_gpt:=mean(severity_score_gpt, na.rm=TRUE),
                by="ancestor_name"] |>
       data.table::setorderv("mean_severity_score_gpt", -1, na.last = TRUE)
@@ -100,12 +114,11 @@ gpt_annot_plot <- function(path,
     facet_wrap(facets = "ancestor_name~.", scales = "free_y", ncol = 3) +
     theme_bw() +
     theme(strip.background = element_rect(fill = "transparent"))
-
+  #### Return ####
   return(
     list(gp0=gp0,
          gp1=gp1,
          gp2=gp2,
          gp3=gp3)
   )
-
 }
