@@ -1,6 +1,7 @@
 test_that("hpo_to_matrix works", {
 
-  phenos <- HPOExplorer::example_phenos()
+  phenos <- HPOExplorer:: example_phenos()
+
   X <- hpo_to_matrix(terms = phenos$hpo_id)
   testthat::expect_true(methods::is(X,"dgCMatrix"))
   testthat::expect_gte(nrow(X),4204)

@@ -18,7 +18,7 @@
 #' @importFrom utils data
 #' @importFrom stringr str_split
 #' @examples
-#' phenotype_to_genes <- load_phenotype_to_genes()[seq_len(1000),]
+#' phenotype_to_genes <- load_phenotype_to_genes()[seq(1000),]
 #' phenos2 <- add_gene_frequency(phenotype_to_genes = phenotype_to_genes)
 add_gene_frequency <- function(phenotype_to_genes = load_phenotype_to_genes(),
                                gene_frequency_threshold = NULL,

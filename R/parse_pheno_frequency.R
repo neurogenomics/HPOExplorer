@@ -2,7 +2,7 @@ parse_pheno_frequency <- function(annot){
   hpo_id <- disease_id <- frequency <- NULL;
 
   annot <- annot[frequency!=""]
-  freq_dt <- lapply(seq_len(nrow(annot)), function(i){
+  freq_dt <- lapply(seq(nrow(annot)), function(i){
     f <- annot[i,]$frequency
     if(grepl("^HP",f)){
       dt <- data.table::data.table(

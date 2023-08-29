@@ -4,7 +4,7 @@
 \alias{example_phenos}
 \title{Example phenotypes dataframe}
 \usage{
-example_phenos(i = seq_len(10))
+example_phenos(i = seq(10))
 }
 \arguments{
 \item{i}{Indices of HPO IDs to use.}

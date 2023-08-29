@@ -27,6 +27,6 @@ adjacency matrix
 Create adjacency matrix of HPO child-parent relationships.
 }
 \examples{
-terms <- get_hpo()$id[seq_len(1000)]
+terms <- get_hpo()$id[seq(1000)]
 adjacency <- adjacency_matrix(terms = terms)
 }

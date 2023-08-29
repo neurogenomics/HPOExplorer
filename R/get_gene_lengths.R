@@ -1,5 +1,5 @@
 get_gene_lengths <- function(gene_list,
-                             keep_seqnames = c(seq_len(22),"X","Y"),
+                             keep_seqnames = c(seq(22),"X","Y"),
                              ensembl_version = 75,
                              verbose = TRUE){
 

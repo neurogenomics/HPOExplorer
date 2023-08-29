@@ -31,7 +31,7 @@ hpo_modifiers_agg <- function(dt,
   #### Post-processing ####
   dt2[Severity_score_min==Inf,]$Severity_score_min <- NA
   dt2[Severity_score_min<0,]$Severity_score_min <- NA
-  dt2$Modifer_top <- lapply(seq_len(nrow(dt2)),
+  dt2$Modifer_top <- lapply(seq(nrow(dt2)),
                             function(i){
                                   r <- dt2[i,]
                                   mn <- strsplit(r$modifier_name,";")[[1]]

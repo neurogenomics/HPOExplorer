@@ -1,6 +1,6 @@
 test_that("add_gene_frequency works", {
 
-  phenotype_to_genes <- load_phenotype_to_genes()[seq_len(1000),]
+  phenotype_to_genes <- load_phenotype_to_genes()[seq(1000),]
   phenos2 <- add_gene_frequency(phenotype_to_genes = phenotype_to_genes)
   cols <- c("gene_freq","gene_freq_name",
             "gene_freq_min","gene_freq_max","gene_freq_mean")

@@ -43,7 +43,7 @@
 #' @importFrom stats setNames
 #' @importFrom ontologyIndex get_ancestors get_descendants
 #' @examples
-#' terms <- get_hpo()$id[seq_len(10)]
+#' terms <- get_hpo()$id[seq(10)]
 #' tiers <- assign_tiers(terms = terms)
 assign_tiers <- function(hpo=get_hpo(),
                          terms=hpo$id,

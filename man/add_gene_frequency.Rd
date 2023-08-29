@@ -40,6 +40,6 @@ are associated with a given phenotype.
 Numeric frequency columns are on a 0-100\% scale.
 }
 \examples{
-phenotype_to_genes <- load_phenotype_to_genes()[seq_len(1000),]
+phenotype_to_genes <- load_phenotype_to_genes()[seq(1000),]
 phenos2 <- add_gene_frequency(phenotype_to_genes = phenotype_to_genes)
 }

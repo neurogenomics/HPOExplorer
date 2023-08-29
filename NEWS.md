@@ -7,6 +7,23 @@
   - `gpt_annot_check`
   - `gpt_annot_codify`
   - `gpt_annot_plot`
+* `get_hpo`
+  - Get OBO directly from  "https://github.com/obophenotype/human-phenotype-ontology/releases" 
+    rather than Bioportal.
+  - Used "hp-base.obo" as this seemed to match the file size of the OBO on Bioportal.
+  - Also tried importing "hp-full.obo" but this caused an error with `ontologyIndex::get_OBO`.
+  
+## Bug fixes
+
+* `load_phenotype_to_genes`:
+  - Revamp to use releases from
+  "https://github.com/obophenotype/human-phenotype-ontology/releases",
+  which HPO now redirects to.
+  - Use piggyback to download files.
+* `test-get_ont_lvls`
+  - New HPO has extra "GO:" terms. Omit them in tests.
+* `example_phenos`
+  - New HPO has extra "GO:" terms. Omit.
 
 # HPOExplorer 0.99.10
 

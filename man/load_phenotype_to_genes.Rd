@@ -8,24 +8,27 @@
 }
 \usage{
 load_phenotype_to_genes(
-  filename = c("phenotype_to_genes.txt", "genes_to_phenotype.txt", "phenotype.hpoa"),
+  file = c("phenotype_to_genes.txt", "genes_to_phenotype.txt", "phenotype.hpoa"),
   save_dir = file.path(tools::R_user_dir("HPOExplorer", which = "cache"), "data"),
-  method = c("hpo", "piggyback"),
+  repo = paste("obophenotype", "human-phenotype-ontology", sep = "/"),
+  tag = "latest",
+  overwrite = FALSE,
   verbose = TRUE
 )
 }
 \arguments{
-\item{filename}{Name of the file.}
+\item{file}{name or vector of names of files to be downloaded. If \code{NULL},
+all assets attached to the release will be downloaded.}
 
 \item{save_dir}{Folder where the phenotype to genes text
 file is/will be stored.}
 
-\item{method}{Where to download the data from:
-\itemize{
-\item{"piggyback": }{An old copy of HPO annotation files
-stored in the Releases section of the \pkg{HPOExplorer} GitHub repository.}
-\item{"hpo": }{An up-to-date copy directly from the official HPO website.}
-}}
+\item{repo}{Repository name in format "owner/repo". Defaults to \code{guess_repo()}.}
+
+\item{tag}{tag for the GitHub release to which this data should be attached.}
+
+\item{overwrite}{Should any local files of the same name be overwritten?
+default \code{TRUE}.}
 
 \item{verbose}{Print messages.}
 }

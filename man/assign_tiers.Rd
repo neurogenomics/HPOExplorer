@@ -72,6 +72,6 @@ Intellectual disability}
 }
 }
 \examples{
-terms <- get_hpo()$id[seq_len(10)]
+terms <- get_hpo()$id[seq(10)]
 tiers <- assign_tiers(terms = terms)
 }

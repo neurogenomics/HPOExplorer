@@ -9,7 +9,7 @@ data.table
 }
 \source{
 \code{
-annot <- load_phenotype_to_genes(filename = "phenotype.hpoa")
+annot <- load_phenotype_to_genes(file = "phenotype.hpoa")
 annot <- annot[onset!="",]
 annot$onset_name <- harmonise_phenotypes(phenotypes = annot$onset,
                                          as_hpo_ids = FALSE)

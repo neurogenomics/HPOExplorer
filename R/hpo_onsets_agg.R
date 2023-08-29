@@ -18,7 +18,7 @@ hpo_onsets_agg <- function(hpo_onsets,
                         onset_score_max=max(onset_score,na.rm=TRUE)
   ),
   by=agg_by] |> suppressWarnings()
-  annot_agg$onset_top <- lapply(seq_len(nrow(annot_agg)),
+  annot_agg$onset_top <- lapply(seq(nrow(annot_agg)),
                                 function(i){
                                   r <- annot_agg[i,]
                                   on <- strsplit(r$onset_names,";")[[1]]

@@ -54,7 +54,7 @@ phenoNet <- HPOExplorer::make_network_object(phenos = phenos,
 #                       colour_label = "ontLvl_genes", 
 #                       interactive = FALSE)
 # plt$layers[[2]] <- NULL
-phenoNet$pair_id <- seq_len(nrow(phenoNet))
+phenoNet$pair_id <- seq(nrow(phenoNet))
 
 fig <- plotly::plot_ly(phenoNet, x = ~x, 
                        y = ~y, z = ~ontLvl, 

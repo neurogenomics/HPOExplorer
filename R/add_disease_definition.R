@@ -14,7 +14,7 @@
 #' @importFrom data.table merge.data.table fcoalesce :=
 #' @importFrom utils data
 #' @examples
-#' phenos <- load_phenotype_to_genes(3)[seq_len(1000)]
+#' phenos <- load_phenotype_to_genes(3)[seq(1000)]
 #' phenos2 <- add_disease_definition(phenos = phenos)
 add_disease_definition <- function(phenos,
                                    cols = c("Definitions","Preferred.Label"),

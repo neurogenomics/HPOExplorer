@@ -10,7 +10,7 @@
 #' @export
 #' @importFrom ontologyIndex get_term_descendancy_matrix
 #' @examples
-#' terms <- get_hpo()$id[seq_len(1000)]
+#' terms <- get_hpo()$id[seq(1000)]
 #' adjacency <- adjacency_matrix(terms = terms)
 adjacency_matrix <- function(hpo = get_hpo(),
                              terms = unique(hpo$id),

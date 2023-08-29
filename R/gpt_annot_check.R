@@ -42,7 +42,7 @@ gpt_annot_check <- function(annot = gpt_annot_read(),
   annot_consist <- lapply(annot_mean[,-1],
                           function(x)sum(x%in%c(0,1)/nrow(annot_mean)))
   #### Check ontology classifications #####
-  annot_check <- lapply(seq_len(nrow(annot)), function(i){
+  annot_check <- lapply(seq(nrow(annot)), function(i){
     r <- annot[i,]
     cbind(
       r[,c("phenotype","hpo_id")],

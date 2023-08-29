@@ -12,7 +12,7 @@ hpo_death_agg <- function(hpo_deaths,
     AgeOfDeath_score_min=min(AgeOfDeath_score,na.rm=TRUE),
     AgeOfDeath_score_max=max(AgeOfDeath_score,na.rm=TRUE)
   ), by=by]
-  annot_agg$AgeOfDeath_top <- lapply(seq_len(nrow(annot_agg)),
+  annot_agg$AgeOfDeath_top <- lapply(seq(nrow(annot_agg)),
                              function(i){
                                r <- annot_agg[i,]
                                on <-unlist(r$AgeOfDeath_names)

@@ -26,8 +26,8 @@ add_disease_genes <- function(phenos,
 
   if(!all(c("modifier","modifier_name") %in% names(phenos))){
     messager("Annotating phenos with disease genes.",v=verbose)
-    annot <- load_phenotype_to_genes(filename = "genes_to_phenotype.txt")
-    dannot <- load_phenotype_to_genes(filename = "phenotype.hpoa")
+    annot <- load_phenotype_to_genes(file = "genes_to_phenotype.txt")
+    dannot <- load_phenotype_to_genes(file = "phenotype.hpoa")
     # annot <- annot[hpo_id %in% unique(phenos$hpo_id),]
     # #### Add hpo_id associations ####
     # dgenes <- load_disease_genes()

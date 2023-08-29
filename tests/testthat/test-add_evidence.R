@@ -33,7 +33,7 @@ test_that("add_evidence works", {
   #
   # rep_melt <- data.table::melt.data.table(
   #   rep,
-  #   measure.vars = names(rep)[-seq_len(2)],
+  #   measure.vars = names(rep)[-seq(2)],
   #   variable.name = "metric",
   #   value.name = "count")
   # rep_melt$evidence_score_filter <- factor(rep_melt$evidence_score_filter,

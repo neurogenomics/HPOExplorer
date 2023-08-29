@@ -49,7 +49,7 @@ make_hoverboxes <- function(phenos,
       unique(phenos$hpo_name),
       unique(phenos$hpo_name)
     ), function(pheno_i){
-      lapply(seq_len(length(columns)), function(i){
+      lapply(seq(length(columns)), function(i){
         val <- phenos[hpo_name == pheno_i, ][1,][[columns[[i]]]]
         val <- if(is.numeric(val)) round(val,digits = digits) else {
           paste(

@@ -1,7 +1,7 @@
 test_that("get_ont_lvls works", {
 
   hpo <- get_hpo()
-  parents <- unique(hpo$id)[seq_len(2)]
+  parents <- grep("^HP",unique(hpo$id), value = TRUE)[seq(2)]
   childs <- unlist(unname(hpo$children[parents]))
 
   terms1 <- c(parents,childs)
