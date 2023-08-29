@@ -18,12 +18,14 @@
 #' annot <- gpt_annot_read()
 gpt_annot_read <- function(path = NULL,
                            verbose=TRUE){
+  # devoptera::args2vars(gpt_annot_read)
+
   pheno_count <- phenotype <- hpo_id <- NULL;
 
   if(is.null(path)){
     path <- get_data("gpt_hpo_annotations.csv")
   }
-  d <- data.table::fread(path)
+  d <- data.table::fread(path, header = TRUE)
   #### Check phenotype names ####
   annot <- load_phenotype_to_genes(verbose = verbose)
   d <- merge(d,
@@ -34,7 +36,6 @@ gpt_annot_read <- function(path = NULL,
   d[d==""] <- NA
   d <- data.table::data.table(d)
   d[,pheno_count:=table(d$phenotype)[phenotype]]
-
   #### Ensure no phenos are missing HPO IDs ####
   missing_phenos <- length(unique(d[is.na(hpo_id)]$phenotype))
   if(missing_phenos>0){
