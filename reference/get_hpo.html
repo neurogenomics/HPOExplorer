@@ -23,7 +23,7 @@ whereas in the 2023 version the maximum ontology level depth is 16
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.11</span>
       </span>
     </div>
 
@@ -89,21 +89,18 @@ whereas in the 2023 version the maximum ontology level depth is 16
     <h2>Source</h2>
     <p><a href="https://bioportal.bioontology.org/ontologies/HP" class="external-link">BioPortal</a>
 <code>
-save_path &lt;- file.path(tempdir(),"hpo.rds")
-URL &lt;- paste0(
-  "https://data.bioontology.org/ontologies/HP/submissions/602/",
-  "download?apikey=8b5b7825-538d-40e0-9e9e-5ab9274a9aeb"
-)
-tmp &lt;- tempfile(fileext = "hpo.obo")
-utils::download.file(URL, tmp)
-hpo &lt;- ontologyIndex::get_OBO(tmp, extract_tags = "everything")
-saveRDS(hpo,save_path)
+f &lt;- HPOExplorer:::get_data(file = "hp-base.obo",
+                            repo = "obophenotype/human-phenotype-ontology",
+                            tag="latest")
+hpo &lt;- ontologyIndex::get_OBO(f, extract_tags = "everything")
 ### Fix non-ASCII characters in metadata ####
 func &lt;- function(v){
   Encoding(v) &lt;- "latin1"
   iconv(v, "latin1", "UTF-8")
 }
 attributes(hpo)$version &lt;- func(attributes(hpo)$version)
+save_path &lt;- file.path(tempdir(),"hpo.rds")
+saveRDS(hpo,save_path)
 piggyback::pb_upload(file = save_path,
                      repo = "neurogenomics/HPOExplorer",
                      overwrite = TRUE,

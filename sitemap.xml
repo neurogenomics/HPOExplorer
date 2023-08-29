@@ -85,9 +85,6 @@
     <loc>/reference/assign_tiers.html</loc>
   </url>
   <url>
-    <loc>/reference/check_annot_gpt.html</loc>
-  </url>
-  <url>
     <loc>/reference/example_phenos.html</loc>
   </url>
   <url>
@@ -122,6 +119,18 @@
   </url>
   <url>
     <loc>/reference/ggnetwork_plot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gpt_annot_check.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gpt_annot_codify.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gpt_annot_plot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gpt_annot_read.html</loc>
   </url>
   <url>
     <loc>/reference/harmonise_phenotypes.html</loc>
@@ -197,6 +206,9 @@
   </url>
   <url>
     <loc>/reference/phenos_to_granges.html</loc>
+  </url>
+  <url>
+    <loc>/reference/search_hpo.html</loc>
   </url>
   <url>
     <loc>/reference/subset_descendants.html</loc>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.11</span>
       </span>
     </div>
 
@@ -76,7 +76,7 @@
     <div id="source">
     <h2>Source</h2>
     <p><code>
-annot &lt;- load_phenotype_to_genes(filename = "phenotype.hpoa")
+annot &lt;- load_phenotype_to_genes(file = "phenotype.hpoa")
 annot &lt;- annot[onset!="",]
 annot$onset_name &lt;- harmonise_phenotypes(phenotypes = annot$onset,
                                          as_hpo_ids = FALSE)

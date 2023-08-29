@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.11</span>
       </span>
     </div>
 
@@ -61,6 +61,40 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.99.11" id="hpoexplorer-09911">HPOExplorer 0.99.11<a class="anchor" aria-label="anchor" href="#hpoexplorer-09911"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-99-11">New features<a class="anchor" aria-label="anchor" href="#new-features-0-99-11"></a></h3>
+<ul><li>New GPT annotation functions
+<ul><li><code>gpt_annot_read</code></li>
+<li><code>gpt_annot_check</code></li>
+<li><code>gpt_annot_codify</code></li>
+<li><code>gpt_annot_plot</code></li>
+</ul></li>
+<li>
+<code>get_hpo</code>
+<ul><li>Get OBO directly from “<a href="https://github.com/obophenotype/human-phenotype-ontology/releases" class="external-link uri">https://github.com/obophenotype/human-phenotype-ontology/releases</a>” rather than Bioportal.</li>
+<li>Used “hp-base.obo” as this seemed to match the file size of the OBO on Bioportal.</li>
+<li>Also tried importing “hp-full.obo” but this caused an error with <code><a href="https://rdrr.io/pkg/ontologyIndex/man/get_ontology.html" class="external-link">ontologyIndex::get_OBO</a></code>.</li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-99-11">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-11"></a></h3>
+<ul><li>
+<code>load_phenotype_to_genes</code>:
+<ul><li>Revamp to use releases from “<a href="https://github.com/obophenotype/human-phenotype-ontology/releases" class="external-link uri">https://github.com/obophenotype/human-phenotype-ontology/releases</a>”, which HPO now redirects to.</li>
+<li>Use piggyback to download files.</li>
+</ul></li>
+<li>
+<code>test-get_ont_lvls</code>
+<ul><li>New HPO has extra “GO:” terms. Omit them in tests.</li>
+</ul></li>
+<li>
+<code>example_phenos</code>
+<ul><li>New HPO has extra “GO:” terms. Omit.</li>
+</ul></li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.99.10" id="hpoexplorer-09910">HPOExplorer 0.99.10<a class="anchor" aria-label="anchor" href="#hpoexplorer-09910"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-99-10">New features<a class="anchor" aria-label="anchor" href="#new-features-0-99-10"></a></h3>
@@ -89,7 +123,7 @@
 <li>Document all args.</li>
 <li>
 <code>add_onset</code>
-<ul><li>Circumvent <code>Inf</code> warnings</li>
+<ul><li>Circumvent <code>Inf</code> warnings.</li>
 </ul></li>
 </ul></div>
 </div>

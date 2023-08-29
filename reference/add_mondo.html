@@ -22,7 +22,7 @@ MONDO_definition: MONDO term definition.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.11</span>
       </span>
     </div>
 
@@ -113,24 +113,24 @@ from <code>y</code>.  The default is <code>FALSE</code>, so that only rows with 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="st">"phenotype.hpoa"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Importing existing file: ... phenotype.hpoa</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> All local files already up-to-date!</span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_mondo</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding disease metadata: Definitions, Preferred.Label</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing Orphanet metadata.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing OMIM metadata.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 0 / 12479 (0%) disease_name missing.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 8158 / 12420 (65.68%) Definitions missing.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 0 / 12526 (0%) disease_name missing.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 8227 / 12467 (65.99%) Definitions missing.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenos with MONDO metadata.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> All local files already up-to-date!</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 74 / 12420 (0.6%) MONDO_ID missing.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 11079 / 12420 (89.2%) MONDO_name missing.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 12217 / 12420 (98.37%) MONDO_definition missing.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 8031 / 12420 (64.66%) Definitions missing.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 128 / 12467 (1.03%) MONDO_ID missing.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 11115 / 12467 (89.16%) MONDO_name missing.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 12265 / 12467 (98.38%) MONDO_definition missing.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 8099 / 12467 (64.96%) Definitions missing.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenos with MONDO metadata.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> All local files already up-to-date!</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 74 / 12420 (0.6%) MONDO_ID missing.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 11079 / 12420 (89.2%) MONDO_name missing.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 12217 / 12420 (98.37%) MONDO_definition missing.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 128 / 12467 (1.03%) MONDO_ID missing.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 11115 / 12467 (89.16%) MONDO_name missing.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 12265 / 12467 (98.38%) MONDO_definition missing.</span>
 </code></pre></div>
     </div>
   </div>
