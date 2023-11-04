@@ -43,9 +43,11 @@ default \code{TRUE}.}
 \link[ontologyIndex]{ontology_index}
 }
 \description{
-Updated version of Human Phenotype Ontology (HPO) from 2023-06-17.
-Created from the OBO files distributed by
-\href{https://bioportal.bioontology.org/ontologies/HP}{BioPortal}.
+Updated version of Human Phenotype Ontology (HPO) from 2023-10-09.
+Created from the OBO files distributed by the HPO project's
+\href{https://github.com/obophenotype/human-phenotype-ontology}{GitHub}.
+}
+\details{
 By comparison, the \code{hpo} data from \pkg{ontologyIndex} is from 2016.
 Note that the maximum ontology level depth in the 2016 version was 14,
 whereas in the 2023 version the maximum ontology level depth is 16

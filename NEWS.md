@@ -1,3 +1,12 @@
+# HPOExplorer 0.99.12
+
+## New features
+
+* `get_hpo`
+  - Updated to lates release: 2023-08-01
+* `gpt_annot_*`
+  - Ensure consistent use of updated column names.
+
 # HPOExplorer 0.99.11
 
 ## New features

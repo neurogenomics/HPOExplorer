@@ -25,7 +25,7 @@ gpt_annot_plot <- function(annot = gpt_annot_read(),
   requireNamespace("ggplot2")
   requireNamespace("scales")
   requireNamespace("patchwork")
-  ancestor_name <- variable <- hpo_id <- phenotype <-
+  ancestor_name <- variable <- hpo_id <- hpo_name <-
     value <- severity_score_gpt <- mean_severity_score_gpt <- NULL;
 
   #### Prepare annotation results ####
@@ -40,7 +40,7 @@ gpt_annot_plot <- function(annot = gpt_annot_read(),
 
   ##### Heatmap of top N most severe phenotypes ####
   gp0.1 <- ggplot(data = dat_top,
-         aes(x=variable, y=phenotype, fill=value)) +
+         aes(x=variable, y=hpo_name, fill=value)) +
     geom_tile() +
     scale_y_discrete(limits=rev) +
     scale_fill_viridis_d(na.value = "grey", direction = -1, option = "plasma") +
@@ -49,7 +49,7 @@ gpt_annot_plot <- function(annot = gpt_annot_read(),
           legend.position = 'right')
   gp0.2 <-
     ggplot(data = dat_top,
-           aes(x="severity_score_gpt", y=phenotype, fill=severity_score_gpt)) +
+           aes(x="severity_score_gpt", y=hpo_name, fill=severity_score_gpt)) +
     geom_tile() +
     scale_y_discrete(limits=rev) +
     scale_fill_viridis_c(na.value = "grey", option = "viridis") +

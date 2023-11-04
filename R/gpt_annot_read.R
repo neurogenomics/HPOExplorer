@@ -20,24 +20,24 @@ gpt_annot_read <- function(path = NULL,
                            verbose=TRUE){
   # devoptera::args2vars(gpt_annot_read)
 
-  pheno_count <- phenotype <- hpo_id <- NULL;
+  pheno_count <- hpo_name <- hpo_id <- NULL;
 
   if(is.null(path)){
     path <- get_data("gpt_hpo_annotations.csv")
   }
   d <- data.table::fread(path, header = TRUE)
+  data.table::setnames(d,"phenotype","hpo_name")
   #### Check phenotype names ####
   annot <- load_phenotype_to_genes(verbose = verbose)
   d <- merge(d,
              unique(annot[,c("hpo_id","hpo_name")]),
-             by.x="phenotype",
-             by.y="hpo_name")
+             by="hpo_name")
   d <- data.frame(d)
   d[d==""] <- NA
   d <- data.table::data.table(d)
-  d[,pheno_count:=table(d$phenotype)[phenotype]]
+  d[,pheno_count:=table(d$hpo_name)[hpo_name]]
   #### Ensure no phenos are missing HPO IDs ####
-  missing_phenos <- length(unique(d[is.na(hpo_id)]$phenotype))
+  missing_phenos <- length(unique(d[is.na(hpo_id)]$hpo_name))
   if(missing_phenos>0){
     messager(missing_phenos,
              "phenotypes do not have matching HPO IDs.",v=verbose)

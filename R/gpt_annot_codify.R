@@ -13,7 +13,7 @@
 #' @importFrom stats na.omit
 #' @importFrom utils head
 #' @examples
-#' checks <- gpt_annot_check()
+#' coded <- gpt_annot_codify()
 gpt_annot_codify <- function(annot = gpt_annot_read(),
                              remove_duplicates=TRUE,
                              code_dict = c(
@@ -38,12 +38,12 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
                              ){
   # res <- gpt_annot_check(path="~/Downloads/gpt_hpo_annotations.csv")
   # annot <- res$annot
-  severity_score_gpt <- congenital_onset <- phenotype <- hpo_id <- NULL;
+  severity_score_gpt <- congenital_onset <- hpo_name <- hpo_id <- NULL;
 
   d <- data.table::copy(annot)
-  #### Ensure only 1 row/phenotype by simply taking the first ####
+  #### Ensure only 1 row/hpo_name by simply taking the first ####
   if(isTRUE(remove_duplicates)){
-    d <- d[,utils::head(.SD,1), by=c("hpo_id","phenotype")]
+    d <- d[,utils::head(.SD,1), by=c("hpo_id","hpo_name")]
   }
   cols <- names(tiers_dict)
   #### Add levels ####
@@ -51,7 +51,7 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
     factor(tolower(x),levels = rev(names(code_dict)), ordered = TRUE)
     }),
     .SDcols = unique(c(cols,"congenital_onset")),
-    by=c("hpo_id","phenotype")]
+    by=c("hpo_id","hpo_name")]
   #### Filter congenital onset ####
   if(!is.null(keep_congenital_onset)){
     d <- d[congenital_onset %in% keep_congenital_onset,]
@@ -63,7 +63,7 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
         (max(unlist(tiers_dict))+1) - unlist(tiers_dict)
     )
   d_coded <- d[,lapply(.SD,FUN=function(x){
-    unlist(code_dict[tolower(x)])}),.SDcols = cols, by=c("hpo_id","phenotype")]
+    unlist(code_dict[tolower(x)])}),.SDcols = cols, by=c("hpo_id","hpo_name")]
   d_weighted <- data.table::as.data.table(
     lapply(stats::setNames(cols,cols),
            function(co){d_coded[[co]]*
@@ -74,15 +74,15 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
                                            on="hpo_id"] |>
     data.table::setorderv("severity_score_gpt",-1, na.last = TRUE) |>
     unique()
-  #### Order phenotypes by severity_score_gpt #####
-  d[,phenotype:=factor(phenotype,
-                       levels = unique(d_weighted$phenotype),
+  #### Order hpo_names by severity_score_gpt #####
+  d[,hpo_name:=factor(hpo_name,
+                       levels = unique(d_weighted$hpo_name),
                        ordered = TRUE)]
-  d_coded[,phenotype:=factor(phenotype,
-                       levels = unique(d_weighted$phenotype),
+  d_coded[,hpo_name:=factor(hpo_name,
+                       levels = unique(d_weighted$hpo_name),
                        ordered = TRUE)]
-  d_weighted[,phenotype:=factor(phenotype,
-                       levels = unique(d_weighted$phenotype),
+  d_weighted[,hpo_name:=factor(hpo_name,
+                       levels = unique(d_weighted$hpo_name),
                        ordered = TRUE)]
   #### Return ####
   return(list(

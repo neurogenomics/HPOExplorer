@@ -32,5 +32,5 @@ Named list
 Check GPT phenotype annotations using a several metrics.
 }
 \examples{
-checks <- gpt_annot_check()
+coded <- gpt_annot_codify()
 }

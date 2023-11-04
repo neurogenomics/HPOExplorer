@@ -20,13 +20,15 @@ get_data <- function(file,
 
   tmp <- file.path(save_dir, file)
   dir.create(save_dir, showWarnings = FALSE, recursive = TRUE)
-  piggyback::pb_download(
-    file = file,
-    tag = tag,
-    dest = save_dir,
-    repo = repo,
-    overwrite = overwrite
-  )
+  if(!file.exists(tmp) ||
+     isTRUE(overwrite)){
+    piggyback::pb_download(
+      file = file,
+      tag = tag,
+      dest = save_dir,
+      repo = repo,
+      overwrite = overwrite)
+  }
   #### Read/return ####
   if(grepl("\\.rds$",tmp)){
     return(readRDS(tmp))
