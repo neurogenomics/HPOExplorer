@@ -10,12 +10,16 @@
 #' @returns A named list or data.frame of metadata for a given HPO ID.
 #'
 #' @export
+#' @import data.table
 #' @examples
 #' dat <- hpo_api(hpo_id="HP:0011420", type="diseases")
 hpo_api <- function(hpo_id,
                     type = list(NULL,"genes","diseases")[[1]],
                     url = paste("hpo.jax.org/api/hpo/term",hpo_id,type,sep="/")
                     ){
+
+  requireNamespace("httr")
+  requireNamespace("jsonlite")
 
   hpo_termdetails <- tryCatch(expr = {
     httr::GET(url = url)
@@ -26,5 +30,7 @@ hpo_api <- function(hpo_id,
   })
   hpo_termdetails_char <- rawToChar(hpo_termdetails$content)
   hpo_termdetails_data <- jsonlite::fromJSON(hpo_termdetails_char)
+  hpo_termdetails_data$diseases <-
+    data.table::data.table(hpo_termdetails_data$diseases)
   return(hpo_termdetails_data)
 }

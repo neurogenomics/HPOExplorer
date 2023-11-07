@@ -3,16 +3,22 @@
 ## New features
 
 * `get_hpo`
-  - Updated to lates release: 2023-08-01
+  - Updated to latest release: 2023-08-01
 * `gpt_annot_*`
   - Ensure consistent use of updated column names.
 * Add version attribute data within HPO objects
   - `get_hpo`: already built in to `ontologyIndex` objects.
   - `load_phenotypes_to_genes`: new attribute.
-* Add `update_hpo` internal function.
+  - New exported helper function: `get_version`
+  - New exported helper function: `clear_cache`
+* Add `make_hpo` internal function.
 * Ensure consistent function naming:
-  - `create_node_data` --> `make_node_data`
-* New internal function: `clear_cache`
+  - `create_node_data` --> `make_node_data` 
+* `get_gencc`
+  - Export
+  - Add version info
+* Increase code coverage throughout
+
 
 # HPOExplorer 0.99.11
 

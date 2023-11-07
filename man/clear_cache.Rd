@@ -7,6 +7,7 @@
 clear_cache(
   save_dir = tools::R_user_dir(package = "HPOExplorer", which = "cache"),
   recursive = TRUE,
+  verbose = TRUE,
   ...
 )
 }
@@ -14,6 +15,8 @@ clear_cache(
 \item{save_dir}{Path to cache directory.}
 
 \item{recursive}{logical.  Should directories be deleted recursively?}
+
+\item{verbose}{Print messages.}
 
 \item{...}{
   Arguments passed on to \code{\link[base:unlink]{base::unlink}}
@@ -26,7 +29,14 @@ clear_cache(
     tilde (see \code{\link[base]{path.expand}}) be expanded?}
   }}
 }
-\description{
-Clear cache
+\value{
+Null.
 }
-\keyword{internal}
+\description{
+Remove all data cached by \pkg{HPOExplorer}.
+}
+\examples{
+\dontrun{
+clear_cache()
+}
+}

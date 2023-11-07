@@ -46,7 +46,7 @@ load_phenotype_to_genes <- function(file = c("phenotype_to_genes.txt",
      !overwrite){
     messager("Reading cached RDS file:",file,v=verbose)
     obj <- readRDS(path_rds)
-    messager("+ Version:",attr(obj,"version"),v=verbose)
+    get_version(obj,verbose=verbose)
     return(obj)
   }
   #### Stored in GitHub Releases ####
@@ -66,8 +66,10 @@ load_phenotype_to_genes <- function(file = c("phenotype_to_genes.txt",
   } else {
     phenotype_to_genes <- data.table::fread(input = f)
   }
+  #### Add version ####
   if(!is.null(attr(f,"version"))){
     attr(phenotype_to_genes,"version") <- attr(f,"version")
+    get_version(phenotype_to_genes,verbose=verbose)
   }
   #### Save RDS ####
   ## This lets up keep track of the version of the data without having to
