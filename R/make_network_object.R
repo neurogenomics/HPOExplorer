@@ -67,10 +67,10 @@ make_network_object <- function(phenos,
     cols <- cols[cols %in% names(phenos)]
     for(col in cols){
       #### Add metadata to phenoNet ####
-      phenoNet <- create_node_data(phenoNet = phenoNet,
-                                   phenos = phenos,
-                                   phenos_column = col,
-                                   verbose = verbose)
+      phenoNet <- make_node_data(phenoNet = phenoNet,
+                                 phenos = phenos,
+                                 phenos_column = col,
+                                 verbose = verbose)
     }
     #### Add number of total edges for each node ####
     if("hpo_id" %in% names(phenos)){

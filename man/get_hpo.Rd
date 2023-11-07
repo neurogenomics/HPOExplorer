@@ -6,22 +6,7 @@
 \source{
 \href{https://bioportal.bioontology.org/ontologies/HP}{BioPortal}
 \code{
-f <- HPOExplorer:::get_data(file = "hp-base.obo",
-                            repo = "obophenotype/human-phenotype-ontology",
-                            tag="latest")
-hpo <- ontologyIndex::get_OBO(f, extract_tags = "everything")
-### Fix non-ASCII characters in metadata ####
-func <- function(v){
-  Encoding(v) <- "latin1"
-  iconv(v, "latin1", "UTF-8")
-}
-attributes(hpo)$version <- func(attributes(hpo)$version)
-save_path <- file.path(tempdir(),"hpo.rds")
-saveRDS(hpo,save_path)
-piggyback::pb_upload(file = save_path,
-                     repo = "neurogenomics/HPOExplorer",
-                     overwrite = TRUE,
-                     tag = "latest")
+hpo <- HPOExplorer:::make_hpo(upload_tag="latest")
 }
 }
 \usage{
@@ -40,7 +25,7 @@ get_hpo(
 default \code{TRUE}.}
 }
 \value{
-\link[ontologyIndex]{ontology_index}
+\link[ontologyIndex]{ontology_index} object.
 }
 \description{
 Updated version of Human Phenotype Ontology (HPO) from 2023-10-09.

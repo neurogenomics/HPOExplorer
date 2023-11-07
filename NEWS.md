@@ -6,6 +6,13 @@
   - Updated to lates release: 2023-08-01
 * `gpt_annot_*`
   - Ensure consistent use of updated column names.
+* Add version attribute data within HPO objects
+  - `get_hpo`: already built in to `ontologyIndex` objects.
+  - `load_phenotypes_to_genes`: new attribute.
+* Add `update_hpo` internal function.
+* Ensure consistent function naming:
+  - `create_node_data` --> `make_node_data`
+* New internal function: `clear_cache`
 
 # HPOExplorer 0.99.11
 

@@ -32,7 +32,7 @@ load_phenotype_to_genes <- function(file = c("phenotype_to_genes.txt",
                                     overwrite = FALSE,
                                     verbose = TRUE
                                     ) {
-  # devoptera::args2vars(load_phenotype_to_genes)
+  # devoptera::args2vars(load_phenotype_to_genes, reassign = TRUE)
 
   #### Get right URL #####
   file <- file[[1]]
@@ -40,12 +40,22 @@ load_phenotype_to_genes <- function(file = c("phenotype_to_genes.txt",
   if(is.numeric(file)){
     file <- eval(formals(load_phenotype_to_genes)$file)[[file]]
   }
+  #### Read from RDS if exists ####
+  path_rds <- file.path(save_dir,paste0(file,".rds"))
+  if(file.exists(path_rds) &&
+     !overwrite){
+    messager("Reading cached RDS file:",file,v=verbose)
+    obj <- readRDS(path_rds)
+    messager("+ Version:",attr(obj,"version"),v=verbose)
+    return(obj)
+  }
   #### Stored in GitHub Releases ####
   f <- get_data(file = file,
                 repo = repo,
                 tag = tag,
                 save_dir = save_dir,
-                overwrite = overwrite)
+                overwrite = overwrite,
+                add_version = TRUE)
   #### Read file ####
   if(file=="phenotype.hpoa"){
     phenotype_to_genes <- data.table::fread(
@@ -56,5 +66,13 @@ load_phenotype_to_genes <- function(file = c("phenotype_to_genes.txt",
   } else {
     phenotype_to_genes <- data.table::fread(input = f)
   }
+  if(!is.null(attr(f,"version"))){
+    attr(phenotype_to_genes,"version") <- attr(f,"version")
+  }
+  #### Save RDS ####
+  ## This lets up keep track of the version of the data without having to
+  ## store this info in a redundant column.
+  saveRDS(phenotype_to_genes,path_rds)
+  #### Return ####
   return(phenotype_to_genes)
 }

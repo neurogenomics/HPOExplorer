@@ -1,4 +1,4 @@
-create_node_data <- function(phenoNet,
+make_node_data <- function(phenoNet,
                              phenos,
                              phenos_column,
                              new_column=phenos_column,

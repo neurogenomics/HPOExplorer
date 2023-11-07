@@ -9,8 +9,8 @@ get_data(
   tag = "latest",
   repo = "neurogenomics/HPOExplorer",
   save_dir = tools::R_user_dir(package = "HPOExplorer", which = "cache"),
-  overwrite = TRUE,
-  check = FALSE
+  add_version = FALSE,
+  overwrite = TRUE
 )
 }
 \arguments{
@@ -23,8 +23,14 @@ all assets attached to the release will be downloaded.}
 
 \item{save_dir}{Directory to save data to.}
 
+\item{add_version}{Add the release version
+to the returned object's \link[base]{attributes}}
+
 \item{overwrite}{Should any local files of the same name be overwritten?
 default \code{TRUE}.}
+}
+\value{
+Path to downloaded file or the object itself (when ".rds" format).
 }
 \description{
 Download remotely stored data via \link[piggyback]{pb_download}.
