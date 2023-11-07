@@ -97,6 +97,9 @@
     <loc>/reference/get_data.html</loc>
   </url>
   <url>
+    <loc>/reference/get_gencc.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_gene_lists.html</loc>
   </url>
   <url>
@@ -119,6 +122,9 @@
   </url>
   <url>
     <loc>/reference/get_term_definition_api.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_version.html</loc>
   </url>
   <url>
     <loc>/reference/ggnetwork_plot.html</loc>
