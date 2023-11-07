@@ -85,6 +85,9 @@
     <loc>/reference/assign_tiers.html</loc>
   </url>
   <url>
+    <loc>/reference/clear_cache.html</loc>
+  </url>
+  <url>
     <loc>/reference/example_phenos.html</loc>
   </url>
   <url>
@@ -185,6 +188,9 @@
   </url>
   <url>
     <loc>/reference/make_hoverboxes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/make_hpo.html</loc>
   </url>
   <url>
     <loc>/reference/make_igraph_object.html</loc>

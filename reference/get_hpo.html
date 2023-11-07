@@ -81,22 +81,7 @@ Created from the OBO files distributed by the HPO project's
     <h2>Source</h2>
     <p><a href="https://bioportal.bioontology.org/ontologies/HP" class="external-link">BioPortal</a>
 <code>
-f &lt;- HPOExplorer:::get_data(file = "hp-base.obo",
-                            repo = "obophenotype/human-phenotype-ontology",
-                            tag="latest")
-hpo &lt;- ontologyIndex::get_OBO(f, extract_tags = "everything")
-### Fix non-ASCII characters in metadata ####
-func &lt;- function(v){
-  Encoding(v) &lt;- "latin1"
-  iconv(v, "latin1", "UTF-8")
-}
-attributes(hpo)$version &lt;- func(attributes(hpo)$version)
-save_path &lt;- file.path(tempdir(),"hpo.rds")
-saveRDS(hpo,save_path)
-piggyback::pb_upload(file = save_path,
-                     repo = "neurogenomics/HPOExplorer",
-                     overwrite = TRUE,
-                     tag = "latest")
+hpo &lt;- HPOExplorer:::make_hpo(upload_tag="latest")
 </code></p>
     </div>
     <div id="arguments">
@@ -118,9 +103,7 @@ default <code>TRUE</code>.</p></dd>
     <h2>Value</h2>
     
 
-<p><a href="https://rdrr.io/pkg/ontologyIndex/man/ontology_index.html" class="external-link">ontology_index</a></p>
-
-
+<p><a href="https://rdrr.io/pkg/ontologyIndex/man/ontology_index.html" class="external-link">ontology_index</a> object.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
