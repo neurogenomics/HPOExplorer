@@ -1,4 +1,5 @@
 gpt_annot_melt <- function(res_coded){
+
   id.vars <- grep("justification|phenotype|hpo_name|hpo_id|pheno_count",
                   names(res_coded$annot),
                   value = TRUE)

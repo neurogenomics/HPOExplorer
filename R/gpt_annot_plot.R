@@ -30,9 +30,9 @@ gpt_annot_plot <- function(annot = gpt_annot_read(),
 
   #### Prepare annotation results ####
   res_coded <- gpt_annot_codify(annot = annot)
-  dat <- gpt_annot_melt(res_coded = res_coded)
+  dat1 <- gpt_annot_melt(res_coded = res_coded)
   #### Get top N most severe phenotypes ####
-  dat_top <- dat[hpo_id %in% unique(dat$hpo_id)[seq(top_n)]]
+  dat_top <- dat1[hpo_id %in% unique(dat1$hpo_id)[seq(top_n)]]
   #### Filter out onset phenotypes ####
   dat_top <- add_ont_lvl(dat_top, keep_ont_levels = keep_ont_levels)
   #### Filter out ont levels  ####
@@ -64,7 +64,7 @@ gpt_annot_plot <- function(annot = gpt_annot_read(),
                                guides = "collect")
 
   #### Stacked barplot of annotation value proportions ####
-  gp1 <- ggplot(dat,
+  gp1 <- ggplot(dat1,
                 aes(x=variable,fill=value)) +
     geom_bar(position = "fill") +
     scale_y_continuous(labels = scales::percent) +
@@ -74,7 +74,7 @@ gpt_annot_plot <- function(annot = gpt_annot_read(),
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
   ##### Boxplots: annotation values vs. severity score ####
-  gp2 <- ggplot(dat, aes(x=value, y=severity_score_gpt, fill=value)) +
+  gp2 <- ggplot(dat1, aes(x=value, y=severity_score_gpt, fill=value)) +
     geom_boxplot() +
     facet_wrap(facets =  "variable~.", ncol = 5) +
     scale_fill_viridis_d(na.value = "grey", direction = -1, option = "plasma") +
@@ -87,25 +87,25 @@ gpt_annot_plot <- function(annot = gpt_annot_read(),
   {
     res_coded <- gpt_annot_codify(annot = annot,
                                   keep_congenital_onset = NULL)
-    dat <- gpt_annot_melt(res_coded = res_coded)
-    dat <- add_ancestor(dat, remove_descendants = NULL)
+    dat2 <- gpt_annot_melt(res_coded = res_coded)
+    dat2 <- add_ancestor(dat2, remove_descendants = NULL)
     # dat[,variable_true:=ifelse(
     #   value %in% c("always","often","varies","rarely"),patchwork
     #   paste(variable,"TRUE",sep = ": "),NA)]
-    dat[,mean_severity_score_gpt:=mean(severity_score_gpt, na.rm=TRUE),
+    dat2[,mean_severity_score_gpt:=mean(severity_score_gpt, na.rm=TRUE),
                by="ancestor_name"] |>
       data.table::setorderv("mean_severity_score_gpt", -1, na.last = TRUE)
-    dat[,ancestor_name:=factor(ancestor_name,
-                                      levels = unique(dat$ancestor_name),
-                                      ordered = TRUE)]
+    dat2[,ancestor_name:=factor(ancestor_name,
+                                levels = unique(dat2$ancestor_name),
+                                ordered = TRUE)]
   }
-  gp3 <- ggplot(dat, aes(x=severity_score_gpt
+  gp3 <- ggplot(dat2, aes(x=severity_score_gpt
                          # fill=factor(congenital_onset)
                          )) +
     geom_histogram(bins = 50, fill="slateblue") +
     geom_vline(aes(xintercept=mean_severity_score_gpt), color="red") +
     geom_label(data = unique(
-      dat[,list(mean_severity_score_gpt), by="ancestor_name"]
+      dat2[,list(mean_severity_score_gpt), by="ancestor_name"]
     ),
               aes(x=mean_severity_score_gpt,
                   y=Inf,
@@ -119,6 +119,11 @@ gpt_annot_plot <- function(annot = gpt_annot_read(),
     list(gp0=gp0,
          gp1=gp1,
          gp2=gp2,
-         gp3=gp3)
+         gp3=gp3,
+         data=list(res_coded=res_coded,
+                   dat1=dat1,
+                   dat2=dat2,
+                   dat_top=dat_top)
+         )
   )
 }
