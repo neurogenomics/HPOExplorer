@@ -1,7 +1,7 @@
 <img src='https://github.com/neurogenomics/HPOExplorer/raw/master/inst/hex/hex.png' title='Hex sticker for HPOExplorer' height='300'><br>
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
-[![](https://img.shields.io/badge/devel%20version-0.99.11-black.svg)](https://github.com/neurogenomics/HPOExplorer)
+[![](https://img.shields.io/badge/devel%20version-0.99.12-black.svg)](https://github.com/neurogenomics/HPOExplorer)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/HPOExplorer.svg)](https://github.com/neurogenomics/HPOExplorer)
 [![](https://img.shields.io/github/last-commit/neurogenomics/HPOExplorer.svg)](https://github.com/neurogenomics/HPOExplorer/commits/master)
 <br> [![R build
@@ -13,15 +13,50 @@ status](https://github.com/neurogenomics/HPOExplorer/workflows/rworkflows/badge.
 Authors: <i>Brian Schilder, Robert Gordon-Smith, Nathan Skene</i>  
 </h4>
 <h4>  
-Most recent update: <i>Aug-31-2023</i>  
+Most recent update: <i>Dec-02-2023</i>  
 </h4>
 
 ## Intro
 
-`HPOExplorer` contains useful functions for working with the [Human
-Phenotype Ontology (HPO)](https://hpo.jax.org/app/). It allows you to
-create interactive phenotype network plots, as well as many other useful
-functions.
+### About HPO
+
+The [Human Phenotype Ontology (HPO)](https://hpo.jax.org/app/)
+controlled vocabulary of phenotypic abnormalities encountered in human
+disease. It currently contains over 18,000 hierarchically organised
+terms. Each term in the HPO describes a phenotypic abnormality, ranging
+from very broad phenotypes (e.g. “Abnormality of the nervous system”)
+down to extremely specific phenotypes (e.g. “Decreased CSF
+5-hydroxyindolacetic acid concentration”).
+
+The HPO is currently being used in thousands of exome and genome
+sequencing projects around the world to aid in the interpretation of
+human variation, in clinical practice to support differential diagnosis
+and to annotate patient information, and in research to understand the
+role of rare variants in human health and disease. The HPO was developed
+by the [Monarch Initiative](https://monarchinitiative.org/) in
+collaboration with [The Jackson Laboratory](https://www.jax.org/).
+
+### About `HPOExplorer`
+
+`HPOExplorer` is an R package with extensive functions for easily
+importing, annotating, filtering, and visualising the [Human Phenotype
+Ontology (HPO)](https://hpo.jax.org/app/) at the disease, phenotype, and
+gene levels. By pulling fresh data directly from official resources like
+[HPO](https://hpo.jax.org/app/),
+[Monarch](https://monarchinitiative.org/) and
+[GenCC](https://thegencc.org/), it ensures tightly controlled version
+coordination with the most up-to-date data available at any given time
+(with the option to use caching to boost speed). Furthermore, it can
+efficiently reorganise gene annotations into sparse matrices for usage
+within downstream statistical and machine learning analysis.
+
+`HPOExplorer` was developed by the [Neurogenomics
+Lab](https://www.neurogenomics.co.uk/) at Imperial College London, along
+with valuable feedback provided by the HPO team. This package is still
+actively evolving and growing. Community engagement is welcome and any
+suggestions can be submitted as an
+[Issue](https://github.com/neurogenomics/HPOExplorer/issues) or [Pull
+Request](https://github.com/neurogenomics/HPOExplorer/pulls).
 
 ## Installation
 
@@ -68,50 +103,40 @@ If you use `HPOExplorer`, please cite:
 utils::sessionInfo()
 ```
 
-    ## R version 4.2.1 (2022-06-23)
-    ## Platform: x86_64-apple-darwin17.0 (64-bit)
-    ## Running under: macOS Big Sur ... 10.16
+    ## R version 4.3.1 (2023-06-16)
+    ## Platform: aarch64-apple-darwin20 (64-bit)
+    ## Running under: macOS Sonoma 14.1.1
     ## 
     ## Matrix products: default
-    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
-    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
     ## 
     ## locale:
     ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+    ## 
+    ## time zone: Europe/London
+    ## tzcode source: internal
     ## 
     ## attached base packages:
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] here_1.0.1          rprojroot_2.0.3     digest_0.6.31      
-    ##  [4] utf8_1.2.3          BiocFileCache_2.6.1 R6_2.5.1           
-    ##  [7] stats4_4.2.1        RSQLite_2.3.1       evaluate_0.21      
-    ## [10] httr_1.4.6          ggplot2_3.4.2       pillar_1.9.0       
-    ## [13] yulab.utils_0.0.6   rworkflows_0.99.12  biocViews_1.66.3   
-    ## [16] rlang_1.1.1         curl_5.0.0          data.table_1.14.8  
-    ## [19] rstudioapi_0.14     whisker_0.4.1       blob_1.2.4         
-    ## [22] DT_0.28             RUnit_0.4.32        rmarkdown_2.22     
-    ## [25] desc_1.4.2          readr_2.1.4         stringr_1.5.0      
-    ## [28] htmlwidgets_1.6.2   dlstats_0.1.7       BiocPkgTools_1.16.1
-    ## [31] igraph_1.5.0.1      RCurl_1.98-1.12     bit_4.0.5          
-    ## [34] munsell_0.5.0       compiler_4.2.1      xfun_0.39          
-    ## [37] pkgconfig_2.0.3     BiocGenerics_0.44.0 rorcid_0.7.0       
-    ## [40] htmltools_0.5.5     tidyselect_1.2.0    tibble_3.2.1       
-    ## [43] httpcode_0.3.0      XML_3.99-0.14       fansi_1.0.4        
-    ## [46] dplyr_1.1.2         tzdb_0.4.0          dbplyr_2.3.2       
-    ## [49] bitops_1.0-7        rappdirs_0.3.3      crul_1.4.0         
-    ## [52] grid_4.2.1          RBGL_1.74.0         jsonlite_1.8.4     
-    ## [55] gtable_0.3.3        lifecycle_1.0.3     DBI_1.1.3          
-    ## [58] magrittr_2.0.3      scales_1.2.1        graph_1.76.0       
-    ## [61] cli_3.6.1           stringi_1.7.12      cachem_1.0.8       
-    ## [64] renv_0.17.3         fauxpas_0.5.2       xml2_1.3.4         
-    ## [67] rvcheck_0.2.1       filelock_1.0.2      generics_0.1.3     
-    ## [70] vctrs_0.6.2         gh_1.4.0            RColorBrewer_1.1-3 
-    ## [73] tools_4.2.1         bit64_4.0.5         Biobase_2.58.0     
-    ## [76] glue_1.6.2          hms_1.1.3           fastmap_1.1.1      
-    ## [79] yaml_2.3.7          colorspace_2.1-0    BiocManager_1.30.20
-    ## [82] rvest_1.0.3         memoise_2.0.1       badger_0.2.3       
-    ## [85] knitr_1.43
+    ##  [1] gtable_0.3.4        jsonlite_1.8.7      renv_1.0.3         
+    ##  [4] dplyr_1.1.4         compiler_4.3.1      BiocManager_1.30.22
+    ##  [7] tidyselect_1.2.0    rvcheck_0.2.1       scales_1.2.1       
+    ## [10] yaml_2.3.7          fastmap_1.1.1       here_1.0.1         
+    ## [13] ggplot2_3.4.4       R6_2.5.1            generics_0.1.3     
+    ## [16] knitr_1.45          yulab.utils_0.1.0   tibble_3.2.1       
+    ## [19] desc_1.4.2          dlstats_0.1.7       rprojroot_2.0.4    
+    ## [22] munsell_0.5.0       pillar_1.9.0        RColorBrewer_1.1-3 
+    ## [25] rlang_1.1.2         utf8_1.2.4          cachem_1.0.8       
+    ## [28] badger_0.2.3        xfun_0.41           fs_1.6.3           
+    ## [31] memoise_2.0.1.9000  cli_3.6.1           magrittr_2.0.3     
+    ## [34] rworkflows_1.0.2    digest_0.6.33       grid_4.3.1         
+    ## [37] rstudioapi_0.15.0   lifecycle_1.0.4     vctrs_0.6.4        
+    ## [40] data.table_1.14.8   evaluate_0.23       glue_1.6.2         
+    ## [43] fansi_1.0.5         colorspace_2.1-0    rmarkdown_2.25     
+    ## [46] tools_4.3.1         pkgconfig_2.0.3     htmltools_0.5.7
 
 </details>
 <hr>
