@@ -18,7 +18,7 @@ pkg <- read.dcf(file="DESCRIPTION",
 
 ### About HPO
 
-The [Human Phenotype Ontology (HPO)](https://hpo.jax.org/app/) controlled vocabulary of phenotypic abnormalities encountered in human disease. It currently contains over 18,000 hierarchically organised terms. Each term in the HPO describes a phenotypic abnormality, ranging from very broad phenotypes (e.g. "Abnormality of the nervous system") down to extremely specific phenotypes (e.g. "Decreased CSF 5-hydroxyindolacetic acid concentration"). 
+The [Human Phenotype Ontology (HPO)](https://hpo.jax.org/app/) is a controlled vocabulary of phenotypic abnormalities encountered in human disease. It currently contains over 18,000 hierarchically organised terms. Each term in the HPO describes a phenotypic abnormality, ranging from very broad phenotypes (e.g. "Abnormality of the nervous system") down to extremely specific phenotypes (e.g. "Decreased CSF 5-hydroxyindolacetic acid concentration"). 
 
 The HPO is currently being used in thousands of exome and genome sequencing projects around the world to aid in the interpretation of human variation, in clinical practice to support differential diagnosis and to annotate patient information, and in research to understand the role of rare variants in human health and disease. The HPO was developed by the [Monarch Initiative](https://monarchinitiative.org/) in collaboration with [The Jackson Laboratory](https://www.jax.org/).
 

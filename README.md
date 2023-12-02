@@ -20,7 +20,7 @@ Most recent update: <i>Dec-02-2023</i>
 
 ### About HPO
 
-The [Human Phenotype Ontology (HPO)](https://hpo.jax.org/app/)
+The [Human Phenotype Ontology (HPO)](https://hpo.jax.org/app/) is a
 controlled vocabulary of phenotypic abnormalities encountered in human
 disease. It currently contains over 18,000 hierarchically organised
 terms. Each term in the HPO describes a phenotypic abnormality, ranging
