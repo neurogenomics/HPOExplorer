@@ -2,6 +2,7 @@
 #'
 #' Add metadata for diseases using files from their respective databases:
 #' OMIM, DECIPHER, Orphanet.
+#' @param id_col Name of the disease ID column.
 #' @param cols Metadata columns to include.
 #' @param save_dir Directory to save metadata files to.
 #' @param include_mondo Add IDs/names/definitions from MONDO via
@@ -18,12 +19,13 @@
 #' phenos2 <- add_disease_definition(phenos = phenos)
 add_disease_definition <- function(phenos,
                                    cols = c("Definitions","Preferred.Label"),
+                                   id_col = "disease_id",
                                    save_dir = file.path(
-  tools::R_user_dir("HPOExplorer",
-                    which="cache")),
-  include_mondo = TRUE,
-  all.x = TRUE,
-  verbose = TRUE) {
+                                     tools::R_user_dir("HPOExplorer",
+                                                       which="cache")),
+                                   include_mondo = TRUE,
+                                   all.x = TRUE,
+                                   verbose = TRUE) {
 
   # devoptera::args2vars(add_disease_definition)
   disease_name <- disease_id <- Preferred.Label <- Definitions <-
@@ -49,32 +51,24 @@ add_disease_definition <- function(phenos,
     return(meta)
   #### Merge metdata ####
   } else {
-    merge_col <- c("disease_id","disease_id")
-    merge_col <- merge_col[merge_col %in% names(phenos)]
-    if(length(merge_col)==0){
-      stp <- "phenos must contain either disease_id or disease_id column."
-      stop(stp)
-    }
     phenos <-
       data.table::merge.data.table(phenos,
                                    meta[,unique(c("id",cols)), with=FALSE],
                                    all.x = all.x,
-                                   by.x = merge_col[1],
+                                   by.x = id_col[1],
                                    by.y = "id")
     if("disease_name" %in% names(phenos)){
       #### Report missing  ####
       report_missing(phenos = phenos,
-                     col = "disease_name",
-                     verbose = verbose)
-      report_missing(phenos = phenos,
-                     col = "Definitions",
+                     id_col = id_col,
+                     report_col = c("disease_name","Definitions"),
                      verbose = verbose)
       ## Needs to be lowercase to harmonise across metadata sources, eg.:
       ## "CEREBROOCULOFACIOSKELETAL SYNDROME 1" vs.
       ## "Cerebrooculofacioskeletal syndrome 1"
       phenos[,disease_name:=tolower(data.table::fcoalesce(Preferred.Label,
-                                                         disease_name,
-                                                         disease_id))]
+                                                          disease_name,
+                                                          disease_id))]
     }
     #### Add mondo ####
     if(isTRUE(include_mondo)){
@@ -85,7 +79,8 @@ add_disease_definition <- function(phenos,
       phenos[,Definitions:=tolower(data.table::fcoalesce(Definitions,
                                                          MONDO_definition))]
       report_missing(phenos = phenos,
-                     col = "Definitions",
+                     id_col = id_col,
+                     report_col = "Definitions",
                      verbose = verbose)
     }
     return(phenos)

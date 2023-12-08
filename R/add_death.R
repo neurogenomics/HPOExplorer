@@ -59,8 +59,7 @@ add_death <- function(phenos,
                           all.x = all.x,
                           allow.cartesian = allow.cartesian,
                           verbose = verbose)
-    utils::data("hpo_deaths",package = "HPOExplorer")
-    annot <- get("hpo_deaths")
+    annot <- pkg_data("hpo_deaths")
     annot <- annot[,c("disease_id",
                       "AgeOfDeath_name",
                       "AgeOfDeath_score")]

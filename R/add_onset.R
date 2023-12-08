@@ -58,8 +58,7 @@ add_onset <- function(phenos,
                           all.x = all.x,
                           allow.cartesian = allow.cartesian,
                           verbose = verbose)
-    utils::data("hpo_onsets",package = "HPOExplorer")
-    hpo_onsets <- get("hpo_onsets")
+    hpo_onsets <- pkg_data("hpo_onsets")
     dict <- hpo_dict(type = "onset")
     hpo_onsets[,onset_score:=dict[onset_name]]
     if(!is.null(agg_by)){

@@ -26,6 +26,14 @@ test_that("get_ont_lvls works", {
   testthat::expect_equal(min(lvls3),0)
   testthat::expect_equal(max(lvls3),1)
 
+  lvls4 <- get_ont_lvls(terms = terms1,
+                        absolute = TRUE,
+                        exclude_top_lvl = FALSE,
+                        reverse = FALSE)
+  testthat::expect_length(lvls4, length(terms1))
+  testthat::expect_equal(min(lvls4),0)
+  testthat::expect_equal(max(lvls4),15)
+
   #### Visual confirmation of correct hierarchy ####
   # ontologyPlot::onto_plot(ontology = hpo,
   #                         label = terms1,

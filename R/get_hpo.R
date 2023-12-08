@@ -10,7 +10,7 @@
 #'  (due to an expansion of the HPO).
 #' @source \href{https://bioportal.bioontology.org/ontologies/HP}{BioPortal}
 #' \code{
-#' hpo <- HPOExplorer:::make_hpo(upload_tag="latest")
+#' hpo <- HPOExplorer:::make_ontology(upload_tag="latest")
 #' }
 #' @inheritParams get_data
 #' @inheritParams piggyback::pb_download
@@ -26,7 +26,7 @@ get_hpo <- function(save_dir=tools::R_user_dir("HPOExplorer",
                     overwrite = TRUE){
   #### ontologyIndex data outdated, from 2016. Don't use. ####
   # utils::data("hpo",package = "ontologyIndex")
-  get_data(file = "hpo.rds",
+  get_data(file = "hp-base.rds",
            tag = tag,
            overwrite = overwrite,
            save_dir = save_dir)

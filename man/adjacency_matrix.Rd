@@ -7,6 +7,7 @@
 adjacency_matrix(
   hpo = get_hpo(),
   terms = unique(hpo$id),
+  remove_terms = grep(":", terms, invert = TRUE, value = TRUE),
   method = "HPOExplorer",
   verbose = TRUE
 )
@@ -14,7 +15,9 @@ adjacency_matrix(
 \arguments{
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 
-\item{terms}{Character vector of HPO IDs.}
+\item{terms}{Character vector of term IDs to include.}
+
+\item{remove_terms}{Character vector of term IDs to exclude.}
 
 \item{method}{Method to use to create the adjacency matrix.}
 

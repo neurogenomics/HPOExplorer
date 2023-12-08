@@ -68,7 +68,8 @@ Suggests:
     htmlwidgets,
     R.utils,
     piggyback,
-    patchwork
+    patchwork,
+    BiocParallel
 VignetteBuilder: knitr
 biocViews:
     Genetics, Preprocessing, GeneTarget, SystemsBiology,

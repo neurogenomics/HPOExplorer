@@ -25,6 +25,8 @@ annotate_phenos <- function(phenos,
                             add_pheno_frequencies = add_disease_data,
                             add_tiers = add_disease_data,
                             add_severities = add_disease_data,
+                            add_disease_definitions = add_disease_data,
+                            include_mondo = FALSE,
                             #### Extra #####
                             add_hoverboxes = FALSE,
                             columns = list_columns(),
@@ -81,10 +83,16 @@ annotate_phenos <- function(phenos,
     phenos <- add_severity(phenos = phenos,
                            verbose = verbose)
   }
-  #### Add phenotype freqs ####
+  #### Add phenotype-disease freqs ####
   if(isTRUE(add_pheno_frequencies)){
     phenos <- add_pheno_frequency(phenos = phenos,
                                   verbose = verbose)
+  }
+  #### Add phenotype-disease freqs ####
+  if(isTRUE(add_disease_definitions)){
+    phenos <- add_disease_definition(phenos = phenos,
+                                     include_mondo = include_mondo,
+                                     verbose = verbose)
   }
   #### Add hoverboxes ####
   if(isTRUE(add_hoverboxes)){

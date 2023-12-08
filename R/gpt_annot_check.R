@@ -39,9 +39,6 @@ gpt_annot_check <- function(annot = gpt_annot_read(),
   annot_mean <- annot[pheno_count>1][,lapply(.SD,function(x){
     mean(!tolower(x) %in% neg_values)
   }),.SDcols=nm,by="hpo_name"]
-  #### Compute consistency within each column ####
-  annot_consist <- lapply(annot_mean[,-1],
-                          function(x)sum(x%in%c(0,1)/nrow(annot_mean)))
   #### Check ontology classifications #####
   annot_check <- lapply(seq(nrow(annot)), function(i){
     r <- annot[i,]
@@ -58,6 +55,10 @@ gpt_annot_check <- function(annot = gpt_annot_read(),
              }) |> data.table::as.data.table()
     )
   }) |> data.table::rbindlist()
+
+  #### Compute consistency within each column ####
+  annot_consist <- sapply(annot_mean[,-1],
+                          function(x)sum(x%in%c(0,1)/nrow(annot_mean)))
   ### Proportion of rows where annotation is not NA
   checkable_rate <- sapply(
     annot_check[,names(query_hits),with=FALSE],
@@ -73,8 +74,8 @@ gpt_annot_check <- function(annot = gpt_annot_read(),
   false_neg_rate <- sapply(
     annot_check[,names(query_hits),with=FALSE],
     function(x){sum(stats::na.omit(x)==FALSE)/length(stats::na.omit(x))})
-  #### Return ####
-  return(list(
+  #### Gather results ####
+  checks <- list(
     annot=annot,
     annot_mean=annot_mean,
     annot_consist=annot_consist,
@@ -83,5 +84,9 @@ gpt_annot_check <- function(annot = gpt_annot_read(),
     checkable_count=checkable_count,
     true_pos_rate=true_pos_rate,
     false_neg_rate=false_neg_rate
-  ))
+  )
+  #### Plot ####
+  checks[["plot"]] <- gpt_annot_check_plot(checks=checks)
+  #### Return ####
+  return(checks)
 }

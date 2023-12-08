@@ -6,7 +6,7 @@
 \source{
 \href{https://bioportal.bioontology.org/ontologies/HP}{BioPortal}
 \code{
-hpo <- HPOExplorer:::make_hpo(upload_tag="latest")
+hpo <- HPOExplorer:::make_ontology(upload_tag="latest")
 }
 }
 \usage{

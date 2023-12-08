@@ -31,6 +31,9 @@
 #' \link[HPOExplorer]{add_death}.
 #' @param columns A named vector of columns in \code{phenos}
 #'  to add to the hoverdata via \link[HPOExplorer]{make_hoverboxes}.
+#' @param add_disease_definitions Add disease definitions.
+#' @param include_mondo Add \href{https://mondo.monarchinitiative.org/}{MONDO}
+#' IDs, names, and definitions to each disease.
 #' @param verbose Print messages.
 #' @inheritParams ggnetwork_plot
 #' @inheritParams make_network_object
@@ -59,6 +62,8 @@ make_phenos_dataframe <- function(ancestor = NULL,
                                   add_pheno_frequencies = add_disease_data,
                                   add_tiers = add_disease_data,
                                   add_severities = add_disease_data,
+                                  add_disease_definitions = add_disease_data,
+                                  include_mondo = FALSE,
                                   #### Extra #####
                                   add_hoverboxes = FALSE,
                                   columns = list_columns(),
@@ -102,6 +107,8 @@ make_phenos_dataframe <- function(ancestor = NULL,
                             add_pheno_frequencies = add_pheno_frequencies,
                             add_tiers = add_tiers,
                             add_severities = add_severities,
+                            add_disease_definitions = add_disease_definitions,
+                            include_mondo = include_mondo,
                             #### Extra #####
                             add_hoverboxes = add_hoverboxes,
                             columns = columns,

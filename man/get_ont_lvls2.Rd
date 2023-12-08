@@ -14,7 +14,7 @@ get_ont_lvls2(
 )
 }
 \arguments{
-\item{terms}{Character vector of HPO IDs.}
+\item{terms}{Character vector of term IDs to include.}
 
 \item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
 

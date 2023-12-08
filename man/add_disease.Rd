@@ -7,6 +7,7 @@
 add_disease(
   phenos,
   extra_cols = NULL,
+  include_mondo = TRUE,
   all.x = TRUE,
   allow.cartesian = FALSE,
   add_definitions = FALSE,
@@ -21,6 +22,9 @@ annotations file to include.
 See
 \href{https://hpo-annotation-qc.readthedocs.io/en/latest/annotationFormat.html}{
 here for column descriptions}.}
+
+\item{include_mondo}{Add IDs/names/definitions from MONDO via
+\link[HPOExplorer]{add_mondo}.}
 
 \item{all.x}{logical; if \code{TRUE}, then extra rows will be added to the
 output, one for each row in \code{x} that has no matching row in \code{y}.

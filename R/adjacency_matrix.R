@@ -1,7 +1,8 @@
 #' Adjacency matrix
 #'
 #' Create adjacency matrix of HPO child-parent relationships.
-#' @param terms Character vector of HPO IDs.
+#' @param terms Character vector of term IDs to include.
+#' @param remove_terms Character vector of term IDs to exclude.
 #' @param method Method to use to create the adjacency matrix.
 #' @inheritParams make_phenos_dataframe
 #' @inheritParams ontologyIndex::get_term_descendancy_matrix
@@ -14,15 +15,19 @@
 #' adjacency <- adjacency_matrix(terms = terms)
 adjacency_matrix <- function(hpo = get_hpo(),
                              terms = unique(hpo$id),
+                             remove_terms=grep(":",terms,
+                                               invert = TRUE, value = TRUE),
                              method = "HPOExplorer",
                              verbose = TRUE) {
-
+  #### Filter terms
   if(is.null(terms)){
     terms <- hpo$id
   }
-   messager("Creating adjacency matrix for",
-            formatC(length(terms),big.mark = ","),"term(s).",
-            v=verbose)
+  terms <- terms[!terms %in% remove_terms]
+  #### Report
+  messager("Creating adjacency matrix for",
+           formatC(length(terms),big.mark = ","),"term(s).",
+           v=verbose)
   if(tolower(method)=="ontologyindex"){
     #### ontologyIndex method ####
     ## Returns same object but not sure if it's the same in all conditions

@@ -7,6 +7,7 @@
 add_disease_definition(
   phenos,
   cols = c("Definitions", "Preferred.Label"),
+  id_col = "disease_id",
   save_dir = file.path(tools::R_user_dir("HPOExplorer", which = "cache")),
   include_mondo = TRUE,
   all.x = TRUE,
@@ -17,6 +18,8 @@ add_disease_definition(
 \item{phenos}{dataframe of phenotypes and values / parameters.}
 
 \item{cols}{Metadata columns to include.}
+
+\item{id_col}{Name of the disease ID column.}
 
 \item{save_dir}{Directory to save metadata files to.}
 

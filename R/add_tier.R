@@ -53,8 +53,7 @@ add_tier <- function(phenos,
   if(!all(c("tier","disease_characteristic") %in% names(phenos))){
     messager("Annotating phenos with Tiers.",v=verbose)
     #### Tiers #####
-    utils::data("hpo_tiers", package = "HPOExplorer")
-    hpo_tiers <- get("hpo_tiers")
+    hpo_tiers <- pkg_data("hpo_tiers")
     if(isFALSE(include_disease_characteristics)){
       hpo_tiers <- hpo_tiers[hpo_name!=disease_characteristic,]
     }
@@ -67,8 +66,7 @@ add_tier <- function(phenos,
   ##### Automatically assign tiers #####
   if(isTRUE(auto_assign) &&
      !("tier_auto" %in% names(phenos))){
-    utils::data("hpo_tiers_auto", package = "HPOExplorer")
-    hpo_tiers_auto <- get("hpo_tiers_auto")
+    hpo_tiers_auto <- pkg_data("hpo_tiers_auto")
     phenos <- data.table::merge.data.table(
       phenos,
       hpo_tiers_auto,

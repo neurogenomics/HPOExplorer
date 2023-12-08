@@ -23,7 +23,11 @@ gpt_annot_read <- function(path = NULL,
   pheno_count <- hpo_name <- hpo_id <- NULL;
 
   if(is.null(path)){
-    path <- get_data("gpt_hpo_annotations.csv")
+    path <- paste0(
+      "https://github.com/neurogenomics/RareDiseasePrioritisation/raw/master/",
+      "gpt_annotations/gpt4_hpo_annotations.csv"
+    )
+    # path <- get_data("gpt_hpo_annotations.csv")
   }
   d <- data.table::fread(path, header = TRUE)
   data.table::setnames(d,"phenotype","hpo_name")

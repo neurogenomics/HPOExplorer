@@ -35,8 +35,7 @@ add_pheno_frequency <- function(phenos,
                           allow.cartesian = allow.cartesian,
                           verbose = verbose)
     #### Get precomputed phenotype-disease frequencies ####
-    utils::data("hpo_frequencies", package = "HPOExplorer")
-    hpo_frequencies <- get("hpo_frequencies")
+    hpo_frequencies <- pkg_data("hpo_frequencies")
     # hpo_frequencies <- hpo_frequencies_agg(hpo_frequencies)
     #### Merge data ####
     phenos <- data.table::merge.data.table(

@@ -5,21 +5,9 @@
 \title{Get Mondo Disease Ontology}
 \source{
 \code{
-save_path <- file.path(tempdir(),"mondo.rds")
-URL <- paste0(
-"https://data.bioontology.org/ontologies/MONDO/submissions/52/download",
-"?apikey=8b5b7825-538d-40e0-9e9e-5ab9274a9aeb"
-)
-tmp <- file.path(tempdir(),"mondo.obo")
-utils::download.file(URL, tmp)
-mondo <- ontologyIndex::get_OBO(file = tmp, extract_tags="everything")
-saveRDS(mondo,save_path)
-piggyback::pb_new_release(repo = "neurogenomics/HPOExplorer",
-                          tag = "latest")
-piggyback::pb_upload(file = save_path,
-                     repo = "neurogenomics/HPOExplorer",
-                     overwrite = TRUE,
-                     tag = "latest")
+mondo <- HPOExplorer:::make_ontology(file="mondo-base.obo",
+                       repo="monarch-initiative/mondo",
+                       upload_tag="latest")
 }
 }
 \usage{

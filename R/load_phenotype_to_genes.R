@@ -41,7 +41,10 @@ load_phenotype_to_genes <- function(file = c("phenotype_to_genes.txt",
     file <- eval(formals(load_phenotype_to_genes)$file)[[file]]
   }
   #### Read from RDS if exists ####
-  path_rds <- file.path(save_dir,paste0(file,".rds"))
+  path_rds <- file.path(
+    save_dir,
+    gsub(paste0("\\.",tools::file_ext(file),"$"),".rds",file)
+    )
   if(file.exists(path_rds) &&
      !overwrite){
     messager("Reading cached RDS file:",file,v=verbose)

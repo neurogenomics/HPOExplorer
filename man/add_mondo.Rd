@@ -2,10 +2,11 @@
 % Please edit documentation in R/add_mondo.R
 \name{add_mondo}
 \alias{add_mondo}
-\title{Add age of death}
+\title{Add MONDO}
 \usage{
 add_mondo(
   phenos,
+  id_col = "disease_id",
   add_definitions = TRUE,
   all.x = TRUE,
   allow.cartesian = FALSE,
@@ -14,6 +15,8 @@ add_mondo(
 }
 \arguments{
 \item{phenos}{dataframe of phenotypes and values / parameters.}
+
+\item{id_col}{ID column to map to MONDO IDs.}
 
 \item{add_definitions}{Add disease definitions using
 \link[HPOExplorer]{add_disease_definition}.}
@@ -29,7 +32,8 @@ from \code{y}.  The default is \code{FALSE}, so that only rows with data from bo
 \item{verbose}{Print messages.}
 }
 \description{
-Add metadata from MONDO, including:
+Add metadata from \href{https://mondo.monarchinitiative.org/}{MONDO},
+including:
 \itemize{
 \item{MONDO_ID: }{MONDO term ID.}
 \item{MONDO_name: }{MONDO term name.}
@@ -37,6 +41,6 @@ Add metadata from MONDO, including:
 }
 }
 \examples{
-phenos <- load_phenotype_to_genes("phenotype.hpoa")
+phenos <- example_phenos()
 phenos2 <- add_mondo(phenos = phenos)
 }

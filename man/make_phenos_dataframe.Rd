@@ -20,6 +20,8 @@ make_phenos_dataframe(
   add_pheno_frequencies = add_disease_data,
   add_tiers = add_disease_data,
   add_severities = add_disease_data,
+  add_disease_definitions = add_disease_data,
+  include_mondo = FALSE,
   add_hoverboxes = FALSE,
   columns = list_columns(),
   interactive = TRUE,
@@ -69,6 +71,11 @@ each disease.}
 
 \item{add_severities}{Add severity column using
 \link[HPOExplorer]{add_severity}.}
+
+\item{add_disease_definitions}{Add disease definitions.}
+
+\item{include_mondo}{Add \href{https://mondo.monarchinitiative.org/}{MONDO}
+IDs, names, and definitions to each disease.}
 
 \item{add_hoverboxes}{Add hoverdata with
 \link[HPOExplorer]{make_hoverboxes}.}

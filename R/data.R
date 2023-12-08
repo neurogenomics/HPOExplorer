@@ -158,3 +158,54 @@
 #' @format data.table
 #' @usage data("hpo_deaths")
 "hpo_deaths"
+
+
+#' Human Phenotype Ontology: HPO ID to OMOP
+#'
+#' @description
+#' Mapping of HPO phenotype IDs (hpo_id) to OMOP concepts (OMOP_ID).
+#' @source
+#' \code{
+#'  hpo <- get_hpo()
+#'  ids <- unique(hpo$id)
+#'  hpo_id_to_omop <- oard_query_api(ids = ids, workers=10)
+#'  id_col="hpo_id"
+#'  data.table::setnames(hpo_id_to_omop,
+#'                       toupper(gsub("concept_","OMOP_",names(hpo_id_to_omop)))
+#'                       )
+#'  data.table::setnames(hpo_id_to_omop, "OMOP_CODE",id_col)
+#'  hpo_id_to_omop <- hpo_id_to_omop[,c(id_col,"OMOP_ID","OMOP_NAME"),
+#'                                   with=FALSE]
+#'  usethis::use_data(hpo_id_to_omop, overwrite = TRUE)
+#'  }
+#'  @format data.table
+#'  @usage data("hpo_id_to_omop")
+"hpo_id_to_omop"
+
+
+#' Human Phenotype Ontology: Disease ID to OMOP
+#'
+#' @description
+#' Mapping of HPO disease IDs (disease_id) to OMOP concepts (OMOP_ID).
+#' @source
+#' \code{
+#'  annot <- load_phenotype_to_genes(3)
+#'  id_col <- "disease_id"
+#'  ## NOTE: must keep batch_size=1 as the OARD API returns results only for
+#'  ## the IDs it can map. This leads to a mismatch between the input and output
+#'  ## which is exacerbated that the concept_id is automatically converted to
+#'  ## MONDO IDs for some reason, without any way to map back to the original
+#'  ## input ID...
+#'  disease_id_to_omop <- oard_query_api(ids = annot$disease_id, workers=10,
+#'                                       batch_size=1)
+#'  data.table::setnames(disease_id_to_omop,
+#'                 toupper(gsub("concept_","OMOP_",names(disease_id_to_omop)))
+#'                       )
+#'  data.table::setnames(disease_id_to_omop,"QUERY",id_col)
+#'  disease_id_to_omop <- disease_id_to_omop[,c(id_col,"OMOP_ID","OMOP_NAME"),
+#'                                           with=FALSE]
+#'  usethis::use_data(disease_id_to_omop, overwrite = TRUE)
+#'  }
+#'  @format data.table
+#'  @usage data("disease_id_to_omop")
+"disease_id_to_omop"

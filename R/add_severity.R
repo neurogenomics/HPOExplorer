@@ -40,8 +40,7 @@ add_severity <- function(phenos,
                           all.x = all.x,
                           allow.cartesian = allow.cartesian,
                           verbose = verbose)
-    utils::data("hpo_modifiers", package = "HPOExplorer")
-    hpo_mod <- get("hpo_modifiers")
+    hpo_mod <- pkg_data("hpo_modifiers")
     #### Aggregate to HPO level ####
     # hpo_agg <- hpo_modifiers_agg(dt = hpo_mod,
     #                              by = by)
