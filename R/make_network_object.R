@@ -1,3 +1,4 @@
+#' @describeIn make_ make_
 #' Make a \link[ggnetwork]{ggnetwork} object
 #'
 #' This uses the network package to coerce the adjacency matrix into a
@@ -6,15 +7,11 @@
 #'
 #' It expects there to be a column of HPO IDs in the phenos dataframe called
 #' hpo_id.
-#' @param phenos dataframe of phenotypes and values / parameters.
-#' @param adjacency An adjacency matrix generated
-#' by \link[HPOExplorer]{adjacency_matrix}.
 #' @param colour_var The column from phenos that you wish
 #' to map to node colour.
 #' @param cols Columns to add to metadata of \link[ggnetwork]{ggnetwork} object.
-#' @inheritParams make_phenos_dataframe
-#' @inheritParams ggnetwork::fortify.network
-#' @inheritDotParams ggnetwork::ggnetwork
+#' @inheritParams ggnetwork::fortify
+#' @inheritDotParams ggnetwork::fortify
 #' @returns A \link[ggnetwork]{ggnetwork} object.
 #'
 #' @export
@@ -27,10 +24,6 @@
 #'                                 colour_var = "ontLvl_geneCount_ratio")
 make_network_object <- function(phenos,
                                 hpo = get_hpo(),
-                                adjacency =
-                                  adjacency_matrix(
-                                    terms = phenos$hpo_id,
-                                    hpo = hpo),
                                 colour_var = "fold_change",
                                 add_ont_lvl_absolute = FALSE,
                                 cols = list_columns(
@@ -41,42 +34,35 @@ make_network_object <- function(phenos,
                                          value = TRUE)
                                     )
                                   ),
-                                layout = "fruchtermanreingold",
-                                verbose = TRUE,
+                                as=c("ggnetwork","tbl_graph"),
                                 ...) {
-  # devoptera::args2vars(make_network_object, reassign = TRUE)
-
-    messager("Making phenotype network object.",v=verbose)
-    if("hpo_id" %in% names(phenos)){
-      adjacency <- adjacency[unique(phenos$hpo_id),
-                             unique(phenos$hpo_id)]
-    }
-    if(!"ontLvl" %in% names(phenos) &&
-       isTRUE(add_ont_lvl_absolute)){
-      phenos <- add_ont_lvl(phenos = phenos,
-                            hpo = hpo,
-                            absolute = TRUE,
-                            verbose = verbose)
-    }
-    #### Create phenoNet obj ####
-    messager("Creating ggnetwork object.",v=verbose)
-    phenoNet <- ggnetwork::ggnetwork(x = adjacency,
-                                     arrow.gap = 0,
-                                     layout = layout,
-                                     ...)
-    cols <- cols[cols %in% names(phenos)]
-    for(col in cols){
-      #### Add metadata to phenoNet ####
-      phenoNet <- make_node_data(phenoNet = phenoNet,
-                                 phenos = phenos,
-                                 phenos_column = col,
-                                 verbose = verbose)
-    }
-    #### Add number of total edges for each node ####
-    if("hpo_id" %in% names(phenos)){
-      messager("Adding n_edges per node.",v=verbose)
-      phenoNet$n_edges <- rowSums(adjacency)[phenoNet$vertex.names]
-    }
-    phenoNet <- unique(phenoNet)
-    return(phenoNet)
+  as <- match.arg(as)
+  messager("Making phenotype network object.")
+  if(!"ontLvl" %in% names(phenos) &&
+     isTRUE(add_ont_lvl_absolute)){
+    phenos <- add_ont_lvl(phenos = phenos,
+                          hpo = hpo,
+                          absolute = TRUE)
+  }
+  #### Create phenoNet obj ####
+  g <- make_igraph_object(phenos,
+                          hpo = hpo,
+                          colour_var = colour_var,
+                          cols = cols)
+  #### Return tbl_graph object if requested ####
+  if(as == "tbl_graph")  return(g)
+  #### Proceed to convert to ggnetwork object ####
+  messager("Creating ggnetwork object.")
+  phenoNet <- ggnetwork::fortify(g,
+                                 ...)
+  cols <- cols[cols %in% names(phenos)]
+  #### No longer needed as make_igraph_object() adds these columns ####
+  # for(col in cols){
+  #   #### Add metadata to phenoNet ####
+  #   phenoNet <- make_node_data(phenoNet = phenoNet,
+  #                              phenos = phenos,
+  #                              phenos_column = col)
+  # }
+  phenoNet <- unique(phenoNet)
+  return(phenoNet)
 }

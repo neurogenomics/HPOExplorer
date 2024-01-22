@@ -1,6 +1,7 @@
 test_that("add_ont_lvl works", {
 
-  phenos <- data.table::data.table(hpo_id=get_hpo()$id[1:10])
+  hp <- get_hpo()
+  phenos <- data.table::data.table(hpo_id=hp@terms[1:10])
   #### Absolute ####
   phenos2 <- add_ont_lvl(phenos = data.table::copy(phenos))
   cols <- c("ontLvl")

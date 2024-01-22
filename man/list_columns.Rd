@@ -8,7 +8,7 @@ list_columns(columns = NULL, add_gene_cols = FALSE, extra_cols = NULL)
 }
 \arguments{
 \item{columns}{A named vector of columns in \code{phenos}
-to add to the hoverdata via \link[HPOExplorer]{make_hoverboxes}.}
+to add to the hoverdata via \link[KGExplorer]{add_hoverboxes}.}
 
 \item{add_gene_cols}{Add columns related to genes.}
 

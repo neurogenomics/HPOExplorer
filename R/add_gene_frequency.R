@@ -1,3 +1,4 @@
+#' @describeIn add_ add_
 #' Add gene frequency
 #'
 #' Add gene-level frequency, i.e. how often mutations in a given gene
@@ -8,15 +9,12 @@
 #'  a gene that occurs 100% of the time in a given phenotype.
 #'  Include \code{NA} if you wish to retain genes that
 #'  do not have any frequency data.
-#'  See \link[HPOExplorer]{add_gene_frequency} for details.
+#'  See \link{add_gene_frequency} for details.
 #' @inheritParams make_phenos_dataframe
 #' @inheritParams data.table::merge.data.table
 #' @returns phenos data.table with extra column
 #'
 #' @export
-#' @importFrom data.table setnames merge.data.table :=
-#' @importFrom utils data
-#' @importFrom stringr str_split
 #' @examples
 #' phenotype_to_genes <- load_phenotype_to_genes()[seq(1000),]
 #' phenos2 <- add_gene_frequency(phenotype_to_genes = phenotype_to_genes)
@@ -31,8 +29,7 @@ add_gene_frequency <- function(phenotype_to_genes = load_phenotype_to_genes(),
     gene_freq_min <- gene_freq_max <- . <- NULL;
 
   phenotype_to_genes <- add_hpo_id(phenos = phenotype_to_genes,
-                                   phenotype_to_genes= phenotype_to_genes,
-                                   verbose = verbose)
+                                   phenotype_to_genes= phenotype_to_genes)
   new_cols <- c("gene_freq_name","gene_freq_min",
                 "gene_freq_max","gene_freq_mean")
   if(!all(new_cols %in% names(phenotype_to_genes))){

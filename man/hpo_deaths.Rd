@@ -9,9 +9,7 @@ data.table
 }
 \source{
 \code{
-terms <- ontologyIndex::get_descendants(ontology = get_hpo(),
-                                        roots = "HP:0011420",
-                                        exclude_roots = TRUE)
+terms <- simona::dag_offspring(get_hpo(), term = "HP:0011420")
 aod <- lapply(stats::setNames(terms, terms),
               function(hpo_id){
                 message("Extracting API data for",hpo_id)
@@ -19,8 +17,7 @@ aod <- lapply(stats::setNames(terms, terms),
               }) |> data.table::rbindlist(fill = TRUE,
                                           use.names = TRUE,
                                           idcol = "AgeOfDeath")
-aod$AgeOfDeath_name <- harmonise_phenotypes(phenotypes = aod$AgeOfDeath,
-                                            as_hpo_ids = FALSE)
+aod$AgeOfDeath_name <- map_phenotypes(terms = aod$AgeOfDeath)
 #### Convert AoD to numeric scores ####
 dict <- HPOExplorer:::hpo_dict(type="AgeOfDeath")
 aod$AgeOfDeath_score <- dict[aod$AgeOfDeath_name]

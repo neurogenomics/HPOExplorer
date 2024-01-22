@@ -17,54 +17,60 @@
 #' @returns ggplot object
 #'
 #' @export
-#' @import ggplot2
-#' @importFrom ontologyIndex get_descendants
 #' @examples
-#' ## Selecting child terms of
-#' ## "Abnormality of the nervous system" as background branches
 #' plt <-  per_branch_plot(
 #'     highlighted_branches = "Abnormality of nervous system physiology",
 #'     ancestor = "Abnormality of the nervous system")
 per_branch_plot <- function(highlighted_branches,
                             ancestor,
                             hpo = get_hpo(),
-                            background_branches = hpo$children[
-                              hpo$id[match(ancestor, hpo$name)]
-                            ][[1]],
+                            background_branches = simona::dag_children(
+                              hpo,
+                              term = map_phenotypes(terms = ancestor,
+                                                    hpo = hpo,
+                                                    to = "id")
+                              ),
                             phenotype_to_genes = load_phenotype_to_genes()) {
-
-  # templateR:::source_all()
-  # devoptera::args2vars(per_branch_plot)
-
   requireNamespace("ggplot2")
-  n_phenos <- branch <- target <- NULL;
 
-  highlighted_branches_ids <- hpo$id[match(highlighted_branches, hpo$name)]
+  highlighted_branches_ids <- map_phenotypes(terms = highlighted_branches,
+                                             hpo = hpo,
+                                             to = "id",
+                                             keep_order = FALSE)
   #### Count phenotypes per branch ####
   phenos_per_branch <- lapply(background_branches, function(b){
-    n <- length(ontologyIndex::get_descendants(ontology = hpo,
-                                               roots =  b))
+    n <- length(simona::dag_offspring(hpo,term =  b))
     if (b %in% highlighted_branches_ids) {
       target_branch <- "target"
     } else {
       target_branch <- "other"
     }
-    data.table::data.table("branch" = hpo$name[b],
+    data.table::data.table("branch_id" = b,
+                           "branch_name"=map_phenotypes(terms = b,
+                                                        hpo = hpo,
+                                                        to = "name"),
                            "n_phenos" = n,
                            "target" = target_branch)
   }) |> data.table::rbindlist()
   data.table::setkeyv(phenos_per_branch, "n_phenos")
-  phenos_per_branch$branch <- factor(x = phenos_per_branch$branch,
-                                     levels = unique(phenos_per_branch$branch),
-                                     ordered = TRUE)
+  phenos_per_branch$branch_name <- factor(
+    x = phenos_per_branch$branch_name,
+    levels = unique(phenos_per_branch$branch_name),
+    ordered = TRUE)
+  #### Plot ####
   plt <- ggplot(phenos_per_branch,
-                aes_string(x = "n_phenos", y = "branch",
-                    color = "target", fill = "target")) +
+                aes(x = !!sym("n_phenos"),
+                    y = !!sym("branch_name"),
+                    color = !!sym("target"),
+                    fill = !!sym("target")
+                    )
+                )+
     geom_col(width = .5) +
     labs(x="Descendants (n)",
          y="hpo_name",
          fill="Group",
          color="Group") +
     theme_bw()
+  #### Return ####
   return(plt)
 }

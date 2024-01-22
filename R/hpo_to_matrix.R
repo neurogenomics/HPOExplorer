@@ -55,8 +55,7 @@ hpo_to_matrix <- function(terms = NULL,
     phenotype_to_genes[,dummy:=1]
     value.var <- "dummy"
   } else if(grepl("^evidence_score",value.var)){
-    phenotype_to_genes <- add_evidence(phenos = phenotype_to_genes,
-                                       verbose = verbose)
+    phenotype_to_genes <- add_evidence(phenos = phenotype_to_genes)
   } else if(!value.var %in% names(phenotype_to_genes)){
     stp <- paste("value.var not found in phenotype_to_genes.")
     stop(stp)
@@ -82,7 +81,10 @@ hpo_to_matrix <- function(terms = NULL,
   #### Format and return ####
   if(isTRUE(as_matrix) ||
      isTRUE(run_cor)){
-    X <- as.matrix(X_dt[,-meta_vars,with=FALSE])|> `rownames<-`(rn)
+    X <- dt_to_matrix(dat=X_dt,
+                      omit_cols = meta_vars,
+                      rownames = rn,
+                      as_sparse = FALSE)
     if(isTRUE(run_cor)){
       messager("Computing all parwise correlations.",v=verbose)
       X_cor <- stats::cor(X, method = method)

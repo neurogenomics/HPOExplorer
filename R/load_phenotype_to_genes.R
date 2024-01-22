@@ -20,8 +20,9 @@ load_phenotype_to_genes <- function(file = c("phenotype_to_genes.txt",
                                              "genes_to_phenotype.txt",
                                              "phenotype.hpoa"),
                                     save_dir = file.path(
-                                      tools::R_user_dir("HPOExplorer",
-                                                        which="cache"),
+                                      KGExplorer::cache_dir(
+                                        package = "HPOExplorer"
+                                        ),
                                       "data"),
                                     repo = paste(
                                       "obophenotype",
@@ -49,7 +50,7 @@ load_phenotype_to_genes <- function(file = c("phenotype_to_genes.txt",
      !overwrite){
     messager("Reading cached RDS file:",file,v=verbose)
     obj <- readRDS(path_rds)
-    get_version(obj,verbose=verbose)
+    KGExplorer::get_version(obj,verbose=verbose)
     return(obj)
   }
   #### Stored in GitHub Releases ####
@@ -72,7 +73,7 @@ load_phenotype_to_genes <- function(file = c("phenotype_to_genes.txt",
   #### Add version ####
   if(!is.null(attr(f,"version"))){
     attr(phenotype_to_genes,"version") <- attr(f,"version")
-    get_version(phenotype_to_genes,verbose=verbose)
+    KGExplorer::get_version(phenotype_to_genes, verbose=verbose)
   }
   #### Save RDS ####
   ## This lets up keep track of the version of the data without having to

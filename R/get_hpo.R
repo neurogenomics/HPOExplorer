@@ -1,6 +1,7 @@
+#' @describeIn get_ get_
 #' Get Human Phenotype Ontology (HPO)
 #'
-#' Updated version of Human Phenotype Ontology (HPO) from 2023-10-09.
+#' Updated version of Human Phenotype Ontology (HPO).
 #' Created from the OBO files distributed by the HPO project's
 #' \href{https://github.com/obophenotype/human-phenotype-ontology}{GitHub}.
 #'
@@ -8,26 +9,28 @@
 #' Note that the maximum ontology level depth in the 2016 version was 14,
 #' whereas in the 2023 version the maximum ontology level depth is 16
 #'  (due to an expansion of the HPO).
-#' @source \href{https://bioportal.bioontology.org/ontologies/HP}{BioPortal}
-#' \code{
-#' hpo <- HPOExplorer:::make_ontology(upload_tag="latest")
-#' }
-#' @inheritParams get_data
-#' @inheritParams piggyback::pb_download
-#' @importFrom tools R_user_dir
-#' @returns \link[ontologyIndex]{ontology_index} object.
+#' @inheritParams KGExplorer::add_ancestors
+#' @inheritDotParams KGExplorer::get_ontology
+#' @returns \link[simona]{ontology_DAG} object.
 #'
 #' @export
+#' @import KGExplorer
 #' @examples
 #' hpo <- get_hpo()
-get_hpo <- function(save_dir=tools::R_user_dir("HPOExplorer",
-                                               which="cache"),
-                    tag = "latest",
-                    overwrite = TRUE){
-  #### ontologyIndex data outdated, from 2016. Don't use. ####
-  # utils::data("hpo",package = "ontologyIndex")
-  get_data(file = "hp-base.rds",
-           tag = tag,
-           overwrite = overwrite,
-           save_dir = save_dir)
+get_hpo <- function(lvl,
+                    add_ancestors = TRUE,
+                    force_new = FALSE,
+                    ...){
+  save_dir <- KGExplorer::cache_dir(package = "HPOExplorer")
+  file <- file.path(save_dir,"hpo.rds")
+  if(!file.exists(file) || isTRUE(force_new)){
+    ont <- KGExplorer::get_ontology(name = "hp",
+                                    add_ancestors = add_ancestors,
+                                    force_new = force_new,
+                                    ...)
+    saveRDS(ont,file)
+  } else {
+    ont <- readRDS(file)
+  }
+  return(ont)
 }

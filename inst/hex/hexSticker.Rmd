@@ -2,7 +2,7 @@
 title: "hexSticker"
 date: "<h4>Updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
 output:
-  BiocStyle::html_document
+  rmarkdown::html_document
 vignette: >
   %\VignetteIndexEntry{hexSticker}
   %\VignetteEngine{knitr::rmarkdown}

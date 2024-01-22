@@ -25,10 +25,9 @@ get_gene_lists <- function(phenotypes,
   # devoptera::args2vars(get_gene_lists)
   hpo_id <- NULL;
 
-  hpo_ids <- harmonise_phenotypes(phenotypes = phenotypes,
-                                  hpo = hpo,
-                                  as_hpo_ids = TRUE,
-                                  verbose = TRUE)
+  hpo_ids <- map_phenotypes(terms = phenotypes,
+                            hpo = hpo,
+                            to="id")
   p2g <- phenotype_to_genes[hpo_id %in% hpo_ids]
   #### Return at data.table #####
   if(isFALSE(as_list)) return(p2g)

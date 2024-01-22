@@ -1,11 +1,11 @@
-hpo_modifiers_agg <- function(dt,
+hpo_modifiers_agg <- function(dat,
                               by = c("disease_id","hpo_id")){
   modifier <- modifier_name <- disease_name <- disease_name <- disease_id <-
     Severity_score <- Severity_score_min <- hpo_id <- NULL;
 
   by <- by[1]
   if(by=="hpo_id"){
-    dt2 <- dt[,list(
+    dt2 <- dat[,list(
       modifier=paste(unique(modifier),collapse=";"),
       modifier_name=paste(unique(modifier_name),collapse=";"),
       modifier_count=paste(table(unlist(modifier_name)),collapse=";"),
@@ -16,7 +16,7 @@ hpo_modifiers_agg <- function(dt,
       Severity_score_min=min(Severity_score, na.rm=TRUE)
     ), by=by]
   } else if (by=="disease_id"){
-    dt2 <- dt[,list(
+    dt2 <- dat[,list(
       disease_name=disease_name,
       modifier=paste(unique(modifier),collapse=";"),
       modifier_name=paste(unique(modifier_name),collapse=";"),

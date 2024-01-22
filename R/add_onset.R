@@ -1,3 +1,4 @@
+#' @describeIn add_ add_
 #' Add age of onset
 #'
 #' Add age of onset for each HPO ID.
@@ -45,19 +46,15 @@ add_onset <- function(phenos,
                       keep_onsets = NULL,
                       agg_by = NULL,
                       all.x = TRUE,
-                      allow.cartesian = FALSE,
-                      verbose = TRUE){
-
-  # devoptera::args2vars(add_onset)
+                      allow.cartesian = FALSE){
   onset_latest <- onset_score <- onset_name <- NULL;
 
   if(!any(c("onset","onset_name","onset_names","onset_score")
           %in% names(phenos))){
-    messager("Annotating phenos with onset.",v=verbose)
+    messager("Annotating phenos with onset.")
     phenos <- add_disease(phenos = phenos,
                           all.x = all.x,
-                          allow.cartesian = allow.cartesian,
-                          verbose = verbose)
+                          allow.cartesian = allow.cartesian)
     hpo_onsets <- pkg_data("hpo_onsets")
     dict <- hpo_dict(type = "onset")
     hpo_onsets[,onset_score:=dict[onset_name]]

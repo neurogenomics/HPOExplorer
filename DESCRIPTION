@@ -1,6 +1,6 @@
 Package: HPOExplorer
 Title: Analysis and Visualisation of the Human Phenotype Ontology
-Version: 0.99.12
+Version: 1.0.0
 Authors@R:
     c(
     person(given = "Brian",
@@ -18,25 +18,21 @@ Authors@R:
            role = c("aut"),
            email = "nathan.skene@gmail.com",
            comment = c(ORCID = "0000-0002-6807-3180"))) 
-Description: HPOExplorer contains useful functions for working with 
-  the Human Phenotype Ontology (HPO). 
-  It allows you to create interactive phenotype network plots,
-  which can be useful for making web applications. 
-  It also has functions for finding ontology level 
-  (n generations of terms below the selected term), 
-  and getting term definitions from HPO API.
+Description: Import, annotate and visualise the 18k+ hierarchically structured 
+  clinical phenotypes across the Human Phenotype Ontology.
 License: GPL-3
 URL: https://github.com/neurogenomics/HPOExplorer
 BugReports: https://github.com/neurogenomics/HPOExplorer/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.0
 Depends: 
     R (>= 4.1.0)
 Imports:
+    KGExplorer,
+    simona,
     ggplot2, 
-    plotly,
-    ontologyIndex,
+    plotly, 
     utils,
     stats,
     methods,
@@ -45,31 +41,27 @@ Imports:
     tools,
     data.table,
     stringr,
-    EnsDb.Hsapiens.v75,
-    ensembldb,
-    AnnotationFilter,
-    GenomicRanges,
-    AnnotationHub
+    GenomicRanges
 Suggests: 
     rmarkdown,
     knitr,
     devtools,
-    BiocStyle,
     rworkflows,
     here,
     httr,
     jsonlite,
     testthat (>= 3.0.0),
-    igraph,
     pals,
     Matrix,
     MASS,
     scales,
     htmlwidgets,
-    R.utils,
     piggyback,
     patchwork,
-    BiocParallel
+    igraph,
+    tidygraph
+Remotes:
+  github::neurogenomics/KGExplorer
 VignetteBuilder: knitr
 biocViews:
     Genetics, Preprocessing, GeneTarget, SystemsBiology,

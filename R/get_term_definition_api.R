@@ -4,7 +4,6 @@
 #' HPO term. If a \code{line_length} \> 0 is passed to the function, it will add
 #' newlines every nth word. This can be useful when displaying the description
 #' in plots with limited space.
-#' @param term One or more HPO IDs.
 #' @returns Character vector of definitions.
 #' @keywords internal
 get_term_definition_api <- function(term,

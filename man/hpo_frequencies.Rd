@@ -13,7 +13,7 @@ data.table
 \code{
 annot <- load_phenotype_to_genes("phenotype.hpoa")
 hpo_frequencies <- HPOExplorer:::parse_pheno_frequency(annot=annot)
-hpo_frequencies <- HPOExplorer:::as_ascii(dt=hpo_frequencies)
+hpo_frequencies <- HPOExplorer:::as_ascii(dat=hpo_frequencies)
 data.table::setcolorder(hpo_frequencies,c("disease_id","hpo_id"))
 usethis::use_data(hpo_frequencies, overwrite = TRUE)
 }

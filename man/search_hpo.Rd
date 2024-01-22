@@ -19,7 +19,8 @@ search_hpo(
 )
 }
 \arguments{
-\item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
+\item{hpo}{Human Phenotype Ontology object,
+loaded from \link[KGExplorer]{get_ontology}.}
 
 \item{queries}{A named list of character vectors.
 Each vector includes a phenoptype name (or a substring)

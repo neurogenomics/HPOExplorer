@@ -4,10 +4,10 @@
 \alias{unlist_col}
 \title{Unlist column}
 \usage{
-unlist_col(dt, col)
+unlist_col(dat, col)
 }
 \arguments{
-\item{dt}{\link[data.table]{data.table}}
+\item{dat}{\link[data.table]{data.table}}
 
 \item{col}{Column name.}
 }

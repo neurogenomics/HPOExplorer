@@ -6,7 +6,7 @@
 #' The resulting object will contain genes (and gene metadata) for all
 #' genes associated with each phenotypes.
 #' @param as_datatable Return as a \link[data.table]{data.table}.
-#' @param keep_seqnames Chromosomes to keep.
+#' @param keep_chr Chromosomes to keep.
 #' @inheritParams add_genes
 #' @inheritParams make_network_object
 #' @inheritParams make_phenos_dataframe
@@ -23,7 +23,7 @@ phenos_to_granges <- function(phenos = NULL,
                               phenotype_to_genes =
                                 load_phenotype_to_genes(),
                               hpo = get_hpo(),
-                              keep_seqnames = c(seq(22),"X","Y"),
+                              keep_chr = c(seq(22),"X","Y"),
                               by = c("hpo_id","disease_id"),
                               gene_col = "intersection",
                               split.field = "hpo_id",
@@ -42,12 +42,10 @@ phenos_to_granges <- function(phenos = NULL,
                       hpo = hpo,
                       by = by,
                       gene_col = gene_col,
-                      allow.cartesian = allow.cartesian,
-                      verbose = verbose)
+                      allow.cartesian = allow.cartesian)
   #### Get gene lengths #####
-  gr <- get_gene_lengths(gene_list = phenos$gene_symbol,
-                         keep_seqnames = keep_seqnames,
-                         verbose = verbose)
+  gr <- KGExplorer::get_gene_lengths(genes = phenos$gene_symbol,
+                                     keep_chr = keep_chr)
   #### Merge in gene length data ####
   gr_dt <- data.table::merge.data.table(
     phenos,

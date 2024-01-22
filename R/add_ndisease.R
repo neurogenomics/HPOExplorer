@@ -1,3 +1,4 @@
+#' @describeIn add_ add_
 #' Add N diseases
 #'
 #' Annotate each HPO term with the total number of disease

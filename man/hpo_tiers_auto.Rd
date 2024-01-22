@@ -9,7 +9,7 @@ data.table
 }
 \source{
 \code{
-hpo_tiers_auto <- HPOExplorer:::assign_tiers(as_datatable=TRUE)
+hpo_tiers_auto <- HPOExplorer:::make_tiers(as_datatable=TRUE)
 hpo_tiers_auto <- add_onset(phenos = hpo_tiers_auto)
 #### Filter by onset criterion ####
 ### Tier 1: Shortened life span: infancy
@@ -28,6 +28,6 @@ data("hpo_tiers_auto")
 }
 \description{
 HPO severity tiers automatically assigned using
-\link[HPOExplorer]{assign_tiers}.
+\link[HPOExplorer]{make_tiers}.
 }
 \keyword{datasets}

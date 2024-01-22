@@ -26,8 +26,7 @@
 #' \code{
 #' annot <- load_phenotype_to_genes(file = "phenotype.hpoa")
 #' annot <- annot[onset!="",]
-#' annot$onset_name <- harmonise_phenotypes(phenotypes = annot$onset,
-#'                                          as_hpo_ids = FALSE)
+#' annot$onset_name <- map_phenotypes(terms = annot$onset)
 #' counts <- dplyr::group_by(annot, disease_id) |>
 #'   dplyr::summarise(hpo_ids=length(unique(hpo_id)),
 #'                    onsets=length(unique(onset)))
@@ -46,10 +45,10 @@
 #'
 #' @description
 #' HPO severity tiers automatically assigned using
-#' \link[HPOExplorer]{assign_tiers}.
+#' \link[HPOExplorer]{make_tiers}.
 #' @source
 #' \code{
-#' hpo_tiers_auto <- HPOExplorer:::assign_tiers(as_datatable=TRUE)
+#' hpo_tiers_auto <- HPOExplorer:::make_tiers(as_datatable=TRUE)
 #' hpo_tiers_auto <- add_onset(phenos = hpo_tiers_auto)
 #' #### Filter by onset criterion ####
 #' ### Tier 1: Shortened life span: infancy
@@ -85,7 +84,7 @@
 #' annot <- HPOExplorer::load_phenotype_to_genes(3)
 #' annot <- annot[modifier!=""]
 #' parse_mod <- function(x){
-#'   unique(harmonise_phenotypes(strsplit(x,";")[[1]]))
+#'   unique(map_phenotypes(strsplit(x,";")[[1]]))
 #' }
 #' annot <- annot[,modifier_name:=lapply(modifier,parse_mod)][modifier!="",]
 #' annot <- annot[,.(modifier_name=unlist(modifier_name)),
@@ -119,7 +118,7 @@
 #' \code{
 #' annot <- load_phenotype_to_genes("phenotype.hpoa")
 #' hpo_frequencies <- HPOExplorer:::parse_pheno_frequency(annot=annot)
-#' hpo_frequencies <- HPOExplorer:::as_ascii(dt=hpo_frequencies)
+#' hpo_frequencies <- HPOExplorer:::as_ascii(dat=hpo_frequencies)
 #' data.table::setcolorder(hpo_frequencies,c("disease_id","hpo_id"))
 #' usethis::use_data(hpo_frequencies, overwrite = TRUE)
 #' }
@@ -134,9 +133,7 @@
 #' Age of Death associated with each disease, and by extension, each phenotype.
 #' @source
 #' \code{
-#' terms <- ontologyIndex::get_descendants(ontology = get_hpo(),
-#'                                         roots = "HP:0011420",
-#'                                         exclude_roots = TRUE)
+#' terms <- simona::dag_offspring(get_hpo(), term = "HP:0011420")
 #' aod <- lapply(stats::setNames(terms, terms),
 #'               function(hpo_id){
 #'                 message("Extracting API data for",hpo_id)
@@ -144,8 +141,7 @@
 #'               }) |> data.table::rbindlist(fill = TRUE,
 #'                                           use.names = TRUE,
 #'                                           idcol = "AgeOfDeath")
-#' aod$AgeOfDeath_name <- harmonise_phenotypes(phenotypes = aod$AgeOfDeath,
-#'                                             as_hpo_ids = FALSE)
+#' aod$AgeOfDeath_name <- map_phenotypes(terms = aod$AgeOfDeath)
 #' #### Convert AoD to numeric scores ####
 #' dict <- HPOExplorer:::hpo_dict(type="AgeOfDeath")
 #' aod$AgeOfDeath_score <- dict[aod$AgeOfDeath_name]
@@ -167,14 +163,14 @@
 #' @source
 #' \code{
 #'  hpo <- get_hpo()
-#'  ids <- unique(hpo$id)
+#'  ids <- unique(hpo@terms)
 #'  hpo_id_to_omop <- oard_query_api(ids = ids, workers=10)
-#'  id_col="hpo_id"
+#'  input_col="hpo_id"
 #'  data.table::setnames(hpo_id_to_omop,
 #'                       toupper(gsub("concept_","OMOP_",names(hpo_id_to_omop)))
 #'                       )
-#'  data.table::setnames(hpo_id_to_omop, "OMOP_CODE",id_col)
-#'  hpo_id_to_omop <- hpo_id_to_omop[,c(id_col,"OMOP_ID","OMOP_NAME"),
+#'  data.table::setnames(hpo_id_to_omop, "OMOP_CODE",input_col)
+#'  hpo_id_to_omop <- hpo_id_to_omop[,c(input_col,"OMOP_ID","OMOP_NAME"),
 #'                                   with=FALSE]
 #'  usethis::use_data(hpo_id_to_omop, overwrite = TRUE)
 #'  }
@@ -190,7 +186,7 @@
 #' @source
 #' \code{
 #'  annot <- load_phenotype_to_genes(3)
-#'  id_col <- "disease_id"
+#'  input_col <- "disease_id"
 #'  ## NOTE: must keep batch_size=1 as the OARD API returns results only for
 #'  ## the IDs it can map. This leads to a mismatch between the input and output
 #'  ## which is exacerbated that the concept_id is automatically converted to
@@ -201,8 +197,8 @@
 #'  data.table::setnames(disease_id_to_omop,
 #'                 toupper(gsub("concept_","OMOP_",names(disease_id_to_omop)))
 #'                       )
-#'  data.table::setnames(disease_id_to_omop,"QUERY",id_col)
-#'  disease_id_to_omop <- disease_id_to_omop[,c(id_col,"OMOP_ID","OMOP_NAME"),
+#'  data.table::setnames(disease_id_to_omop,"QUERY",input_col)
+#'  disease_id_to_omop <- disease_id_to_omop[,c(input_col,"OMOP_ID","OMOP_NAME"),
 #'                                           with=FALSE]
 #'  usethis::use_data(disease_id_to_omop, overwrite = TRUE)
 #'  }

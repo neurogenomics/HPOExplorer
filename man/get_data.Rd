@@ -8,7 +8,7 @@ get_data(
   file,
   tag = "latest",
   repo = "neurogenomics/HPOExplorer",
-  save_dir = tools::R_user_dir(package = "HPOExplorer", which = "cache"),
+  save_dir = KGExplorer::cache_dir(package = "HPOExplorer"),
   add_version = FALSE,
   overwrite = TRUE
 )

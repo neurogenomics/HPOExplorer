@@ -1,3 +1,4 @@
+#' @describeIn add_ add_
 #' Add HPO modifiers
 #'
 #' Annotate each HPO with modifier terms, including
@@ -28,21 +29,17 @@ add_severity <- function(phenos,
                          hpo = get_hpo(),
                          all.x = TRUE,
                          allow.cartesian = FALSE,
-                         severity_threshold = NULL,
-                         verbose = TRUE){
-
-  # devoptera::args2vars(add_severity)
+                         severity_threshold = NULL){
   Severity_score <- NULL;
 
   if(!all(c("modifier","modifier_name") %in% names(phenos))){
-    messager("Annotating phenos with modifiers",v=verbose)
+    messager("Annotating phenos with modifiers")
     phenos <- add_disease(phenos = phenos,
                           all.x = all.x,
-                          allow.cartesian = allow.cartesian,
-                          verbose = verbose)
+                          allow.cartesian = allow.cartesian)
     hpo_mod <- pkg_data("hpo_modifiers")
     #### Aggregate to HPO level ####
-    # hpo_agg <- hpo_modifiers_agg(dt = hpo_mod,
+    # hpo_agg <- hpo_modifiers_agg(dat = hpo_mod,
     #                              by = by)
     #### Add diseases ####
     phenos <- data.table::merge.data.table(

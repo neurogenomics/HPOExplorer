@@ -1,21 +1,18 @@
+#' @describeIn main main
 #' Annotate phenotypes
 #'
 #' Annotate phenotypes \link[data.table]{data.table} without various types
 #' of metadata.
-#' @inheritParams make_network_object
-#' @inheritParams make_phenos_dataframe
-#'
 #' @export
 #' @examples
 #' phenos <- example_phenos()
 #' phenos2 <- annotate_phenos(phenos)
 annotate_phenos <- function(phenos,
                             hpo = get_hpo(),
-                            adjacency = NULL,
                             ##### Phenotype metadata ####
                             add_ont_lvl_absolute = TRUE,
                             add_ont_lvl_relative = FALSE,
-                            add_info_contents = FALSE,
+                            add_info_content = TRUE,
                             add_description = TRUE,
                             #### Disease/symptom metadata ####
                             add_disease_data = FALSE,
@@ -30,76 +27,58 @@ annotate_phenos <- function(phenos,
                             #### Extra #####
                             add_hoverboxes = FALSE,
                             columns = list_columns(),
-                            interactive = TRUE,
-                            verbose = TRUE){
+                            interactive = TRUE){
 
   #### Add ontology levels: absolute ####
   if(isTRUE(add_ont_lvl_absolute)){
     phenos <- add_ont_lvl(phenos = phenos,
                           hpo = hpo,
-                          absolute = TRUE,
-                          verbose = verbose)
+                          absolute = TRUE)
   }
   #### Add ontology levels: relative ####
   if(isTRUE(add_ont_lvl_relative)){
     phenos <- add_ont_lvl(phenos = phenos,
                           hpo = hpo,
-                          adjacency = adjacency,
-                          absolute = FALSE,
-                          verbose = verbose)
+                          absolute = FALSE)
   }
   #### Add info content ####
   if(isTRUE(add_info_content)){
     phenos <- add_info_content(phenos = phenos,
-                               hpo = hpo,
-                               verbose = verbose)
+                               hpo = hpo)
   }
-  phenos <- add_hpo_definition(phenos = phenos,
-                               verbose = verbose)
-  phenos <- add_ancestor(phenos = phenos,
-                         verbose = verbose)
+  phenos <- add_hpo_definition(phenos = phenos)
+  phenos <- add_ancestor(phenos = phenos)
   if(isTRUE(add_ndiseases)){
-    phenos <- add_ndisease(phenos = phenos,
-                           verbose = verbose)
+    phenos <- add_ndisease(phenos = phenos)
   }
   #### Add age of onset ####
   if(isTRUE(add_onsets)){
-    phenos <- add_onset(phenos = phenos,
-                        verbose = verbose)
+    phenos <- add_onset(phenos = phenos)
   }
   #### Add age of death ####
   if(isTRUE(add_deaths)){
     phenos <- add_death(phenos = phenos,
-                        allow.cartesian = TRUE,
-                        verbose = verbose)
+                        allow.cartesian = TRUE)
   }
   #### Add Tiers ####
   if(isTRUE(add_tiers)){
-    phenos <- add_tier(phenos = phenos,
-                       verbose = verbose)
+    phenos <- add_tier(phenos = phenos)
   }
   #### Add Severities ####
   if(isTRUE(add_severities)){
-    phenos <- add_severity(phenos = phenos,
-                           verbose = verbose)
+    phenos <- add_severity(phenos = phenos)
   }
   #### Add phenotype-disease freqs ####
   if(isTRUE(add_pheno_frequencies)){
-    phenos <- add_pheno_frequency(phenos = phenos,
-                                  verbose = verbose)
+    phenos <- add_pheno_frequency(phenos = phenos)
   }
   #### Add phenotype-disease freqs ####
   if(isTRUE(add_disease_definitions)){
-    phenos <- add_disease_definition(phenos = phenos,
-                                     include_mondo = include_mondo,
-                                     verbose = verbose)
+    phenos <- add_mondo(phenos = phenos)
   }
   #### Add hoverboxes ####
   if(isTRUE(add_hoverboxes)){
-    phenos <- make_hoverboxes(phenos = phenos,
-                              interactive = interactive,
-                              columns = columns,
-                              verbose = verbose)
+    phenos <- KGExplorer::add_hoverboxes(g=phenos)
   }
   return(phenos)
 }

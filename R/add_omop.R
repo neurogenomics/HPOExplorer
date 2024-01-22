@@ -1,52 +1,50 @@
-#' Add MONDO
+#' @describeIn add_ add_
+#' Add OMOP
 #'
 #' Add metadata from \href{https://mondo.monarchinitiative.org/}{MONDO},
 #' including:
 #' \itemize{
-#' \item{MONDO_ID: }{MONDO term ID.}
-#' \item{MONDO_name: }{MONDO term name.}
-#' \item{MONDO_definition: }{MONDO term definition.}
+#' \item{mondo_id: }{MONDO term ID.}
+#' \item{mondo_name: }{MONDO term name.}
+#' \item{mondo_def: }{MONDO term definition.}
 #' }
-#' @param id_col ID column to map to MONDO IDs.
+#' @param input_col ID column to map to MONDO IDs.
 #' @param force_new Force a new query to the OARD API instead of
 #' using pre-downloaded data.
-#' @inheritParams add_disease
-#' @inheritParams data.table::merge.data.table
+#'
 #' @export
-#' @importFrom data.table :=
+#' @import data.table
 #' @examples
 #' phenos <- example_phenos()
 #' phenos2 <- add_omop(phenos = phenos)
 add_omop <- function(phenos,
-                     id_col = "hpo_id",
+                     input_col = "hpo_id",
                      all.x = TRUE,
                      allow.cartesian = FALSE,
                      force_new = FALSE,
                      verbose = TRUE){
-
-  # devoptera::args2vars(add_omop)
-  if(!id_col %in% names(phenos)){
-    stop("id_col not found in phenos.")
+  if(!input_col %in% names(phenos)){
+    stop("input_col not found in phenos.")
   }
   if(!all(c("OMOP_ID","OMOP_NAME") %in% names(phenos))){
     messager("Annotating phenos with OMOP metadata.",v=verbose)
     #### Select the correct map ####
-    if(id_col=="hpo_id" || isTRUE(force_new)){
+    if(input_col=="hpo_id" || isTRUE(force_new)){
       omop <- pkg_data("hpo_id_to_omop")
-    } else if(id_col=="disease_id"){
+    } else if(input_col=="disease_id"){
       omop <- pkg_data("disease_id_to_omop")
     } else {
-      omop <- oard_query_api(ids = phenos[[id_col]])
+      omop <- KGExplorer::query_oard(ids = phenos[[input_col]])
     }
     phenos2 <- data.table::merge.data.table(
       phenos,
       omop,
-      by=id_col,
+      by=input_col,
       all.x = all.x,
       allow.cartesian = allow.cartesian,
     )
-    report_missing(phenos = phenos2,
-                   id_col = id_col,
+    report_missing(phenos2,
+                   input_col = input_col,
                    report_col = c("OMOP_ID","OMOP_NAME"),
                    verbose = verbose)
     return(phenos2)

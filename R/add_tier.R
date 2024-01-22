@@ -1,3 +1,4 @@
+#' @describeIn add_ add_
 #' Add severity Tiers
 #'
 #' Add severity Tier for each HPO ID, in accordance with the

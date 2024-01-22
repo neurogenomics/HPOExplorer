@@ -17,10 +17,11 @@ get_gene_lists(
 (e.g. "Phenotypic abnormality") \<string\>.}
 
 \item{phenotype_to_genes}{Output of
-\link[HPOExplorer]{load_phenotype_to_genes} mapping phenotypes
+\link{load_phenotype_to_genes} mapping phenotypes
 to gene annotations.}
 
-\item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
+\item{hpo}{Human Phenotype Ontology object,
+loaded from \link[KGExplorer]{get_ontology}.}
 
 \item{as_list}{Return as a named list instead of a data.table.}
 

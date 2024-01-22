@@ -8,7 +8,7 @@ phenos_to_granges(
   phenos = NULL,
   phenotype_to_genes = load_phenotype_to_genes(),
   hpo = get_hpo(),
-  keep_seqnames = c(seq(22), "X", "Y"),
+  keep_chr = c(seq(22), "X", "Y"),
   by = c("hpo_id", "disease_id"),
   gene_col = "intersection",
   split.field = "hpo_id",
@@ -18,15 +18,16 @@ phenos_to_granges(
 )
 }
 \arguments{
-\item{phenos}{dataframe of phenotypes and values / parameters.}
+\item{phenos}{A data.table containing HPO IDs and other metadata.}
 
 \item{phenotype_to_genes}{Output of
-\link[HPOExplorer]{load_phenotype_to_genes} mapping phenotypes
+\link{load_phenotype_to_genes} mapping phenotypes
 to gene annotations.}
 
-\item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
+\item{hpo}{Human Phenotype Ontology object,
+loaded from \link[KGExplorer]{get_ontology}.}
 
-\item{keep_seqnames}{Chromosomes to keep.}
+\item{keep_chr}{Chromosomes to keep.}
 
 \item{by}{A vector of shared column names in \code{x} and \code{y} to merge on.
 This defaults to the shared key columns between the two tables.

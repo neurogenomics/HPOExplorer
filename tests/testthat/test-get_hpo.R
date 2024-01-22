@@ -4,5 +4,5 @@ test_that("get_hpo works", {
   hpo <- get_hpo()
   items <- ls()
   testthat::expect_true("hpo" %in% ls())
-  testthat::expect_true(methods::is(hpo,"ontology_index"))
+  testthat::expect_true(methods::is(hpo,"ontology_DAG"))
 })

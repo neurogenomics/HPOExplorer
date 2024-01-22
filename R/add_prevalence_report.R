@@ -1,11 +1,11 @@
 add_prevalence_report <- function(phenos,
                                   phenos2,
-                                  id_col,
+                                  input_col,
                                   verbose=TRUE){
   mean_prevalence <- NULL;
   phenos2 <- data.table::copy(phenos2)
   phenos2 <- phenos2[!is.na(mean_prevalence),]
- for(idc in id_col){
+ for(idc in input_col){
    n_end <- length(unique(phenos2[[idc]]))
    n_start <-  length(unique(phenos[[idc]]))
    messager(

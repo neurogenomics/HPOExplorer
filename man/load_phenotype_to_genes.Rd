@@ -9,7 +9,7 @@
 \usage{
 load_phenotype_to_genes(
   file = c("phenotype_to_genes.txt", "genes_to_phenotype.txt", "phenotype.hpoa"),
-  save_dir = file.path(tools::R_user_dir("HPOExplorer", which = "cache"), "data"),
+  save_dir = file.path(KGExplorer::cache_dir(package = "HPOExplorer"), "data"),
   repo = paste("obophenotype", "human-phenotype-ontology", sep = "/"),
   tag = "latest",
   overwrite = FALSE,

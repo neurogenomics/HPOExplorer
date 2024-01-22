@@ -1,3 +1,4 @@
+#' @describeIn add_ add_
 #' Get term definition
 #'
 #' This function accesses the HPO API to get a description/definition of an

@@ -1,3 +1,4 @@
+#' @describeIn add_ add_
 #' Add age of death
 #'
 #' Add age of death for each HPO ID.
@@ -18,10 +19,7 @@
 #' @param keep_deaths The age of death associated with each HPO ID to keep.
 #'  If >1 age of death is associated with the term,
 #'  only the earliest age is considered.
-#'  See \link[HPOExplorer]{add_death} for details.
-#' @param agg_by Column to aggregate age of death metadata by.
-#' @inheritParams make_network_object
-#' @inheritParams data.table::merge.data.table
+#'  See \link{add_death} for details.
 #' @returns phenos data.table with extra columns:
 #' \itemize{
 #' \item{"AgeOfDeath": }{AgeOfDeath HPO IDs of disease phenotypes associated
@@ -46,19 +44,17 @@ add_death <- function(phenos,
                       keep_deaths = NULL,
                       all.x = TRUE,
                       allow.cartesian = FALSE,
-                      agg_by = NULL,
-                      verbose = TRUE){
+                      agg_by = NULL){
 
   # devoptera::args2vars(add_death)
   AgeOfDeath_earliest <- AgeOfDeath_name <- NULL;
 
   if(!all(c("AgeOfDeath",
             "AgeOfDeath_name") %in% names(phenos))){
-    messager("Annotating phenos with AgeOfDeath.",v=verbose)
+    messager("Annotating phenos with AgeOfDeath.")
     phenos <- add_disease(phenos = phenos,
                           all.x = all.x,
-                          allow.cartesian = allow.cartesian,
-                          verbose = verbose)
+                          allow.cartesian = allow.cartesian)
     annot <- pkg_data("hpo_deaths")
     annot <- annot[,c("disease_id",
                       "AgeOfDeath_name",

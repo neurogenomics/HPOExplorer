@@ -1,3 +1,4 @@
+#' @describeIn add_ add_
 #' Add phenotype frequency
 #'
 #' Add phenotype-level frequency, i.e.
@@ -8,8 +9,6 @@
 #'  Include \code{NA} if you wish to retain phenotypes that
 #'  do not have any frequency data.
 #'  See \link[HPOExplorer]{add_pheno_frequency} for details.
-#' @inheritParams make_network_object
-#' @inheritParams data.table::merge.data.table
 #' @returns phenos data.table with extra column
 #'
 #' @export
@@ -22,18 +21,15 @@
 add_pheno_frequency <- function(phenos,
                                 pheno_frequency_threshold = NULL,
                                 all.x = TRUE,
-                                allow.cartesian = FALSE,
-                                verbose = TRUE){
-  # devoptera::args2vars(add_pheno_frequency)
+                                allow.cartesian = FALSE){
   pheno_freq_mean <- NULL;
 
   new_cols <- c("pheno_freq_min","pheno_freq_max","pheno_freq_mean")
   if(!all(new_cols %in% names(phenos))){
-    messager("Annotating phenotype frequencies.",v=verbose)
+    messager("Annotating phenotype frequencies.")
     phenos <- add_disease(phenos = phenos,
                           all.x = all.x,
-                          allow.cartesian = allow.cartesian,
-                          verbose = verbose)
+                          allow.cartesian = allow.cartesian)
     #### Get precomputed phenotype-disease frequencies ####
     hpo_frequencies <- pkg_data("hpo_frequencies")
     # hpo_frequencies <- hpo_frequencies_agg(hpo_frequencies)

@@ -1,3 +1,4 @@
+#' @describeIn add_ add_
 #' Add evidence
 #'
 #' Add the strength of evidence supporting each gene-disease association.
@@ -16,7 +17,6 @@
 #' }
 #' @param keep_evidence The evidence scores of each gene-disease
 #' association to keep.
-#' @param agg_by Column to aggregate metadata by.
 #' @param default_score Default evidence score to
 #' apply to gene-disease associations that are present in the HPO annotations
 #' but don't have evidence scores in the GenCC annotations.
@@ -40,21 +40,15 @@ add_evidence <- function(phenos,
                          allow.cartesian = FALSE,
                          agg_by = c("disease_id",
                                     "gene_symbol"),
-                         default_score = 1,
-                         verbose = TRUE){
-
-  # devoptera::args2vars(add_evidence)
+                         default_score = 1){
   evidence_score <- evidence_score_mean <- NULL;
 
   if(!all(c("evidence_score_mean") %in% names(phenos))){
-    messager("Annotating gene-disease associations with Evidence score",
-             v=verbose)
+    messager("Annotating gene-disease associations with Evidence score")
     phenos <- add_disease(phenos = phenos,
                           all.x = all.x,
-                          allow.cartesian = allow.cartesian,
-                          verbose = verbose)
-    annot <- get_gencc(agg_by = agg_by,
-                       verbose = verbose)
+                          allow.cartesian = allow.cartesian)
+    annot <- get_gencc(agg_by = agg_by)
     #### Merge with input data ####
     phenos <- data.table::merge.data.table(
       x = phenos,

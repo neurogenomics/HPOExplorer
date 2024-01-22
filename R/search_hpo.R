@@ -11,7 +11,6 @@
 #' @returns Named list of HPO IDs.
 #'
 #' @export
-#' @importFrom ontologyIndex get_descendants
 #' @examples
 #' query_hits <- search_hpo()
 search_hpo <- function(hpo = get_hpo(),
@@ -38,24 +37,24 @@ search_hpo <- function(hpo = get_hpo(),
                        include_descendants=TRUE,
                        include_ancestors=FALSE,
                        verbose=TRUE){
-  # devoptera::args2vars(search_hpo)
+  name <- NULL;
 
   query_hits <- lapply(queries, function(q){
     terms <- grep(paste(q,collapse = "|"),
-                  hpo$name,
+                  hpo@elementMetadata$name,
                   ignore.case = TRUE, value = TRUE)
+    dat <- subset(hpo@elementMetadata, name %in% terms)
     res <- c()
     if(isTRUE(include_descendants)){
       res <- c(res,
-        ontologyIndex::get_descendants(ontology = hpo,
-                                       roots = names(terms),
-                                       exclude_roots = FALSE)
+               simona::dag_offspring(hpo,
+                                     term = dat$id)
         )
     }
     if(isTRUE(include_ancestors)){
       res <- c(res,
-        ontologyIndex::get_ancestors(ontology = hpo,
-                                     terms = names(terms))
+               simona::dag_ancestors(hpo,
+                                     term = dat$id)
       )
     }
     return(unique(res))

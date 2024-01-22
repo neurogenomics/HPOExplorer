@@ -1,3 +1,4 @@
+#' @describeIn add_ add_
 #' Add diseases
 #'
 #' Annotate each HPO term with diseases that they are associated with.
@@ -6,12 +7,6 @@
 #' See
 #' \href{https://hpo-annotation-qc.readthedocs.io/en/latest/annotationFormat.html}{
 #' here for column descriptions}.
-#' @param add_definitions Add disease definitions using
-#' \link[HPOExplorer]{add_disease_definition}.
-#' @inheritParams add_disease_definition
-#' @inheritParams make_network_object
-#' @inheritParams data.table::merge.data.table
-#' @returns phenos data.table with extra columns
 #'
 #' @export
 #' @importFrom data.table merge.data.table
@@ -22,23 +17,17 @@
 add_disease <- function(phenos,
                         # extra_cols = c("Evidence","Reference","Biocuration"),
                         extra_cols = NULL,
-                        include_mondo = TRUE,
                         all.x = TRUE,
                         allow.cartesian = FALSE,
-                        add_definitions = FALSE,
-                        verbose = TRUE){
-
-  # devoptera::args2vars(add_disease)
-
+                        add_definitions = FALSE){
   if(!"hpo_id" %in% names(phenos)){
     stp <- paste("hpo_id column must be present in phenos.")
     stop(stp)
   }
   if(!all(c("disease_name","disease_id") %in% names(phenos))){
-    messager("Annotating phenos with Disease",v=verbose)
+    messager("Annotating phenos with Disease")
     annot <- load_phenotype_to_genes(3)
     #### From disease_id ####
-    data.table::setnames(phenos,"disease_id","disease_id", skip_absent = TRUE)
     if("disease_name" %in% names(phenos)){
       return(phenos)
     }
@@ -57,12 +46,9 @@ add_disease <- function(phenos,
       all.x = all.x,
       allow.cartesian = allow.cartesian)
   }
-  #### Add Definitions column and fill out missing disease_name columns ####
+  #### Add disease definitions and Mondo ID mappings ####
   if(isTRUE(add_definitions)){
-    phenos <- add_disease_definition(phenos = phenos,
-                                     all.x = all.x,
-                                     include_mondo = include_mondo,
-                                     verbose = verbose)
+    phenos <- add_mondo(phenos = phenos)
   }
   return(phenos)
 }

@@ -9,7 +9,7 @@ test_that("ggnetwork_plot works", {
   phenoNet <- make_network_object(phenos = phenos,
                                   colour_var = "ontLvl_geneCount_ratio")
   testthat::expect_true(methods::is(phenoNet,"data.frame"))
-  testthat::expect_equal(nrow(phenoNet),45)
+  testthat::expect_equal(nrow(phenoNet),71)
 
   #### ggnetwork_plot ####
   plt <- ggnetwork_plot(phenoNet = phenoNet,

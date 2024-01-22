@@ -1,3 +1,4 @@
+#' @describeIn main main
 #' Example phenotypes dataframe
 #'
 #' Create a minimal example of a phenos dataframe.
@@ -8,6 +9,7 @@
 #' @importFrom data.table data.table
 #' @examples
 #' phenos <- example_phenos()
-example_phenos <- function(i=seq(10)){
-  data.table::data.table(hpo_id=grep("^HP:",get_hpo()$id, value = TRUE)[i])
+example_phenos <- function(i=seq(10),
+                           hpo=get_hpo()){
+  data.table::data.table(hpo_id=grep("^HP:",hpo@terms, value = TRUE)[i])
 }

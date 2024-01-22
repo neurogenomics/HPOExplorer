@@ -23,7 +23,7 @@ hpo_to_matrix(
 Set to \code{NULL} (default) to include all terms.}
 
 \item{phenotype_to_genes}{Output of
-\link[HPOExplorer]{load_phenotype_to_genes} mapping phenotypes
+\link{load_phenotype_to_genes} mapping phenotypes
 to gene annotations.}
 
 \item{formula}{A formula of the form LHS ~ RHS to cast, see Details.}

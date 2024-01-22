@@ -6,9 +6,6 @@
 \usage{
 get_term_definition_api(term, line_length = FALSE)
 }
-\arguments{
-\item{term}{One or more HPO IDs.}
-}
 \value{
 Character vector of definitions.
 }

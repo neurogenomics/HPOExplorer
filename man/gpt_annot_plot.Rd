@@ -18,13 +18,13 @@ gpt_annot_plot(
 
 \item{keep_ont_levels}{Only keep phenotypes at certain \emph{absolute}
 ontology levels to keep.
-See \link[HPOExplorer]{add_ont_lvl} for details.}
+See \link{add_ont_lvl} for details.}
 
 \item{remove_descendants}{Remove HPO terms that are descendants of a given
 ancestral HPO term. Ancestral terms be provided as a character vector of
 phenotype names (e.g. \code{c("Clinical course")}),
 HPO IDs (e.g. \code{"HP:0031797" }) or a mixture of the two.
-See \link[HPOExplorer]{add_ancestor} for details.}
+See \link{add_ancestor} for details.}
 
 \item{top_n}{Top number of most severe phenotypes to plot in heatmap.}
 

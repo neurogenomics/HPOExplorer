@@ -11,8 +11,7 @@ data.table
 \code{
 annot <- load_phenotype_to_genes(file = "phenotype.hpoa")
 annot <- annot[onset!="",]
-annot$onset_name <- harmonise_phenotypes(phenotypes = annot$onset,
-                                         as_hpo_ids = FALSE)
+annot$onset_name <- map_phenotypes(terms = annot$onset)
 counts <- dplyr::group_by(annot, disease_id) |>
   dplyr::summarise(hpo_ids=length(unique(hpo_id)),
                    onsets=length(unique(onset)))

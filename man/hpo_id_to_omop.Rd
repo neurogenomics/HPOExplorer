@@ -10,14 +10,14 @@ An object of class \code{data.table} (inherits from \code{data.frame}) with 1642
 \source{
 \code{
  hpo <- get_hpo()
- ids <- unique(hpo$id)
+ ids <- unique(hpo@terms)
  hpo_id_to_omop <- oard_query_api(ids = ids, workers=10)
- id_col="hpo_id"
+ input_col="hpo_id"
  data.table::setnames(hpo_id_to_omop,
                       toupper(gsub("concept_","OMOP_",names(hpo_id_to_omop)))
                       )
- data.table::setnames(hpo_id_to_omop, "OMOP_CODE",id_col)
- hpo_id_to_omop <- hpo_id_to_omop[,c(id_col,"OMOP_ID","OMOP_NAME"),
+ data.table::setnames(hpo_id_to_omop, "OMOP_CODE",input_col)
+ hpo_id_to_omop <- hpo_id_to_omop[,c(input_col,"OMOP_ID","OMOP_NAME"),
                                   with=FALSE]
  usethis::use_data(hpo_id_to_omop, overwrite = TRUE)
  }

@@ -1,3 +1,4 @@
+#' @describeIn add_ add_
 #' Add genes
 #'
 #' Add genes associated with each phenotype
@@ -19,8 +20,7 @@ add_genes <- function(phenos = NULL,
                       by = c("hpo_id","disease_id"),
                       gene_col = "gene_symbol",
                       all.x = FALSE,
-                      allow.cartesian = FALSE,
-                      verbose = TRUE){
+                      allow.cartesian = FALSE){
   # devoptera::args2vars(add_genes, reassign = TRUE)
 
   #### Prepare gene data ####
@@ -38,7 +38,7 @@ add_genes <- function(phenos = NULL,
   ## Genes driving celltype-symptom enrichment.
   if(!is.null(gene_col) &&
      gene_col %in% names(phenos)){
-    phenos <- unlist_col(dt=phenos,
+    phenos <- unlist_col(dat=phenos,
                          col=gene_col)
     data.table::setnames(phenos,gene_col,"gene_symbol")
     by <- unique(c(by,"gene_symbol"))
@@ -46,11 +46,9 @@ add_genes <- function(phenos = NULL,
   #### Ensure necessary columns are in phenos ####
   phenos <- add_hpo_id(phenos = phenos,
                        phenotype_to_genes = phenotype_to_genes,
-                       hpo = hpo,
-                       verbose = verbose)
+                       hpo = hpo)
   phenos <- add_disease(phenos = phenos,
-                        allow.cartesian = allow.cartesian,
-                        verbose = verbose)
+                        allow.cartesian = allow.cartesian)
   #### Add Gene col to data ####
   if(!"gene_symbol" %in% names(phenos)){
     by <- by[by %in% names(phenos)]

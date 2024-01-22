@@ -1,13 +1,8 @@
+#' @describeIn add_ add_
 #' Add disease genes
 #'
 #' Add genes that overlap between an HPO ID and an associated phenotype.
-#' @inheritParams make_network_object
-#' @inheritParams data.table::merge.data.table
-#' @returns phenos data.table with extra columns
-#'
 #' @export
-#' @importFrom data.table merge.data.table
-#' @importFrom utils data
 #' @examples
 #' \dontrun{
 #' phenos <- load_phenotype_to_genes()
@@ -30,7 +25,7 @@ add_disease_genes <- function(phenos,
     dannot <- load_phenotype_to_genes(file = "phenotype.hpoa")
     # annot <- annot[hpo_id %in% unique(phenos$hpo_id),]
     # #### Add hpo_id associations ####
-    # dgenes <- load_disease_genes()
+    # dgenes <- get_disease_genes()
     # dgenes <- data.table::merge.data.table(
     #   dgenes,
     #   annot[,c("disease_id","disease_name","hpo_id")],

@@ -1,3 +1,40 @@
+# HPOExplorer 1.0.0
+
+## New features
+
+* *MAJOR CHANGES*: Switched from `ontologyIndex` to `simona`, 
+  which seems to be better written and has extensive analysis functions.
+* *MAJOR CHANGES*: Moved most non-HPO data annotation to [`KnowledgeNets`](https://github.com/neurogenomics/KnowledgeNets)
+  - Functions to assess disease or phenotype prevalence (https://github.com/neurogenomics/RareDiseasePrioritisation/issues/34)
+    - `get_prevalence_orphanet`
+    - `get_prevalence_oard` 
+  - Functions to assess the existence of models for phenotypes or diseases (https://github.com/neurogenomics/RareDiseasePrioritisation/issues/33)  
+    - `map_upheno`
+    - `map_upheno_data`
+    - `map_upheno_plots`
+    - `map_upheno_heatmap`
+    - `map_upheno_rainplot`
+    - `map_upheno_scatterplot`
+    - `get_monarch`
+    - `get_monarch_models` 
+  
+* New exported functions:
+  - Helper functions: 
+    - `convert_hpo`
+  - Functions to map IDs across ontologies:
+    - `add_medgen`
+    - `add_omop` 
+    - `add_prevalence`
+    - `add_prevalence_report`
+* New internal functions:
+  - `dt_to_matrix`
+
+## Bug fixes
+
+* `add_mondo`
+  - Drastically improved cross-ontology mappings to MONDO (https://github.com/monarch-initiative/mondo/issues/6873)
+    - Add subfunction `map_mondo`
+   
 # HPOExplorer 0.99.12
 
 ## New features
@@ -11,7 +48,7 @@
   - `load_phenotypes_to_genes`: new attribute.
   - New exported helper function: `get_version`
   - New exported helper function: `clear_cache`
-* Add `make_hpo` internal function.
+* Add `make_ontology` internal function.
 * Ensure consistent function naming:
   - `create_node_data` --> `make_node_data` 
 * `get_gencc`
@@ -179,7 +216,7 @@
 * `hpo_tiers`:
   - Found lots of typos, outdated phenotype names, and mismatched HPO IDs.
     We through and manually re-curated all of these and checked that they match up with the 
-    `harmonise_phenotypes` output.
+    `map_phenotypes` output.
   - Add original `hpo_tiers` csv to *inst/extdata*.
 * Delete `get_hpo_id` function in favor of `get_hpo_id_direct` 
   which is more reliable and comprehensive.
@@ -219,7 +256,7 @@
   - `phenos_to_granges`
   - `add_onset`
   - `add_tier`
-  - `harmonise_phenotypes`
+  - `map_phenotypes`
   - `get_gene_lists`
   - `get_gene_lengths`
   - `list_onsets`

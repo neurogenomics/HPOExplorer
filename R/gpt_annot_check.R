@@ -27,8 +27,8 @@ gpt_annot_check <- function(annot = gpt_annot_read(),
   # prior_ids <- unique(HPOExplorer::hpo_modifiers$hpo_id)
   # new_ids <- unique(annot$hpo_id)
   # length(new_ids)/length(prior_ids)
-  # length(prior_ids)/length(hpo$id)
-  # length(new_ids)/length(hpo$id)
+  # length(prior_ids)/length(hpo@terms)
+  # length(new_ids)/length(hpo@terms)
   #### Check annotation consistency ####
   nm <- names(annot)[!grepl("hpo_name|justification|hpo_id",names(annot),
                         ignore.case = TRUE)]

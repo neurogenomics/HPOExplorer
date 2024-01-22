@@ -1,3 +1,4 @@
+#' @describeIn add_ add_
 #' Add information content
 #'
 #' Add a column containing the information content score  for each HPO ID.
@@ -6,22 +7,21 @@
 #' @returns phenos data.table with extra column
 #'
 #' @export
-#' @importFrom data.table :=
-#' @importFrom ontologyIndex get_term_info_content
+#' @import simona
 #' @examples
 #' phenos <- example_phenos()
 #' phenos2 <- add_info_content(phenos = phenos)
 add_info_content <- function(phenos,
-                             hpo = get_hpo(),
-                             verbose = TRUE){
+                             hpo = get_hpo()){
   info_content <- hpo_id <- NULL;
 
   if(!"info_content" %in% names(phenos)){
-    messager("Adding information_content scores.",v=verbose)
-    ic_dict <- ontologyIndex::get_term_info_content(
-      ontology = hpo,
-      term_sets = phenos$hpo_id,
-      patch_missing = FALSE)
+    messager("Adding information_content scores.")
+    if(!"IC" %in% names(hpo@elementMetadata)){
+      simona::mcols(hpo)$IC <- simona::term_IC(hpo)
+    }
+    ic_dict <- KGExplorer::get_ontology_dict(ont=hpo,
+                                             to = "IC")
     phenos[,info_content:=ic_dict[hpo_id]]
   }
   return(phenos)

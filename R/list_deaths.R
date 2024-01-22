@@ -1,3 +1,4 @@
+#' @describeIn map_ map_
 #' List age of death HPO terms
 #'
 #' List age of death phenotypes in the HPO.
@@ -10,22 +11,19 @@
 #' deaths <- list_deaths()
 list_deaths <- function(hpo = get_hpo(),
                         exclude = FALSE,# c("Miscarriage","Stillbirth","Prenatal death" )
-                        as_hpo_ids = FALSE,
-                        include_na = TRUE,
-                        verbose = TRUE){
-  # devoptera::args2vars(list_opts)
-
-  opts <- harmonise_phenotypes(phenotypes = names(hpo_dict(type = "AgeOfDeath")),
-                               hpo = hpo,
-                               as_hpo_ids = TRUE,
-                               keep_order = FALSE,
-                               invert = TRUE,
-                               verbose = verbose)
+                        to = c("name","id"),
+                        include_na = TRUE){
+  to <- match.arg(to)
+  opts <- map_phenotypes(terms = names(hpo_dict(type = "AgeOfDeath")),
+                         hpo = hpo,
+                         to="id",
+                         keep_order = FALSE,
+                         invert = TRUE)
   if(!is.null(exclude)){
     opts <- opts[!grepl(paste(exclude,collapse = "|"),opts,
                             ignore.case = TRUE)]
   }
-  if(isTRUE(as_hpo_ids)){
+  if(to=="id"){
     ids <- names(opts)
     if(isTRUE(include_na)){
       ids <- c(ids,NA)

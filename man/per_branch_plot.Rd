@@ -8,7 +8,8 @@ per_branch_plot(
   highlighted_branches,
   ancestor,
   hpo = get_hpo(),
-  background_branches = hpo$children[hpo$id[match(ancestor, hpo$name)]][[1]],
+  background_branches = simona::dag_children(hpo, term = map_phenotypes(terms = ancestor,
+    hpo = hpo, to = "id")),
   phenotype_to_genes = load_phenotype_to_genes()
 )
 }
@@ -19,13 +20,14 @@ to highlight \<vector\<string\>\>}
 \item{ancestor}{The ancestor to get all descendants of. If \code{NULL},
 returns the entirely ontology.}
 
-\item{hpo}{Human Phenotype Ontology object, loaded from \pkg{ontologyIndex}.}
+\item{hpo}{Human Phenotype Ontology object,
+loaded from \link[KGExplorer]{get_ontology}.}
 
 \item{background_branches}{HPO Ids of all branches to be shown
 (including highlighted) \<vector\<string\>\>}
 
 \item{phenotype_to_genes}{Output of
-\link[HPOExplorer]{load_phenotype_to_genes} mapping phenotypes
+\link{load_phenotype_to_genes} mapping phenotypes
 to gene annotations.}
 }
 \value{
@@ -44,8 +46,6 @@ Note that the highlighted branches must be also present in the background
 branches.
 }
 \examples{
-## Selecting child terms of
-## "Abnormality of the nervous system" as background branches
 plt <-  per_branch_plot(
     highlighted_branches = "Abnormality of nervous system physiology",
     ancestor = "Abnormality of the nervous system")

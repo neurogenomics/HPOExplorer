@@ -16,7 +16,7 @@ data.table
 annot <- HPOExplorer::load_phenotype_to_genes(3)
 annot <- annot[modifier!=""]
 parse_mod <- function(x){
-  unique(harmonise_phenotypes(strsplit(x,";")[[1]]))
+  unique(map_phenotypes(strsplit(x,";")[[1]]))
 }
 annot <- annot[,modifier_name:=lapply(modifier,parse_mod)][modifier!="",]
 annot <- annot[,.(modifier_name=unlist(modifier_name)),

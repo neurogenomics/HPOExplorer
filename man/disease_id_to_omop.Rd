@@ -10,7 +10,7 @@ An object of class \code{data.table} (inherits from \code{data.frame}) with 5354
 \source{
 \code{
  annot <- load_phenotype_to_genes(3)
- id_col <- "disease_id"
+ input_col <- "disease_id"
  ## NOTE: must keep batch_size=1 as the OARD API returns results only for
  ## the IDs it can map. This leads to a mismatch between the input and output
  ## which is exacerbated that the concept_id is automatically converted to
@@ -21,8 +21,8 @@ An object of class \code{data.table} (inherits from \code{data.frame}) with 5354
  data.table::setnames(disease_id_to_omop,
                 toupper(gsub("concept_","OMOP_",names(disease_id_to_omop)))
                       )
- data.table::setnames(disease_id_to_omop,"QUERY",id_col)
- disease_id_to_omop <- disease_id_to_omop[,c(id_col,"OMOP_ID","OMOP_NAME"),
+ data.table::setnames(disease_id_to_omop,"QUERY",input_col)
+ disease_id_to_omop <- disease_id_to_omop[,c(input_col,"OMOP_ID","OMOP_NAME"),
                                           with=FALSE]
  usethis::use_data(disease_id_to_omop, overwrite = TRUE)
  }
