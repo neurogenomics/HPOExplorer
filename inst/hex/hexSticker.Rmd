@@ -49,7 +49,7 @@ dir.create(dirname(filename), showWarnings = FALSE, recursive = TRUE)
 phenos <- HPOExplorer::make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
 phenoNet <- HPOExplorer::make_network_object(phenos = phenos,
                                 colour_var = "ontLvl_geneCount_ratio")
-# plt <- HPOExplorer::ggnetwork_plot(phenoNet = phenoNet,
+# plt <- HPOExplorer::make_network_plot(phenoNet = phenoNet,
 #                       colour_var = "ontLvl_geneCount_ratio",
 #                       colour_label = "ontLvl_genes", 
 #                       interactive = FALSE)

@@ -70,27 +70,16 @@ phenos <- make_phenos_dataframe(hpo = hpo,
                                 ancestor = ancestor)
 ```
 
+# Plot it
+Then we can make the plot with `make_network_plot`. Again you need to give the column name for the variable you want mapped to colour in the `colour_var` argument. We also need to provide a nice label for this column in `colour_label`. This will be used for the figure legend. 
 
-# Network object
-
-In order to generate the plot we need to coerse the phenos dataframe in to a network object. We use the [`network`](https://CRAN.R-project.org/package=network) package to do this. It is a way to represent the information about each individual phenotype, as well as the types of relationships between them, all in one data structure. 
-
-Once we have this adjacency matrix that represents the relationships between phenotypes, we use `make_network_object` to coerce it into a format suitable for plotting. Essentially this converts the matrix into a dataframe and gives (x,y) coordinates for each data point so that they can be plotted using ggplot. 
 
 The `colour_var` argument is where you choose the column name from the `phenos` dataframe which you want to be mapped to the colour of the nodes. In this case we created the family arbitrary variable of ontology level to number of associated genes ratio and its column name is `ontLvl_geneCount_ratio`. 
 
-```{r nw, warning = FALSE , message = FALSE}  
-phenoNet <- make_network_object(phenos = phenos,  
-                                hpo = hpo, 
-                                colour_var = "ontLvl_geneCount_ratio")
-```
-
-# Plot it
-Then we can make the plot with `ggnetwork_plot`. Again you need to give the column name for the variable you want mapped to colour in the `colour_var` argument. We also need to provide a nice label for this column in `colour_label`. This will be used for the figure legend. 
 
 ```{r plot, warning = FALSE, message = FALSE, fig.width = 9, fig.height = 7}
-plt <- ggnetwork_plot(phenoNet = phenoNet, 
-                      colour_var = "ontLvl_geneCount_ratio")
+plt <- make_network_plot(phenos = phenos, 
+                         colour_var = "ontLvl_geneCount_ratio")
 methods::show(plt)
 ```
 

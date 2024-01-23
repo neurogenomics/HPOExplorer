@@ -2,7 +2,7 @@
 #' Make phenotypes dataframe
 #'
 #' Make a dataframe from a subset of the Human Phenotype Ontology.
-#' @inheritParams ggnetwork_plot
+#' @inheritParams make_network_plot
 #' @inheritParams make_network_object
 #' @returns The HPO in dataframe format.
 #'
@@ -34,7 +34,7 @@ make_phenos_dataframe <- function(ancestor = NULL,
                                   interactive = TRUE,
                                   verbose = TRUE
                                   ){
-  hpo_id <- . <- NULL;
+  hpo_id <- . <- gene_symbol <- NULL;
 
   if(!is.null(ancestor)){
     IDx <- get_hpo_id_direct(term = ancestor,
@@ -50,7 +50,8 @@ make_phenos_dataframe <- function(ancestor = NULL,
            formatC(length(unique(descendants$hpo_name)),big.mark = ","),
            "descendents.")
   messager("Computing gene counts.")
-  phenos <- descendants[,.(geneCount=.N), by=c("hpo_id","hpo_name")]
+  phenos <- descendants[,.(geneCount=data.table::uniqueN(gene_symbol)),
+                        by=c("hpo_id","hpo_name")]
   #### Annotate phenotypes ####
   phenos <- annotate_phenos(phenos = phenos,
                             hpo = hpo,

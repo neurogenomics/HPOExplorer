@@ -42,8 +42,6 @@ hpo_to_matrix <- function(terms = NULL,
                           as_sparse = TRUE,
                           method = "pearson",
                           verbose = TRUE){
-  # devoptera::args2vars(hpo_to_matrix, reassign = TRUE)
-  requireNamespace("Matrix")
   hpo_id <- dummy <- NULL;
 
   messager("Constructing HPO gene x phenotype matrix.",v=verbose)
@@ -81,10 +79,10 @@ hpo_to_matrix <- function(terms = NULL,
   #### Format and return ####
   if(isTRUE(as_matrix) ||
      isTRUE(run_cor)){
-    X <- dt_to_matrix(dat=X_dt,
-                      omit_cols = meta_vars,
-                      rownames = rn,
-                      as_sparse = FALSE)
+    X <- KGExplorer::dt_to_matrix(dat=X_dt,
+                                  omit_cols = meta_vars,
+                                  rownames = rn,
+                                  as_sparse = FALSE)
     if(isTRUE(run_cor)){
       messager("Computing all parwise correlations.",v=verbose)
       X_cor <- stats::cor(X, method = method)

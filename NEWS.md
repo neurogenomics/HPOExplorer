@@ -274,7 +274,7 @@
 
 * Added a `NEWS.md` file to track changes to the package.
 * Implemented `rworkflows`
-* `ggnetwork_plot`: make interactive with `plotly`
+* `make_network_plot`: make interactive with `plotly`
 * Add simplifying wrapper functions:
   - `make_hoverboxes`
   - `make_phenos_dataframe`

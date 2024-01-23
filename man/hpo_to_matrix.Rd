@@ -47,10 +47,7 @@ with an extra column "gene_symbol".}
 \item{as_sparse}{Convert the data to a sparse matrix.
 Only used when \code{as_matrix=TRUE}.}
 
-\item{method}{a character string indicating which correlation
-    coefficient (or covariance) is to be computed.  One of
-    \code{"pearson"} (default), \code{"kendall"}, or \code{"spearman"}:
-    can be abbreviated.}
+\item{method}{Method to construct plot with.}
 
 \item{verbose}{Print messages.}
 }

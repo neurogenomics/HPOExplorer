@@ -12,16 +12,16 @@ gpt_annot_check_plot <- function(checks,
     data.table::setnames(c("metric","annotation","value"))
   check_df$metric <- factor(check_df$metric, levels = items, ordered = TRUE)
 
-  ggplot(check_df[annotation!="pheno_count"],
-         aes(x=annotation, y=value, fill=metric)) +
-    geom_bar(stat="identity") +
-    facet_grid(rows="metric",
+  ggplot2::ggplot(check_df[annotation!="pheno_count"],
+                  ggplot2::aes(x=annotation, y=value, fill=metric)) +
+    ggplot2::geom_bar(stat="identity") +
+    ggplot2::facet_grid(rows="metric",
                scales = "free_y",) +
-    theme_bw() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1),
-          strip.background = element_rect(fill = "grey20"),
-          strip.text = element_text(color = "white")) +
-    labs(title = "GPT annotation validation",
+    ggplot2::theme_bw() +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
+          strip.background = ggplot2::element_rect(fill = "grey20"),
+          strip.text = ggplot2::element_text(color = "white")) +
+    ggplot2::labs(title = "GPT annotation validation",
          x = "Annotation column",
          y = "Value",
          fill = "Metric")

@@ -6,9 +6,8 @@
 \usage{
 gpt_annot_plot(
   annot = gpt_annot_read(),
-  keep_ont_levels = seq(0, 5),
-  remove_descendants = c("Clinical course", "Sporadic", "Multifactorial inheritance",
-    "Inheritance modifier", "Phenotypic variability"),
+  keep_ont_levels = seq(3, 17),
+  keep_descendants = "Phenotypic abnormality",
   top_n = 50,
   verbose = TRUE
 )
@@ -20,11 +19,9 @@ gpt_annot_plot(
 ontology levels to keep.
 See \link{add_ont_lvl} for details.}
 
-\item{remove_descendants}{Remove HPO terms that are descendants of a given
-ancestral HPO term. Ancestral terms be provided as a character vector of
-phenotype names (e.g. \code{c("Clinical course")}),
-HPO IDs (e.g. \code{"HP:0031797" }) or a mixture of the two.
-See \link{add_ancestor} for details.}
+\item{keep_descendants}{Terms whose descendants should be kept 
+(including themselves).
+ Set to \code{NULL} (default) to skip this filtering step.}
 
 \item{top_n}{Top number of most severe phenotypes to plot in heatmap.}
 

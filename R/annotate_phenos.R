@@ -29,6 +29,11 @@ annotate_phenos <- function(phenos,
                             columns = list_columns(),
                             interactive = TRUE){
 
+  #### Add basic phenotype info ####
+  phenos <- add_hpo_id(phenos = phenos)
+  phenos <- add_hpo_name(phenos = phenos)
+  phenos <- add_hpo_definition(phenos = phenos)
+  phenos <- add_ancestor(phenos = phenos)
   #### Add ontology levels: absolute ####
   if(isTRUE(add_ont_lvl_absolute)){
     phenos <- add_ont_lvl(phenos = phenos,
@@ -46,8 +51,6 @@ annotate_phenos <- function(phenos,
     phenos <- add_info_content(phenos = phenos,
                                hpo = hpo)
   }
-  phenos <- add_hpo_definition(phenos = phenos)
-  phenos <- add_ancestor(phenos = phenos)
   if(isTRUE(add_ndiseases)){
     phenos <- add_ndisease(phenos = phenos)
   }

@@ -32,8 +32,10 @@ make_igraph_object <- function(phenos,
   g <- KGExplorer::ontology_to(ont = hpo,
                                terms = phenos$hpo_id,
                                to = "tbl_graph")
+  g <- KGExplorer::filter_graph(g,
+                                filters = list(name=phenos$hpo_id))
   pcols <- intersect(names(phenos), names(cols))
-  gcols <- KGExplorer:::get_graph_colnames(g)
+  gcols <- KGExplorer::get_graph_colnames(g)
   cols <- setdiff(pcols, gcols)
   if(length(cols)>0){
     phenos <- phenos[,cols,with=FALSE]

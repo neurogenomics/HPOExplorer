@@ -32,12 +32,9 @@ Imports:
     KGExplorer,
     simona,
     ggplot2, 
-    plotly, 
     utils,
     stats,
     methods,
-    network,
-    ggnetwork,
     tools,
     data.table,
     stringr,
@@ -51,14 +48,9 @@ Suggests:
     httr,
     jsonlite,
     testthat (>= 3.0.0),
-    pals,
-    Matrix,
-    MASS,
     scales,
-    htmlwidgets,
     piggyback,
     patchwork,
-    igraph,
     tidygraph
 Remotes:
   github::neurogenomics/KGExplorer

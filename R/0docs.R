@@ -73,6 +73,7 @@ NULL
 #' @inheritParams main
 #' @inheritParams make_
 #' @inheritParams get_
+#' @inheritParams filter_
 #' @inheritParams data.table::merge.data.table
 #' @returns Annotated data.
 #' @name add_
@@ -85,6 +86,7 @@ NULL
 #' Functions to filter data.table objects.
 #' @family filter_
 #' @inheritParams main
+#' @inheritParams KGExplorer::filter_
 #' @returns Filtered data.
 #' @name filter_
 NULL

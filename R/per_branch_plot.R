@@ -58,19 +58,19 @@ per_branch_plot <- function(highlighted_branches,
     levels = unique(phenos_per_branch$branch_name),
     ordered = TRUE)
   #### Plot ####
-  plt <- ggplot(phenos_per_branch,
-                aes(x = !!sym("n_phenos"),
-                    y = !!sym("branch_name"),
-                    color = !!sym("target"),
-                    fill = !!sym("target")
+  plt <- ggplot2::ggplot(phenos_per_branch,
+                         ggplot2::aes(x = !!ggplot2::sym("n_phenos"),
+                    y = !!ggplot2::sym("branch_name"),
+                    color = !!ggplot2::sym("target"),
+                    fill = !!ggplot2::sym("target")
                     )
                 )+
-    geom_col(width = .5) +
-    labs(x="Descendants (n)",
+    ggplot2::geom_col(width = .5) +
+    ggplot2::labs(x="Descendants (n)",
          y="hpo_name",
          fill="Group",
          color="Group") +
-    theme_bw()
+    ggplot2::theme_bw()
   #### Return ####
   return(plt)
 }

@@ -10,14 +10,10 @@
 #' @param colour_var The column from phenos that you wish
 #' to map to node colour.
 #' @param cols Columns to add to metadata of \link[ggnetwork]{ggnetwork} object.
-#' @inheritParams ggnetwork::fortify
-#' @inheritDotParams ggnetwork::fortify
 #' @returns A \link[ggnetwork]{ggnetwork} object.
 #'
 #' @export
-#' @import network
-#' @importFrom ggnetwork ggnetwork
-#' @importFrom data.table as.data.table
+#' @import data.table
 #' @examples
 #' phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
 #' phenoNet <- make_network_object(phenos = phenos,
@@ -52,17 +48,9 @@ make_network_object <- function(phenos,
   #### Return tbl_graph object if requested ####
   if(as == "tbl_graph")  return(g)
   #### Proceed to convert to ggnetwork object ####
-  messager("Creating ggnetwork object.")
-  phenoNet <- ggnetwork::fortify(g,
-                                 ...)
+  phenoNet <- KGExplorer::graph_to_ggnetwork(g,
+                                             ...)
   cols <- cols[cols %in% names(phenos)]
-  #### No longer needed as make_igraph_object() adds these columns ####
-  # for(col in cols){
-  #   #### Add metadata to phenoNet ####
-  #   phenoNet <- make_node_data(phenoNet = phenoNet,
-  #                              phenos = phenos,
-  #                              phenos_column = col)
-  # }
   phenoNet <- unique(phenoNet)
   return(phenoNet)
 }

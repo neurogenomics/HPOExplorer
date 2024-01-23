@@ -18,8 +18,9 @@
 #' @examples
 #' hpo <- get_hpo()
 get_hpo <- function(lvl,
-                    add_ancestors = TRUE,
+                    add_ancestors = 2,
                     force_new = FALSE,
+                    terms=NULL,
                     ...){
   save_dir <- KGExplorer::cache_dir(package = "HPOExplorer")
   file <- file.path(save_dir,"hpo.rds")
@@ -27,10 +28,13 @@ get_hpo <- function(lvl,
     ont <- KGExplorer::get_ontology(name = "hp",
                                     add_ancestors = add_ancestors,
                                     force_new = force_new,
+                                    terms = terms,
                                     ...)
     saveRDS(ont,file)
   } else {
     ont <- readRDS(file)
   }
+  ont <- KGExplorer::filter_ontology(ont = ont,
+                                     terms = terms)
   return(ont)
 }
