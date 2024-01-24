@@ -13,8 +13,7 @@
 #' @returns A named vector of HPO term descriptions.
 #'
 #' @export
-#' @importFrom stats setNames
-#' @importFrom data.table :=
+#' @import data.table
 #' @examples
 #' phenos <- example_phenos()
 #' phenos2 <- add_hpo_definition(phenos = phenos)

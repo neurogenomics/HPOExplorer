@@ -5,6 +5,8 @@
 #' @param code_dict Numerical encodings of annotation values.
 #' @param tiers_dict Numerical encodings of annotation column.
 #' @param keep_congenital_onset Which stages of congenital onset to keep.
+#' @param reset_tiers_dict Override \code{tiers_dict} values and set all values
+#' to 1. This will ensure that all annotations are unweighted.
 #' @inheritParams gpt_annot_check
 #' @returns Named list
 #'
@@ -34,6 +36,7 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
                                cancer=3,
                                reduced_fertility=4
                              ),
+                             reset_tiers_dict=FALSE,
                              keep_congenital_onset=head(names(code_dict),4)
                              ){
   # res <- gpt_annot_check(path="~/Downloads/gpt_hpo_annotations.csv")
@@ -41,6 +44,7 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
   severity_score_gpt <- congenital_onset <- hpo_name <- hpo_id <- NULL;
 
   d <- data.table::copy(annot)
+  if(isTRUE(reset_tiers_dict)) tiers_dict <- lapply(tiers_dict,function(x){1})
   #### Ensure only 1 row/hpo_name by simply taking the first ####
   if(isTRUE(remove_duplicates)){
     d <- d[,utils::head(.SD,1), by=c("hpo_id","hpo_name")]

@@ -7,9 +7,7 @@
 #' phenos <- example_phenos()
 #' phenos2 <- add_hpo_name(phenos=phenos)
 add_hpo_name <- function(phenos,
-                         hpo = get_hpo(),
-                         phenotype_to_genes = NULL) {
-
+                         hpo = get_hpo()) {
   if(!"hpo_name" %in% names(phenos)){
     messager("Adding HPO names.")
     phenos <- add_hpo_id(phenos)

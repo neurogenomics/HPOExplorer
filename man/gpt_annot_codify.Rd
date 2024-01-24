@@ -11,6 +11,7 @@ gpt_annot_codify(
   tiers_dict = list(intellectual_disability = 1, death = 1, impaired_mobility = 2,
     physical_malformations = 2, blindness = 3, sensory_impairments = 3, immunodeficiency
     = 3, cancer = 3, reduced_fertility = 4),
+  reset_tiers_dict = FALSE,
   keep_congenital_onset = head(names(code_dict), 4)
 )
 }
@@ -22,6 +23,9 @@ gpt_annot_codify(
 \item{code_dict}{Numerical encodings of annotation values.}
 
 \item{tiers_dict}{Numerical encodings of annotation column.}
+
+\item{reset_tiers_dict}{Override \code{tiers_dict} values and set all values
+to 1. This will ensure that all annotations are unweighted.}
 
 \item{keep_congenital_onset}{Which stages of congenital onset to keep.}
 }

@@ -21,8 +21,6 @@ add_genes <- function(phenos = NULL,
                       gene_col = "gene_symbol",
                       all.x = FALSE,
                       allow.cartesian = FALSE){
-  # devoptera::args2vars(add_genes, reassign = TRUE)
-
   #### Prepare gene data ####
   phenotype_to_genes <- data.table::copy(phenotype_to_genes)
   data.table::setnames(phenotype_to_genes,"disease_id","disease_id",
@@ -45,7 +43,6 @@ add_genes <- function(phenos = NULL,
   }
   #### Ensure necessary columns are in phenos ####
   phenos <- add_hpo_id(phenos = phenos,
-                       phenotype_to_genes = phenotype_to_genes,
                        hpo = hpo)
   phenos <- add_disease(phenos = phenos,
                         allow.cartesian = allow.cartesian)

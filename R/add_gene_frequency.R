@@ -21,6 +21,7 @@
 add_gene_frequency <- function(phenotype_to_genes = load_phenotype_to_genes(),
                                gene_frequency_threshold = NULL,
                                all.x = TRUE,
+                               allow.cartesian = FALSE,
                                verbose = TRUE){
 
   # devoptera::args2vars(add_gene_frequency)
@@ -28,8 +29,7 @@ add_gene_frequency <- function(phenotype_to_genes = load_phenotype_to_genes(),
   frequency <- gene_freq_name <- gene_freq_mean <-
     gene_freq_min <- gene_freq_max <- . <- NULL;
 
-  phenotype_to_genes <- add_hpo_id(phenos = phenotype_to_genes,
-                                   phenotype_to_genes= phenotype_to_genes)
+  phenotype_to_genes <- add_hpo_id(phenos = phenotype_to_genes)
   new_cols <- c("gene_freq_name","gene_freq_min",
                 "gene_freq_max","gene_freq_mean")
   if(!all(new_cols %in% names(phenotype_to_genes))){
@@ -41,7 +41,8 @@ add_gene_frequency <- function(phenotype_to_genes = load_phenotype_to_genes(),
       x = phenotype_to_genes,
       y = g2p[,c("hpo_id","gene_symbol","frequency"),with=FALSE],
       by = c("hpo_id","gene_symbol"),
-      all.x = all.x)
+      all.x = all.x,
+      allow.cartesian = allow.cartesian)
     #### Parse freq data ####
     phenotype_to_genes[,gene_freq_name:=mapply(frequency,FUN=function(f){
       if(grepl("HP:",f)) get_freq_dict()[f] else f })]
