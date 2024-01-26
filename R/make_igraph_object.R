@@ -33,7 +33,7 @@ make_igraph_object <- function(phenos,
                                terms = phenos$hpo_id,
                                to = "tbl_graph")
   g <- KGExplorer::filter_graph(g,
-                                filters = list(name=phenos$hpo_id))
+                                node_filters = list(name=phenos$hpo_id))
   pcols <- intersect(names(phenos), names(cols))
   gcols <- KGExplorer::get_graph_colnames(g)
   cols <- setdiff(pcols, gcols)
