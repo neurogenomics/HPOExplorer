@@ -4,10 +4,10 @@
 #' @param remove_duplicates Ensure only 1 row per phenotype.
 #' @param code_dict Numerical encodings of annotation values.
 #' @param tiers_dict Numerical encodings of annotation column.
-#' @param keep_congenital_onset Which stages of congenital onset to keep.
 #' @param reset_tiers_dict Override \code{tiers_dict} values and set all values
 #' to 1. This will ensure that all annotations are unweighted.
 #' @inheritParams gpt_annot_check
+#' @inheritParams KGExplorer::filter_dt
 #' @returns Named list
 #'
 #' @export
@@ -34,10 +34,11 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
                                sensory_impairments=3,
                                immunodeficiency=3,
                                cancer=3,
-                               reduced_fertility=4
+                               reduced_fertility=4,
+                               congenital_onset=1
                              ),
                              reset_tiers_dict=FALSE,
-                             keep_congenital_onset=head(names(code_dict),4)
+                             filters=list()
                              ){
   # res <- gpt_annot_check(path="~/Downloads/gpt_hpo_annotations.csv")
   # annot <- res$annot
@@ -57,9 +58,8 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
     .SDcols = unique(c(cols,"congenital_onset")),
     by=c("hpo_id","hpo_name")]
   #### Filter congenital onset ####
-  if(!is.null(keep_congenital_onset)){
-    d <- d[congenital_onset %in% keep_congenital_onset,]
-  }
+  d <- KGExplorer::filter_dt(dat = d,
+                             filters = filters)
   #### Compute max possible score ####
   max_score <-
     sum(

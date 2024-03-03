@@ -88,8 +88,7 @@ gpt_annot_plot <- function(annot = gpt_annot_read(),
 
   #### Histograms of severity scores in each HPO branch ####
   {
-    res_coded <- gpt_annot_codify(annot = annot,
-                                  keep_congenital_onset = NULL)
+    res_coded <- gpt_annot_codify(annot = annot)
     dat2 <- gpt_annot_melt(res_coded = res_coded)
     dat2 <- add_ancestor(dat2,
                          keep_descendants = keep_descendants)

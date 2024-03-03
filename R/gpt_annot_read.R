@@ -6,7 +6,7 @@
 #'  If \code{NULL}, will pull data from GitHub Releases instead.
 #' @param verbose Print messages.
 #' @source code {
-#' piggyback::pb_upload(file = "~/Downloads/gpt_hpo_annotations.csv",
+#' piggyback::pb_upload(file = "~/Downloads/gpt4_hpo_annotations.csv",
 #'                      repo = "neurogenomics/HPOExplorer",
 #'                      overwrite = TRUE,
 #'                      tag = "latest")
@@ -18,16 +18,14 @@
 #' annot <- gpt_annot_read()
 gpt_annot_read <- function(path = NULL,
                            verbose=TRUE){
-  # devoptera::args2vars(gpt_annot_read)
-
   pheno_count <- hpo_name <- hpo_id <- NULL;
 
   if(is.null(path)){
-    path <- paste0(
-      "https://github.com/neurogenomics/RareDiseasePrioritisation/raw/master/",
-      "gpt_annotations/gpt4_hpo_annotations.csv"
-    )
-    # path <- get_data("gpt_hpo_annotations.csv")
+    # path <- paste0(
+    #   "https://github.com/neurogenomics/RareDiseasePrioritisation/raw/master/",
+    #   "gpt_annotations/gpt4_hpo_annotations.csv"
+    # )
+    path <- get_data("gpt4_hpo_annotations.csv")
   }
   d <- data.table::fread(path, header = TRUE)
   data.table::setnames(d,"phenotype","hpo_name")

@@ -64,7 +64,8 @@ add_evidence(
   all.x = TRUE,
   allow.cartesian = FALSE,
   agg_by = c("disease_id", "gene_symbol"),
-  default_score = 1
+  default_score = 1,
+  ...
 )
 
 add_gene_frequency(
@@ -205,11 +206,10 @@ If >1 age of death is associated with the term,
 only the earliest age is considered.
 See \link{add_death} for details.}
 
-\item{all.x}{logical; if \code{TRUE}, then extra rows will be added to the
-output, one for each row in \code{x} that has no matching row in \code{y}.
-These rows will have 'NA's in those columns that are usually filled with values
-from \code{y}.  The default is \code{FALSE}, so that only rows with data from both
-\code{x} and \code{y} are included in the output.}
+\item{all.x}{logical; if \code{TRUE}, rows from \code{x} which have no matching row
+in \code{y} are included. These rows will have 'NA's in the columns that are usually
+filled with values from \code{y}. The default is \code{FALSE} so that only rows with
+data from both \code{x} and \code{y} are included in the output.}
 
 \item{allow.cartesian}{See \code{allow.cartesian} in \code{\link[data.table]{[.data.table}}.}
 
@@ -231,6 +231,31 @@ association to keep.}
 \item{default_score}{Default evidence score to
 apply to gene-disease associations that are present in the HPO annotations
 but don't have evidence scores in the GenCC annotations.}
+
+\item{...}{
+  Arguments passed on to \code{\link[KGExplorer:get_]{KGExplorer::get_gencc}}, \code{\link[KGExplorer:map_]{KGExplorer::map_mondo}}, \code{\link[KGExplorer:get_]{KGExplorer::get_ontology_levels}}
+  \describe{
+    \item{\code{save_dir}}{Directory to save a file to.}
+    \item{\code{dict}}{A named vector of evidence score mappings.
+See \href{https://thegencc.org/faq.html#validity-termsdelphi-survey}{here}
+for more information.}
+    \item{\code{dat}}{\link[data.table]{data.table} with genes.}
+    \item{\code{output_col}}{Column name of output IDs.}
+    \item{\code{to}}{Character vector of database(s) to map IDs to.
+When not \code{"mondo"}, can supply multiple alternative databases to map to
+ (e.g. \code{c("OMIM","Orphanet","DECIPHER")}).}
+    \item{\code{map_types}}{Mapping types to include.}
+    \item{\code{top_n}}{Top number of mappings to return per \code{top_by} grouping.
+Set to \code{NULL} to skip this step.}
+    \item{\code{add_name}}{Logical, if TRUE, add mondo name column.}
+    \item{\code{ont}}{An ontology of class \link[simona]{ontology_DAG}.}
+    \item{\code{terms}}{Term IDs to include. Can alternatively be an integer, 
+which will be used to randomly sample N terms from the data.}
+    \item{\code{remove_terms}}{Character vector of term IDs to exclude.}
+    \item{\code{reverse}}{If \code{TRUE}, ontology
+level numbers with be revered such that the level of the parent terms
+are larger than the child terms.}
+  }}
 
 \item{phenotype_to_genes}{Output of
 \link{load_phenotype_to_genes} mapping phenotypes
@@ -264,28 +289,6 @@ as opposed to a static local dataset.}
 
 \item{map_to}{Mapping outputs to include
 (from Mondo IDs to another database's IDs).}
-
-\item{...}{
-  Arguments passed on to \code{\link[KGExplorer:map_]{KGExplorer::map_mondo}}, \code{\link[KGExplorer:get_]{KGExplorer::get_ontology_levels}}
-  \describe{
-    \item{\code{dat}}{\link[data.table]{data.table} with genes.}
-    \item{\code{output_col}}{Column name of output IDs.}
-    \item{\code{to}}{Character vector of database(s) to map IDs to.
-When not \code{"mondo"}, can supply multiple alternative databases to map to
- (e.g. \code{c("OMIM","Orphanet","DECIPHER")}).}
-    \item{\code{map_types}}{Mapping types to include.}
-    \item{\code{top_n}}{Top number of mappings to return per \code{top_by} grouping.
-Set to \code{NULL} to skip this step.}
-    \item{\code{add_name}}{Logical, if TRUE, add mondo name column.}
-    \item{\code{save_dir}}{Directory to save cached data.}
-    \item{\code{ont}}{An ontology of class \link[simona]{ontology_DAG}.}
-    \item{\code{terms}}{Term IDs to include. Can alternatively be an integer, 
-which will be used to randomly sample N terms from the data.}
-    \item{\code{remove_terms}}{Character vector of term IDs to exclude.}
-    \item{\code{reverse}}{If \code{TRUE}, ontology
-level numbers with be revered such that the level of the parent terms
-are larger than the child terms.}
-  }}
 
 \item{pheno_ndiseases_threshold}{Filter phenotypes by the
 maximum number of diseases they are associated with.}

@@ -10,9 +10,9 @@ gpt_annot_codify(
   code_dict = c(never = 0, rarely = 1, varies = 2, often = 3, always = 4),
   tiers_dict = list(intellectual_disability = 1, death = 1, impaired_mobility = 2,
     physical_malformations = 2, blindness = 3, sensory_impairments = 3, immunodeficiency
-    = 3, cancer = 3, reduced_fertility = 4),
+    = 3, cancer = 3, reduced_fertility = 4, congenital_onset = 1),
   reset_tiers_dict = FALSE,
-  keep_congenital_onset = head(names(code_dict), 4)
+  filters = list()
 )
 }
 \arguments{
@@ -27,7 +27,9 @@ gpt_annot_codify(
 \item{reset_tiers_dict}{Override \code{tiers_dict} values and set all values
 to 1. This will ensure that all annotations are unweighted.}
 
-\item{keep_congenital_onset}{Which stages of congenital onset to keep.}
+\item{filters}{A named list, where each element in the list is the name of 
+a column in the data, and the vector within each element represents the 
+values to include in the final data.}
 }
 \value{
 Named list

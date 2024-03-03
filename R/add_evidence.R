@@ -22,6 +22,7 @@
 #' but don't have evidence scores in the GenCC annotations.
 #' @inheritParams make_network_object
 #' @inheritParams data.table::merge.data.table
+#' @inheritDotParams KGExplorer::get_gencc
 #' @returns phenos data.table with extra columns:
 #' \itemize{
 #' \item{"evidence_score_min": }{Minimum evidence score.}
@@ -30,7 +31,7 @@
 #' }
 #'
 #' @export
-#' @importFrom data.table merge.data.table
+#' @import data.table
 #' @examples
 #' phenos <- load_phenotype_to_genes()
 #' phenos2 <- add_evidence(phenos = phenos)
@@ -40,7 +41,8 @@ add_evidence <- function(phenos,
                          allow.cartesian = FALSE,
                          agg_by = c("disease_id",
                                     "gene_symbol"),
-                         default_score = 1){
+                         default_score = 1,
+                         ...){
   evidence_score <- evidence_score_mean <- NULL;
 
   if(!all(c("evidence_score_mean") %in% names(phenos))){
@@ -48,7 +50,8 @@ add_evidence <- function(phenos,
     phenos <- add_disease(phenos = phenos,
                           all.x = all.x,
                           allow.cartesian = allow.cartesian)
-    annot <- get_gencc(agg_by = agg_by)
+    annot <- KGExplorer::get_gencc(agg_by = agg_by,
+                                   ...)
     #### Merge with input data ####
     phenos <- data.table::merge.data.table(
       x = phenos,

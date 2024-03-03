@@ -32,6 +32,7 @@ For example:
   \describe{
     \item{\code{save_dir}}{Directory to save a file to.}
     \item{\code{name}}{\itemize{
+\item{<...>}{Any ontology name from \link[KGExplorer]{get_ols_options}}
 \item{"mondo"}{
 Import the \href{https://mondo.monarchinitiative.org/}{Mondo} ontology.
 \href{https://github.com/monarch-initiative/mondo/release}{
@@ -41,7 +42,6 @@ Import the \href{https://hpo.jax.org/app/}{Human Phenotype Ontology}.
 \href{https://github.com/obophenotype/human-phenotype-ontology/release}{
 GitHub.}}
 }}
-    \item{\code{filetype}}{File type to search for.}
     \item{\code{method}}{Compute ontology levels using:
 \itemize{
  \item{"height" (default)} \link[simona]{dag_height}.

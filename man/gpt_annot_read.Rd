@@ -5,7 +5,7 @@
 \title{Read annotations from GPT}
 \source{
 code {
-piggyback::pb_upload(file = "~/Downloads/gpt_hpo_annotations.csv",
+piggyback::pb_upload(file = "~/Downloads/gpt4_hpo_annotations.csv",
 repo = "neurogenomics/HPOExplorer",
 overwrite = TRUE,
 tag = "latest")
