@@ -1,7 +1,7 @@
 <img src='https://github.com/neurogenomics/HPOExplorer/raw/master/inst/hex/hex.png' title='Hex sticker for HPOExplorer' height='300'><br>
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
-[![](https://img.shields.io/badge/devel%20version-0.99.12-black.svg)](https://github.com/neurogenomics/HPOExplorer)
+[![](https://img.shields.io/badge/devel%20version-1.0.0-black.svg)](https://github.com/neurogenomics/HPOExplorer)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/HPOExplorer.svg)](https://github.com/neurogenomics/HPOExplorer)
 [![](https://img.shields.io/github/last-commit/neurogenomics/HPOExplorer.svg)](https://github.com/neurogenomics/HPOExplorer/commits/master)
 <br> [![R build
@@ -13,7 +13,7 @@ status](https://github.com/neurogenomics/HPOExplorer/workflows/rworkflows/badge.
 Authors: <i>Brian Schilder, Robert Gordon-Smith, Nathan Skene</i>  
 </h4>
 <h4>  
-Most recent update: <i>Dec-02-2023</i>  
+Most recent update: <i>Mar-08-2024</i>  
 </h4>
 
 ## Intro
@@ -63,9 +63,9 @@ Request](https://github.com/neurogenomics/HPOExplorer/pulls).
 Within R:
 
 ``` r
-if (!require("remotes")) install.packages("remotes")
-if (!require("HPOExplorer")) remotes::install_github("neurogenomics/HPOExplorer")
+if(!require("BiocManager")) install.packages("BiocManager")
 
+BiocManager::install("neurogenomics/HPOExplorer")
 library(HPOExplorer)
 ```
 
@@ -105,7 +105,7 @@ utils::sessionInfo()
 
     ## R version 4.3.1 (2023-06-16)
     ## Platform: aarch64-apple-darwin20 (64-bit)
-    ## Running under: macOS Sonoma 14.1.1
+    ## Running under: macOS Sonoma 14.3.1
     ## 
     ## Matrix products: default
     ## BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
@@ -121,21 +121,21 @@ utils::sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] gtable_0.3.4        jsonlite_1.8.7      renv_1.0.3         
+    ##  [1] gtable_0.3.4        jsonlite_1.8.8      renv_1.0.3         
     ##  [4] dplyr_1.1.4         compiler_4.3.1      BiocManager_1.30.22
-    ##  [7] tidyselect_1.2.0    rvcheck_0.2.1       scales_1.2.1       
-    ## [10] yaml_2.3.7          fastmap_1.1.1       here_1.0.1         
+    ##  [7] tidyselect_1.2.0    rvcheck_0.2.1       scales_1.3.0       
+    ## [10] yaml_2.3.8          fastmap_1.1.1       here_1.0.1         
     ## [13] ggplot2_3.4.4       R6_2.5.1            generics_0.1.3     
-    ## [16] knitr_1.45          yulab.utils_0.1.0   tibble_3.2.1       
-    ## [19] desc_1.4.2          dlstats_0.1.7       rprojroot_2.0.4    
+    ## [16] knitr_1.45          yulab.utils_0.1.4   tibble_3.2.1       
+    ## [19] desc_1.4.3          dlstats_0.1.7       rprojroot_2.0.4    
     ## [22] munsell_0.5.0       pillar_1.9.0        RColorBrewer_1.1-3 
-    ## [25] rlang_1.1.2         utf8_1.2.4          cachem_1.0.8       
-    ## [28] badger_0.2.3        xfun_0.41           fs_1.6.3           
-    ## [31] memoise_2.0.1.9000  cli_3.6.1           magrittr_2.0.3     
-    ## [34] rworkflows_1.0.2    digest_0.6.33       grid_4.3.1         
-    ## [37] rstudioapi_0.15.0   lifecycle_1.0.4     vctrs_0.6.4        
-    ## [40] data.table_1.14.8   evaluate_0.23       glue_1.6.2         
-    ## [43] fansi_1.0.5         colorspace_2.1-0    rmarkdown_2.25     
+    ## [25] rlang_1.1.3         utf8_1.2.4          cachem_1.0.8       
+    ## [28] badger_0.2.3        xfun_0.42           fs_1.6.3           
+    ## [31] memoise_2.0.1.9000  cli_3.6.2           magrittr_2.0.3     
+    ## [34] rworkflows_1.0.1    digest_0.6.34       grid_4.3.1         
+    ## [37] rstudioapi_0.15.0   lifecycle_1.0.4     vctrs_0.6.5        
+    ## [40] data.table_1.15.0   evaluate_0.23       glue_1.7.0         
+    ## [43] fansi_1.0.6         colorspace_2.1-0    rmarkdown_2.25     
     ## [46] tools_4.3.1         pkgconfig_2.0.3     htmltools_0.5.7
 
 </details>
