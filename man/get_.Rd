@@ -6,7 +6,14 @@
 \alias{get_hpo_id_direct}
 \title{Get functions}
 \usage{
-get_hpo(lvl, add_ancestors = 2, force_new = FALSE, terms = NULL, ...)
+get_hpo(
+  lvl,
+  add_ancestors = 2,
+  force_new = FALSE,
+  terms = NULL,
+  method = "github",
+  ...
+)
 
 get_hpo_id_direct(term, hpo = get_hpo())
 }
@@ -27,6 +34,8 @@ For example:
 
 \item{terms}{A subset of HPO IDs to assign Tiers to.}
 
+\item{method}{Method to construct plot with.}
+
 \item{...}{
   Arguments passed on to \code{\link[KGExplorer:get_]{KGExplorer::get_ontology}}
   \describe{
@@ -41,11 +50,6 @@ GitHub.}}.
 Import the \href{https://hpo.jax.org/app/}{Human Phenotype Ontology}.
 \href{https://github.com/obophenotype/human-phenotype-ontology/release}{
 GitHub.}}
-}}
-    \item{\code{method}}{Compute ontology levels using:
-\itemize{
- \item{"height" (default)} \link[simona]{dag_height}.
- \item{"depth"} \link[simona]{dag_depth}.
 }}
     \item{\code{add_metadata}}{Add metadata to the resulting ontology object.}
     \item{\code{add_n_edges}}{Add the number of edges (connections) for each term.}

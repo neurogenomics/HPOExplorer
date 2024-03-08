@@ -26,16 +26,16 @@
 #' or a phenotype x phenotype matrix if \code{run_cor=TRUE}.
 #'
 #' @export
-#' @importFrom data.table dcast.data.table copy setnafill :=
+#' @import data.table
 #' @importFrom stats terms as.formula cor
 #' @examples
 #' phenos <- example_phenos()
 #' X <- hpo_to_matrix(terms = phenos$hpo_id)
 hpo_to_matrix <- function(terms = NULL,
                           phenotype_to_genes = load_phenotype_to_genes(),
-                          formula = "gene_symbol ~ hpo_name",
+                          formula = "gene_symbol ~ hpo_id",
                           fun.aggregate = mean,
-                          value.var = "evidence_score_mean",
+                          value.var = "evidence_score_sum",
                           fill = 0,
                           run_cor = FALSE,
                           as_matrix = TRUE,

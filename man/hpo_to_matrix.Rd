@@ -7,9 +7,9 @@
 hpo_to_matrix(
   terms = NULL,
   phenotype_to_genes = load_phenotype_to_genes(),
-  formula = "gene_symbol ~ hpo_name",
+  formula = "gene_symbol ~ hpo_id",
   fun.aggregate = mean,
-  value.var = "evidence_score_mean",
+  value.var = "evidence_score_sum",
   fill = 0,
   run_cor = FALSE,
   as_matrix = TRUE,

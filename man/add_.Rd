@@ -60,7 +60,7 @@ add_disease_genes(phenos, all.x = TRUE, verbose = TRUE)
 
 add_evidence(
   phenos,
-  keep_evidence = NULL,
+  evidence_score_threshold = NULL,
   all.x = TRUE,
   allow.cartesian = FALSE,
   agg_by = c("disease_id", "gene_symbol"),
@@ -96,6 +96,7 @@ add_gpt_annotations(
 
 add_hpo_definition(
   phenos,
+  hpo = get_hpo(),
   line_length = FALSE,
   use_api = FALSE,
   verbose = TRUE
@@ -225,8 +226,8 @@ here for column descriptions}.}
 
 \item{verbose}{Print messages.}
 
-\item{keep_evidence}{The evidence scores of each gene-disease
-association to keep.}
+\item{evidence_score_threshold}{The minimum threshold of mean
+evidence scores of each gene-phenotype association to keep.}
 
 \item{default_score}{Default evidence score to
 apply to gene-disease associations that are present in the HPO annotations

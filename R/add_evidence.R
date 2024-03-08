@@ -15,8 +15,8 @@
 #' \item{GENCC:100006 }{"Refuted Evidence" (evidence_score=0)}
 #' \item{GENCC:100008 }{"No Known Disease Relationship" (evidence_score=0)}
 #' }
-#' @param keep_evidence The evidence scores of each gene-disease
-#' association to keep.
+#' @param evidence_score_threshold The minimum threshold of mean
+#' evidence scores of each gene-phenotype association to keep.
 #' @param default_score Default evidence score to
 #' apply to gene-disease associations that are present in the HPO annotations
 #' but don't have evidence scores in the GenCC annotations.
@@ -36,7 +36,7 @@
 #' phenos <- load_phenotype_to_genes()
 #' phenos2 <- add_evidence(phenos = phenos)
 add_evidence <- function(phenos,
-                         keep_evidence = NULL,
+                         evidence_score_threshold = NULL,
                          all.x = TRUE,
                          allow.cartesian = FALSE,
                          agg_by = c("disease_id",
@@ -62,11 +62,11 @@ add_evidence <- function(phenos,
       allow.cartesian = allow.cartesian)
   }
   #### Filter ####
-  if(!is.null(keep_evidence)){
+  if(!is.null(evidence_score_threshold)){
     if("evidence_score_mean" %in% names(phenos)){
-      phenos <- phenos[evidence_score_mean %in% keep_evidence,]
+      phenos <- phenos[evidence_score_mean>=evidence_score_threshold,]
     } else if("evidence_score" %in% names(phenos)){
-      phenos <- phenos[evidence_score %in% keep_evidence,]
+      phenos <- phenos[evidence_score>=evidence_score_threshold,]
     }
   }
   #### Set default score ####

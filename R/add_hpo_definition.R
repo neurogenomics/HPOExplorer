@@ -18,6 +18,7 @@
 #' phenos <- example_phenos()
 #' phenos2 <- add_hpo_definition(phenos = phenos)
 add_hpo_definition <- function(phenos,
+                               hpo = get_hpo(),
                                line_length = FALSE,
                                use_api = FALSE,
                                verbose = TRUE) {
@@ -29,7 +30,8 @@ add_hpo_definition <- function(phenos,
                                            line_length = line_length)
   } else {
     definitions <- get_term_definition_data(term = phenos$hpo_id,
-                                            line_length = line_length)
+                                            line_length = line_length,
+                                            hpo = hpo)
   }
   phenos[,definition:=definitions[hpo_id]]
   return(phenos)

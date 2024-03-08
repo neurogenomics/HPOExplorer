@@ -21,6 +21,8 @@ get_hpo <- function(lvl,
                     add_ancestors = 2,
                     force_new = FALSE,
                     terms=NULL,
+                    ## rols imports the international version for some reason
+                    method="github",
                     ...){
   save_dir <- KGExplorer::cache_dir(package = "HPOExplorer")
   file <- file.path(save_dir,"hpo.rds")
@@ -29,6 +31,7 @@ get_hpo <- function(lvl,
                                     add_ancestors = add_ancestors,
                                     force_new = force_new,
                                     terms = terms,
+                                    method = method,
                                     ...)
     saveRDS(ont,file)
   } else {
