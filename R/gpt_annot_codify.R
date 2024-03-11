@@ -40,9 +40,7 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
                              reset_tiers_dict=FALSE,
                              filters=list()
                              ){
-  # res <- gpt_annot_check(path="~/Downloads/gpt_hpo_annotations.csv")
-  # annot <- res$annot
-  severity_score_gpt <- congenital_onset <- hpo_name <- hpo_id <- NULL;
+  severity_score_gpt <- hpo_name <- NULL;
 
   d <- data.table::copy(annot)
   if(isTRUE(reset_tiers_dict)) tiers_dict <- lapply(tiers_dict,function(x){1})
@@ -70,12 +68,14 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
     unlist(code_dict[tolower(x)])}),.SDcols = cols, by=c("hpo_id","hpo_name")]
   d_weighted <- data.table::as.data.table(
     lapply(stats::setNames(cols,cols),
-           function(co){d_coded[[co]]*
-               ((max(unlist(tiers_dict))+1)-tiers_dict[[co]]) })
-  )[,hpo_id:=d_coded$hpo_id][,severity_score_gpt:=(
+           function(co){
+           d_coded[[co]]*
+               ((max(unlist(tiers_dict))+1)-tiers_dict[[co]])
+             })
+  )[,hpo_name:=d_coded$hpo_name][,severity_score_gpt:=(
     rowSums(.SD,na.rm = TRUE)/max_score*100),
                              .SDcols=cols][d_coded[,-cols,with=FALSE],
-                                           on="hpo_id"] |>
+                                           on="hpo_name"] |>
     data.table::setorderv("severity_score_gpt",-1, na.last = TRUE) |>
     unique()
   #### Order hpo_names by severity_score_gpt #####

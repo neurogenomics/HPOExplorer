@@ -70,7 +70,7 @@ plot_evidence <- function(metric="evidence_score_sum",
     evidence_score_sum_min=min(get(metric),na.rm=TRUE),
     evidence_score_sum_max=max(get(metric),na.rm=TRUE),
     evidence_score_sum_mean=mean(get(metric),na.rm=TRUE),
-    evidence_score_sum_sd=sd(get(metric),na.rm=TRUE)),
+    evidence_score_sum_sd=stats::sd(get(metric),na.rm=TRUE)),
     by=c("hpo_id","gene_symbol")]|>
     data.table::setorderv(metric_sd, -1,na.last = TRUE)
   h5 <- plot_hist(gcc_phenotype_agg_sd[!is.na(get(metric_sd))],
