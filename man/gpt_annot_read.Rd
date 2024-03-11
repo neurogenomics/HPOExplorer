@@ -3,20 +3,27 @@
 \name{gpt_annot_read}
 \alias{gpt_annot_read}
 \title{Read annotations from GPT}
-\source{
-code {
-piggyback::pb_upload(file = "~/Downloads/gpt4_hpo_annotations.csv",
-repo = "neurogenomics/HPOExplorer",
-overwrite = TRUE,
-tag = "latest")
-}
-}
 \usage{
-gpt_annot_read(path = NULL, verbose = TRUE)
+gpt_annot_read(
+  save_path = file.path(KGExplorer::cache_dir(package = "HPOExplorer"),
+    "gpt4_hpo_annotations.csv"),
+  force_new = FALSE,
+  hpo = get_hpo(),
+  include_nogenes = TRUE,
+  verbose = TRUE
+)
 }
 \arguments{
-\item{path}{Path to annotations CSV file.
-If \code{NULL}, will pull data from GitHub Releases instead.}
+\item{save_path}{Path to annotations CSV file.
+If the file does not exist, the data will be downloaded from GitHub.}
+
+\item{force_new}{If \code{TRUE}, the data will be downloaded from GitHub
+even if it already exists locally.}
+
+\item{hpo}{Human Phenotype Ontology object,
+loaded from \link[KGExplorer]{get_ontology}.}
+
+\item{include_nogenes}{Include phenotypes with no associated genes.}
 
 \item{verbose}{Print messages.}
 }

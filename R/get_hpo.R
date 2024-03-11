@@ -9,7 +9,7 @@
 #' Note that the maximum ontology level depth in the 2016 version was 14,
 #' whereas in the 2023 version the maximum ontology level depth is 16
 #'  (due to an expansion of the HPO).
-#' @inheritParams KGExplorer::add_ancestors
+#' @inheritParams KGExplorer::get_ontology
 #' @inheritDotParams KGExplorer::get_ontology
 #' @returns \link[simona]{ontology_DAG} object.
 #'

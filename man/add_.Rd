@@ -61,6 +61,7 @@ add_disease_genes(phenos, all.x = TRUE, verbose = TRUE)
 add_evidence(
   phenos,
   evidence_score_threshold = NULL,
+  evidence_score_threshold_metric = "evidence_score_sum",
   all.x = TRUE,
   allow.cartesian = FALSE,
   agg_by = c("disease_id", "gene_symbol"),
@@ -102,7 +103,7 @@ add_hpo_definition(
   verbose = TRUE
 )
 
-add_hpo_id(phenos, hpo = get_hpo())
+add_hpo_id(phenos, hpo = get_hpo(), ignore_case = TRUE)
 
 add_hpo_name(phenos, hpo = get_hpo())
 
@@ -229,6 +230,9 @@ here for column descriptions}.}
 \item{evidence_score_threshold}{The minimum threshold of mean
 evidence scores of each gene-phenotype association to keep.}
 
+\item{evidence_score_threshold_metric}{The metric to use for filtering with
+\code{evidence_score_threshold}.}
+
 \item{default_score}{Default evidence score to
 apply to gene-disease associations that are present in the HPO annotations
 but don't have evidence scores in the GenCC annotations.}
@@ -250,8 +254,7 @@ When not \code{"mondo"}, can supply multiple alternative databases to map to
 Set to \code{NULL} to skip this step.}
     \item{\code{add_name}}{Logical, if TRUE, add mondo name column.}
     \item{\code{ont}}{An ontology of class \link[simona]{ontology_DAG}.}
-    \item{\code{terms}}{Term IDs to include. Can alternatively be an integer, 
-which will be used to randomly sample N terms from the data.}
+    \item{\code{terms}}{A vector of ontology term IDs.}
     \item{\code{remove_terms}}{Character vector of term IDs to exclude.}
     \item{\code{reverse}}{If \code{TRUE}, ontology
 level numbers with be revered such that the level of the parent terms
@@ -285,6 +288,8 @@ If \code{y} has no key columns, this defaults to the key of \code{x}.}
 
 \item{use_api}{Get definitions from the HPO API,
 as opposed to a static local dataset.}
+
+\item{ignore_case}{Ignore case when mapping terms.}
 
 \item{input_col}{Name of the column containing the disease or phenotype IDs.}
 

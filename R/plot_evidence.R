@@ -81,8 +81,8 @@ plot_evidence <- function(metric="evidence_score_sum",
   pw <- patchwork::wrap_plots(h1,h2,h3,h4,h5, ncol = 1)
   if(isTRUE(show_plot)) methods::show(pw)
 
-  KGExplorer::plot_save(plt = pw,
-                        path = save_path,
+  KGExplorer::plot_save(plt=pw,
+                        save_path=save_path,
                         height=height,
                         width=width)
   return(
