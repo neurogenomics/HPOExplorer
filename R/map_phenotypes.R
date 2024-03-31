@@ -21,11 +21,15 @@ map_phenotypes <- function(terms,
                            to=c("name","id"),
                            keep_order = TRUE,
                            ignore_case = TRUE,
+                           ignore_char = eval(formals(
+                               KGExplorer::map_ontology_terms
+                               )$ignore_char),
                            invert = FALSE){
   KGExplorer::map_ontology_terms(terms = terms,
                                  ont = hpo,
                                  to = to,
                                  keep_order = keep_order,
                                  ignore_case = ignore_case,
+                                 ignore_char = ignore_char,
                                  invert = invert)
 }

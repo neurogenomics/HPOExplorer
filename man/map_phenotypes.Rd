@@ -10,6 +10,7 @@ map_phenotypes(
   to = c("name", "id"),
   keep_order = TRUE,
   ignore_case = TRUE,
+  ignore_char = eval(formals(KGExplorer::map_ontology_terms)$ignore_char),
   invert = FALSE
 )
 }
@@ -30,6 +31,9 @@ If \code{FALSE}, return a named list of only the unique \code{terms},
 sometimes in a different order.}
 
 \item{ignore_case}{Ignore case when mapping terms.}
+
+\item{ignore_char}{A character vector of characters to ignore when 
+mapping terms.}
 
 \item{invert}{Invert the keys/values of the dictionary,
 such that the key becomes the values (and vice versa).}

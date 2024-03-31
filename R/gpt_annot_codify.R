@@ -21,21 +21,20 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
                              code_dict = c(
                                "never"=0,
                                "rarely"=1,
-                               "varies"=2,
-                               "often"=3,
-                               "always"=4
+                               "often"=2,
+                               "always"=3
                              ),
                              tiers_dict=list(
-                               intellectual_disability=1,
-                               death=1,
-                               impaired_mobility=2,
-                               physical_malformations=2,
-                               blindness=3,
+                               intellectual_disability=5,
+                               death=5,
+                               impaired_mobility=4,
+                               physical_malformations=3,
+                               blindness=4,
                                sensory_impairments=3,
                                immunodeficiency=3,
                                cancer=3,
-                               reduced_fertility=4,
-                               congenital_onset=1
+                               reduced_fertility=1,
+                               congenital_onset=4
                              ),
                              reset_tiers_dict=FALSE,
                              filters=list()
@@ -62,15 +61,14 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
   max_score <-
     sum(
       max(code_dict, na.rm = TRUE) *
-        (max(unlist(tiers_dict))+1) - unlist(tiers_dict)
+      (max(unlist(tiers_dict))*length(tiers_dict))
     )
   d_coded <- d[,lapply(.SD,FUN=function(x){
     unlist(code_dict[tolower(x)])}),.SDcols = cols, by=c("hpo_id","hpo_name")]
   d_weighted <- data.table::as.data.table(
     lapply(stats::setNames(cols,cols),
            function(co){
-           d_coded[[co]]*
-               ((max(unlist(tiers_dict))+1)-tiers_dict[[co]])
+           d_coded[[co]]*tiers_dict[[co]]
              })
   )[,hpo_name:=d_coded$hpo_name][,severity_score_gpt:=(
     rowSums(.SD,na.rm = TRUE)/max_score*100),

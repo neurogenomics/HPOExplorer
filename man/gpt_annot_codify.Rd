@@ -7,10 +7,10 @@
 gpt_annot_codify(
   annot = gpt_annot_read(),
   remove_duplicates = TRUE,
-  code_dict = c(never = 0, rarely = 1, varies = 2, often = 3, always = 4),
-  tiers_dict = list(intellectual_disability = 1, death = 1, impaired_mobility = 2,
-    physical_malformations = 2, blindness = 3, sensory_impairments = 3, immunodeficiency
-    = 3, cancer = 3, reduced_fertility = 4, congenital_onset = 1),
+  code_dict = c(never = 0, rarely = 1, often = 2, always = 3),
+  tiers_dict = list(intellectual_disability = 5, death = 5, impaired_mobility = 4,
+    physical_malformations = 3, blindness = 4, sensory_impairments = 3, immunodeficiency
+    = 3, cancer = 3, reduced_fertility = 1, congenital_onset = 4),
   reset_tiers_dict = FALSE,
   filters = list()
 )

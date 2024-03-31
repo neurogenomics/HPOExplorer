@@ -15,15 +15,12 @@
 #' @export
 #' @examples
 #' gpt_annot <- gpt_annot_read()
-gpt_annot_read <- function(save_path=file.path(
-  KGExplorer::cache_dir(package = "HPOExplorer"),
-  "gpt4_hpo_annotations.csv"
-),
-
-phenotype_to_genes = load_phenotype_to_genes(),
+gpt_annot_read <- function(save_path=file.path(KGExplorer::cache_dir(package="HPOExplorer"),
+                                               "gpt4_hpo_annotations.csv"),
+                           phenotype_to_genes = load_phenotype_to_genes(),
                            force_new=FALSE,
-hpo=get_hpo(),
-include_nogenes=TRUE,
+                           hpo=get_hpo(),
+                           include_nogenes=TRUE,
                            verbose=TRUE){
   pheno_count <- hpo_name <- hpo_id <- phenotype <- NULL;
 
@@ -35,10 +32,19 @@ include_nogenes=TRUE,
     utils::download.file(path, save_path)
     # path <- get_data("gpt4_hpo_annotations.csv")
   }
-  d <- data.table::fread(save_path, header = TRUE)
-  d <- d[!is.na(phenotype)]
-  data.table::setnames(d,"phenotype","hpo_name")
-  d <- add_hpo_id(d, hpo = hpo)
+  {
+    d <- data.table::fread(save_path, header = TRUE)
+    d <- d[!is.na(phenotype)]
+    data.table::setnames(d,"phenotype","hpo_name")
+    d <- add_hpo_id(d, hpo = hpo)
+  }
+  {
+    #### Add subset with fixed hpo_names ####
+    # https://github.com/neurogenomics/RareDiseasePrioritisation/issues/31#issuecomment-1989079044
+    fixmap <- data.table::fread("https://github.com/neurogenomics/RareDiseasePrioritisation/files/14562614/mismatched_hpo_names_fixed.csv")
+    d <- rbind(d[!hpo_name %in% unique(fixmap$hpo_name)],
+               fixmap, fill=TRUE)
+  }
   #### Check phenotype names ####
   d <- merge(d,
              unique(phenotype_to_genes[,c("hpo_id","hpo_name")]),

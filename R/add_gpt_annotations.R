@@ -29,8 +29,11 @@ add_gpt_annotations <- function(phenos,
   if(all(annot_cols %in% names(phenos))){
     messager("Ancestor columns already present. Skipping.")
   }else {
+    ## According to the latest GPT annotations (3-15-2024),
+    ## merging on "hpo_id" yields more annotated results (10724)
+    ## than merging on "hpo_name" (10678).
     phenos <- data.table::merge.data.table(phenos,
-                                           annot[,-c("hpo_name")],
+                                           annot[,-c("hpo_name")][,.SD[1], by="hpo_id"],
                                            by= "hpo_id",
                                            all.x = TRUE)
   }

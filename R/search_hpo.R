@@ -60,7 +60,7 @@ search_hpo <- function(hpo = get_hpo(),
     return(unique(res))
   })
   hit_counts <- lapply(query_hits, length)
-  messager("Number of phenotype gits per query group:")
+  messager("Number of phenotype hits per query group:")
   messager(paste(paste(" -",names(hit_counts)),hit_counts,
                  collapse = "\n",sep=": "),v=verbose)
   return(query_hits)
