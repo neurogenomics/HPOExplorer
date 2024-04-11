@@ -1,3 +1,16 @@
+# HPOExplorer 1.0.1
+
+## New features
+
+- Add Issues templates
+
+## Bug fixes
+
+* Fix tests: 
+  - `gpt_annot_check`
+  - `add_hpo_id`
+* Fix functions: `gpt_annot_plot`
+
 # HPOExplorer 1.0.0
 
 ## New features

@@ -116,6 +116,7 @@ NULL
 #' returns the entirely ontology.
 #' @family make_
 #' @inheritParams main
+#' @inheritParams KGExplorer::map_colors
 #' @returns R object.
 #' @name make_
 NULL

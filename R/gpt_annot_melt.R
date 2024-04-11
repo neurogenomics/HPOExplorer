@@ -5,7 +5,8 @@ gpt_annot_melt <- function(res_coded){
                   value = TRUE)
   dat <- data.table::melt.data.table(
     data = res_coded$annot[
-      res_coded$annot_weighted[,c("hpo_id","severity_score_gpt")],on="hpo_id"],
+      unique(res_coded$annot_weighted[,c("hpo_id","severity_score_gpt")]),
+      on="hpo_id"],
     id.vars = c(id.vars,"severity_score_gpt"),
     variable.factor = TRUE,
     value.factor = TRUE)

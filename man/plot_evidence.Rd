@@ -20,14 +20,14 @@ plot_evidence(
 \link{load_phenotype_to_genes} mapping phenotypes
 to gene annotations.}
 
-\item{show_plot}{Print the plot after it's been generated.}
+\item{show_plot}{Show the plot.}
 
 \item{save_path}{Path to save interactive plot to
 as a self-contained HTML file.}
 
-\item{height}{: String. Default to "100\%". The height of the network in pixels or as a percentage.}
+\item{height}{Height of the heatmap body.}
 
-\item{width}{: Number. Default to 1. The width of the edge. If value is set, this is not used.}
+\item{width}{Width of the heatmap body.}
 }
 \description{
 Plot the distribution of evidence scores for gene-disease and gene-phenotype

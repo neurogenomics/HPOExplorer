@@ -7,7 +7,8 @@ gpt_annot_check_plot <- function(checks,
                                  scales = "free"){
   requireNamespace("ggplot2")
 
-  annotation <- metric <- metric_category <- metric_type <- NULL;
+  annotation <- metric <- metric_category <- metric_type <- n <-
+    value <- label <-NULL;
   check_df <- lapply(checks[items],
                      data.table::as.data.table, keep.rownames = TRUE) |>
     data.table::rbindlist(idcol = "metric") |>

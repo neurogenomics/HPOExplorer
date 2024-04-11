@@ -112,7 +112,7 @@ See \link[KGExplorer]{get_ontology_levels} for more details.}
 
 \item{interactive}{Make the plot interactive.}
 
-\item{show_plot}{Print the plot after it's been generated.}
+\item{show_plot}{Show the plot.}
 
 \item{hoverbox_column}{Name of the new hoverbox column to add.}
 
