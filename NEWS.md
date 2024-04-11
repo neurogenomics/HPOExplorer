@@ -7,7 +7,7 @@
 ## Bug fixes
 
 * Fix tests: 
-  - `gpt_annot_check`
+  - `gpt_annot_check` 
   - `add_hpo_id`
 * Fix functions: `gpt_annot_plot`
 
