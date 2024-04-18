@@ -26,8 +26,8 @@ gpt_annot_read <- function(save_path=file.path(KGExplorer::cache_dir(package="HP
 
   if(!file.exists(save_path) || isTRUE(force_new)){
     path <- paste0(
-      "https://github.com/neurogenomics/RareDiseasePrioritisation/raw/master/",
-      "gpt_annotations/gpt4_hpo_annotations.csv"
+      "https://github.com/neurogenomics/gpt_hpo_annotations/raw/master/",
+      "data/gpt4_hpo_annotations.csv"
     )
     utils::download.file(path, save_path)
     # path <- get_data("gpt4_hpo_annotations.csv")

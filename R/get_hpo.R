@@ -23,15 +23,17 @@ get_hpo <- function(lvl,
                     terms=NULL,
                     ## rols imports the international version for some reason
                     method="github",
+                    save_dir=KGExplorer::cache_dir(package = "HPOExplorer"),
                     ...){
-  save_dir <- KGExplorer::cache_dir(package = "HPOExplorer")
-  file <- file.path(save_dir,"hpo.rds")
+
+  file <- file.path(save_dir,"hp.rds")
   if(!file.exists(file) || isTRUE(force_new)){
     ont <- KGExplorer::get_ontology(name = "hp",
                                     add_ancestors = add_ancestors,
                                     force_new = force_new,
                                     terms = terms,
                                     method = method,
+                                    save_dir = save_dir,
                                     ...)
     saveRDS(ont,file)
   } else {

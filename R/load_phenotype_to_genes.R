@@ -7,6 +7,8 @@
 #' @param save_dir Folder where the phenotype to genes text
 #' file is/will be stored.
 #' @param verbose Print messages.
+#' @param save_tmp Keep the intermediate annotation text file
+#' (before it gets converted to .rds format).
 #' @inheritParams piggyback::pb_download
 #' @returns A \link[data.table]{data.table} of the HPO annotations.
 #'
@@ -31,6 +33,7 @@ load_phenotype_to_genes <- function(file = c("phenotype_to_genes.txt",
                                     ),
                                     tag = "latest",
                                     overwrite = FALSE,
+                                    save_tmp=TRUE,
                                     verbose = TRUE
                                     ) {
   # devoptera::args2vars(load_phenotype_to_genes, reassign = TRUE)
@@ -79,6 +82,7 @@ load_phenotype_to_genes <- function(file = c("phenotype_to_genes.txt",
   ## This lets up keep track of the version of the data without having to
   ## store this info in a redundant column.
   saveRDS(phenotype_to_genes,path_rds)
+  if(isFALSE(save_tmp)) o <- file.remove(f)
   #### Return ####
   return(phenotype_to_genes)
 }

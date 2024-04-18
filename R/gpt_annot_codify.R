@@ -15,7 +15,7 @@
 #' @importFrom stats na.omit
 #' @importFrom utils head
 #' @examples
-#' coded <- gpt_annot_codify()
+#' res_coded <- gpt_annot_codify()
 gpt_annot_codify <- function(annot = gpt_annot_read(),
                              remove_duplicates=TRUE,
                              code_dict = c(
@@ -34,7 +34,7 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
                                immunodeficiency=3,
                                cancer=3,
                                reduced_fertility=1,
-                               congenital_onset=4
+                               congenital_onset=1
                              ),
                              reset_tiers_dict=FALSE,
                              filters=list()

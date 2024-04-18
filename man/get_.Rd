@@ -12,6 +12,7 @@ get_hpo(
   force_new = FALSE,
   terms = NULL,
   method = "github",
+  save_dir = KGExplorer::cache_dir(package = "HPOExplorer"),
   ...
 )
 
@@ -36,10 +37,11 @@ For example:
 
 \item{method}{Method to construct plot with.}
 
+\item{save_dir}{Directory to save a file to.}
+
 \item{...}{
   Arguments passed on to \code{\link[KGExplorer:get_]{KGExplorer::get_ontology}}
   \describe{
-    \item{\code{save_dir}}{Directory to save a file to.}
     \item{\code{name}}{\itemize{
 \item{<...>}{Any ontology name from \link[KGExplorer]{get_ols_options}}
 \item{"mondo"}{
@@ -51,6 +53,7 @@ Import the \href{https://hpo.jax.org/app/}{Human Phenotype Ontology}.
 \href{https://github.com/obophenotype/human-phenotype-ontology/release}{
 GitHub.}}
 }}
+    \item{\code{filetype}}{File type to search for.}
     \item{\code{add_metadata}}{Add metadata to the resulting ontology object.}
     \item{\code{add_n_edges}}{Add the number of edges (connections) for each term.}
     \item{\code{add_ontology_levels}}{Add the ontology level for each term.}

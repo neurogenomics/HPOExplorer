@@ -10,7 +10,7 @@ gpt_annot_codify(
   code_dict = c(never = 0, rarely = 1, often = 2, always = 3),
   tiers_dict = list(intellectual_disability = 5, death = 5, impaired_mobility = 4,
     physical_malformations = 3, blindness = 4, sensory_impairments = 3, immunodeficiency
-    = 3, cancer = 3, reduced_fertility = 1, congenital_onset = 4),
+    = 3, cancer = 3, reduced_fertility = 1, congenital_onset = 1),
   reset_tiers_dict = FALSE,
   filters = list()
 )
@@ -38,5 +38,5 @@ Named list
 Check GPT phenotype annotations using a several metrics.
 }
 \examples{
-coded <- gpt_annot_codify()
+res_coded <- gpt_annot_codify()
 }

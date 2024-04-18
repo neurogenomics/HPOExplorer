@@ -6,15 +6,21 @@
 \usage{
 search_hpo(
   hpo = get_hpo(),
-  queries = list(intellectual_disability = c("intellectual disability"),
-    impaired_mobility = c("Abnormal central motor function", "Abnormality of movement"),
-    physical_malformations = c("malformation"), blindness = c("^blindness"),
-    sensory_impairments = c("Abnormality of vision", "Abnormality of the sense of smell",
-    "Abnormality of taste sensation", "Somatic sensory dysfunction",
-    "Hearing abnormality"), immunodeficiency = c("Immunodeficiency"), cancer =
-    c("Neoplasm", "Cancer"), reduced_fertility = c("Decreased fertility")),
+  queries = list(intellectual_disability = c("Intellectual disability",
+    "Mental deterioration"), impaired_mobility = c("Gait disturbance",
+    "Diminished movement", " mobility"), physical_malformations = c("malformation"),
+    blindness = c("^blindness"), sensory_impairments = c("Abnormality of vision",
+    "Abnormality of the sense of smell", "Abnormality of taste sensation",
+    "Somatic sensory dysfunction", "Hearing abnormality"), immunodeficiency =
+    c("Immunodeficiency", "Impaired antigen-specific response"), cancer = c("Cancer", 
+  
+      "malignant", "carcinoma"), reduced_fertility = c("Decreased fertility",
+    "Hypogonadism")),
+  search_cols = c("name"),
   include_descendants = TRUE,
   include_ancestors = FALSE,
+  ignore.case = TRUE,
+  fixed = FALSE,
   verbose = TRUE
 )
 }
@@ -26,9 +32,17 @@ loaded from \link[KGExplorer]{get_ontology}.}
 Each vector includes a phenoptype name (or a substring)
 to be searched for in the HPO.}
 
+\item{search_cols}{HPO metadata column names to query for hits.}
+
 \item{include_descendants}{Include all descendants of query hits.}
 
 \item{include_ancestors}{Include all ancestors of query hits.}
+
+\item{ignore.case}{if \code{FALSE}, the pattern matching is \emph{case
+      sensitive} and if \code{TRUE}, case is ignored during matching.}
+
+\item{fixed}{logical.  If \code{TRUE}, \code{pattern} is a string to be
+    matched as is.  Overrides all conflicting arguments.}
 
 \item{verbose}{Print messages.}
 }

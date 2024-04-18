@@ -13,6 +13,7 @@ load_phenotype_to_genes(
   repo = paste("obophenotype", "human-phenotype-ontology", sep = "/"),
   tag = "latest",
   overwrite = FALSE,
+  save_tmp = TRUE,
   verbose = TRUE
 )
 }
@@ -29,6 +30,9 @@ file is/will be stored.}
 
 \item{overwrite}{Should any local files of the same name be overwritten?
 default \code{TRUE}.}
+
+\item{save_tmp}{Keep the intermediate annotation text file
+(before it gets converted to .rds format).}
 
 \item{verbose}{Print messages.}
 }
