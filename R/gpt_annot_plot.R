@@ -2,6 +2,7 @@
 #'
 #' Plot annotations from GPT.
 #' @param top_n Top number of most severe phenotypes to plot in heatmap.
+#' @param width Max facet label width.
 #' @inheritParams gpt_annot_check
 #' @inheritParams add_ont_lvl
 #' @inheritParams add_ancestor
@@ -15,6 +16,7 @@ gpt_annot_plot <- function(annot = gpt_annot_read(),
                            keep_ont_levels=seq(3,17),
                            keep_descendants="Phenotypic abnormality",
                            top_n=50,
+                           width=80,
                            verbose=TRUE
                            ){
   requireNamespace("ggplot2")
@@ -78,7 +80,9 @@ gpt_annot_plot <- function(annot = gpt_annot_read(),
   gp2 <- ggplot2::ggplot(dat1, ggplot2::aes(x=value, y=severity_score_gpt,
                                             fill=value)) +
     ggplot2::geom_boxplot() +
-    ggplot2::facet_wrap(facets =  "variable~.", ncol = 5) +
+    ggplot2::facet_wrap(facets = stringr::str_wrap(gsub("_"," ",variable),
+                                                   width = width)~.,
+                        ncol = 5) +
     ggplot2::scale_fill_viridis_d(na.value = "grey", direction = -1,
                                   option = "plasma") +
     ggplot2::labs(x=NULL) +

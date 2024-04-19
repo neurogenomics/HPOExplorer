@@ -9,6 +9,7 @@ gpt_annot_plot(
   keep_ont_levels = seq(3, 17),
   keep_descendants = "Phenotypic abnormality",
   top_n = 50,
+  width = 80,
   verbose = TRUE
 )
 }
@@ -24,6 +25,8 @@ See \link{add_ont_lvl} for details.}
  Set to \code{NULL} (default) to skip this filtering step.}
 
 \item{top_n}{Top number of most severe phenotypes to plot in heatmap.}
+
+\item{width}{Max facet label width.}
 
 \item{verbose}{Print messages.}
 }
