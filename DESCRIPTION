@@ -51,7 +51,8 @@ Suggests:
     scales,
     piggyback,
     patchwork,
-    tidygraph
+    tidygraph,
+    colorspace
 Remotes:
   github::neurogenomics/KGExplorer
 VignetteBuilder: knitr

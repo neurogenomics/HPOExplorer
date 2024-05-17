@@ -3,8 +3,8 @@
 #' Check GPT phenotype annotations using a several metrics.
 #' @param remove_duplicates Ensure only 1 row per phenotype.
 #' @param code_dict Numerical encodings of annotation values.
-#' @param tiers_dict Numerical encodings of annotation column.
-#' @param reset_tiers_dict Override \code{tiers_dict} values and set all values
+#' @param weights_dict Weights to be applied to each annotation metric.
+#' @param reset_weights_dict Override \code{weights_dict} values and set all values
 #' to 1. This will ensure that all annotations are unweighted.
 #' @inheritParams gpt_annot_check
 #' @inheritParams KGExplorer::filter_dt
@@ -24,9 +24,9 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
                                "often"=2,
                                "always"=3
                              ),
-                             tiers_dict=list(
+                             weights_dict=list(
+                               death=6,
                                intellectual_disability=5,
-                               death=5,
                                impaired_mobility=4,
                                physical_malformations=3,
                                blindness=4,
@@ -36,18 +36,18 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
                                reduced_fertility=1,
                                congenital_onset=1
                              ),
-                             reset_tiers_dict=FALSE,
+                             reset_weights_dict=FALSE,
                              filters=list()
                              ){
   severity_score_gpt <- hpo_name <- NULL;
 
   d <- data.table::copy(annot)
-  if(isTRUE(reset_tiers_dict)) tiers_dict <- lapply(tiers_dict,function(x){1})
+  if(isTRUE(reset_weights_dict)) weights_dict <- lapply(weights_dict,function(x){1})
   #### Ensure only 1 row/hpo_name by simply taking the first ####
   if(isTRUE(remove_duplicates)){
     d <- d[,utils::head(.SD,1), by=c("hpo_id","hpo_name")]
   }
-  cols <- names(tiers_dict)
+  cols <- names(weights_dict)
   #### Add levels ####
   d <- d[,lapply(.SD,function(x){
     factor(tolower(x),levels = rev(names(code_dict)), ordered = TRUE)
@@ -61,14 +61,14 @@ gpt_annot_codify <- function(annot = gpt_annot_read(),
   max_score <-
     sum(
       max(code_dict, na.rm = TRUE) *
-      (max(unlist(tiers_dict))*length(tiers_dict))
+      (max(unlist(weights_dict))*length(weights_dict))
     )
   d_coded <- d[,lapply(.SD,FUN=function(x){
     unlist(code_dict[tolower(x)])}),.SDcols = cols, by=c("hpo_id","hpo_name")]
   d_weighted <- data.table::as.data.table(
     lapply(stats::setNames(cols,cols),
            function(co){
-           d_coded[[co]]*tiers_dict[[co]]
+           d_coded[[co]]*weights_dict[[co]]
              })
   )[,hpo_name:=d_coded$hpo_name][,severity_score_gpt:=(
     rowSums(.SD,na.rm = TRUE)/max_score*100),

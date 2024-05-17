@@ -111,6 +111,7 @@ gpt_annot_check <- function(annot = gpt_annot_read(),
   checks <- list(
     annot=annot,
     annot_mean=annot_mean,
+    annot_stringent_mean=annot_stringent_mean,
     consistency_count=consistency_count,
     consistency_rate=consistency_rate,
     consistency_stringent_count=consistency_count,

@@ -89,7 +89,7 @@ add_genes(
 
 add_gpt_annotations(
   phenos,
-  annot = gpt_annot_codify(reset_tiers_dict = TRUE)$annot_weighted,
+  annot = gpt_annot_codify(reset_weights_dict = TRUE)$annot_weighted,
   annot_cols = names(annot)[!names(annot) \%in\% c("hpo_id", "hpo_name")],
   gpt_filters = `names<-`(rep(list(NULL), length(annot_cols)), annot_cols),
   force_new = FALSE

@@ -8,10 +8,10 @@ gpt_annot_codify(
   annot = gpt_annot_read(),
   remove_duplicates = TRUE,
   code_dict = c(never = 0, rarely = 1, often = 2, always = 3),
-  tiers_dict = list(intellectual_disability = 5, death = 5, impaired_mobility = 4,
+  weights_dict = list(death = 6, intellectual_disability = 5, impaired_mobility = 4,
     physical_malformations = 3, blindness = 4, sensory_impairments = 3, immunodeficiency
     = 3, cancer = 3, reduced_fertility = 1, congenital_onset = 1),
-  reset_tiers_dict = FALSE,
+  reset_weights_dict = FALSE,
   filters = list()
 )
 }
@@ -22,9 +22,9 @@ gpt_annot_codify(
 
 \item{code_dict}{Numerical encodings of annotation values.}
 
-\item{tiers_dict}{Numerical encodings of annotation column.}
+\item{weights_dict}{Weights to be applied to each annotation metric.}
 
-\item{reset_tiers_dict}{Override \code{tiers_dict} values and set all values
+\item{reset_weights_dict}{Override \code{weights_dict} values and set all values
 to 1. This will ensure that all annotations are unweighted.}
 
 \item{filters}{A named list, where each element in the list is the name of 
