@@ -4,44 +4,44 @@
 #'  do some initial preprocessing (e.g. adding HPO IDs).
 #' @inheritParams main
 #' @inheritParams make_
-#' @param save_path Path to annotations CSV file.
-#'  If the file does not exist, the data will be downloaded from GitHub.
+#' @inheritParams get_
 #' @param force_new If \code{TRUE}, the data will be downloaded from GitHub
 #' even if it already exists locally.
 #' @param verbose Print messages.
 #' @param include_nogenes Include phenotypes with no associated genes.
+#' @inheritDotParams get_data
 #' @returns data.table of phenotype annotations
 #'
 #' @export
 #' @examples
 #' gpt_annot <- gpt_annot_read()
-gpt_annot_read <- function(save_path=file.path(KGExplorer::cache_dir(package="HPOExplorer"),
-                                               "gpt4_hpo_annotations.csv"),
-                           phenotype_to_genes = load_phenotype_to_genes(),
+gpt_annot_read <- function(save_dir=KGExplorer::cache_dir(package="HPOExplorer"),
+                           phenotype_to_genes = load_phenotype_to_genes(save_dir = save_dir),
                            force_new=FALSE,
                            hpo=get_hpo(),
                            include_nogenes=TRUE,
-                           verbose=TRUE){
-  pheno_count <- hpo_name <- hpo_id <- phenotype <- NULL;
+                           verbose=TRUE,
+                           ...){
+  pheno_count <- hpo_name <- hpo_id <- NULL;
 
-  if(!file.exists(save_path) || isTRUE(force_new)){
-    path <- paste0(
-      "https://github.com/neurogenomics/gpt_hpo_annotations/raw/master/",
-      "data/gpt4_hpo_annotations.csv"
-    )
-    utils::download.file(path, save_path)
-    # path <- get_data("gpt4_hpo_annotations.csv")
-  }
+  save_path <- get_data(file = "gpt4_hpo_annotations.csv.gz",
+                        save_dir = save_dir,
+                        overwrite = force_new,
+                        ...)
   {
     d <- data.table::fread(save_path, header = TRUE)
-    d <- d[!is.na(phenotype)]
-    data.table::setnames(d,"phenotype","hpo_name")
+    data.table::setnames(d,"phenotype","hpo_name", skip_absent = TRUE)
+    d <- d[!is.na(hpo_name)]
     d <- add_hpo_id(d, hpo = hpo)
   }
   {
     #### Add subset with fixed hpo_names ####
     # https://github.com/neurogenomics/RareDiseasePrioritisation/issues/31#issuecomment-1989079044
-    fixmap <- data.table::fread("https://github.com/neurogenomics/RareDiseasePrioritisation/files/14562614/mismatched_hpo_names_fixed.csv")
+    save_path_fixmap <- get_data(file = "mismatched_hpo_names_fixed.csv.gz",
+                                 save_dir = save_dir,
+                                 overwrite = force_new,
+                                 ...)
+    fixmap <- data.table::fread(save_path_fixmap)
     d <- rbind(d[!hpo_name %in% unique(fixmap$hpo_name)],
                fixmap, fill=TRUE)
   }

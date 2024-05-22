@@ -5,18 +5,17 @@
 \title{Read annotations from GPT}
 \usage{
 gpt_annot_read(
-  save_path = file.path(KGExplorer::cache_dir(package = "HPOExplorer"),
-    "gpt4_hpo_annotations.csv"),
-  phenotype_to_genes = load_phenotype_to_genes(),
+  save_dir = KGExplorer::cache_dir(package = "HPOExplorer"),
+  phenotype_to_genes = load_phenotype_to_genes(save_dir = save_dir),
   force_new = FALSE,
   hpo = get_hpo(),
   include_nogenes = TRUE,
-  verbose = TRUE
+  verbose = TRUE,
+  ...
 )
 }
 \arguments{
-\item{save_path}{Path to annotations CSV file.
-If the file does not exist, the data will be downloaded from GitHub.}
+\item{save_dir}{Directory to save a file to.}
 
 \item{phenotype_to_genes}{Output of
 \link{load_phenotype_to_genes} mapping phenotypes
@@ -31,6 +30,19 @@ loaded from \link[KGExplorer]{get_ontology}.}
 \item{include_nogenes}{Include phenotypes with no associated genes.}
 
 \item{verbose}{Print messages.}
+
+\item{...}{
+  Arguments passed on to \code{\link[=get_data]{get_data}}
+  \describe{
+    \item{\code{add_version}}{Add the release version
+to the returned object's \link[base]{attributes}}
+    \item{\code{file}}{name or vector of names of files to be downloaded. If \code{NULL},
+all assets attached to the release will be downloaded.}
+    \item{\code{repo}}{Repository name in format "owner/repo". Defaults to \code{guess_repo()}.}
+    \item{\code{tag}}{tag for the GitHub release to which this data should be attached.}
+    \item{\code{overwrite}}{Should any local files of the same name be overwritten?
+default \code{TRUE}.}
+  }}
 }
 \value{
 data.table of phenotype annotations
