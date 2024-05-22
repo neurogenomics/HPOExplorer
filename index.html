@@ -6,19 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Analysis and Visualisation of the Human Phenotype Ontology • HPOExplorer</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Analysis and Visualisation of the Human Phenotype Ontology">
-<meta property="og:description" content="HPOExplorer contains useful functions for working with 
-  the Human Phenotype Ontology (HPO). 
-  It allows you to create interactive phenotype network plots,
-  which can be useful for making web applications. 
-  It also has functions for finding ontology level 
-  (n generations of terms below the selected term), 
-  and getting term definitions from HPO API.">
+<meta property="og:description" content="Import, annotate and visualise the 18k+ hierarchically structured clinical phenotypes across the Human Phenotype Ontology.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -39,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2</span>
       </span>
     </div>
 
@@ -59,7 +53,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/docker.html">Docker</a>
+      <a href="articles/docker.html">Docker/Singularity Containers</a>
     </li>
   </ul>
 </li>
@@ -87,25 +81,37 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<img src="https://github.com/neurogenomics/HPOExplorer/raw/master/inst/hex/hex.png" title="Hex sticker for HPOExplorer" height="300"><br><a href="https://cran.r-project.org/web/licenses/GPL-3" class="external-link"><img src="https://img.shields.io/badge/license-GPL--3-blue.svg" alt="License: GPL-3"></a> <a href="https://github.com/neurogenomics/HPOExplorer" class="external-link"><img src="https://img.shields.io/badge/devel%20version-0.99.12-black.svg"></a> <a href="https://github.com/neurogenomics/HPOExplorer" class="external-link"><img src="https://img.shields.io/github/languages/code-size/neurogenomics/HPOExplorer.svg"></a> <a href="https://github.com/neurogenomics/HPOExplorer/commits/master" class="external-link"><img src="https://img.shields.io/github/last-commit/neurogenomics/HPOExplorer.svg"></a> <br><a href="https://github.com/neurogenomics/HPOExplorer/actions" class="external-link"><img src="https://github.com/neurogenomics/HPOExplorer/workflows/rworkflows/badge.svg" alt="R build status"></a> <a href="https://app.codecov.io/gh/neurogenomics/HPOExplorer" class="external-link"><img src="https://codecov.io/gh/neurogenomics/HPOExplorer/branch/master/graph/badge.svg"></a> <br><a href="https://app.codecov.io/gh/neurogenomics/HPOExplorer/tree/master" target="_blank" class="external-link"><img src="https://codecov.io/gh/neurogenomics/HPOExplorer/branch/master/graphs/icicle.svg" title="Codecov icicle graph" width="200" height="50" style="vertical-align: top;"></a><br><h4>
+<img src="https://github.com/neurogenomics/HPOExplorer/raw/master/inst/hex/hex.png" title="Hex sticker for HPOExplorer" height="300"><br><a href="https://cran.r-project.org/web/licenses/GPL-3" class="external-link"><img src="https://img.shields.io/badge/license-GPL--3-blue.svg" alt="License: GPL-3"></a> <a href="https://github.com/neurogenomics/HPOExplorer" class="external-link"><img src="https://img.shields.io/badge/devel%20version-1.0.2-black.svg"></a> <a href="https://github.com/neurogenomics/HPOExplorer" class="external-link"><img src="https://img.shields.io/github/languages/code-size/neurogenomics/HPOExplorer.svg"></a> <a href="https://github.com/neurogenomics/HPOExplorer/commits/master" class="external-link"><img src="https://img.shields.io/github/last-commit/neurogenomics/HPOExplorer.svg"></a> <br><a href="https://github.com/neurogenomics/HPOExplorer/actions" class="external-link"><img src="https://github.com/neurogenomics/HPOExplorer/workflows/rworkflows/badge.svg" alt="R build status"></a> <a href="https://app.codecov.io/gh/neurogenomics/HPOExplorer" class="external-link"><img src="https://codecov.io/gh/neurogenomics/HPOExplorer/branch/master/graph/badge.svg"></a> <br><a href="https://app.codecov.io/gh/neurogenomics/HPOExplorer/tree/master" target="_blank" class="external-link"><img src="https://codecov.io/gh/neurogenomics/HPOExplorer/branch/master/graphs/icicle.svg" title="Codecov icicle graph" width="200" height="50" style="vertical-align: top;"></a><br><h4>
 Authors: <i>Brian Schilder, Robert Gordon-Smith, Nathan Skene</i>
 </h4>
 <h4>
-Most recent update: <i>Nov-15-2023</i>
+Most recent update: <i>May-22-2024</i>
 </h4>
 <div class="section level2">
 <h2 id="intro">Intro<a class="anchor" aria-label="anchor" href="#intro"></a>
 </h2>
-<p><code>HPOExplorer</code> contains useful functions for working with the <a href="https://hpo.jax.org/app/" class="external-link">Human Phenotype Ontology (HPO)</a>. It allows you to create interactive phenotype network plots, as well as many other useful functions.</p>
+<div class="section level3">
+<h3 id="about-hpo">About HPO<a class="anchor" aria-label="anchor" href="#about-hpo"></a>
+</h3>
+<p>The <a href="https://hpo.jax.org/app/" class="external-link">Human Phenotype Ontology (HPO)</a> is a controlled vocabulary of phenotypic abnormalities encountered in human disease. It currently contains over 18,000 hierarchically organised terms. Each term in the HPO describes a phenotypic abnormality, ranging from very broad phenotypes (e.g. “Abnormality of the nervous system”) down to extremely specific phenotypes (e.g. “Decreased CSF 5-hydroxyindolacetic acid concentration”).</p>
+<p>The HPO is currently being used in thousands of exome and genome sequencing projects around the world to aid in the interpretation of human variation, in clinical practice to support differential diagnosis and to annotate patient information, and in research to understand the role of rare variants in human health and disease. The HPO was developed by the <a href="https://monarchinitiative.org/" class="external-link">Monarch Initiative</a> in collaboration with <a href="https://www.jax.org/" class="external-link">The Jackson Laboratory</a>.</p>
+</div>
+<div class="section level3">
+<h3 id="about-hpoexplorer">About <code>HPOExplorer</code>
+<a class="anchor" aria-label="anchor" href="#about-hpoexplorer"></a>
+</h3>
+<p><code>HPOExplorer</code> is an R package with extensive functions for easily importing, annotating, filtering, and visualising the <a href="https://hpo.jax.org/app/" class="external-link">Human Phenotype Ontology (HPO)</a> at the disease, phenotype, and gene levels. By pulling fresh data directly from official resources like <a href="https://hpo.jax.org/app/" class="external-link">HPO</a>, <a href="https://monarchinitiative.org/" class="external-link">Monarch</a> and <a href="https://thegencc.org/" class="external-link">GenCC</a>, it ensures tightly controlled version coordination with the most up-to-date data available at any given time (with the option to use caching to boost speed). Furthermore, it can efficiently reorganise gene annotations into sparse matrices for usage within downstream statistical and machine learning analysis.</p>
+<p><code>HPOExplorer</code> was developed by the <a href="https://www.neurogenomics.co.uk/" class="external-link">Neurogenomics Lab</a> at Imperial College London, along with valuable feedback provided by the HPO team. This package is still actively evolving and growing. Community engagement is welcome and any suggestions can be submitted as an <a href="https://github.com/neurogenomics/HPOExplorer/issues" class="external-link">Issue</a> or <a href="https://github.com/neurogenomics/HPOExplorer/pulls" class="external-link">Pull Request</a>.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>Within R:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/neurogenomics/HPOExplorer" class="external-link">"HPOExplorer"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"neurogenomics/HPOExplorer"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://bioconductor.github.io/BiocManager/" class="external-link">"BiocManager"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"neurogenomics/HPOExplorer"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/neurogenomics/HPOExplorer" class="external-link">HPOExplorer</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -139,9 +145,9 @@ Most recent update: <i>Nov-15-2023</i>
 </h1>
 <details><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="do">## R Under development (unstable) (2023-11-08 r85496)</span></span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="do">## R version 4.4.0 (2024-04-24)</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="do">## Platform: x86_64-pc-linux-gnu</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="do">## Running under: Ubuntu 22.04.3 LTS</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="do">## Running under: Ubuntu 22.04.4 LTS</span></span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="do">## Matrix products: default</span></span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="do">## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
@@ -162,25 +168,25 @@ Most recent update: <i>Nov-15-2023</i>
 <span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="do">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="do">## other attached packages:</span></span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="do">## [1] rmarkdown_2.25</span></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="do">## [1] rmarkdown_2.27</span></span>
 <span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="do">## loaded via a namespace (and not attached):</span></span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="do">##  [1] gtable_0.3.4        jsonlite_1.8.7      renv_1.0.3         </span></span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="do">##  [4] dplyr_1.1.3         compiler_4.4.0      BiocManager_1.30.22</span></span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="do">##  [7] tidyselect_1.2.0    rvcheck_0.2.1       scales_1.2.1       </span></span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a><span class="do">## [10] yaml_2.3.7          fastmap_1.1.1       here_1.0.1         </span></span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="do">## [13] ggplot2_3.4.4       R6_2.5.1            generics_0.1.3     </span></span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a><span class="do">## [16] knitr_1.45          yulab.utils_0.1.0   tibble_3.2.1       </span></span>
-<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a><span class="do">## [19] desc_1.4.2          dlstats_0.1.7       rprojroot_2.0.4    </span></span>
-<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a><span class="do">## [22] munsell_0.5.0       pillar_1.9.0        RColorBrewer_1.1-3 </span></span>
-<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a><span class="do">## [25] rlang_1.1.2         utf8_1.2.4          cachem_1.0.8       </span></span>
-<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a><span class="do">## [28] badger_0.2.3        xfun_0.41           fs_1.6.3           </span></span>
-<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a><span class="do">## [31] memoise_2.0.1       cli_3.6.1           magrittr_2.0.3     </span></span>
-<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a><span class="do">## [34] rworkflows_1.0.0    digest_0.6.33       grid_4.4.0         </span></span>
-<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a><span class="do">## [37] lifecycle_1.0.4     vctrs_0.6.4         data.table_1.14.8  </span></span>
-<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a><span class="do">## [40] evaluate_0.23       glue_1.6.2          fansi_1.0.5        </span></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="do">##  [1] gtable_0.3.5        jsonlite_1.8.8      renv_1.0.7         </span></span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="do">##  [4] dplyr_1.1.4         compiler_4.4.0      BiocManager_1.30.23</span></span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="do">##  [7] tidyselect_1.2.1    rvcheck_0.2.1       scales_1.3.0       </span></span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a><span class="do">## [10] yaml_2.3.8          fastmap_1.2.0       here_1.0.1         </span></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="do">## [13] ggplot2_3.5.1       R6_2.5.1            generics_0.1.3     </span></span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a><span class="do">## [16] knitr_1.46          yulab.utils_0.1.4   tibble_3.2.1       </span></span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a><span class="do">## [19] desc_1.4.3          dlstats_0.1.7       rprojroot_2.0.4    </span></span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a><span class="do">## [22] munsell_0.5.1       pillar_1.9.0        RColorBrewer_1.1-3 </span></span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a><span class="do">## [25] rlang_1.1.3         utf8_1.2.4          cachem_1.1.0       </span></span>
+<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a><span class="do">## [28] badger_0.2.3        xfun_0.44           fs_1.6.4           </span></span>
+<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a><span class="do">## [31] memoise_2.0.1       cli_3.6.2           magrittr_2.0.3     </span></span>
+<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a><span class="do">## [34] rworkflows_1.0.1    digest_0.6.35       grid_4.4.0         </span></span>
+<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a><span class="do">## [37] lifecycle_1.0.4     vctrs_0.6.5         data.table_1.15.4  </span></span>
+<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a><span class="do">## [40] evaluate_0.23       glue_1.7.0          fansi_1.0.6        </span></span>
 <span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a><span class="do">## [43] colorspace_2.1-0    tools_4.4.0         pkgconfig_2.0.3    </span></span>
-<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a><span class="do">## [46] htmltools_0.5.7</span></span></code></pre></div>
+<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a><span class="do">## [46] htmltools_0.5.8.1</span></span></code></pre></div>
 </details><hr>
 </div>
 
@@ -232,7 +238,7 @@ Most recent update: <i>Nov-15-2023</i>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>
