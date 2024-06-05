@@ -10,7 +10,10 @@ plot_top_phenos(
   keep_descendants = "Phenotypic abnormality",
   n_per_class = 10,
   annotation_order = NULL,
-  split_by_congenital = TRUE
+  split_by_congenital = TRUE,
+  axis.text.x = c(FALSE, TRUE),
+  legend.position = "right",
+  ...
 )
 }
 \arguments{
@@ -30,6 +33,49 @@ See \link{add_ont_lvl} for details.}
 
 \item{split_by_congenital}{Split the phenotypes by congenital onset
 (congenital = always/often, noncongenital = never/rarely).}
+
+\item{axis.text.x}{Whether to include x-axis text in top and bottom subplots.}
+
+\item{legend.position}{the default position of legends ("none", "left",
+"right", "bottom", "top", "inside")}
+
+\item{...}{
+  Arguments passed on to \code{\link[patchwork:plot_layout]{patchwork::plot_layout}}
+  \describe{
+    \item{\code{ncol,nrow}}{The dimensions of the grid to create - if both are \code{NULL} it
+will use the same logic as \link[ggplot2:facet_wrap]{facet_wrap()} to set the
+dimensions}
+    \item{\code{byrow}}{Analogous to \code{byrow} in \link[base:matrix]{matrix()}. If \code{FALSE} the
+plots will be filled in in column-major order}
+    \item{\code{widths,heights}}{The relative widths and heights of each column and row
+in the grid. Will get repeated to match the dimensions of the grid. The
+special value of \code{NA}/\verb{-1null} will behave as \verb{1null} unless a fixed aspect
+plot is inserted in which case it will allow the dimension to expand or
+contract to match the aspect ratio of the content}
+    \item{\code{guides}}{A string specifying how guides should be treated in the layout.
+\code{'collect'} will collect guides below to the given nesting level, removing
+duplicates. \code{'keep'} will stop collection at this level and let guides be
+placed alongside their plot. \code{auto} will allow guides to be collected if a
+upper level tries, but place them alongside the plot if not.  If you modify
+default guide "position" with \link[ggplot2:theme]{theme(legend.position=...)}
+while also collecting guides you must apply that change to the overall
+patchwork (see example).}
+    \item{\code{tag_level}}{A string (\code{'keep'} or \code{'new'}) to indicate how
+auto-tagging should behave. See \code{\link[patchwork:plot_annotation]{plot_annotation()}}.}
+    \item{\code{design}}{Specification of the location of areas in the layout. Can either
+be specified as a text string or by concatenating calls to \code{\link[patchwork:area]{area()}} together.
+See the examples for further information on use.}
+    \item{\code{axes}}{A string specifying how axes should be treated. \code{'keep'} will
+retain all axes in individual plots. \code{'collect'} will remove duplicated
+axes when placed in the same run of rows or columns of the layout.
+\code{'collect_x'} and \code{'collect_y'} will remove duplicated x-axes in the columns
+or duplicated y-axes in the rows respectively.}
+    \item{\code{axis_titles}}{A string specifying how axis titltes should be treated.
+\code{'keep'} will retain all axis titles in individual plots. \code{'collect'} will
+remove duplicated titles in one direction and merge titles in the opposite
+direction. \code{'collect_x'} and \code{'collect_y'} control this for x-axis titles
+and y-axis titles respectively.}
+  }}
 }
 \description{
 Plot the most severe phenotypes per severity class:

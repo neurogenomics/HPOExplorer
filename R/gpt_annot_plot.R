@@ -13,6 +13,7 @@
 #' @examples
 #' plots <- gpt_annot_plot()
 gpt_annot_plot <- function(annot = gpt_annot_read(),
+                           hpo = get_hpo(),
                            keep_ont_levels=seq(3,17),
                            keep_descendants="Phenotypic abnormality",
                            top_n=50,
@@ -30,14 +31,15 @@ gpt_annot_plot <- function(annot = gpt_annot_read(),
   dat1 <- gpt_annot_melt(res_coded = res_coded)
   #### Filter out ont levels  ####
   dat1 <- add_ancestor(dat1,
+                       hpo = hpo,
                        keep_descendants = keep_descendants)
   data.table::setorderv(dat1,"severity_score_gpt",-1)
   #### Get top N most severe phenotypes ####
   dat_top <- dat1[hpo_id %in% unique(dat1$hpo_id)[seq(top_n)]]
   #### Filter out onset phenotypes ####
-  dat_top <- add_ont_lvl(dat_top, keep_ont_levels = keep_ont_levels)
-
-
+  dat_top <- add_ont_lvl(dat_top,
+                         hpo = hpo,
+                         keep_ont_levels = keep_ont_levels)
   ##### Heatmap of top N most severe phenotypes ####
   gp0.1 <- ggplot2::ggplot(data = dat_top,
                            ggplot2::aes(x=variable, y=hpo_name, fill=value)) +
@@ -95,6 +97,7 @@ gpt_annot_plot <- function(annot = gpt_annot_read(),
     res_coded <- gpt_annot_codify(annot = annot)
     dat2 <- gpt_annot_melt(res_coded = res_coded)
     dat2 <- add_ancestor(dat2,
+                         hpo = hpo,
                          keep_descendants = keep_descendants)
     dat2[,mean_severity_score_gpt:=mean(severity_score_gpt, na.rm=TRUE),
                by="ancestor_name"] |>

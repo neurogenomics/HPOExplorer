@@ -6,6 +6,7 @@
 \usage{
 gpt_annot_plot(
   annot = gpt_annot_read(),
+  hpo = get_hpo(),
   keep_ont_levels = seq(3, 17),
   keep_descendants = "Phenotypic abnormality",
   top_n = 50,
@@ -15,6 +16,9 @@ gpt_annot_plot(
 }
 \arguments{
 \item{annot}{GPT-generated phenotype annotations.}
+
+\item{hpo}{Human Phenotype Ontology object,
+loaded from \link[KGExplorer]{get_ontology}.}
 
 \item{keep_ont_levels}{Only keep phenotypes at certain \emph{absolute}
 ontology levels to keep.

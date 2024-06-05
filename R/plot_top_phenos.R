@@ -9,8 +9,11 @@
 #' @param annotation_order The order of the annotations to include.
 #' @param split_by_congenital Split the phenotypes by congenital onset
 #' (congenital = always/often, noncongenital = never/rarely).
+#' @param axis.text.x Whether to include x-axis text in top and bottom subplots.
 #' @inheritParams add_ont_lvl
 #' @inheritParams add_ancestor
+#' @inheritParams ggplot2::theme
+#' @inheritDotParams patchwork::plot_layout
 #' @export
 #' @examples
 #' res_class <- gpt_annot_class()
@@ -20,7 +23,10 @@ plot_top_phenos <- function(res_class = gpt_annot_class(),
                             keep_descendants = "Phenotypic abnormality",
                             n_per_class = 10,
                             annotation_order=NULL,
-                            split_by_congenital=TRUE){
+                            split_by_congenital=TRUE,
+                            axis.text.x=c(FALSE,TRUE),
+                            legend.position = 'right',
+                            ...){
   requireNamespace("ggplot2")
   requireNamespace("colorspace")
 
@@ -37,6 +43,8 @@ plot_top_phenos <- function(res_class = gpt_annot_class(),
                                 xlab="Clinical characteristic",
                                 ylab="HPO phenotype",
                                 direction = 1,
+                                axis.text.x=TRUE,
+                                legend.position=c('right','right'),
                                 limits=NULL){
     # devoptera::args2vars(plot_top_phenos_i, run_source_all = FALSE)
     variable <- hpo_name <- value <- NULL;
@@ -48,12 +56,14 @@ plot_top_phenos <- function(res_class = gpt_annot_class(),
                          show.legend=show.legend) +
       ggplot2::scale_y_discrete(limits=rev) +
       ggplot2::scale_fill_brewer(palette = "GnBu",
-                                 labels=c("0"="never","1"="rarely",
-                                          "2"="often","3"="always"),
+                                 labels=c(`0`="never",
+                                          `1`="rarely",
+                                          `2`="often",
+                                          `3`="always"),
                                  direction = direction) +
       ggplot2::theme_classic() +
       ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
-                     legend.position = 'right') +
+                     legend.position = legend.position[1]) +
       ggplot2::labs(x = xlab,
                     y = ylab,
                     subtitle=title,
@@ -74,10 +84,14 @@ plot_top_phenos <- function(res_class = gpt_annot_class(),
       ggplot2::guides(fill = ggplot2::guide_colorbar(reverse = TRUE)) +
       ggplot2::theme(axis.text.y = ggplot2::element_blank(),
                      axis.ticks.y = ggplot2::element_blank(),
-                     legend.position = 'right')
-    p3 <- patchwork::wrap_plots(p1, p2, ncol = 2,
+                     legend.position = legend.position[2])
+    p3 <- patchwork::wrap_plots(p1, p2,
+                                ncol = 2,
                                 widths = c(1,.2),
                                 guides = "collect")
+    if(isFALSE(axis.text.x)){
+      p3 <- p3 & ggplot2::theme(axis.text.x = ggplot2::element_blank())
+    }
     return(p3)
   }
 
@@ -90,17 +104,20 @@ plot_top_phenos <- function(res_class = gpt_annot_class(),
       plot_top_phenos_i(dt=get_top_phenos_out$congenital,
                         xlab = NULL,
                         show.legend = FALSE,
+                        axis.text.x=axis.text.x[1],
                         title="Congenital phenotypes",
                         limits=limits)
       |
         plot_top_phenos_i(get_top_phenos_out$noncongenital,
                         xlab = NULL,
                         ylab = NULL,
+                        axis.text.x=axis.text.x[2],
                         title="Non-congenital phenotypes",
                         limits=limits)
     ) + patchwork::plot_layout(guides = "collect",
                                axes = "collect",
-                               axis_titles = "collect") +
+                               axis_titles = "collect",
+                               ...) +
       patchwork::plot_annotation(tag_levels = "a")
 
   } else {
@@ -109,6 +126,9 @@ plot_top_phenos <- function(res_class = gpt_annot_class(),
     fig_top_phenos <- plot_top_phenos_i(get_top_phenos_out,
                                         limits=limits)
   }
+  fig_top_phenos <- fig_top_phenos &
+    ggplot2::theme(legend.position = legend.position)
+  #### Return ####
   return(
     list(
       data=get_top_phenos_out,
