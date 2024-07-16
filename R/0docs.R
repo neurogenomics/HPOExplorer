@@ -69,7 +69,6 @@ NULL
 #' Functions to add metadata to data.table objects.
 #' @family add_
 #' @param agg_by Column to aggregate metadata by.
-#' @param add_definitions Add disease definitions using \link{add_mondo}.
 #' @param gpt_filters A named list of filters to apply to the GPT annotations.
 #' @inheritParams main
 #' @inheritParams make_

@@ -17,7 +17,8 @@ add_genes <- function(phenos = NULL,
                       phenotype_to_genes =
                         load_phenotype_to_genes(),
                       hpo = get_hpo(),
-                      by = c("hpo_id","disease_id"),
+                      by = c("hpo_id","hpo_name",
+                             "disease_id","disease_name","disease_description"),
                       gene_col = "gene_symbol",
                       all.x = FALSE,
                       allow.cartesian = FALSE){
@@ -44,19 +45,12 @@ add_genes <- function(phenos = NULL,
   #### Ensure necessary columns are in phenos ####
   phenos <- add_hpo_id(phenos = phenos,
                        hpo = hpo)
-  phenos <- add_disease(phenos = phenos,
-                        allow.cartesian = allow.cartesian)
   #### Add Gene col to data ####
   if(!"gene_symbol" %in% names(phenos)){
     by <- by[by %in% names(phenos)]
-    ## Get gene annotations
-    annot <- unique(
-      phenotype_to_genes[,unique(c(by,"gene_symbol","ncbi_gene_id")),
-                         with=FALSE]
-    )
-    ## Merge with input data
+    # ## Merge with input data
     phenos <- data.table::merge.data.table(phenos,
-                                           annot,
+                                           phenotype_to_genes,
                                            by = by,
                                            all.x = all.x,
                                            allow.cartesian = allow.cartesian)

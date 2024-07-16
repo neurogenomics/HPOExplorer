@@ -205,3 +205,19 @@
 #'  @format data.table
 #'  @usage data("disease_id_to_omop")
 "disease_id_to_omop"
+
+#' Human Phenotype Ontology: Disease ID to Disease Name and Disease Description
+#'
+#' @description
+#' Mapping of HPO disease ID (disease_id) to Disease Name and
+#' Disease Description.
+#' @source
+#' \code{
+#'  dat <- load_phenotype_to_genes()
+#'  out <- map_disease(dat)
+#'  disease_map <- out[,list(disease_id,disease_name,disease_description)]|>unique()
+#'  usethis::use_data(disease_map, overwrite = TRUE)
+#'  }
+#'  @format data.table
+#'  @usage data("disease_map")
+"disease_map"
