@@ -43,7 +43,7 @@
 add_death <- function(phenos,
                       keep_deaths = NULL,
                       all.x = TRUE,
-                      allow.cartesian = FALSE,
+                      allow.cartesian = TRUE,
                       agg_by = NULL){
 
   # devoptera::args2vars(add_death)

@@ -13,7 +13,7 @@ map_disease(
   dat,
   id_col = "disease_id",
   fields = c("disease", "categories", "genes")[1],
-  use_api = TRUE,
+  use_api = FALSE,
   return_dat = FALSE,
   workers = NULL,
   all.x = TRUE,

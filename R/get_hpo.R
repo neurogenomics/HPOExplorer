@@ -17,8 +17,7 @@
 #' @import KGExplorer
 #' @examples
 #' hpo <- get_hpo()
-get_hpo <- function(lvl,
-                    add_ancestors = 2,
+get_hpo <- function(lvl = 2,
                     force_new = FALSE,
                     terms=NULL,
                     ## rols imports the international version for some reason
@@ -29,7 +28,7 @@ get_hpo <- function(lvl,
   file <- file.path(save_dir,"hp.rds")
   if(!file.exists(file) || isTRUE(force_new)){
     ont <- KGExplorer::get_ontology(name = "hp",
-                                    add_ancestors = add_ancestors,
+                                    lvl = lvl,
                                     force_new = force_new,
                                     terms = terms,
                                     method = method,

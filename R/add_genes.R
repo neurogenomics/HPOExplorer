@@ -47,6 +47,7 @@ add_genes <- function(phenos = NULL,
                        hpo = hpo)
   #### Add Gene col to data ####
   if(!"gene_symbol" %in% names(phenos)){
+    messager("Adding genes and disease IDs.")
     by <- by[by %in% names(phenos)]
     # ## Merge with input data
     phenos <- data.table::merge.data.table(phenos,

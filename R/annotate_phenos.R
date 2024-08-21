@@ -77,7 +77,8 @@ annotate_phenos <- function(phenos,
   }
   #### Add phenotype-disease freqs ####
   if(isTRUE(add_disease_definitions)){
-    phenos <- add_mondo(phenos = phenos)
+    phenos <- add_disease(phenos = phenos,
+                          add_descriptions = TRUE)
   }
   #### Add hoverboxes ####
   if(isTRUE(add_hoverboxes)){

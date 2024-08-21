@@ -1,3 +1,14 @@
+# HPOExplorer 1.0.3
+
+## New features
+
+* Upgrade `add_disease` to use cached definitions.
+
+## Bug fixes
+
+* Fix tests for `make_phenos_dataframe`.
+* Deprecate `hpo_api` as the HPO API was deprecated in the 2.0.0 Release (https://hpo.jax.org/data/api).
+
 # HPOExplorer 1.0.1
 
 ## New features

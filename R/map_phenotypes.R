@@ -25,6 +25,7 @@ map_phenotypes <- function(terms,
                                KGExplorer::map_ontology_terms
                                )$ignore_char),
                            invert = FALSE){
+  to <- match.arg(to)
   KGExplorer::map_ontology_terms(terms = terms,
                                  ont = hpo,
                                  to = to,

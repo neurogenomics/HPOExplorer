@@ -27,5 +27,7 @@ Extract data from the Human Phenotype Ontology (HPO) using the
 Application Programming Interface (API).
 }
 \examples{
+\dontrun{
 dat <- hpo_api(hpo_id="HP:0011420", type="diseases")
+}
 }

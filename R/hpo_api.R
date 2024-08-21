@@ -12,12 +12,16 @@
 #' @export
 #' @import data.table
 #' @examples
+#' \dontrun{
 #' dat <- hpo_api(hpo_id="HP:0011420", type="diseases")
+#' }
 hpo_api <- function(hpo_id,
                     type = list(NULL,"genes","diseases")[[1]],
                     url = paste("hpo.jax.org/api/hpo/term",hpo_id,type,sep="/")
                     ){
 
+  .Deprecated(msg="hpo_api is deprecated. For details, see: https://hpo.jax.org/data/api")
+  stop()
   requireNamespace("httr")
   requireNamespace("jsonlite")
 

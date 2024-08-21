@@ -18,7 +18,7 @@
 map_disease <- function(dat,
                         id_col="disease_id",
                         fields=c("disease","categories","genes")[1],
-                        use_api=TRUE,
+                        use_api=FALSE,
                         return_dat=FALSE,
                         workers=NULL,
                         all.x = TRUE,
@@ -29,17 +29,17 @@ map_disease <- function(dat,
   #   httr::add_headers(accept = "application/json")
   # )
   # cont <- httr::content(res)
-
   # Define the URL and headers
   if(!id_col %in% names(dat)){
     stop("id_col not found in dat.")
   }
   if(!all(c("disease_name","disease_description") %in% names(dat))){
     messager("Adding disease_name and disease_description.")
+    requireNamespace("BiocParallel")
     #### Slow but up-to-date ####
     if(use_api || length(fields)>1){
       map_disease_i <- function(id){
-        url <- URLencode(
+        url <- utils::URLencode(
           ## encode URL
           paste0("https://ontology.jax.org/api/network/annotation/",id)
         )

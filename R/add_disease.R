@@ -1,11 +1,7 @@
 #' Add diseases
 #'
 #' Annotate each HPO term with diseases that they are associated with.
-#' @param extra_cols Extra metadata columns from the"phenotype.hpoa"
-#' annotations file to include.
-#' See
-#' \href{https://hpo-annotation-qc.readthedocs.io/en/latest/annotationFormat.html}{
-#' here for column descriptions}.
+#' @param add_descriptions Add disease names and descriptions.
 #' @inheritParams add_
 #' @inheritParams map_disease
 #'
@@ -18,7 +14,7 @@
 add_disease <- function(phenos,
                         phenotype_to_genes = load_phenotype_to_genes(),
                         hpo = get_hpo(),
-                        extra_cols = NULL,
+                        add_descriptions=FALSE,
                         all.x = TRUE,
                         use_api=FALSE,
                         workers=NULL,
@@ -34,13 +30,16 @@ add_disease <- function(phenos,
                         all.x = all.x,
                         allow.cartesian = allow.cartesian)
   }
-  phenos <- map_disease(dat=phenos,
-                        id_col="disease_id",
-                        fields=c("disease"),
-                        use_api=use_api,
-                        return_dat=TRUE,
-                        all.x = all.x,
-                        allow.cartesian = allow.cartesian,
-                        workers=workers)
+  if(isTRUE(add_descriptions)){
+    phenos <- map_disease(dat=phenos,
+                          id_col="disease_id",
+                          fields=c("disease"),
+                          use_api=use_api,
+                          return_dat=TRUE,
+                          all.x = all.x,
+                          allow.cartesian = allow.cartesian,
+                          workers=workers)
+  }
+
   return(phenos)
 }

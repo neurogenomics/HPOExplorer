@@ -8,7 +8,7 @@ add_disease(
   phenos,
   phenotype_to_genes = load_phenotype_to_genes(),
   hpo = get_hpo(),
-  extra_cols = NULL,
+  add_descriptions = FALSE,
   all.x = TRUE,
   use_api = FALSE,
   workers = NULL,
@@ -25,11 +25,7 @@ to gene annotations.}
 \item{hpo}{Human Phenotype Ontology object,
 loaded from \link[KGExplorer]{get_ontology}.}
 
-\item{extra_cols}{Extra metadata columns from the"phenotype.hpoa"
-annotations file to include.
-See
-\href{https://hpo-annotation-qc.readthedocs.io/en/latest/annotationFormat.html}{
-here for column descriptions}.}
+\item{add_descriptions}{Add disease names and descriptions.}
 
 \item{all.x}{logical; if \code{TRUE}, rows from \code{x} which have no matching row
 in \code{y} are included. These rows will have 'NA's in the columns that are usually

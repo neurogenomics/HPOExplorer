@@ -1,6 +1,6 @@
 Package: HPOExplorer
 Title: Analysis and Visualisation of the Human Phenotype Ontology
-Version: 1.0.2
+Version: 1.0.3
 Authors@R:
     c(
     person(given = "Brian",
@@ -52,7 +52,8 @@ Suggests:
     piggyback,
     patchwork,
     tidygraph,
-    colorspace
+    colorspace,
+    BiocParallel
 Remotes:
   github::neurogenomics/KGExplorer
 VignetteBuilder: knitr
