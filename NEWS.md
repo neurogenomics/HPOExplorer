@@ -1,3 +1,9 @@
+# HPOExplorer 1.0.4
+
+## Bug fixes
+
+* Fix tests expecting fixed number of phenotypes.
+
 # HPOExplorer 1.0.3
 
 ## New features

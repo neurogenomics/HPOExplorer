@@ -3,7 +3,7 @@ test_that("make_network_plot works", {
   #### make_phenos_dataframe ####
   phenos <- make_phenos_dataframe(ancestor = "Neurodevelopmental delay")
   testthat::expect_true(methods::is(phenos,"data.table"))
-  testthat::expect_equal(nrow(phenos),23)
+  testthat::expect_in(nrow(phenos),seq(21, 28))
 
   #### ggnetwork: interactive ####
   plt <- make_network_plot(phenos = phenos,
