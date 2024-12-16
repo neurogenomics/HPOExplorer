@@ -1,141 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/articles/HPOExplorer.html</loc>
-  </url>
-  <url>
-    <loc>/articles/docker.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_.html</loc>
-  </url>
-  <url>
-    <loc>/reference/disease_id_to_omop.html</loc>
-  </url>
-  <url>
-    <loc>/reference/filter_.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fix_hpo_ids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_gene_lists.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_term_definition_api.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_top_phenos.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gpt_annot_check.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gpt_annot_class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gpt_annot_codify.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gpt_annot_melt.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gpt_annot_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gpt_annot_plot_branches.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gpt_annot_read.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hpo_api.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hpo_deaths.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hpo_frequencies.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hpo_id_to_omop.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hpo_modifiers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hpo_onsets.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hpo_tiers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hpo_tiers_auto.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hpo_to_matrix.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/list_columns.html</loc>
-  </url>
-  <url>
-    <loc>/reference/load_phenotype_to_genes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/main.html</loc>
-  </url>
-  <url>
-    <loc>/reference/make_.html</loc>
-  </url>
-  <url>
-    <loc>/reference/map_.html</loc>
-  </url>
-  <url>
-    <loc>/reference/map_phenotypes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/newlines_to_definition.html</loc>
-  </url>
-  <url>
-    <loc>/reference/per_branch_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/phenos_to_granges.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_evidence.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_top_phenos.html</loc>
-  </url>
-  <url>
-    <loc>/reference/search_hpo.html</loc>
-  </url>
-  <url>
-    <loc>/reference/unlist_col.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/articles/HPOExplorer.html</loc></url>
+<url><loc>/articles/docker.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/add_.html</loc></url>
+<url><loc>/reference/add_disease.html</loc></url>
+<url><loc>/reference/disease_id_to_omop.html</loc></url>
+<url><loc>/reference/disease_map.html</loc></url>
+<url><loc>/reference/filter_.html</loc></url>
+<url><loc>/reference/fix_hpo_ids.html</loc></url>
+<url><loc>/reference/get_.html</loc></url>
+<url><loc>/reference/get_data.html</loc></url>
+<url><loc>/reference/get_gene_lists.html</loc></url>
+<url><loc>/reference/get_term_definition_api.html</loc></url>
+<url><loc>/reference/get_top_phenos.html</loc></url>
+<url><loc>/reference/gpt_annot_check.html</loc></url>
+<url><loc>/reference/gpt_annot_class.html</loc></url>
+<url><loc>/reference/gpt_annot_codify.html</loc></url>
+<url><loc>/reference/gpt_annot_melt.html</loc></url>
+<url><loc>/reference/gpt_annot_plot.html</loc></url>
+<url><loc>/reference/gpt_annot_plot_branches.html</loc></url>
+<url><loc>/reference/gpt_annot_read.html</loc></url>
+<url><loc>/reference/hpo_api.html</loc></url>
+<url><loc>/reference/hpo_deaths.html</loc></url>
+<url><loc>/reference/hpo_frequencies.html</loc></url>
+<url><loc>/reference/hpo_id_to_omop.html</loc></url>
+<url><loc>/reference/hpo_modifiers.html</loc></url>
+<url><loc>/reference/hpo_onsets.html</loc></url>
+<url><loc>/reference/hpo_tiers.html</loc></url>
+<url><loc>/reference/hpo_tiers_auto.html</loc></url>
+<url><loc>/reference/hpo_to_matrix.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/list_columns.html</loc></url>
+<url><loc>/reference/load_phenotype_to_genes.html</loc></url>
+<url><loc>/reference/main.html</loc></url>
+<url><loc>/reference/make_.html</loc></url>
+<url><loc>/reference/map_.html</loc></url>
+<url><loc>/reference/map_disease.html</loc></url>
+<url><loc>/reference/map_phenotypes.html</loc></url>
+<url><loc>/reference/newlines_to_definition.html</loc></url>
+<url><loc>/reference/per_branch_plot.html</loc></url>
+<url><loc>/reference/phenos_to_granges.html</loc></url>
+<url><loc>/reference/plot_arrow.html</loc></url>
+<url><loc>/reference/plot_evidence.html</loc></url>
+<url><loc>/reference/plot_top_phenos.html</loc></url>
+<url><loc>/reference/search_hpo.html</loc></url>
+<url><loc>/reference/unlist_col.html</loc></url>
 </urlset>
+

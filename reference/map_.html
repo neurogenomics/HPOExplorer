@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.4</span>
       </span>
     </div>
 
@@ -31,7 +31,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
@@ -44,20 +44,20 @@
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/neurogenomics/HPOExplorer/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Map functions</h1>
-    <small class="dont-index">Source: <a href="https://github.com/neurogenomics/HPOExplorer/blob/HEAD/R/0docs.R" class="external-link"><code>R/0docs.R</code></a>, <a href="https://github.com/neurogenomics/HPOExplorer/blob/HEAD/R/list_deaths.R" class="external-link"><code>R/list_deaths.R</code></a>, <a href="https://github.com/neurogenomics/HPOExplorer/blob/HEAD/R/list_onsets.R" class="external-link"><code>R/list_onsets.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/neurogenomics/HPOExplorer/blob/improve-docs/R/0docs.R" class="external-link"><code>R/0docs.R</code></a>, <a href="https://github.com/neurogenomics/HPOExplorer/blob/improve-docs/R/list_deaths.R" class="external-link"><code>R/list_deaths.R</code></a>, <a href="https://github.com/neurogenomics/HPOExplorer/blob/improve-docs/R/list_onsets.R" class="external-link"><code>R/list_onsets.R</code></a></small>
     <div class="hidden name"><code>map_.Rd</code></div>
     </div>
 
@@ -84,44 +84,40 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>hpo</dt>
+
+
+<dl><dt id="arg-hpo">hpo<a class="anchor" aria-label="anchor" href="#arg-hpo"></a></dt>
 <dd><p>Human Phenotype Ontology object,
 loaded from <a href="https://rdrr.io/pkg/KGExplorer/man/get_.html" class="external-link">get_ontology</a>.</p></dd>
 
 
-<dt>exclude</dt>
+<dt id="arg-exclude">exclude<a class="anchor" aria-label="anchor" href="#arg-exclude"></a></dt>
 <dd><p>HPO phenotype names to exclude.</p></dd>
 
 
-<dt>to</dt>
+<dt id="arg-to">to<a class="anchor" aria-label="anchor" href="#arg-to"></a></dt>
 <dd><p>Character vector of database(s) to map IDs to.
 When not <code>"mondo"</code>, can supply multiple alternative databases to map to
  (e.g. <code>c("OMIM","Orphanet","DECIPHER")</code>).</p></dd>
 
 
-<dt>include_na</dt>
+<dt id="arg-include-na">include_na<a class="anchor" aria-label="anchor" href="#arg-include-na"></a></dt>
 <dd><p>Include NA values for onset.</p></dd>
 
 
-<dt>verbose</dt>
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
 <dd><p>Print messages.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>Mapped data.</p>
-
-
+    <p>Mapped data.</p>
 <p>Named list of HPO IDs.</p>
-
-
 <p>Named list of HPO IDs.</p>
     </div>
     <div id="functions">
     <h2>Functions</h2>
-    
+
 <ul><li><p><code>list_deaths()</code>: map_
 List age of death HPO terms</p>
 <p>List age of death phenotypes in the HPO.</p></li>
@@ -150,15 +146,15 @@ List age of onset HPO terms</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 
