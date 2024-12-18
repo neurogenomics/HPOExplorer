@@ -121,7 +121,7 @@ to gene annotations.</p></dd>
 
 
 <dt id="arg-fun-aggregate">fun.aggregate<a class="anchor" aria-label="anchor" href="#arg-fun-aggregate"></a></dt>
-<dd><p>Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to <code>length</code> with a message.</p>
+<dd><p>Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to <code>length</code> with a warning of class 'dt_missing_fun_aggregate_warning'.</p>
 <p>To use multiple aggregation functions, pass a <code>list</code>; see Examples.</p></dd>
 
 
@@ -131,7 +131,7 @@ to gene annotations.</p></dd>
 
 
 <dt id="arg-fill">fill<a class="anchor" aria-label="anchor" href="#arg-fill"></a></dt>
-<dd><p>Value with which to fill missing cells. If <code>fun.aggregate</code> is present, takes the value by applying the function on a 0-length vector.</p></dd>
+<dd><p>Value with which to fill missing cells. If <code>fill=NULL</code> and missing cells are present, then <code>fun.aggregate</code> is used on a 0-length vector to obtain a fill value.</p></dd>
 
 
 <dt id="arg-run-cor">run_cor<a class="anchor" aria-label="anchor" href="#arg-run-cor"></a></dt>
