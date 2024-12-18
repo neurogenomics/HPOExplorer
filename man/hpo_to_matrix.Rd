@@ -28,7 +28,7 @@ to gene annotations.}
 
 \item{formula}{A formula of the form LHS ~ RHS to cast, see Details.}
 
-\item{fun.aggregate}{Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to \code{length} with a message.
+\item{fun.aggregate}{Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to \code{length} with a warning of class 'dt_missing_fun_aggregate_warning'.
 
   To use multiple aggregation functions, pass a \code{list}; see Examples. }
 
@@ -36,7 +36,7 @@ to gene annotations.}
 
   Cast multiple \code{value.var} columns simultaneously by passing their names as a \code{character} vector. See Examples. }
 
-\item{fill}{Value with which to fill missing cells. If \code{fun.aggregate} is present, takes the value by applying the function on a 0-length vector.}
+\item{fill}{Value with which to fill missing cells. If \code{fill=NULL} and missing cells are present, then \code{fun.aggregate} is used on a 0-length vector to obtain a fill value.}
 
 \item{run_cor}{Return a matrix of pairwise correlations.}
 

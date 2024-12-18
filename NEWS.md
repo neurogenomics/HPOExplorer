@@ -3,6 +3,8 @@
 ## Bug fixes
 
 * Fix tests expecting fixed number of phenotypes.
+* Vignette
+  - `HPOExplorer`: Fix rendering of final plot.
 
 # HPOExplorer 1.0.3
 
