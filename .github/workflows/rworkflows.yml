@@ -38,7 +38,7 @@ jobs:
           cont: ~
           rspm: ~
     steps:
-    - uses: neurogenomics/rworkflows@master
+    - uses: HDash/rworkflows@temp-citeproc-fix
       with:
         run_bioccheck: ${{ false }}
         run_rcmdcheck: ${{ true }}
