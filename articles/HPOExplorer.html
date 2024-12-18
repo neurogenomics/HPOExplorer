@@ -89,7 +89,7 @@ Authors: <i>Robert Gordon-Smith, Brian M. Schilder, Nathan G
             
             <h4 data-toc-skip class="date"><h4>
 <br>
-Most recent update: <i>Dec-16-2024</i><br>
+Most recent update: <i>Dec-18-2024</i><br>
 </h4></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/HPOExplorer/blob/improve-docs/vignettes/HPOExplorer.Rmd" class="external-link"><code>vignettes/HPOExplorer.Rmd</code></a></small>
@@ -108,6 +108,8 @@ Most recent update: <i>Dec-16-2024</i><br>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/neurogenomics/HPOExplorer" class="external-link">"HPOExplorer"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"neurogenomics/HPOExplorer"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/neurogenomics/HPOExplorer" class="external-link">HPOExplorer</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in get(paste0(generic, ".", class), envir = get_method_env()) : </span></span>
+<span><span class="co">##   object 'type_sum.accel' not found</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
@@ -124,7 +126,7 @@ from the graph.</p>
 <div class="section level2">
 <h2 id="load-ontology-data">Load ontology data<a class="anchor" aria-label="anchor" href="#load-ontology-data"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hpo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_.html">get_hpo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -134,7 +136,7 @@ from the graph.</p>
 outline the main features of the package. First we are going to get a
 subset of HPO terms to plot. We will select phenotypes that are
 descendants of “Neurodevelopmental delay”.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ancestor</span> <span class="op">&lt;-</span> <span class="st">"Neurodevelopmental delay"</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -161,7 +163,7 @@ the horizontal spread of branching off terms). For example “Phenotypic
 abnormality” is high up in the HPO and all other disease phenotypes are
 descendants of it. It is at ontology level 13. A term with no
 descendants is at ontology level 0.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_.html">make_phenos_dataframe</a></span><span class="op">(</span>hpo <span class="op">=</span> <span class="va">hpo</span>, </span>
 <span>                                ancestor <span class="op">=</span> <span class="va">ancestor</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -178,7 +180,7 @@ name from the <code>phenos</code> dataframe which you want to be mapped
 to the colour of the nodes. In this case we created the family arbitrary
 variable of ontology level to number of associated genes ratio and its
 column name is <code>ontLvl_geneCount_ratio</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_.html">make_network_plot</a></span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span>, </span>
 <span>                         colour_var <span class="op">=</span> <span class="st">"ontLvl_geneCount_ratio"</span><span class="op">)</span></span>
 <span><span class="fu">methods</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/methods/show.html" class="external-link">show</a></span><span class="op">(</span><span class="va">plt</span><span class="op">)</span></span></code></pre></div>
@@ -477,9 +479,9 @@ column name is <code>ontLvl_geneCount_ratio</code>.</p>
 <div class="section level2">
 <h2 id="session-info">Session Info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<details><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<details><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## R Under development (unstable) (2024-12-10 r87437)</span></span>
+<pre><code><span><span class="co">## R Under development (unstable) (2024-12-15 r87442)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu</span></span>
 <span><span class="co">## Running under: Ubuntu 24.04.1 LTS</span></span>
 <span><span class="co">## </span></span>
@@ -505,71 +507,70 @@ column name is <code>ontLvl_geneCount_ratio</code>.</p>
 <span><span class="co">## [1] HPOExplorer_1.0.4</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##   [1] RColorBrewer_1.1-3        jsonlite_1.8.9           </span></span>
-<span><span class="co">##   [3] shape_1.4.6.1             magrittr_2.0.3           </span></span>
-<span><span class="co">##   [5] farver_2.1.2              rmarkdown_2.29           </span></span>
-<span><span class="co">##   [7] GlobalOptions_0.1.2       fs_1.6.5                 </span></span>
-<span><span class="co">##   [9] ragg_1.3.3                vctrs_0.6.5              </span></span>
-<span><span class="co">##  [11] ggtree_3.15.0             rstatix_0.7.2            </span></span>
-<span><span class="co">##  [13] htmltools_0.5.8.1         broom_1.0.7              </span></span>
-<span><span class="co">##  [15] Formula_1.2-5             gridGraphics_0.5-1       </span></span>
-<span><span class="co">##  [17] sass_0.4.9                bslib_0.8.0              </span></span>
-<span><span class="co">##  [19] htmlwidgets_1.6.4         desc_1.4.3               </span></span>
-<span><span class="co">##  [21] httr2_1.0.7               plotly_4.10.4            </span></span>
-<span><span class="co">##  [23] cachem_1.1.0              igraph_2.1.2             </span></span>
-<span><span class="co">##  [25] ggnetwork_0.5.13          mime_0.12                </span></span>
-<span><span class="co">##  [27] lifecycle_1.0.4           iterators_1.0.14         </span></span>
-<span><span class="co">##  [29] pkgconfig_2.0.3           Matrix_1.7-1             </span></span>
-<span><span class="co">##  [31] R6_2.5.1                  fastmap_1.2.0            </span></span>
-<span><span class="co">##  [33] shiny_1.10.0              clue_0.3-66              </span></span>
-<span><span class="co">##  [35] digest_0.6.37             aplot_0.2.3              </span></span>
-<span><span class="co">##  [37] colorspace_2.1-1          patchwork_1.3.0          </span></span>
-<span><span class="co">##  [39] S4Vectors_0.45.2          grr_0.9.5                </span></span>
-<span><span class="co">##  [41] crosstalk_1.2.1           textshaping_0.4.1        </span></span>
-<span><span class="co">##  [43] ggpubr_0.6.0              labeling_0.4.3           </span></span>
-<span><span class="co">##  [45] fansi_1.0.6               httr_1.4.7               </span></span>
-<span><span class="co">##  [47] KGExplorer_0.99.03        abind_1.4-8              </span></span>
-<span><span class="co">##  [49] compiler_4.5.0            withr_3.0.2              </span></span>
-<span><span class="co">##  [51] doParallel_1.0.17         backports_1.5.0          </span></span>
-<span><span class="co">##  [53] BiocParallel_1.41.0       orthogene_1.13.0         </span></span>
-<span><span class="co">##  [55] carData_3.0-5             homologene_1.4.68.19.3.27</span></span>
-<span><span class="co">##  [57] maps_3.4.2.1              ggsignif_0.6.4           </span></span>
-<span><span class="co">##  [59] rappdirs_0.3.3            rjson_0.2.23             </span></span>
-<span><span class="co">##  [61] scatterplot3d_0.3-44      tools_4.5.0              </span></span>
-<span><span class="co">##  [63] ape_5.8-1                 httpuv_1.6.15            </span></span>
-<span><span class="co">##  [65] glue_1.8.0                rols_3.3.0               </span></span>
-<span><span class="co">##  [67] nlme_3.1-166              promises_1.3.2           </span></span>
-<span><span class="co">##  [69] grid_4.5.0                cluster_2.1.8            </span></span>
-<span><span class="co">##  [71] generics_0.1.3            gtable_0.3.6             </span></span>
-<span><span class="co">##  [73] tidyr_1.3.1               data.table_1.16.4        </span></span>
-<span><span class="co">##  [75] tidygraph_1.3.1           xml2_1.3.6               </span></span>
-<span><span class="co">##  [77] car_3.1-3                 utf8_1.2.4               </span></span>
-<span><span class="co">##  [79] BiocGenerics_0.53.3       foreach_1.5.2            </span></span>
-<span><span class="co">##  [81] pillar_1.9.0              stringr_1.5.1            </span></span>
-<span><span class="co">##  [83] yulab.utils_0.1.8         babelgene_22.9           </span></span>
-<span><span class="co">##  [85] pals_1.9                  later_1.4.1              </span></span>
-<span><span class="co">##  [87] circlize_0.4.16           dplyr_1.1.4              </span></span>
-<span><span class="co">##  [89] treeio_1.31.0             lattice_0.22-6           </span></span>
-<span><span class="co">##  [91] tidyselect_1.2.1          ComplexHeatmap_2.23.0    </span></span>
-<span><span class="co">##  [93] knitr_1.49                IRanges_2.41.2           </span></span>
-<span><span class="co">##  [95] stats4_4.5.0              xfun_0.49                </span></span>
-<span><span class="co">##  [97] Biobase_2.67.0            matrixStats_1.4.1        </span></span>
-<span><span class="co">##  [99] stringi_1.8.4             lazyeval_0.2.2           </span></span>
-<span><span class="co">## [101] ggfun_0.1.8               yaml_2.3.10              </span></span>
-<span><span class="co">## [103] evaluate_1.0.1            codetools_0.2-20         </span></span>
-<span><span class="co">## [105] tibble_3.2.1              ggplotify_0.1.2          </span></span>
-<span><span class="co">## [107] Polychrome_1.5.1          cli_3.6.3                </span></span>
-<span><span class="co">## [109] xtable_1.8-4              systemfonts_1.1.0        </span></span>
-<span><span class="co">## [111] munsell_0.5.1             jquerylib_0.1.4          </span></span>
-<span><span class="co">## [113] dichromat_2.0-0.1         Rcpp_1.0.13-1            </span></span>
-<span><span class="co">## [115] mapproj_1.2.11            gprofiler2_0.2.3         </span></span>
-<span><span class="co">## [117] png_0.1-8                 parallel_4.5.0           </span></span>
-<span><span class="co">## [119] simona_1.5.0              pkgdown_2.1.1            </span></span>
-<span><span class="co">## [121] ggplot2_3.5.1             viridisLite_0.4.2        </span></span>
-<span><span class="co">## [123] tidytree_0.4.6            scales_1.3.0             </span></span>
-<span><span class="co">## [125] purrr_1.0.2               crayon_1.5.3             </span></span>
-<span><span class="co">## [127] GetoptLong_1.0.5          rlang_1.1.4              </span></span>
-<span><span class="co">## [129] rvest_1.0.4</span></span></code></pre>
+<span><span class="co">##   [1] grr_0.9.5                 httr2_1.0.7              </span></span>
+<span><span class="co">##   [3] rlang_1.1.4               magrittr_2.0.3           </span></span>
+<span><span class="co">##   [5] clue_0.3-66               GetoptLong_1.0.5         </span></span>
+<span><span class="co">##   [7] matrixStats_1.4.1         compiler_4.5.0           </span></span>
+<span><span class="co">##   [9] png_0.1-8                 systemfonts_1.1.0        </span></span>
+<span><span class="co">##  [11] vctrs_0.6.5               maps_3.4.2.1             </span></span>
+<span><span class="co">##  [13] gprofiler2_0.2.3          stringr_1.5.1            </span></span>
+<span><span class="co">##  [15] rvest_1.0.4               shape_1.4.6.1            </span></span>
+<span><span class="co">##  [17] pkgconfig_2.0.3           crayon_1.5.3             </span></span>
+<span><span class="co">##  [19] fastmap_1.2.0             backports_1.5.0          </span></span>
+<span><span class="co">##  [21] labeling_0.4.3            promises_1.3.2           </span></span>
+<span><span class="co">##  [23] rmarkdown_2.29            ragg_1.3.3               </span></span>
+<span><span class="co">##  [25] purrr_1.0.2               xfun_0.49                </span></span>
+<span><span class="co">##  [27] cachem_1.1.0              pals_1.9                 </span></span>
+<span><span class="co">##  [29] aplot_0.2.4               jsonlite_1.8.9           </span></span>
+<span><span class="co">##  [31] later_1.4.1               BiocParallel_1.41.0      </span></span>
+<span><span class="co">##  [33] cluster_2.1.8             broom_1.0.7              </span></span>
+<span><span class="co">##  [35] parallel_4.5.0            R6_2.5.1                 </span></span>
+<span><span class="co">##  [37] rols_3.3.0                stringi_1.8.4            </span></span>
+<span><span class="co">##  [39] RColorBrewer_1.1-3        bslib_0.8.0              </span></span>
+<span><span class="co">##  [41] car_3.1-3                 jquerylib_0.1.4          </span></span>
+<span><span class="co">##  [43] Rcpp_1.0.13-1             iterators_1.0.14         </span></span>
+<span><span class="co">##  [45] knitr_1.49                IRanges_2.41.2           </span></span>
+<span><span class="co">##  [47] httpuv_1.6.15             igraph_2.1.2             </span></span>
+<span><span class="co">##  [49] Matrix_1.7-1              tidyselect_1.2.1         </span></span>
+<span><span class="co">##  [51] dichromat_2.0-0.1         abind_1.4-8              </span></span>
+<span><span class="co">##  [53] yaml_2.3.10               doParallel_1.0.17        </span></span>
+<span><span class="co">##  [55] codetools_0.2-20          lattice_0.22-6           </span></span>
+<span><span class="co">##  [57] tibble_3.2.1              withr_3.0.2              </span></span>
+<span><span class="co">##  [59] shiny_1.10.0              Biobase_2.67.0           </span></span>
+<span><span class="co">##  [61] treeio_1.31.0             evaluate_1.0.1           </span></span>
+<span><span class="co">##  [63] gridGraphics_0.5-1        desc_1.4.3               </span></span>
+<span><span class="co">##  [65] xml2_1.3.6                circlize_0.4.16          </span></span>
+<span><span class="co">##  [67] pillar_1.10.0             ggtree_3.15.0            </span></span>
+<span><span class="co">##  [69] ggpubr_0.6.0              carData_3.0-5            </span></span>
+<span><span class="co">##  [71] stats4_4.5.0              foreach_1.5.2            </span></span>
+<span><span class="co">##  [73] ggfun_0.1.8               plotly_4.10.4            </span></span>
+<span><span class="co">##  [75] generics_0.1.3            S4Vectors_0.45.2         </span></span>
+<span><span class="co">##  [77] ggplot2_3.5.1             munsell_0.5.1            </span></span>
+<span><span class="co">##  [79] scales_1.3.0              tidytree_0.4.6           </span></span>
+<span><span class="co">##  [81] ggnetwork_0.5.13          xtable_1.8-4             </span></span>
+<span><span class="co">##  [83] glue_1.8.0                orthogene_1.13.0         </span></span>
+<span><span class="co">##  [85] mapproj_1.2.11            scatterplot3d_0.3-44     </span></span>
+<span><span class="co">##  [87] lazyeval_0.2.2            tools_4.5.0              </span></span>
+<span><span class="co">##  [89] data.table_1.16.4         KGExplorer_0.99.03       </span></span>
+<span><span class="co">##  [91] ggsignif_0.6.4            babelgene_22.9           </span></span>
+<span><span class="co">##  [93] fs_1.6.5                  tidygraph_1.3.1          </span></span>
+<span><span class="co">##  [95] grid_4.5.0                tidyr_1.3.1              </span></span>
+<span><span class="co">##  [97] ape_5.8-1                 crosstalk_1.2.1          </span></span>
+<span><span class="co">##  [99] colorspace_2.1-1          nlme_3.1-166             </span></span>
+<span><span class="co">## [101] patchwork_1.3.0           homologene_1.4.68.19.3.27</span></span>
+<span><span class="co">## [103] Formula_1.2-5             cli_3.6.3                </span></span>
+<span><span class="co">## [105] rappdirs_0.3.3            Polychrome_1.5.1         </span></span>
+<span><span class="co">## [107] textshaping_0.4.1         viridisLite_0.4.2        </span></span>
+<span><span class="co">## [109] ComplexHeatmap_2.23.0     dplyr_1.1.4              </span></span>
+<span><span class="co">## [111] gtable_0.3.6              rstatix_0.7.2            </span></span>
+<span><span class="co">## [113] yulab.utils_0.1.8         sass_0.4.9               </span></span>
+<span><span class="co">## [115] digest_0.6.37             BiocGenerics_0.53.3      </span></span>
+<span><span class="co">## [117] ggplotify_0.1.2           rjson_0.2.23             </span></span>
+<span><span class="co">## [119] htmlwidgets_1.6.4         farver_2.1.2             </span></span>
+<span><span class="co">## [121] htmltools_0.5.8.1         pkgdown_2.1.1            </span></span>
+<span><span class="co">## [123] simona_1.5.0              lifecycle_1.0.4          </span></span>
+<span><span class="co">## [125] httr_1.4.7                mime_0.12                </span></span>
+<span><span class="co">## [127] GlobalOptions_0.1.2</span></span></code></pre>
 </details><hr>
 </div>
   </div>
