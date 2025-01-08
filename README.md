@@ -1,7 +1,7 @@
 <img src='https://github.com/neurogenomics/HPOExplorer/raw/master/inst/hex/hex.png' title='Hex sticker for HPOExplorer' height='300'><br>
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
-[![](https://img.shields.io/badge/devel%20version-1.0.0-black.svg)](https://github.com/neurogenomics/HPOExplorer)
+[![](https://img.shields.io/badge/devel%20version-1.0.4-black.svg)](https://github.com/neurogenomics/HPOExplorer)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/HPOExplorer.svg)](https://github.com/neurogenomics/HPOExplorer)
 [![](https://img.shields.io/github/last-commit/neurogenomics/HPOExplorer.svg)](https://github.com/neurogenomics/HPOExplorer/commits/master)
 <br> [![R build
@@ -10,10 +10,11 @@ status](https://github.com/neurogenomics/HPOExplorer/workflows/rworkflows/badge.
 <br>
 <a href='https://app.codecov.io/gh/neurogenomics/HPOExplorer/tree/master' target='_blank'><img src='https://codecov.io/gh/neurogenomics/HPOExplorer/branch/master/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'></a>  
 <h4>  
-Authors: <i>Brian Schilder, Robert Gordon-Smith, Nathan Skene</i>  
+Authors: <i>Brian Schilder, Robert Gordon-Smith, Nathan Skene,
+Hiranyamaya Dash</i>  
 </h4>
 <h4>  
-Most recent update: <i>Mar-08-2024</i>  
+Most recent update: <i>Dec-03-2024</i>  
 </h4>
 
 ## Intro
@@ -103,13 +104,13 @@ If you use `HPOExplorer`, please cite:
 utils::sessionInfo()
 ```
 
-    ## R version 4.3.1 (2023-06-16)
-    ## Platform: aarch64-apple-darwin20 (64-bit)
-    ## Running under: macOS Sonoma 14.3.1
+    ## R version 4.4.2 (2024-10-31)
+    ## Platform: aarch64-apple-darwin20
+    ## Running under: macOS Sequoia 15.1.1
     ## 
     ## Matrix products: default
-    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
-    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
+    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
     ## 
     ## locale:
     ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -121,22 +122,23 @@ utils::sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] gtable_0.3.4        jsonlite_1.8.8      renv_1.0.3         
-    ##  [4] dplyr_1.1.4         compiler_4.3.1      BiocManager_1.30.22
-    ##  [7] tidyselect_1.2.0    rvcheck_0.2.1       scales_1.3.0       
-    ## [10] yaml_2.3.8          fastmap_1.1.1       here_1.0.1         
-    ## [13] ggplot2_3.4.4       R6_2.5.1            generics_0.1.3     
-    ## [16] knitr_1.45          yulab.utils_0.1.4   tibble_3.2.1       
+    ##  [1] gtable_0.3.6        jsonlite_1.8.9      renv_1.0.11        
+    ##  [4] dplyr_1.1.4         compiler_4.4.2      BiocManager_1.30.25
+    ##  [7] tidyselect_1.2.1    rvcheck_0.2.1       scales_1.3.0       
+    ## [10] yaml_2.3.10         fastmap_1.2.0       here_1.0.1         
+    ## [13] ggplot2_3.5.1       R6_2.5.1            generics_0.1.3     
+    ## [16] knitr_1.49          yulab.utils_0.1.8   tibble_3.2.1       
     ## [19] desc_1.4.3          dlstats_0.1.7       rprojroot_2.0.4    
-    ## [22] munsell_0.5.0       pillar_1.9.0        RColorBrewer_1.1-3 
-    ## [25] rlang_1.1.3         utf8_1.2.4          cachem_1.0.8       
-    ## [28] badger_0.2.3        xfun_0.42           fs_1.6.3           
-    ## [31] memoise_2.0.1.9000  cli_3.6.2           magrittr_2.0.3     
-    ## [34] rworkflows_1.0.1    digest_0.6.34       grid_4.3.1         
-    ## [37] rstudioapi_0.15.0   lifecycle_1.0.4     vctrs_0.6.5        
-    ## [40] data.table_1.15.0   evaluate_0.23       glue_1.7.0         
-    ## [43] fansi_1.0.6         colorspace_2.1-0    rmarkdown_2.25     
-    ## [46] tools_4.3.1         pkgconfig_2.0.3     htmltools_0.5.7
+    ## [22] munsell_0.5.1       pillar_1.9.0        RColorBrewer_1.1-3 
+    ## [25] rlang_1.1.4         utf8_1.2.4          badger_0.2.4       
+    ## [28] xfun_0.49           fs_1.6.5            cli_3.6.3          
+    ## [31] magrittr_2.0.3      rworkflows_1.0.3    digest_0.6.37      
+    ## [34] grid_4.4.2          rstudioapi_0.17.1   lifecycle_1.0.4    
+    ## [37] vctrs_0.6.5         evaluate_1.0.1      glue_1.8.0         
+    ## [40] data.table_1.16.2   fansi_1.0.6         colorspace_2.1-1   
+    ## [43] rmarkdown_2.29      tools_4.4.2         pkgconfig_2.0.3    
+    ## [46] htmltools_0.5.8.1
 
 </details>
+
 <hr>

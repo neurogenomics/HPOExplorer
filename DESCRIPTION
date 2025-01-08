@@ -1,6 +1,6 @@
 Package: HPOExplorer
 Title: Analysis and Visualisation of the Human Phenotype Ontology
-Version: 1.0.3
+Version: 1.0.4
 Authors@R:
     c(
     person(given = "Brian",
@@ -17,7 +17,12 @@ Authors@R:
            family = "Skene",
            role = c("aut"),
            email = "nathan.skene@gmail.com",
-           comment = c(ORCID = "0000-0002-6807-3180"))) 
+           comment = c(ORCID = "0000-0002-6807-3180")),
+    person(given = "Hiranyamaya",
+           family = "Dash",
+           role = c("ctb"),
+           email = "hdash.work@gmail.com",
+           comment = c(ORCID = "0009-0005-5514-505X")))
 Description: Import, annotate and visualise the 18k+ hierarchically structured 
   clinical phenotypes across the Human Phenotype Ontology.
 License: GPL-3
@@ -25,7 +30,7 @@ URL: https://github.com/neurogenomics/HPOExplorer
 BugReports: https://github.com/neurogenomics/HPOExplorer/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Depends: 
     R (>= 4.1.0)
 Imports:

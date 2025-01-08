@@ -80,7 +80,7 @@ The `colour_var` argument is where you choose the column name from the `phenos` 
 ```{r plot, warning = FALSE, message = FALSE, fig.width = 9, fig.height = 7}
 plt <- make_network_plot(phenos = phenos, 
                          colour_var = "ontLvl_geneCount_ratio")
-methods::show(plt)
+plt$plot
 ```
 
 

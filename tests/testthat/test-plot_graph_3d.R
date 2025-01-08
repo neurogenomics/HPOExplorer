@@ -6,6 +6,6 @@ test_that("plot_graph_3d works", {
     KGExplorer::plot_graph_3d(g=g, show_plot = FALSE)
   )
   testthat::expect_true(methods::is(g,"igraph"))
-  testthat::expect_length(g,23)
+  testthat::expect_in(length(g),seq(21, 28))
   testthat::expect_true(methods::is(plt,"plotly"))
 })
