@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.5</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@ descendants of an ancestor HPO ID term.</p></li>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_.html">make_phenos_dataframe</a></span><span class="op">(</span>ancestor <span class="op">=</span> <span class="st">"Neurodevelopmental delay"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting data for 24 descendents.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing gene counts.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding term definitions.</span>
@@ -126,7 +126,7 @@ descendants of an ancestor HPO ID term.</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding ancestor metadata.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Ancestor metadata already present. Use force_new=TRUE to overwrite.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 24 associations remain after filtering.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Getting absolute ontology level for 19,034 IDs.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Getting absolute ontology level for 18,082 IDs.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing ontology level / gene count ratio.</span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">filter_descendants</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span>,</span></span>
 <span class="r-in"><span>                              keep_descendants <span class="op">=</span> <span class="st">"Motor delay"</span><span class="op">)</span></span></span>

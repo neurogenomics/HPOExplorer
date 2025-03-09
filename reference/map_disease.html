@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.5</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@ data from both <code>x</code> and <code>y</code> are included in the output.</p>
 
 
 <dt id="arg-allow-cartesian">allow.cartesian<a class="anchor" aria-label="anchor" href="#arg-allow-cartesian"></a></dt>
-<dd><p>See <code>allow.cartesian</code> in <code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">[.data.table</a></code>.</p></dd>
+<dd><p>See <code>allow.cartesian</code> in <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">[.data.table</a></code>.</p></dd>
 
 </dl></div>
 
@@ -128,7 +128,7 @@ data from both <code>x</code> and <code>y</code> are included in the output.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">HPOExplorer</span><span class="fu">::</span><span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-in"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">map_disease</span><span class="op">(</span>dat <span class="op">=</span> <span class="va">dat</span>, workers<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding disease_name and disease_description.</span>
 </code></pre></div>

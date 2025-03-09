@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.5</span>
       </span>
     </div>
 
@@ -259,7 +259,7 @@ data from both <code>x</code> and <code>y</code> are included in the output.</p>
 
 
 <dt id="arg-allow-cartesian">allow.cartesian<a class="anchor" aria-label="anchor" href="#arg-allow-cartesian"></a></dt>
-<dd><p>See <code>allow.cartesian</code> in <code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">[.data.table</a></code>.</p></dd>
+<dd><p>See <code>allow.cartesian</code> in <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">[.data.table</a></code>.</p></dd>
 
 
 <dt id="arg-agg-by">agg_by<a class="anchor" aria-label="anchor" href="#arg-agg-by"></a></dt>
@@ -296,7 +296,7 @@ See <a href="https://thegencc.org/faq.html#validity-termsdelphi-survey" class="e
 for more information.</p></dd>
 
     <dt><code>dat</code></dt>
-<dd><p><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a> with genes.</p></dd>
+<dd><p><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a> with genes.</p></dd>
 
     <dt><code>output_col</code></dt>
 <dd><p>Column name of output IDs.</p></dd>
@@ -652,7 +652,7 @@ Intellectual disability</p></li>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_death</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenos with AgeOfDeath.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding genes and disease IDs.</span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -660,41 +660,41 @@ Intellectual disability</p></li>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_evidence</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating gene-disease associations with Evidence Score</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Gathering data from GenCC.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing cached file.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Evidence scores for: </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  - 10630 diseases </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  - 5300 genes</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-02-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  - 10665 diseases </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  - 5361 genes</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-09</span>
 <span class="r-in"><span><span class="va">phenotype_to_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span>,<span class="op">]</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_gene_frequency</span><span class="op">(</span>phenotype_to_genes <span class="op">=</span> <span class="va">phenotype_to_genes</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating gene frequencies.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: genes_to_phenotype.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="main.html">example_phenos</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_genes</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding genes and disease IDs.</span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="main.html">example_phenos</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_gpt_annotations</span><span class="op">(</span><span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: piggyback</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Translating ontology terms to ids.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 384 phenotypes do not have matching HPO IDs.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading in GPT annotations for 16,752 phenotypes.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 151 phenotypes do not have matching HPO IDs.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading in GPT annotations for 16,982 phenotypes.</span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="main.html">example_phenos</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_hpo_definition</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding term definitions.</span>
 <span class="r-in"><span><span class="va">phenotype_to_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">phenotype_to_genes</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hpo_id"</span>,<span class="st">"hpo_name"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_hpo_id</span><span class="op">(</span>phenos<span class="op">=</span><span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="main.html">example_phenos</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -706,7 +706,7 @@ Intellectual disability</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding information_content scores.</span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="load_phenotype_to_genes.html">load_phenotype_to_genes</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">]</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype.hpoa</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_mondo</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: downloadR</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: echogithub</span>
@@ -719,11 +719,11 @@ Intellectual disability</p></li>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_ndisease</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenos with n_diseases</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: genes_to_phenotype.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype.hpoa</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="main.html">example_phenos</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_omop</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenos with OMOP metadata.</span>
@@ -733,11 +733,11 @@ Intellectual disability</p></li>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_onset</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenos with onset.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding genes and disease IDs.</span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_.html">make_phenos_dataframe</a></span><span class="op">(</span>ancestor <span class="op">=</span> <span class="st">"Neurodevelopmental delay"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting data for 24 descendents.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing gene counts.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding term definitions.</span>
@@ -745,38 +745,38 @@ Intellectual disability</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding ancestor metadata.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Ancestor metadata already present. Use force_new=TRUE to overwrite.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 24 associations remain after filtering.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Getting absolute ontology level for 19,034 IDs.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Getting absolute ontology level for 18,082 IDs.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing ontology level / gene count ratio.</span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_ont_lvl</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="main.html">example_phenos</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_pheno_frequency</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenotype frequencies.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding genes and disease IDs.</span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="main.html">example_phenos</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_prevalence</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding genes and disease IDs.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Mapping disease_id --&gt; mondo_id</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading cached ontology: /github/home/.cache/R/KGExplorer/mondo.rds</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 11 / 7,359 (0.15%) mondo_id missing.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 11 / 7,359 (0.15%) mondo_name missing.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2,695 / 7,359 (36.62%) mondo_def missing.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 5 / 7,360 (0.07%) mondo_id missing.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 5 / 7,360 (0.07%) mondo_name missing.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2,697 / 7,360 (36.64%) mondo_def missing.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Mapping disease_id --&gt; mondo_id</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading cached ontology: /github/home/.cache/R/KGExplorer/mondo.rds</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 25 / 6,089 (0.41%) mondo_id missing.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 25 / 6,089 (0.41%) mondo_name missing.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1,077 / 6,089 (17.69%) mondo_def missing.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Prevalence added for 0 / 7,359 disease_id IDs (0%)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1,079 / 6,089 (17.72%) mondo_def missing.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Prevalence added for 0 / 7,360 disease_id IDs (0%)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Prevalence added for 0 / 10 hpo_id IDs (0%)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Prevalence added for 0 / 6,824 mondo_id IDs (0%)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Prevalence added for 0 / 6,831 mondo_id IDs (0%)</span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="main.html">example_phenos</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_severity</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Annotating phenos with modifiers</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-01-16</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding genes and disease IDs.</span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu"><a href="main.html">example_phenos</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">phenos2</span> <span class="op">&lt;-</span> <span class="fu">add_tier</span><span class="op">(</span>phenos <span class="op">=</span> <span class="va">phenos</span><span class="op">)</span></span></span>
