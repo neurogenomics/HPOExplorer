@@ -50,7 +50,8 @@ add_death <- function(phenos,
   AgeOfDeath_earliest <- AgeOfDeath_name <- NULL;
 
   if(!all(c("AgeOfDeath",
-            "AgeOfDeath_name") %in% names(phenos))){
+            "AgeOfDeath_names" # NOTE: Gets turned from "AgeOfDeath_name" to "AgeOfDeath_names" during aggregation
+            ) %in% names(phenos))){
     messager("Annotating phenos with AgeOfDeath.")
     phenos <- add_disease(phenos = phenos,
                           all.x = all.x,
