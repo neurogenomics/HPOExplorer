@@ -22,7 +22,7 @@ get_hpo <- function(lvl = 2,
                     terms=NULL,
                     ## rols imports the international version for some reason
                     method="github",
-                    save_dir=KGExplorer::cache_dir(package = "HPOExplorer"),
+                    save_dir=KGExplorer::cache_dir(),
                     ...){
 
   file <- file.path(save_dir,"hp.rds")

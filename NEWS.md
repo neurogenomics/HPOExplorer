@@ -1,3 +1,9 @@
+# HPOExplorer 1.0.5
+
+## New features
+
+* Store HPO ontology in default `KGExplorer` cache dir to reduce disk storage.
+
 # HPOExplorer 1.0.4
 
 ## Bug fixes
