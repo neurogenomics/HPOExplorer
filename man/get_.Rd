@@ -12,8 +12,9 @@ get_hpo(
   lvl = 2,
   force_new = FALSE,
   terms = NULL,
+  tag = "v2024-02-08",
   method = "github",
-  save_dir = KGExplorer::cache_dir(package = "HPOExplorer"),
+  save_dir = KGExplorer::cache_dir(),
   ...
 )
 
@@ -42,6 +43,8 @@ For example:
 \item{force_new}{Force a new download or creation of a data resource.}
 
 \item{terms}{A subset of HPO IDs to assign Tiers to.}
+
+\item{tag}{tag for the GitHub release to which this data should be attached.}
 
 \item{method}{Method to construct plot with.}
 
@@ -72,7 +75,6 @@ to the returned object's \link[base]{attributes}}
     \item{\code{file}}{name or vector of names of files to be downloaded. If \code{NULL},
 all assets attached to the release will be downloaded.}
     \item{\code{repo}}{Repository name in format "owner/repo". Defaults to \code{guess_repo()}.}
-    \item{\code{tag}}{tag for the GitHub release to which this data should be attached.}
     \item{\code{overwrite}}{Should any local files of the same name be overwritten?
 default \code{TRUE}.}
   }}
@@ -106,9 +108,14 @@ Functions to get data objects and extract elements.
 \item \code{get_hpo()}: get_
 Get Human Phenotype Ontology (HPO)
 
-Updated version of Human Phenotype Ontology (HPO).
-Created from the OBO files distributed by the HPO project's
-\href{https://github.com/obophenotype/human-phenotype-ontology}{GitHub}.
+Downloads and imports the "v2024-02-08" release of the
+Human Phenotype Ontology (HPO) for the purposes of version control and
+consistency of results. To get the latest version of the HPO,
+use \code{get_hpo(tag="release", force_new=T)}
+The HPO objects are created from the OBO files distributed via
+the official
+\href{https://github.com/obophenotype/human-phenotype-ontology}{
+HPO GitHub repository}.
 
 By comparison, the \code{hpo} data from \pkg{ontologyIndex} is from 2016.
 Note that the maximum ontology level depth in the 2016 version was 14,

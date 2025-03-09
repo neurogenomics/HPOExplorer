@@ -1,9 +1,14 @@
 #' @describeIn get_ get_
 #' Get Human Phenotype Ontology (HPO)
 #'
-#' Updated version of Human Phenotype Ontology (HPO).
-#' Created from the OBO files distributed by the HPO project's
-#' \href{https://github.com/obophenotype/human-phenotype-ontology}{GitHub}.
+#' Downloads and imports the "v2024-02-08" release of the
+#'  Human Phenotype Ontology (HPO) for the purposes of version control and
+#'  consistency of results. To get the latest version of the HPO,
+#'  use \code{get_hpo(tag="release", force_new=T)}
+#' The HPO objects are created from the OBO files distributed via
+#' the official
+#' \href{https://github.com/obophenotype/human-phenotype-ontology}{
+#' HPO GitHub repository}.
 #'
 #' By comparison, the \code{hpo} data from \pkg{ontologyIndex} is from 2016.
 #' Note that the maximum ontology level depth in the 2016 version was 14,
@@ -20,7 +25,7 @@
 get_hpo <- function(lvl = 2,
                     force_new = FALSE,
                     terms=NULL,
-                    ## rols imports the international version for some reason
+                    tag = "v2024-02-08",
                     method="github",
                     save_dir=KGExplorer::cache_dir(),
                     ...){
@@ -33,6 +38,7 @@ get_hpo <- function(lvl = 2,
                                     terms = terms,
                                     method = method,
                                     save_dir = save_dir,
+                                    tag = tag,
                                     ...)
     saveRDS(ont,file)
   } else {
