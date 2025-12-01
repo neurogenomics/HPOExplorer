@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.6</span>
       </span>
     </div>
 
@@ -94,12 +94,23 @@
 
 <dl><dt id="arg-lvl">lvl<a class="anchor" aria-label="anchor" href="#arg-lvl"></a></dt>
 <dd><p>How many levels deep into the ontology to get ancestors from.
-For example:</p><ul><li><p>1: "All"</p></li>
-<li><p>2: "Phenotypic abnormality"</p></li>
-<li><p>3: "Abnormality of the nervous system"</p></li>
-<li><p>4: "Abnormality of nervous system physiology"</p></li>
-<li><p>5: "Neurodevelopmental abnormality" or "Behavioral abnormality"</p></li>
-</ul></dd>
+For example:</p><dl><dt>1</dt>
+<dd><p>"All"</p></dd>
+
+<dt>2</dt>
+<dd><p>"Phenotypic abnormality"</p></dd>
+
+<dt>3</dt>
+<dd><p>"Abnormality of the nervous system"</p></dd>
+
+<dt>4</dt>
+<dd><p>"Abnormality of nervous system physiology"</p></dd>
+
+<dt>5</dt>
+<dd><p>"Neurodevelopmental abnormality" or "Behavioral abnormality"</p></dd>
+
+
+</dl></dd>
 
 
 <dt id="arg-force-new">force_new<a class="anchor" aria-label="anchor" href="#arg-force-new"></a></dt>
@@ -124,16 +135,21 @@ For example:</p><ul><li><p>1: "All"</p></li>
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Arguments passed on to <code><a href="https://rdrr.io/pkg/KGExplorer/man/get_.html" class="external-link">KGExplorer::get_ontology</a></code>, <code><a href="get_data.html">get_data</a></code></p><dl><dt><code>name</code></dt>
-<dd><ul><li><p>&lt;...&gt;Any ontology name from <a href="https://rdrr.io/pkg/KGExplorer/man/get_.html" class="external-link">get_ols_options</a></p></li>
-<li><p>"mondo"
-Import the <a href="https://mondo.monarchinitiative.org/" class="external-link">Mondo</a> ontology.
+<dd><dl><dt>&lt;...&gt;</dt>
+<dd><p>Any ontology name from <a href="https://rdrr.io/pkg/KGExplorer/man/get_.html" class="external-link">get_ols_options</a></p></dd>
+
+<dt>"mondo"</dt>
+<dd><p>Import the <a href="https://mondo.monarchinitiative.org/" class="external-link">Mondo</a> ontology.
 <a href="https://github.com/monarch-initiative/mondo/release" class="external-link">
-GitHub.</a>.</p></li>
-<li><p>"hpo"
-Import the <a href="https://hpo.jax.org/app/" class="external-link">Human Phenotype Ontology</a>.
+GitHub.</a></p></dd>
+.
+<dt>"hpo"</dt>
+<dd><p>Import the <a href="https://hpo.jax.org/app/" class="external-link">Human Phenotype Ontology</a>.
 <a href="https://github.com/obophenotype/human-phenotype-ontology/release" class="external-link">
-GitHub.</a></p></li>
-</ul></dd>
+GitHub.</a></p></dd>
+
+
+</dl></dd>
 
     <dt><code>filetype</code></dt>
 <dd><p>File type to search for.</p></dd>
@@ -195,7 +211,8 @@ and are therefore less reliable.</p></dd>
     <p>Data.</p>
 <p><a href="https://rdrr.io/pkg/simona/man/ontology_DAG-class.html" class="external-link">ontology_DAG</a> object.</p>
 <p>The HPO ID(s) of phenotype(s)</p>
-<p>A named list of data.table objects containing mappings.</p>
+<p>A named list of <a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a>
+objects containing mappings.</p>
     </div>
     <div id="functions">
     <h2>Functions</h2>
@@ -244,7 +261,7 @@ other medical ontologies (e.g. SNOMED CT, UMLS, ICD-9/10).</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

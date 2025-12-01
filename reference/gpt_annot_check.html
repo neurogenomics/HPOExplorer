@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.6</span>
       </span>
     </div>
 
@@ -72,6 +72,7 @@
 <span>  response_map <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>no <span class="op">=</span> <span class="st">"never"</span>, yes <span class="op">=</span> <span class="st">"always"</span><span class="op">)</span>,</span>
 <span>  pos_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sometimes"</span>, <span class="st">"often"</span>, <span class="st">"always"</span><span class="op">)</span>,</span>
 <span>  neg_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"never"</span>, <span class="st">"rarely"</span><span class="op">)</span>,</span>
+<span>  show_plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -104,6 +105,10 @@ Used for standardisation of responses.</p></dd>
 <dd><p>Negative values.</p></dd>
 
 
+<dt id="arg-show-plot">show_plot<a class="anchor" aria-label="anchor" href="#arg-show-plot"></a></dt>
+<dd><p>Include a plot of the results.</p></dd>
+
+
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
 <dd><p>Print messages.</p></dd>
 
@@ -118,7 +123,7 @@ Used for standardisation of responses.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">checks</span> <span class="op">&lt;-</span> <span class="fu">gpt_annot_check</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Translating ontology terms to ids.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-11-24</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 151 phenotypes do not have matching HPO IDs.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading in GPT annotations for 16,982 phenotypes.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Querying HPO for matching terms.</span>
@@ -131,11 +136,6 @@ Used for standardisation of responses.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  - immunodeficiency: 29</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  - cancer: 56</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  - reduced_fertility: 9</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The `facets` argument of `facet_grid()` is deprecated as of ggplot2 2.2.0.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use the `rows` argument instead.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">HPOExplorer</span> package.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Please report the issue at</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB; font-style: italic;">&lt;https://github.com/neurogenomics/HPOExplorer/issues&gt;</span>.</span>
 </code></pre></div>
     </div>
   </div>
@@ -150,7 +150,7 @@ Used for standardisation of responses.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

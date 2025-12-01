@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPOExplorer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.6</span>
       </span>
     </div>
 
@@ -366,27 +366,36 @@ Make severity Tiers (auto)</p>
 rating system provided by
 <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4262393/" class="external-link">
 Lazarin et al (2014)</a>.
-In order of increasing severity:</p><ul><li><p>Tier 4 Reduced fertility</p></li>
-<li><p>Tier 3 Sensory impairment: vision,
+In order of increasing severity:</p><dl><dt>Tier 4 </dt>
+<dd><p>Reduced fertility</p></dd>
+
+<dt>Tier 3 </dt>
+<dd><p>Sensory impairment: vision,
 Immunodeficiency/cancer,
 Sensory impairment: hearing,
 Sensory impairment: touch, other (including pain),
 Mental illness,
-Dysmorphic features</p></li>
-<li><p>Tier 2 Shortened life span: premature adulthood,
+Dysmorphic features</p></dd>
+
+<dt>Tier 2 </dt>
+<dd><p>Shortened life span: premature adulthood,
 Impaired mobility,
-Internal physical malformation</p></li>
-<li><p>Tier 1 Shortened life span: infancy,
+Internal physical malformation</p></dd>
+
+<dt>Tier 1 </dt>
+<dd><p>Shortened life span: infancy,
 Shortened life span: childhood/adolescence,
-Intellectual disability</p></li>
-</ul></li>
+Intellectual disability</p></dd>
+
+
+</dl></li>
 </ul></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu">make_phenos_dataframe</span><span class="op">(</span>ancestor <span class="op">=</span> <span class="st">"Neurodevelopmental delay"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-11-24</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting data for 24 descendents.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing gene counts.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding term definitions.</span>
@@ -402,7 +411,7 @@ Intellectual disability</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Removing isolated nodes.</span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu">make_phenos_dataframe</span><span class="op">(</span>ancestor <span class="op">=</span> <span class="st">"Neurodevelopmental delay"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-11-24</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting data for 24 descendents.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing gene counts.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding term definitions.</span>
@@ -425,7 +434,7 @@ Intellectual disability</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Converting graph to ggnetwork.</span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu">make_phenos_dataframe</span><span class="op">(</span>ancestor <span class="op">=</span> <span class="st">"Neurodevelopmental delay"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-11-24</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting data for 24 descendents.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing gene counts.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding term definitions.</span>
@@ -444,7 +453,7 @@ Intellectual disability</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Creating ggnetwork plot.</span>
 <span class="r-in"><span><span class="va">phenos</span> <span class="op">&lt;-</span> <span class="fu">make_phenos_dataframe</span><span class="op">(</span>ancestor <span class="op">=</span> <span class="st">"Neurodevelopmental delay"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype_to_genes.txt</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-11-24</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting data for 24 descendents.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing gene counts.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding term definitions.</span>
@@ -457,7 +466,7 @@ Intellectual disability</p></li>
 <span class="r-in"><span><span class="va">terms</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_.html">get_hpo</a></span><span class="op">(</span><span class="op">)</span><span class="op">@</span><span class="va">terms</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="va">tiers</span> <span class="op">&lt;-</span> <span class="fu">make_tiers</span><span class="op">(</span>terms <span class="op">=</span> <span class="va">terms</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cached RDS file: phenotype.hpoa</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: 2025-03-03</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> + Version: v2025-11-24</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> keyword_set=Tier1: Found 0 terms matching category.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> keyword_set=Tier2: Found 0 terms matching category.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> keyword_set=Tier3: Found 0 terms matching category.</span>
@@ -477,7 +486,7 @@ Intellectual disability</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>
