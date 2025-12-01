@@ -38,10 +38,10 @@ to be searched for in the HPO.}
 
 \item{include_ancestors}{Include all ancestors of query hits.}
 
-\item{ignore.case}{if \code{FALSE}, the pattern matching is \emph{case
+\item{ignore.case}{logical. if \code{FALSE}, the pattern matching is \emph{case
       sensitive} and if \code{TRUE}, case is ignored during matching.}
 
-\item{fixed}{logical.  If \code{TRUE}, \code{pattern} is a string to be
+\item{fixed}{logical. If \code{TRUE}, \code{pattern} is a string to be
     matched as is.  Overrides all conflicting arguments.}
 
 \item{verbose}{Print messages.}

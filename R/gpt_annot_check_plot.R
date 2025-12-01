@@ -48,7 +48,8 @@ gpt_annot_check_plot <- function(checks,
     # ggplot2::scale_fill_viridis_d(drop = FALSE, end = .8 )+
     ggplot2::scale_fill_viridis_c()+
     ggplot2::scale_x_discrete(drop = scales %in% c("free","free_x")) +
-    ggplot2::facet_grid(facets=metric_type~metric_category,
+    ggplot2::facet_grid(rows=ggplot2::vars(metric_type),
+                        cols=ggplot2::vars(metric_category),
                         scales = scales) +
     ggplot2::theme_bw() +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),

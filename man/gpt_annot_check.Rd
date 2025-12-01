@@ -10,6 +10,7 @@ gpt_annot_check(
   response_map = list(no = "never", yes = "always"),
   pos_values = c("sometimes", "often", "always"),
   neg_values = c("never", "rarely"),
+  show_plot = FALSE,
   verbose = TRUE
 )
 }
@@ -27,6 +28,8 @@ Used for standardisation of responses.}
 \item{pos_values}{Positive values.}
 
 \item{neg_values}{Negative values.}
+
+\item{show_plot}{Include a plot of the results.}
 
 \item{verbose}{Print messages.}
 }

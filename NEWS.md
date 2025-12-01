@@ -1,3 +1,14 @@
+# HPOExplorer 1.0.6
+
+## New features
+
+* `add_info_content`: Add `force_new` arg.
+
+## Bug fixes
+
+* `plot_arrow`: Fix text color.
+* `gpt_annot_check`: Fix `facet_grid` call.
+
 # HPOExplorer 1.0.5
 
 ## New features

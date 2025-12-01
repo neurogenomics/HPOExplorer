@@ -25,7 +25,7 @@ data("hpo_frequencies")
 Frequency of each HPO term \emph{WITHIN} all associated diseases
 (as opposed to the general population).
 In order of increasing frequency:
-\itemize{
+\describe{
 \item{HP:0040284 }{"Very rare (<4-1\%)"}
 \item{HP:0040283 }{"Occasional (29-5\%)"}
 \item{HP:0040282 }{"Frequent (79-30\%)"}

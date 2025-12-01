@@ -47,7 +47,7 @@ plot_top_phenos <- function(res_class = gpt_annot_class(),
                                 legend.position=c('right','right'),
                                 limits=NULL){
     # devoptera::args2vars(plot_top_phenos_i, run_source_all = FALSE)
-    variable <- hpo_name <- value <- NULL;
+    variable <- hpo_name <- value <- severity_class <- NULL;
 
     p1 <- ggplot2::ggplot(data = dt,
                           ggplot2::aes(x=variable, y=hpo_name,
@@ -68,7 +68,8 @@ plot_top_phenos <- function(res_class = gpt_annot_class(),
                     y = ylab,
                     subtitle=title,
                     fill = "Occurrence") +
-      ggplot2::facet_grid(severity_class ~ ., scales = "free_y")
+      ggplot2::facet_grid(rows=ggplot2::vars(severity_class),
+                          scales = "free_y")
 
     p2 <- ggplot2::ggplot(data = dt,
                           ggplot2::aes(x="severity_score_gpt", y=hpo_name,

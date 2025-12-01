@@ -11,6 +11,7 @@
 #' @param pos_values Positive values.
 #' @param neg_values Negative values.
 #' @param verbose Print messages.
+#' @param show_plot Include a plot of the results.
 #' @returns Named list
 #'
 #' @export
@@ -26,6 +27,7 @@ gpt_annot_check <- function(annot = gpt_annot_read(),
                             ),
                             pos_values=c("sometimes","often","always"),
                             neg_values = c("never","rarely"),
+                            show_plot=FALSE,
                             verbose = TRUE
                             ){
   pheno_count <- NULL;
@@ -125,8 +127,12 @@ gpt_annot_check <- function(annot = gpt_annot_read(),
     response_counts=response_counts,
     response_counts_standard=response_counts_standard
   )
+
   #### Plot ####
-  checks[["plot"]] <- gpt_annot_check_plot(checks=checks)
+  if (show_plot){
+    checks[["plot"]] <- gpt_annot_check_plot(checks=checks)
+  }
+
   #### Return ####
   return(checks)
 }

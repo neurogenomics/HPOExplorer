@@ -12,10 +12,11 @@
 #' phenos <- example_phenos()
 #' phenos2 <- add_info_content(phenos = phenos)
 add_info_content <- function(phenos,
-                             hpo = get_hpo()){
+                             hpo = get_hpo(),
+                             force_new=FALSE){
   info_content <- hpo_id <- NULL;
 
-  if(!"info_content" %in% names(phenos)){
+  if(!"info_content" %in% names(phenos) | isTRUE(force_new)){
     messager("Adding information_content scores.")
     if(!"IC" %in% names(hpo@elementMetadata)){
       simona::mcols(hpo)$IC <- simona::term_IC(hpo)

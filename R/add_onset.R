@@ -3,7 +3,7 @@
 #'
 #' Add age of onset for each HPO ID.
 #' onset IDs and assigned "onset_score" values:
-#' \itemize{
+#' \describe{
 #' \item{HP:0011461 }{"Fetal onset" (onset_score=1)}
 #' \item{HP:0030674 }{"Antenatal onset" (onset_score=2)}
 #' \item{HP:0003577 }{"Congenital onset" (onset_score=3)}
@@ -24,18 +24,18 @@
 #' @inheritParams make_network_object
 #' @inheritParams data.table::merge.data.table
 #' @returns phenos data.table with extra columns:
-#' \itemize{
-#' \item{"onset": }{onset HPO IDs of disease phenotypes associated
+#' \describe{
+#' \item{"onset"}{onset HPO IDs of disease phenotypes associated
 #' with the target hpo_id phenotype.}
-#' \item{"onset_names": }{onset HPO names of disease phenotypes associated
+#' \item{"onset_names"}{onset HPO names of disease phenotypes associated
 #' with the target hpo_id phenotype.}
-#' \item{"onset_counts": }{The number of times each term in
+#' \item{"onset_counts"}{The number of times each term in
 #' "onset_names" appears across associated disease phenotypes.}
-#' \item{"onset_score_mean": }{Mean onset score.}
-#' \item{"onset_score_min": }{Minimum onset score.}
-#' \item{"onset_top": }{The most common onset term.}
-#' \item{"onset_earliest": }{The earliest age of onset.}
-#' \item{"onset_latest": }{The latest age of onset.}
+#' \item{"onset_score_mean"}{Mean onset score.}
+#' \item{"onset_score_min"}{Minimum onset score.}
+#' \item{"onset_top"}{The most common onset term.}
+#' \item{"onset_earliest"}{The earliest age of onset.}
+#' \item{"onset_latest"}{The latest age of onset.}
 #' }
 #' @export
 #' @importFrom data.table merge.data.table :=

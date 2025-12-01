@@ -13,6 +13,7 @@ plot_arrow(
   labels_y = c(yend * 0.8, yend * 0.2),
   labels = c("Broad\\nphenotypes", "Specific\\nphenotypes"),
   labels_alpha = 0.8,
+  text_color = "white",
   labels_size = 4,
   arrrow_size = 2,
   arrow_color = "grey50"
@@ -34,6 +35,8 @@ plot_arrow(
 \item{labels}{Labels for each end of the arrow.}
 
 \item{labels_alpha}{Transparency of the labels.}
+
+\item{text_color}{Color for the label text.}
 
 \item{labels_size}{Size of the labels.}
 

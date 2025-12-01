@@ -71,7 +71,7 @@
 #' @description
 #' Severity/progression modifiers of each HPO term.
 #' In order of increasing severity:
-#' \itemize{
+#' \describe{
 #' \item{HP:0012825 }{Mild (Severity_score=4)}
 #' \item{HP:0012827 }{Borderline (Severity_score=3)}
 #' \item{HP:0012828 }{Severe (Severity_score=2)}
@@ -106,7 +106,7 @@
 #' Frequency of each HPO term \emph{WITHIN} all associated diseases
 #' (as opposed to the general population).
 #' In order of increasing frequency:
-#' \itemize{
+#' \describe{
 #' \item{HP:0040284 }{"Very rare (<4-1%)"}
 #' \item{HP:0040283 }{"Occasional (29-5%)"}
 #' \item{HP:0040282 }{"Frequent (79-30%)"}

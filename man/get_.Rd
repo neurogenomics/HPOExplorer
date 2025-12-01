@@ -32,12 +32,12 @@ get_mappings(
 \arguments{
 \item{lvl}{How many levels deep into the ontology to get ancestors from.
 For example:
-\itemize{
-\item{1: }{"All"}
-\item{2: }{"Phenotypic abnormality"}
-\item{3: }{"Abnormality of the nervous system"}
-\item{4: }{"Abnormality of nervous system physiology"}
-\item{5: }{"Neurodevelopmental abnormality" or "Behavioral abnormality"}
+\describe{
+\item{1}{"All"}
+\item{2}{"Phenotypic abnormality"}
+\item{3}{"Abnormality of the nervous system"}
+\item{4}{"Abnormality of nervous system physiology"}
+\item{5}{"Neurodevelopmental abnormality" or "Behavioral abnormality"}
 }}
 
 \item{force_new}{Force a new download or creation of a data resource.}
@@ -98,7 +98,8 @@ Data.
 
 The HPO ID(s) of phenotype(s)
 
-A named list of \link{data.table} objects containing mappings.
+A named list of \link[data.table]{data.table}
+objects containing mappings.
 }
 \description{
 Functions to get data objects and extract elements.

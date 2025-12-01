@@ -3,10 +3,10 @@
 #'
 #' Add metadata from \href{https://mondo.monarchinitiative.org/}{MONDO},
 #' including:
-#' \itemize{
-#' \item{mondo_id: }{MONDO term ID.}
-#' \item{mondo_name: }{MONDO term name.}
-#' \item{mondo_def: }{MONDO term definition.}
+#' \describe{
+#' \item{mondo_id}{MONDO term ID.}
+#' \item{mondo_name}{MONDO term name.}
+#' \item{mondo_def}{MONDO term definition.}
 #' }
 #' @param input_col ID column to map to MONDO IDs.
 #' @param force_new Force a new query to the OARD API instead of

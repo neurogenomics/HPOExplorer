@@ -12,6 +12,7 @@
 #' @param yend y-coordinate of the arrow end.
 #' @param labels_x x-coordinates of the labels.
 #' @param labels_y y-coordinates of the labels.
+#' @param text_color Color for the label text.
 #' @return ggplot2 object.
 #' @export
 #' @examples
@@ -23,23 +24,28 @@ plot_arrow <- function(x=1, xend = 1,
                        labels=c("Broad\nphenotypes",
                                 "Specific\nphenotypes"),
                        labels_alpha=.8,
+                       text_color="white",
                        labels_size=4,
                        arrrow_size=2,
                        arrow_color="grey50"){
   requireNamespace("ggplot2")
 
-
   ggplot2::ggplot() +
     ggplot2::geom_segment(
       ggplot2::aes(x=x, xend = xend , y=y, yend = yend),
-        size=arrrow_size,color=arrow_color,
+      linewidth=arrrow_size,
+      color=arrow_color,
       arrow = ggplot2::arrow(ends="both", type="closed",
                              length = ggplot2::unit(0.6,"cm"))) +
     ggplot2::geom_label(ggplot2::aes(x=labels_x[1], y=labels_y[1],
                                      label=labels[1]),
-                        size=labels_size, alpha=labels_alpha) +
+                        color=text_color,
+                        size=labels_size,
+                        alpha=labels_alpha) +
     ggplot2::geom_label(ggplot2::aes(x=labels_x[2], y=labels_y[2],
                                      label=labels[2]),
-                        size=labels_size, alpha=labels_alpha) +
+                        color=text_color,
+                        size=labels_size,
+                        alpha=labels_alpha) +
     ggplot2::theme_void()
 }

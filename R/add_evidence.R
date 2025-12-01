@@ -5,7 +5,7 @@
 #' \href{https://thegencc.org/faq.html#validity-termsdelphi-survey}{
 #' Delphi survey} evidence classification IDs and
 #' assigned "evidence_score" values:
-#' \itemize{
+#' \describe{
 #' \item{GENCC:100001 }{"Definitive" (evidence_score=6)}
 #' \item{GENCC:100002 }{"Strong" (evidence_score=5)}
 #' \item{GENCC:100003 }{"Moderate" (evidence_score=4)}
@@ -26,10 +26,10 @@
 #' @inheritParams data.table::merge.data.table
 #' @inheritDotParams KGExplorer::get_gencc
 #' @returns phenos data.table with extra columns:
-#' \itemize{
-#' \item{"evidence_score_min": }{Minimum evidence score.}
-#' \item{"evidence_score_max": }{Maximum evidence score.}
-#' \item{"evidence_score_mean": }{Mean evidence score.}
+#' \describe{
+#' \item{"evidence_score_min"}{Minimum evidence score.}
+#' \item{"evidence_score_max"}{Maximum evidence score.}
+#' \item{"evidence_score_mean"}{Mean evidence score.}
 #' }
 #'
 #' @export

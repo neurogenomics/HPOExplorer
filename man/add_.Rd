@@ -97,7 +97,7 @@ add_hpo_id(phenos, hpo = get_hpo(), ignore_case = TRUE)
 
 add_hpo_name(phenos, hpo = get_hpo())
 
-add_info_content(phenos, hpo = get_hpo())
+add_info_content(phenos, hpo = get_hpo(), force_new = FALSE)
 
 add_mondo(phenos, input_col = "disease_id", map_to = "hpo", ...)
 
@@ -171,12 +171,12 @@ add_tier(
 
 \item{lvl}{How many levels deep into the ontology to get ancestors from.
 For example:
-\itemize{
-\item{1: }{"All"}
-\item{2: }{"Phenotypic abnormality"}
-\item{3: }{"Abnormality of the nervous system"}
-\item{4: }{"Abnormality of nervous system physiology"}
-\item{5: }{"Neurodevelopmental abnormality" or "Behavioral abnormality"}
+\describe{
+\item{1}{"All"}
+\item{2}{"Phenotypic abnormality"}
+\item{3}{"Abnormality of the nervous system"}
+\item{4}{"Abnormality of nervous system physiology"}
+\item{5}{"Neurodevelopmental abnormality" or "Behavioral abnormality"}
 }}
 
 \item{hpo}{Human Phenotype Ontology object,
@@ -329,25 +329,25 @@ do not have any Tier assignment.}
 Annotated data.
 
 phenos data.table with extra columns:
-\itemize{
-\item{"AgeOfDeath": }{AgeOfDeath HPO IDs of disease phenotypes associated
+\describe{
+\item{"AgeOfDeath"}{AgeOfDeath HPO IDs of disease phenotypes associated
 with the target hpo_id phenotype.}
-\item{"AgeOfDeath_names": }{AgeOfDeath HPO names of disease phenotypes
+\item{"AgeOfDeath_names"}{AgeOfDeath HPO names of disease phenotypes
 associated with the target hpo_id phenotype.}
-\item{"AgeOfDeath_counts": }{The number of times each term in
+\item{"AgeOfDeath_counts"}{The number of times each term in
 "AgeOfDeath_names" appears across associated disease phenotypes.}
-\item{"AgeOfDeath_score_mean": }{Mean age of death score.}
-\item{"AgeOfDeath_score_min": }{Minimum age of death score.}
-\item{"AgeOfDeath_top": }{The most common age of death term.}
-\item{"AgeOfDeath_earliest": }{The earliest age of death.}
-\item{"AgeOfDeath_latest": }{The latest age of death.}
+\item{"AgeOfDeath_score_mean"}{Mean age of death score.}
+\item{"AgeOfDeath_score_min"}{Minimum age of death score.}
+\item{"AgeOfDeath_top"}{The most common age of death term.}
+\item{"AgeOfDeath_earliest"}{The earliest age of death.}
+\item{"AgeOfDeath_latest"}{The latest age of death.}
 }
 
 phenos data.table with extra columns:
-\itemize{
-\item{"evidence_score_min": }{Minimum evidence score.}
-\item{"evidence_score_max": }{Maximum evidence score.}
-\item{"evidence_score_mean": }{Mean evidence score.}
+\describe{
+\item{"evidence_score_min"}{Minimum evidence score.}
+\item{"evidence_score_max"}{Maximum evidence score.}
+\item{"evidence_score_mean"}{Mean evidence score.}
 }
 
 phenos data.table with extra column
@@ -361,18 +361,18 @@ phenos data.table with extra columns.
 phenos data.table with extra columns
 
 phenos data.table with extra columns:
-\itemize{
-\item{"onset": }{onset HPO IDs of disease phenotypes associated
+\describe{
+\item{"onset"}{onset HPO IDs of disease phenotypes associated
 with the target hpo_id phenotype.}
-\item{"onset_names": }{onset HPO names of disease phenotypes associated
+\item{"onset_names"}{onset HPO names of disease phenotypes associated
 with the target hpo_id phenotype.}
-\item{"onset_counts": }{The number of times each term in
+\item{"onset_counts"}{The number of times each term in
 "onset_names" appears across associated disease phenotypes.}
-\item{"onset_score_mean": }{Mean onset score.}
-\item{"onset_score_min": }{Minimum onset score.}
-\item{"onset_top": }{The most common onset term.}
-\item{"onset_earliest": }{The earliest age of onset.}
-\item{"onset_latest": }{The latest age of onset.}
+\item{"onset_score_mean"}{Mean onset score.}
+\item{"onset_score_min"}{Minimum onset score.}
+\item{"onset_top"}{The most common onset term.}
+\item{"onset_earliest"}{The earliest age of onset.}
+\item{"onset_latest"}{The latest age of onset.}
 }
 
 phenos data.table with extra column
@@ -398,7 +398,7 @@ Add age of death
 
 Add age of death for each HPO ID.
 AgeOfDeath IDs and assigned "AgeOfDeath_score" values:
-\itemize{
+\describe{
 \item{HP:0005268 }{"Miscarriage" (AgeOfDeath_score=1)}
 \item{HP:0003826 }{"Stillbirth" (AgeOfDeath_score=1)}
 \item{HP:0034241 }{"Prenatal death" (AgeOfDeath_score=1)}
@@ -424,7 +424,7 @@ Add the strength of evidence supporting each gene-disease association.
 \href{https://thegencc.org/faq.html#validity-termsdelphi-survey}{
 Delphi survey} evidence classification IDs and
 assigned "evidence_score" values:
-\itemize{
+\describe{
 \item{GENCC:100001 }{"Definitive" (evidence_score=6)}
 \item{GENCC:100002 }{"Strong" (evidence_score=5)}
 \item{GENCC:100003 }{"Moderate" (evidence_score=4)}
@@ -494,10 +494,10 @@ Add OMOP
 
 Add metadata from \href{https://mondo.monarchinitiative.org/}{MONDO},
 including:
-\itemize{
-\item{mondo_id: }{MONDO term ID.}
-\item{mondo_name: }{MONDO term name.}
-\item{mondo_def: }{MONDO term definition.}
+\describe{
+\item{mondo_id}{MONDO term ID.}
+\item{mondo_name}{MONDO term name.}
+\item{mondo_def}{MONDO term definition.}
 }
 
 \item \code{add_onset()}: add_
@@ -505,7 +505,7 @@ Add age of onset
 
 Add age of onset for each HPO ID.
 onset IDs and assigned "onset_score" values:
-\itemize{
+\describe{
 \item{HP:0011461 }{"Fetal onset" (onset_score=1)}
 \item{HP:0030674 }{"Antenatal onset" (onset_score=2)}
 \item{HP:0003577 }{"Congenital onset" (onset_score=3)}
@@ -542,7 +542,7 @@ Add HPO modifiers
 Annotate each HPO with modifier terms, including
 (but not limited to) progression and severity ratings.
 In order of increasing severity:
-\itemize{
+\describe{
 \item{HP:0012825 }{"Mild" (Severity_score=4)}
 \item{HP:0012827 }{"Borderline" (Severity_score=3)}
 \item{HP:0012828 }{"Severe" (Severity_score=2)}
@@ -557,7 +557,7 @@ rating system provided by
 \href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4262393/}{
 Lazarin et al (2014)}.
 In order of increasing severity:
-\itemize{
+\describe{
 \item{Tier 4 }{Reduced fertility}
 \item{Tier 3 }{Sensory impairment: vision,
 Immunodeficiency/cancer,

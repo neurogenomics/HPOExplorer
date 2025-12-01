@@ -9,7 +9,8 @@
 #'  Greater distances mean that mappings are found through intermediate terms
 #'   and are therefore less reliable.
 #' @inheritDotParams get_data
-#' @returns A named list of \link{data.table} objects containing mappings.
+#' @returns A named list of \link[data.table]{data.table}
+#' objects containing mappings.
 #'
 #' @export
 #' @examples

@@ -3,7 +3,7 @@
 #'
 #' Add age of death for each HPO ID.
 #' AgeOfDeath IDs and assigned "AgeOfDeath_score" values:
-#' \itemize{
+#' \describe{
 #' \item{HP:0005268 }{"Miscarriage" (AgeOfDeath_score=1)}
 #' \item{HP:0003826 }{"Stillbirth" (AgeOfDeath_score=1)}
 #' \item{HP:0034241 }{"Prenatal death" (AgeOfDeath_score=1)}
@@ -21,18 +21,18 @@
 #'  only the earliest age is considered.
 #'  See \link{add_death} for details.
 #' @returns phenos data.table with extra columns:
-#' \itemize{
-#' \item{"AgeOfDeath": }{AgeOfDeath HPO IDs of disease phenotypes associated
+#' \describe{
+#' \item{"AgeOfDeath"}{AgeOfDeath HPO IDs of disease phenotypes associated
 #' with the target hpo_id phenotype.}
-#' \item{"AgeOfDeath_names": }{AgeOfDeath HPO names of disease phenotypes
+#' \item{"AgeOfDeath_names"}{AgeOfDeath HPO names of disease phenotypes
 #' associated with the target hpo_id phenotype.}
-#' \item{"AgeOfDeath_counts": }{The number of times each term in
+#' \item{"AgeOfDeath_counts"}{The number of times each term in
 #' "AgeOfDeath_names" appears across associated disease phenotypes.}
-#' \item{"AgeOfDeath_score_mean": }{Mean age of death score.}
-#' \item{"AgeOfDeath_score_min": }{Minimum age of death score.}
-#' \item{"AgeOfDeath_top": }{The most common age of death term.}
-#' \item{"AgeOfDeath_earliest": }{The earliest age of death.}
-#' \item{"AgeOfDeath_latest": }{The latest age of death.}
+#' \item{"AgeOfDeath_score_mean"}{Mean age of death score.}
+#' \item{"AgeOfDeath_score_min"}{Minimum age of death score.}
+#' \item{"AgeOfDeath_top"}{The most common age of death term.}
+#' \item{"AgeOfDeath_earliest"}{The earliest age of death.}
+#' \item{"AgeOfDeath_latest"}{The latest age of death.}
 #' }
 #'
 #' @export

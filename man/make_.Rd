@@ -247,7 +247,7 @@ rating system provided by
 \href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4262393/}{
 Lazarin et al (2014)}.
 In order of increasing severity:
-\itemize{
+\describe{
 \item{Tier 4 }{Reduced fertility}
 \item{Tier 3 }{Sensory impairment: vision,
 Immunodeficiency/cancer,

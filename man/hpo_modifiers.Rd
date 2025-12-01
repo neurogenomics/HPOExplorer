@@ -34,7 +34,7 @@ data("hpo_modifiers")
 \description{
 Severity/progression modifiers of each HPO term.
 In order of increasing severity:
-\itemize{
+\describe{
 \item{HP:0012825 }{Mild (Severity_score=4)}
 \item{HP:0012827 }{Borderline (Severity_score=3)}
 \item{HP:0012828 }{Severe (Severity_score=2)}
