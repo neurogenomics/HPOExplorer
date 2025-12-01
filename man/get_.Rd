@@ -53,7 +53,7 @@ For example:
 \item{...}{
   Arguments passed on to \code{\link[KGExplorer:get_]{KGExplorer::get_ontology}}, \code{\link[=get_data]{get_data}}
   \describe{
-    \item{\code{name}}{\itemize{
+    \item{\code{name}}{\describe{
 \item{<...>}{Any ontology name from \link[KGExplorer]{get_ols_options}}
 \item{"mondo"}{
 Import the \href{https://mondo.monarchinitiative.org/}{Mondo} ontology.
